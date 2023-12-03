@@ -1,0 +1,19 @@
+snippet snip "The Snippet Snippet" bA
+snippet ${1:Trigger} "${2:Description}" ${3:Options}
+${0}
+`echo endsnippet`
+endsnippet
+
+snippet ct "Insert 'Contents...'" w
+Contents...
+endsnippet
+
+snippet cx "Insert <context> keyword" bA
+context "${1:Context function}($2)"
+$0
+endsnippet
+
+# generate [v]isual [t]abstop
+snippet vt "${VISUAL:PLATZHALTER}" i
+\${VISUAL:${1:Contents...}}$0
+endsnippet

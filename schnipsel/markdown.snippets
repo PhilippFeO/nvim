@@ -1,0 +1,85 @@
+# Improved Formatting
+# ───────────────────
+snippet ssec "H2-Heading" b
+## ${1:${VISUAL:H2-Heading}}
+$0
+endsnippet
+
+snippet sssec "H3-Heading" b
+### ${1:${VISUAL:H3-Heading}}
+$0
+endsnippet
+
+snippet par "Paragraph" b
+#### ${1:Paragraph Name}
+$0
+endsnippet
+
+snippet spar "Paragraph" b
+##### ${1:Paragraph Name}
+$0
+endsnippet
+
+snippet ** "Bold text" A
+**$1** $0
+endsnippet
+
+snippet ilc "Inline Code" A
+\`$1\` $0
+endsnippet
+
+snippet `` "Inline Code on `" A
+\`$1\` $0
+endsnippet
+
+# Links
+# ─────
+snippet s. "Insert |> at beginning of line" bA
+|> $0
+endsnippet
+
+snippet link "Create Markdown link" w
+[${1:Text}](${2:URL}) $0
+endsnippet
+
+snippet flink "Insert file link" A
+[${1:Datei}](file:///home/philipp/${2:Pfad}/$1) $0
+endsnippet
+
+# Links for further reading are preceded by "|>" [1] and start at a new line
+#	[1]: Looks better with ligatures
+#	The first "l" has no meaning
+snippet llink "Create |>-Markdown link" bA
+|> [${1:Text}](${2:URL}) $0
+endsnippet
+
+snippet ilink "Create link to WWW with  " A
+[  ${1:Text}](${2:Ziel}) $0
+endsnippet
+
+snippet wlink "Create link within my Wiki with  " A
+[  ${1:Text}](${2:Ziel}) $0
+endsnippet
+
+# Code blocks
+# ───────────
+snippet pcb "[p]ython [c]ode [bl]ock" bA
+\`\`\`python
+${1:${VISUAL:Code}}
+\`\`\`
+$0
+endsnippet
+
+snippet lcb "[l]ua [c]ode [bl]ock" bA
+\`\`\`lua
+${1:${VISUAL:Code}}
+\`\`\`
+$0
+endsnippet
+
+snippet scb "[s]h [c]ode [bl]ock" bA
+\`\`\`sh
+${1:${VISUAL:Code}}
+\`\`\`
+$0
+endsnippet

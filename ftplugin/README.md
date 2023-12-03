@@ -1,0 +1,1 @@
+Files in this directory are sourced only when the filetype of recently opened file matches. They are sourced not buffer-wise but instance-wise, i.e. after opening a `.tex` file, and then a new tab with a `python` file, the `tex*.lua` files within `ftplugin/` were sourced. Commands like `dsm` of `tex_vimtex.lua` are available in python files.

@@ -1,0 +1,41 @@
+global !p
+from vimsnippets import get_comment_format
+endglobal
+
+
+# Prints a line of fixed length.
+# ────────────────────────────────────────
+#snippet '(lu|py|sh|te|tex)line' "Prints a simple line without Text" brA
+snippet 'cline' "Prints a simple line without Text" brA
+`!p snip.rv = get_comment_format()[0] + ' ' + '─' * 40`
+endsnippet
+
+# Underlines a piece of text/comment for any of the specified languages.
+# ──────────────────────────────────────────────────────────────────────
+snippet 'uline' "Nice underline for comments in specified programming language (s. all.snippets)" brA
+`!p snip.rv = get_comment_format()[0] + ' '`$1
+`!p snip.rv = get_comment_format()[0] + ' ' + '─' * len(t[1])`
+endsnippet
+
+# ─── Line with inline Text. ──────────
+snippet 'iline' "Line with inline text in specified programming language (s. all.snippets)" brA
+`!p snip.rv = get_comment_format()[0] + ' ' + '─' * 3` $1 `!p snip.rv = '─' * 10`
+endsnippet
+
+# ┌──────────────────────────────────────────────────────────┐
+# │ Prints this nice box for any of the specified languages. │
+# └──────────────────────────────────────────────────────────┘
+snippet  'tbox' "Nice box for comments in specified programming language (s. all.snippets)" brA
+`!p snip.rv = get_comment_format()[0] + ' ' + '┌' + '─' * (len(t[1]) + 2) + '┐'`
+`!p snip.rv = get_comment_format()[0] + ' '`│ $1 │
+`!p snip.rv = get_comment_format()[0] + ' ' + '└' + '─' * (len(t[1]) + 2) + '┘'# Hier gibt es manchmal Fehler`
+endsnippet
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │ Prints this nice box with rounded corners of the specidfied language │
+# ╰──────────────────────────────────────────────────────────────────────╯
+snippet  'trbox' "Nice box for comments in specified programming language (s. all.snippets)" brA
+`!p snip.rv = get_comment_format()[0] + ' ' + '╭' + '─' * (len(t[1]) + 2) + '╮'`
+`!p snip.rv = get_comment_format()[0] + ' '`│ $1 │
+`!p snip.rv = get_comment_format()[0] + ' ' + '╰' + '─' * (len(t[1]) + 2) + '╯'# Hier gibt es manchmal Fehler`
+endsnippet

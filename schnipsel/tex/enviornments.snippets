@@ -1,0 +1,30 @@
+global !p
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and y != '0'
+endglobal
+
+
+snippet env "New LaTeX environment" bA
+\begin{${1:enviornment}}
+    $2
+\end{$1}
+$0
+endsnippet
+
+snippet fra "New LaTeX beamer [fra]me" bA
+\begin{frame}{${1:Title}}
+    ${0:Contents...}
+\end{frame}
+endsnippet
+
+snippet 'item(\d)' "Itemize with slide indicator <N->" br
+\begin{itemize}
+    \item <`!p snip.rv = match.group(1)`-> $0
+\end{itemize}
+endsnippet
+
+context "env('itemize')"
+snippet 'itm(\d)' "\item with slide indicator <N->" brA
+\item <`!p snip.rv = match.group(1)`-> $0
+endsnippet

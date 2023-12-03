@@ -1,0 +1,31 @@
+global !p
+# Only expand in comments
+def comment():
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+endglobal
+
+
+# Misc
+# ────
+# Snippet for inserting named links with href
+# Order is unintuitive, hence the snippet
+snippet hr "The hyperref package's \href{}{} command (for url links)"
+\href{${1:URL}}{${2:Text-Label}}$0
+endsnippet
+
+snippet eph "\emph{...}" w
+\emph{${1:${VISUAL:Contents...}} $0
+endsnippet
+
+snippet tt "\texttt-font" w
+\texttt{${1:${VISUAL:Contents...}}} $0
+endsnippet
+
+snippet tii "\textit-font" w
+\textit{${1:${VISUAL:Contents...}}} $0
+endsnippet
+
+snippet s{ "Surround with {}" i
+{${1:${VISUAL}}} $0
+endsnippet
+

@@ -1,0 +1,58 @@
+# Only expand in math envitonments
+global !p
+def math():
+  return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+
+
+# Context Snippets
+# ────────────────
+context "math()"
+snippet ff "\frac{}{} (only math environments)" A
+\frac{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z])(\d)' "Single digit subscript" rA
+`!p snip.rv = f"{match.group(1)}_{match.group(2)}"` $0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "Double digit subscript" rA
+`!p snip.rv = f"{match.group(1)}_{{{match.group(2)}}}"` $0
+endsnippet
+
+
+# Normal Snippets
+# ───────────────
+# [s]cript [d]own
+context "math()"
+snippet sd "Insert subscript" iA
+_{${1:$${VISUAL}}} $0
+endsnippet
+
+# [s]cript [u]p
+context "math()"
+snippet su "Insert superscript" iA
+^{${1:${VISUAL}}} $0
+endsnippet
+
+snippet ilp "Inline Math ([p]arenthesis)" wA
+\\( ${1:${VISUAL}} \\) $0
+endsnippet
+
+# The following two snippets are inspired by
+# https://www.ejmastnak.com/tutorials/vim-latex/ultisnips/#interpolation
+# but I removed the regex and replaced the r-option with the w-option
+snippet mm "Inline LaTeX math" wA
+\$ ${1:${VISUAL}} \$ $0
+endsnippet
+
+snippet $ "$-Inline Math" wA
+\$ $1 \$ $0
+endsnippet
+
+# Easily insert Euler's number e
+snippet ee "e^{} supercript" wA
+e^{${1:${VISUAL}}} $0
+endsnippet

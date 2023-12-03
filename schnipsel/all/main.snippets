@@ -1,0 +1,19 @@
+global !p
+from vimsnippets import foldmarker, make_box, get_comment_format
+# LOREM = """
+# Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod \
+# tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At \
+# vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, \
+# no sea takimata sanctus est Lorem ipsum dolor sit amet.
+# """
+endglobal
+
+
+# Own todo-snippet because the default one is to detailed.
+snippet todo "TODO-Kommentar" bw
+`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`>$0
+endsnippet
+
+snippet „ "Insert German quotation marks" A
+„$1“ $0
+endsnippet
