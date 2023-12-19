@@ -1,11 +1,13 @@
--- ─── User Commands ──────────
+-- Loads RUNTIMEPATH/compiler/python.lua
+vim.cmd.compiler('python')
 
+
+-- ─── User Commands ──────────
 -- Save and execute python program
 vim.api.nvim_create_user_command('P', 'w | !python3 %', {})
 
 
 -- ─── Autocommands ──────────
-
 -- The following autocommand(s) serve as workflow utilities when solving leetcode challenges.
 -- On save the programs is executed and its output displayed on a fresh buffer.
 
