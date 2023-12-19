@@ -15,7 +15,8 @@ require('kanagawa').setup({
                     -- no background for signs in signcolumn
                     bg_gutter = 'none',
                     -- The original waveBlue1 is moderately visible
-                    bg_visual = wave_colors.palette.winterRed -- winterYellow also possible
+                    -- winterYellow also possible
+                    bg_visual = wave_colors.palette.winterRed
                 }
             }
         }
