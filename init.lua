@@ -10,6 +10,7 @@ I moved some contents into (list by far not complete)
   ./lua/*.lua  Everything here can be required directly (no path needed)
   lua/lazy/ Stuff for loading plugins initially (setup is done somewhere else)
 ]]
+
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
 --  Otherwise wrong <Leader> is used.
