@@ -30,7 +30,8 @@ autocmd('BufWinEnter', {
 })
 
 -- ─── LSP Autocommands ──────────
--- TODO: Edit kanagawa.nvim or highlight groups using kanagawa's palette because highlight group colors are ugly  <25-125-11-2023
+-- TODO: Edit kanagawa.nvim or highlight groups using kanagawa's palette because highlight group colors are ugly
+-- TODO: Which highlight group is used by vim.lsp.buf.document_highlight()?
 autocmd('CursorHold', {
     group = vim.api.nvim_create_augroup('Document-Highlight-Normal', { clear = true }),
     callback = function()
@@ -47,7 +48,7 @@ autocmd('CursorHoldI', {
     desc = 'Identifier highlighting in Insert Mode on CursorHold'
 })
 autocmd('CursorMoved', {
-    group = vim.api.nvim_create_augroup('Clear-Document-Highlight', { clear = true }),
+    group = vim.api.nvim_create_augroup('Document-Highlight-Clear', { clear = true }),
     callback = function()
         vim.lsp.buf.clear_references()
     end,
