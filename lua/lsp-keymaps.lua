@@ -1,4 +1,4 @@
--- LSP keymaps
+-- LSP related keymaps
 -- required in ./after/plugin/mason.lua
 
 --  This function gets run when an LSP connects to a particular buffer.
@@ -22,12 +22,11 @@ local on_attach = function(_, bufnr)
   nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
   nmap('gt', vim.lsp.buf.type_definition, '[g]oto [t]ype definition')
   nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
-  -- basically a searchable structural overview of the document
+  -- basically a searchable structure/outline of the document
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
 
-
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation (twice for jumping into window)')
 
   -- Lesser used LSP functionality
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
