@@ -1,14 +1,24 @@
+-- :h kanagawa very useful, all written here has it's roots there
+
+-- Theme necessary to load colors
+--  wave_colors.palette = all defined colors
+--  wave_colors.theme = their usecase
+local wave_colors = require('kanagawa.colors').setup({ theme = 'wave' })
+
 require('kanagawa').setup({
     colors = {
         theme = {
             all = {
                 ui = {
                     -- no background for signs in signcolumn
-                    bg_gutter = 'none'
+                    bg_gutter = 'none',
+                    -- The original waveBlue1 is moderately visible
+                    bg_visual = wave_colors.palette.winterRed -- winterYellow also possible
                 }
             }
         }
     },
+    -- overrides is for highlight groups
     -- overrides = function(colors)
     --     return {
     --         ['@text.diff.add'] = { fg = "blue" },
@@ -59,4 +69,4 @@ require('kanagawa').setup({
     end,
 })
 
-vim.cmd.colorscheme 'kanagawa'
+vim.cmd.colorscheme('kanagawa')
