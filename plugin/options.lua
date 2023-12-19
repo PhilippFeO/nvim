@@ -21,6 +21,9 @@ vim.o.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartcase = true
+-- Ignore case during search
+-- TODO: Difference to smartcase unclear
+vim.opt.ignorecase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -40,15 +43,15 @@ vim.opt.wrap = true
 --vim.g.textwidth = 20
 --vim.g.wrapmargin = 3
 
--- Deaktivieren der Maus (scrollen funktioniert aber noch)
+-- Bye bye, mouse (but you can still scroll, old habits never die)
 vim.opt.mouse = ""
 
 -- Deprecated due to use of lualine
 -- statusline
--- Dateiname und prozentuale vertikale Position.
+-- File name and relativ vertical position
 --vim.opt.statusline = "%t    %p%% of %L Lines"
 
--- winbar
+-- winbar; filename in upper right corner
 -- s. :h statusline for formatting
 --  %=  shift to the right
 --  %m  idicates modified or not
@@ -58,20 +61,16 @@ vim.o.winbar = "%=%m %f"
 -- Fenstertitel zeigt Dateiname
 vim.opt.title = true
 
--- (Relative) Zeilennummerierung
-vim.opt.number = true
+-- relative line numbering
+vim.opt.number = true -- left align current line number
 vim.opt.relativenumber = true
 
--- Rechteckiger Cursor im Insert-Mode (Der Standard ist in Neovim ein Strich, "wie man ihn kennt")
+-- block cursor in Insert mode (default is a | as usual)
 vim.opt.guicursor = "i-ci:iCursor-blinkwait100-blinkon150-blinkoff150"
--- Aktuelle Zeile hervorheben
+-- Highlight current line
 vim.opt.cursorline = true
 
--- Ignoriere Groß- und Kleinschreibung bei der Suche
-vim.opt.ignorecase = true
-
--- Aktiviert 24-Bit-Farben (davor 8-Bit)
--- (Man sollte nun mehr/bessere/kontrastreichere Farben zur Verfügung haben)
+-- Enable better colors (I think 24-bit)
 vim.opt.termguicolors = true
 
 -- Tabs/Einrückungen auf 4 Leerzeichen setzen (Standard: 8 Zeichen lang, evtl. wird Tabulator-Zeichen verwendet und keine Leerzeichen)
@@ -81,9 +80,9 @@ vim.opt.shiftwidth = 0   -- uses tabstop when 0
 vim.opt.expandtab = true -- Deaktivieren per <set noexpandtab>
 vim.opt.softtabstop = 4
 
--- Swap- und Backup-Datei deaktivieren
+-- Disable swap- and backup file
 vim.opt.swapfile = false
---set nobackup
+-- set nobackup
 
 -- Immer N Zeilen nach oben und nach unten haben, wenn man vertikal navigiert.
 --   ==> So erreicht man nie den untersten Fenster-/Bildrand und es ist einfach
@@ -94,7 +93,8 @@ vim.opt.scrolloff = 8
 -- Rand für Zeilenlänge
 --set colorcolumn=<N>
 
--- Vertikale Teilungen per <:vs[p]> (:vsplit) werden rechts angezeigt, nicht links
+-- split vertically to the right when using :vsp, :vsplit, <C-v> in telescope
 vim.opt.splitright = true
 -- Horizontale Teilungen <:sp> werden unten (nicht darüber) angezeigt
+-- split horizontally below when using :sp, :split
 vim.opt.splitbelow = true
