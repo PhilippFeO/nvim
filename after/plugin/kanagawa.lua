@@ -1,5 +1,7 @@
 -- :h kanagawa very useful, all written here has it's roots there
 
+-- See end of file for additional configuration regarding LSP windows
+
 -- Theme necessary to load colors
 --  wave_colors.palette = all defined colors
 --  wave_colors.theme = their usecase
@@ -41,21 +43,6 @@ require('kanagawa').setup({
             -- set their background accordingly if you wish to keep them dark and borderless
             LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
             MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-            --[[
-                Borders on LSP floating windows
-                1. Use following function, fi. in mason.lua
-                    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                      vim.lsp.handlers.hover, {
-                        -- Use a sharp border with `FloatBorder` highlights
-                        border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
-                        -- add the title in hover float window
-                        -- title = "hover"
-                      }
-                    )
-                2. Customize via fg and bg attributes of NormalFloat and FloatBorder, f.i.
-                    NormalFloat = { bg = "#54546D" }, -- sumiInk4 from kanagawa
-                    FloatBorder = { bg = "#54546D", fg = "#cc3300" },
-            --]]
 
             -- Settings for telescope (borderless)
             TelescopeTitle = { fg = theme.ui.special, bold = true },
@@ -70,3 +57,19 @@ require('kanagawa').setup({
 })
 
 vim.cmd.colorscheme('kanagawa')
+
+--[[
+Borders on LSP floating windows
+1. Use following function, fi. in after/plugin/mason.lua
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        -- Use a sharp border with `FloatBorder` highlights
+        border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
+        -- add the title in hover float window
+        -- title = "hover"
+      }
+    )
+2. Customize via fg and bg attributes of NormalFloat and FloatBorder in 'overrides' section of above setup process
+    NormalFloat = { bg = "#54546D" }, -- #54546D=sumiInk4 from kanagawa
+    FloatBorder = { bg = "#54546D", fg = "#cc3300" },
+--]]
