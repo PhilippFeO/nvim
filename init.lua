@@ -5,10 +5,10 @@
 
 Adapted configuration of https://github.com/nvim-lua/kickstart.nvim
 
-I moved some contents into
+I moved some contents into (list by far not complete)
   ./after/plugin/*.lua (<require(…).setup(…)> for some plugins)
-  ./lua/*.lua
-  ./lua/plugins/*.lua (Contents of <require('lazy').setup({…})>)
+  ./lua/*.lua  Everything here can be required directly (no path needed)
+  lua/lazy/ Stuff for loading plugins initially (setup is done somewhere else)
 ]]
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
@@ -82,7 +82,7 @@ require('lazy').setup({
   },
 
   -- Additional lua configuration
-  -- Related to LSP (removed from neovim/nvim-lspconfig > dependencies for clearer overview)
+  -- Related to LSP (removed from nvim-lspconfig.lua > dependencies for clearer overview)
   'folke/neodev.nvim', -- GitHub: Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
 
   {
@@ -103,10 +103,8 @@ require('lazy').setup({
   },
   {
     'lervag/wiki.vim',
-    -- [[
-    --  Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
-    --  Ansonsten wird irgndwie das Arbeitsverzeichnis für das wiki auf dieses Startverzeichnis gesetzt und telescope funktioniert nicht. Macht aber keinen Unterschied, wenn man init-test.lua verwendet.
-    -- ]]
+    -- Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
+    -- Ansonsten wird irgndwie das Arbeitsverzeichnis für das wiki auf dieses Startverzeichnis gesetzt und telescope funktioniert nicht. Macht aber keinen Unterschied, wenn man init-test.lua verwendet.
     init = function()
       vim.g.wiki_root = '~/wiki'
       vim.g.wiki_index_name = 'Notizen'
@@ -116,7 +114,6 @@ require('lazy').setup({
       vim.g.wiki_global_load = false
       vim.g.wiki_write_on_nav = true
       vim.g.wiki_tag_scan_num_lines = 5
-      -- vim.g.wiki_completion_enabled = true -- use vim's internal completion mechanics <C-n>
     end,
   },
 
@@ -136,7 +133,6 @@ require('lazy').setup({
   },
 
 
-  -- lazy.nvim install configurations
   require('lazy.nvim-lspconfig-mason'),
   require('lazy.nvim-cmp'),
   require('lazy.git-plugins'),
@@ -169,18 +165,13 @@ require('lazy').setup({
 -- setup neovim lua configuration
 require('neodev').setup()
 
--- some plugins need python and a python interpreter with the
+-- some plugins, fi. UltiSnips, need python and a python interpreter with the
 -- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
 -- should now work with virtual envs flawlessly
 -- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
 -- the mechanic completely
 vim.g.python3_host_prog = '/usr/bin/python3'
 
--- ─── VIM-RAINBOW ──────────
--- TODO: vim-rainbow for colored ([{ <13-03-2023>
--- TODO: see. below for settings <13-03-2023>
---vim.cmd("let g:rainbow_active = 1")
---vim.g.rainbow_active = 1
 
 -- ─── Language ──────────
 vim.api.nvim_exec('language en_US.utf8', true)
@@ -203,11 +194,11 @@ vim.api.nvim_create_autocmd('textyankpost', {
 
 
 -- diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "go to previous diagnostic message" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "open diagnostics list" })
-
+-- TODO: Move to a better lsp-related location <19-12-2023>
+vim.keymap.set('n', 'dk', vim.diagnostic.goto_prev, { desc = "LSP: Go to previous diagnostic message" })
+vim.keymap.set('n', 'dj', vim.diagnostic.goto_next, { desc = "LSP: Go to next diagnostic message" })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "LSP: Open floating diagnostic message" })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "LSP: Open diagnostics list" })
 
 -- the line beneath this is called `modeline`. see `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
