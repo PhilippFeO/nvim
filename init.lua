@@ -188,7 +188,7 @@ vim.g.python3_host_prog = '/usr/bin/python3'
 
 
 -- ─── Language ──────────
-vim.api.nvim_exec('language en_US.utf8', true)
+-- vim.api.nvim_exec('language en_US.utf8', true)
 
 -- ─── :help in new tab ──────────
 vim.cmd.cabbrev('helpt', 'tab help')
