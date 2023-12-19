@@ -3,20 +3,26 @@
 -- ┌───────────────────┐
 -- │ <Leader> Mappings │
 -- └───────────────────┘
--- <Leader>, <LocalLeader> is set in init.lua, because lazy.nvim wiches so
+-- <Leader>, <LocalLeader> is set in init.lua, because lazy.nvim wishes so
 
 -- Dieses Kopieren und Einfügen ohne dass das Markierte gespeichert wird und den alten Text überschreibt. Klappt irgendwie mit <Leader> nicht.
 -- Im Visual-Mode markiertes wird durch vorher Geyanktes ersetzt ohne dass markierter Teil "das neue zu ersetzende" ist
 vim.api.nvim_set_keymap('x', '<Leader>p', [["_dP]], { noremap = true, desc = 'Delete into \"_ and paste' })
---xnoremap ,p "_dP
+
+-- Switch windows easier using basic vim movements
+vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window on the left' })
+vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
+vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
+vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+-- :make executes string behind makeprg
+-- s. RUNTIMEPATH/compiler/python.lua for example
+-- maybe vim.fn.expand('%') is useful for having absolute paths
+vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>', { desc = 'Compile/Execute current file' })
+
 
 -- Beim Betätigen von <<Leader>s> wird automatisch ein Ersetzungsbefehl generiert, um das aktuelle Wort zu ersetzen. So muss man es nicht extr eintippen."
 vim.api.nvim_set_keymap('n', '<Leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { noremap = true, desc = '[s]earch for current word' })
-
--- Terminal in neuem vertikalem Fenster starten
---vim.api.nvim_set_keymap('n', '<Leader>t', '<Cmd>vertical split | terminal <CR>', {})
-
 -- In die System-Zwischenablage kopieren
 vim.api.nvim_set_keymap('v', '<Leader>y', [["+y]], { noremap = true, desc = 'Copy into system clipboard' })
 vim.api.nvim_set_keymap('n', '<Leader>y', [["+y]], { noremap = true, desc = 'Copy line into system clipboard' })
