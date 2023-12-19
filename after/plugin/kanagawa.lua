@@ -21,15 +21,13 @@ require('kanagawa').setup({
             }
         }
     },
-    -- overrides is for highlight groups
-    -- overrides = function(colors)
-    --     return {
-    --         ['@text.diff.add'] = { fg = "blue" },
-    --     }
-    -- end
+    -- 'overrides' is for highlight groups
     overrides = function(colors)
         local theme = colors.theme
         return {
+            -- Example syntax for Treesitter related highlight groups
+            -- ['@text.diff.add'] = { fg = "blue" },
+
             -- Settings for floating windows
             NormalFloat = { bg = "none" }, -- try #54546D=sumiInk4 from kanagawa
             FloatBorder = { bg = "none" },
