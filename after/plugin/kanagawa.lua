@@ -28,12 +28,12 @@ require('kanagawa').setup({
             -- Example syntax for Treesitter related highlight groups
             -- ['@text.diff.add'] = { fg = "blue" },
 
-            -- Used by vim.lsp.buf.document_highlight() on CursorHold events
-            -- TODO: Maybe some inter highlight group linking is possible to save some code and maintenance <19-12-2023>
-            LspReferenceText = { bg = colors.palette.dragonBlack6, bold = true },
-            LspReferenceRead = { bg = colors.palette.dragonBlack6, bold = true },
-            -- is also underlined
-            LspReferenceWrite = { bg = colors.palette.dragonBlack6, bold = true },
+            -- -- Used by vim.lsp.buf.document_highlight() on CursorHold events
+            -- -- TODO: Maybe some inter highlight group linking is possible to save some code and maintenance <19-12-2023>
+            -- LspReferenceText = { bg = colors.palette.dragonBlack6, bold = true },
+            -- LspReferenceRead = { bg = colors.palette.dragonBlack6, bold = true },
+            -- -- is also underlined
+            -- LspReferenceWrite = { bg = colors.palette.dragonBlack6, bold = true },
 
             -- Settings for floating windows
             NormalFloat = { bg = "none" }, -- try #54546D=sumiInk4 from kanagawa
