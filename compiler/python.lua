@@ -5,3 +5,5 @@
 vim.cmd.CompilerSet('makeprg=python3')
 -- from `h errorformat`
 vim.cmd.CompilerSet([[errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m]])
+
+vim.o.autowrite = true
