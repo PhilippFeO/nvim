@@ -48,6 +48,8 @@ vim.keymap.set('n', '<Localleader>xx', '<Cmd>w | source %<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 -- wie oben nur halbe Seite NACH OBEN
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in jumplist' })
+vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
 
 -- Adjust split size via <ALT-[hjkl]>
 -- vim.api.nvim_set_keymap('n', '<A-h>', '<Cmd>vertical resize -5<CR>', { noremap = true, desc = 'Shrink vertical split' })
