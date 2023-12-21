@@ -50,6 +50,8 @@ vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in jumplist' })
 vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
+vim.keymap.set('n', '[m', '[mzz', { desc = 'Center after jumping to previous @function.outer' })
+vim.keymap.set('n', ']m', ']mzz', { desc = 'Center after jumping to next @function.outer' })
 
 -- Adjust split size via <ALT-[hjkl]>
 -- vim.api.nvim_set_keymap('n', '<A-h>', '<Cmd>vertical resize -5<CR>', { noremap = true, desc = 'Shrink vertical split' })
