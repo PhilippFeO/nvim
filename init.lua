@@ -37,34 +37,8 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  {
-    dir = '~/dotfiles/nvim/lua/myplugins/cmp-csv',
-    opts = {
-      documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
-      csv_path = '~/programmieren/recipe-selector/res/ingredient_category_url.csv',
-      filetype = 'yaml',
-    }
-  },
-
-  {
-    'PhilippFeO/telescope-filelinks.nvim',
-    -- `dev = true` implies using the local version of the plugin
-    -- location specified via `dev.path` in `opts` parameter (s. below)
-    dev = true,
-    branch = 'prepend_to_link',
-  },
-
-  {
-    'PhilippFeO/telescope-link-headings.nvim',
-    -- `dev = true` implies using the local version of the plugin
-    -- location specified via `dev.path` in `opts` parameter (s. below)
-    dev = true,
-    branch = 'master',
-  },
-
-  'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
-  'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
-  'windwp/nvim-autopairs',       -- TODO: remove keymap for parentheses and quotation marks
+  'numToStr/Comment.nvim', -- check ./after/plugin/comment.lua for setup and mechanics
+  'windwp/nvim-autopairs', -- TODO: remove keymap for parentheses and quotation marks
 
   {
     'preservim/vim-markdown',
