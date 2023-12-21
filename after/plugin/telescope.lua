@@ -49,7 +49,7 @@ vim.keymap.set('n', "<leader>sk", builtin.keymaps, { desc = "[s]earch [k]eymaps 
 vim.keymap.set('n', '<Leader>sm', builtin.man_pages, { desc = '[s]earch [m]an pages' })
 vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[s]earch [t]reesitter' })
 vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch [w]ord under cursor' })
-vim.keymap.set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = '[s]earch [b]uffer' })
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[s]earch [b]uffer' })
 
 
 -- Telescope extensions
