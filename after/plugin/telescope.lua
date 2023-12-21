@@ -36,20 +36,35 @@ vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = 'TelescopeNormal' })
 -- ───────
 local builtin = require('telescope.builtin')
 
+local prepend_desc = function(desc)
+  if desc then
+    desc = '🔭 Tel: ' .. desc
+  end
+
+  return desc
+end
+
+local nmap = function(keys, func, desc)
+  if desc then
+    desc = prepend_desc(desc)
+  end
+
+  vim.keymap.set('n', keys, func, { desc = desc })
+end
 -- ─── [f]ind keymaps ──────────
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[f]ind existing [b]uffers' })
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+nmap('<leader>fb', builtin.buffers, '[f]ind existing [b]uffers')
+nmap('<leader>ff', builtin.find_files, '[f]ind [f]iles')
 
 -- ─── [s]earch keymaps ──────────
-vim.keymap.set('n', '<Leader>sa', builtin.autocommands, { desc = '[s]earch [a]utocommands' })
-vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
-vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch project with [g]rep' })
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
-vim.keymap.set('n', "<leader>sk", builtin.keymaps, { desc = "[s]earch [k]eymaps (normal mode)" })
-vim.keymap.set('n', '<Leader>sm', builtin.man_pages, { desc = '[s]earch [m]an pages' })
-vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[s]earch [t]reesitter' })
-vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch [w]ord under cursor' })
-vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[s]earch [b]uffer' })
+nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
+nmap('<leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
+nmap('<leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
+nmap('<leader>sh', builtin.help_tags, '[s]earch [h]elp')
+nmap('<leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
+nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
+nmap('<leader>st', builtin.treesitter, '[s]earch [t]reesitter')
+nmap('<leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
+nmap('<leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
 
 
 -- Telescope extensions
@@ -62,8 +77,9 @@ filelinks.setup({
   format_string = '[  %s](/%s)',
   prompt_title = 'Wiki Files'
 })
-vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = '[l]ink to [w]iki page' })
-vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = ':Telescope filelinks make_filelink' })
+vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
+-- TODO: remap of keymaps? <21-12-2023>
+vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('Tel: [l]ink to [w]iki page') })
 
 vim.keymap.set('n', '<Leader>lf', function()
   filelinks.make_filelink({
@@ -72,7 +88,7 @@ vim.keymap.set('n', '<Leader>lf', function()
     remove_extension = false,
     prompt_title = 'Files under /home/philipp/'
   })
-end, { desc = '[l]ink to [f]ile in $HOME' })
+end, { desc = prepend_desc('Tel: [l]ink to [f]ile in $HOME') })
 
 vim.keymap.set('n', '<Leader>li', function()
   filelinks.make_filelink({
@@ -82,7 +98,7 @@ vim.keymap.set('n', '<Leader>li', function()
     prepend_to_link = "~/wiki/",
     find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
   })
-end, { desc = '[l]ink to [i]mage in ~/wiki/' })
+end, { desc = prepend_desc('Tel: [l]ink to [i]mage in ~/wiki/') })
 
 -- ─── link_headings ──────────
 -- require('telescope').load_extension('link_headings')
