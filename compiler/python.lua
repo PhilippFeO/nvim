@@ -1,6 +1,7 @@
--- Due to compatability reasons better use CompilerSet than vim.bo.makeprg
+-- TODO: Add if exists('current_compiler')-statement from video <20-12-2023>
+
+-- Due to compatability reasons with older Vim versions better use CompilerSet than vim.bo.makeprg directly
+-- But since I won't publish my plugin, in principle I dont have to care
 vim.cmd.CompilerSet('makeprg=python3')
--- vim.cmd.CompilerSet([[errorformat=%E||%.%#,%C\ \ \ \ \ File\ \"%f\",\ line\ %l%.%#,%C%.%#%o,%Z%m]])
--- TODO: || entfernen, \s* für Leerzeichen? <19-12-2023>
---      Beispiele für Python-Fehlerformatstrings: https://github.com/idbrii/vim-david/blob/1a0089f30172b19ee084c24a951d337358989801/compiler/python.vim)
+-- from `h errorformat`
 vim.cmd.CompilerSet([[errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m]])
