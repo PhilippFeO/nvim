@@ -110,22 +110,9 @@ vim.api.nvim_set_keymap('v', 'K', ":m'<-2<CR>gv=gv", { noremap = true })
 -- ┌──────┐
 -- │ Misc │
 -- └──────┘
+vim.keymap.set('n', ']<Space>', '<Cmd>normal o<CR>', { desc = 'Add one empty line below cursor' })
+vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty line above cursor' })
 -- vim.keymap.set('n', '[[', '[[zz', { remap = true, desc = 'Center view after going to previous section (in LaTeX)' })
 -- vim.api.nvim_set_keymap('n', '[[', '[[zz',
 -- { noremap = true, desc = 'Center view after going to previous section (in LaTeX)' })
 -- vim.keymap.set('n', ']]', ']]zz', { remap = true, desc = 'Center view after going to next section (in LaTeX)' })
-
--- ", and ' completion
--- vim.api.nvim_set_keymap("i", "\"", "\"\"<Left>", { noremap = true })
--- vim.api.nvim_set_keymap("i", "'", "''<Left>", { noremap = true })
-
--- Überschreibt schließende Klammer/Anführungszeichen
--- Praktisch, va. wenn man in Python Funktionen definiert, da man sonst
--- umständlich per ESC A hinter die Klammer wechseln müsste, so tippt man sie
--- einfach schnell.
--- vim.api.nvim_set_keymap("i", "<expr> )", [[strpart(getline('.'), col('.')-1, 1) == ) ? <Right> : )]], { noremap = true })
--- vim.api.nvim_set_keymap("i", "<expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" :", ""}"", { noremap = true })
--- vim.api.nvim_set_keymap("i", "<expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" :", ""]"", { noremap = true })
---vim.api.nvim_set_keymap("i", "<expr> '", strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" :", ""''<Left>"", { noremap = true })
--- vim.cmd([[ inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"<Left>" ]])
--- vim.cmd([[ inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" : "''<Left>" ]])
