@@ -1,3 +1,4 @@
+-- Conceal markdown formatting, fi. *italic* with italic text and no '*'
 vim.o.conceallevel = 2
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -22,14 +23,6 @@ vim.opt.autoindent = false
 -- ─── Mappings (esp. for my Wiki) ──────────
 -- Open help command enclosed in `` in new tab, ie. `h lua-guide`
 vim.keymap.set('n', '<C-h>', '"hyi`:tab <C-r>h<CR>', { desc = 'Open help page reference in Wiki' })
-
-
--- ─── User Commands (esp. for my Wiki) ──────────
--- When I switched from Zim-Wiki to Vimwiki, my Zim-Wiki pages were not properly transformed into Markdown syntax. This User command does some post processing.
-local user_command = vim.api.nvim_create_user_command
-user_command('CorrectMD', 'set hlsearch | %s/` \\(.\\{-}\\)`/ `\\1`/gc', {
-    desc = 'WORD` CODE` -> WORD `CODE`',
-})
 
 
 -- ─── Spellchecking ────────────────────
