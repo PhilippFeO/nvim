@@ -57,6 +57,9 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
   'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
   'windwp/nvim-autopairs',       -- TODO: remove keymap for parentheses and quotation marks
+  -- Additional lua configuration
+  -- Related to LSP (removed from nvim-lspconfig.lua > dependencies for clearer overview)
+  'folke/neodev.nvim', -- GitHub: Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
 
   {
     'preservim/vim-markdown',
@@ -81,10 +84,6 @@ require('lazy').setup({
       },
     }
   },
-
-  -- Additional lua configuration
-  -- Related to LSP (removed from nvim-lspconfig.lua > dependencies for clearer overview)
-  'folke/neodev.nvim', -- GitHub: Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
 
   {
     -- Detect tabstop and shiftwidth automatically
