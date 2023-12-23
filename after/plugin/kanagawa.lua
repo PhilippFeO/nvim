@@ -5,6 +5,7 @@
 -- Theme necessary to load colors
 --  wave_colors.palette = all defined colors
 --  wave_colors.theme = their usecase
+--      didn't work without specifying the theme
 local wave_colors = require('kanagawa.colors').setup({ theme = 'wave' })
 
 require('kanagawa').setup({
