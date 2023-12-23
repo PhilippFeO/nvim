@@ -45,13 +45,15 @@ vim.keymap.set('n', '<Localleader>xx', '<Cmd>w | source %<CR>', { noremap = true
 -- zz zentriert Cursor in der Mitte
 --  ==> So muss man beim navigieren immer nur auf eine Stelle schauen und nicht
 --  den Cursor suchen
-vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
+--  zt moves lines up until vim.o.scrolloff
+vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zt', { noremap = true })
 -- wie oben nur halbe Seite NACH OBEN
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zt', { noremap = true })
 vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in jumplist' })
 vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
-vim.keymap.set('n', '[m', '[mzz', { desc = 'Center after jumping to previous @function.outer' })
-vim.keymap.set('n', ']m', ']mzz', { desc = 'Center after jumping to next @function.outer' })
+-- when jumping to a function, I want to see as much as possible from it's body, hence zt and not zz
+vim.keymap.set('n', '[m', '[mzt', { desc = 'Move to top after jumping to previous @function.outer' })
+vim.keymap.set('n', ']m', ']mzt', { desc = 'Move to top after jumping to next @function.outer' })
 
 -- Adjust split size via <ALT-[hjkl]>
 -- vim.api.nvim_set_keymap('n', '<A-h>', '<Cmd>vertical resize -5<CR>', { noremap = true, desc = 'Shrink vertical split' })
