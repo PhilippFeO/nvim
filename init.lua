@@ -121,10 +121,6 @@ require('lazy').setup({
   require('lazy.ultisnips'),
   {
     'honza/vim-snippets',
-    -- Ultisnips/ and snippets/ (snipMate) collide => archive snippets/ and remove directory
-    build =
-        'tar -czf snippets.tar.gz /home/philipp/.local/share/nvim/lazy/vim-snippets/snippets;' ..
-        'rm -rf /home/philipp/.local/share/nvim/lazy/vim-snippets/snippets'
   },
   {
     -- ultisnips sources for LSP
