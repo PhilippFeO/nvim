@@ -1,8 +1,7 @@
--- [[ LSP related plugins ]]
 --  The configuration is done in after/plugin/lsp.lua
-return  {
+return {
   'neovim/nvim-lspconfig', -- LSP Configuration
-  dependencies = { -- LSP Plugins
+  dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
