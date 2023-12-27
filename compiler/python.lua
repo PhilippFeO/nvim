@@ -3,8 +3,9 @@
 
 -- Due to compatability reasons with older Vim versions better use CompilerSet than vim.bo.makeprg directly
 -- But since I won't publish my plugin, in principle I dont have to care
-vim.cmd.CompilerSet('makeprg=~/dotfiles/nvim/compiler/parse_python_error.sh')
-vim.cmd.CompilerSet([[errorformat=File\ \"%f\"\\,\ line\ %l\\,\ in\ <%.%#>\ %m]])
-
+-- `pytest -rs` prints information about as skip marked tests
+vim.cmd.CompilerSet([[makeprg=python3\ -m\ pytest \-rs]])
+-- from `h errorformat`
+vim.cmd.CompilerSet([[errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m]])
 
 vim.o.autowrite = true
