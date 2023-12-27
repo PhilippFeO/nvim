@@ -20,7 +20,7 @@ local on_attach = function(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, '[g]oto [g]efinition (as in plain vim)')
   nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
   nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
-  nmap('gt', vim.lsp.buf.type_definition, '[g]oto [t]ype definition')
+  nmap('gy', vim.lsp.buf.type_definition, '[g]oto t[y]pe definition')
   nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
   -- basically a searchable structure/outline of the document
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
