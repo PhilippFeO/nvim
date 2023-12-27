@@ -67,6 +67,8 @@ nmap('<leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 nmap('<leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
 
+-- ─── Git ──────────
+nmap('gs', builtin.git_status, '[g]it [s]tatus')
 
 -- Telescope extensions
 -- ────────────────────
