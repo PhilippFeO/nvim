@@ -82,7 +82,7 @@ filelinks.setup({
 })
 vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
 -- TODO: remap of keymaps? <21-12-2023>
-vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('Tel: [l]ink to [w]iki page') })
+vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
 
 vim.keymap.set('n', '<Leader>lf', function()
   filelinks.make_filelink({
@@ -91,7 +91,7 @@ vim.keymap.set('n', '<Leader>lf', function()
     remove_extension = false,
     prompt_title = 'Files under /home/philipp/'
   })
-end, { desc = prepend_desc('Tel: [l]ink to [f]ile in $HOME') })
+end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
 
 vim.keymap.set('n', '<Leader>li', function()
   filelinks.make_filelink({
@@ -101,7 +101,7 @@ vim.keymap.set('n', '<Leader>li', function()
     prepend_to_link = "~/wiki/",
     find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
   })
-end, { desc = prepend_desc('Tel: [l]ink to [i]mage in ~/wiki/') })
+end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
 
 -- ─── link_headings ──────────
 -- require('telescope').load_extension('link_headings')
