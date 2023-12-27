@@ -38,7 +38,8 @@ local builtin = require('telescope.builtin')
 
 local prepend_desc = function(desc)
   if desc then
-    desc = '🔭 Tel: ' .. desc
+    --     󰭎    🔭
+    desc = ' Tel: ' .. desc
   end
 
   return desc
