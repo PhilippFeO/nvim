@@ -4,7 +4,7 @@
 -- Due to compatability reasons with older Vim versions better use CompilerSet than vim.bo.makeprg directly
 -- But since I won't publish my plugin, in principle I dont have to care
 -- `pytest -rs` prints information about as skip marked tests
-vim.cmd.CompilerSet([[makeprg=python3\ -m\ pytest \-rs]])
+vim.cmd.CompilerSet([[makeprg=python3\ -m\ pytest\ -rs]])
 -- from `h errorformat`
 vim.cmd.CompilerSet([[errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m]])
 
