@@ -11,8 +11,9 @@ endglobal
 
 # Own todo-snippet because the default one is to detailed.
 snippet todo "TODO-Kommentar" bw
-`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`>$0
+`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`, Philipp Rost> `!p snip.rv=get_comment_format()[2]`$0
 endsnippet
+
 
 snippet „ "Insert German quotation marks" A
 „$1“ $0
