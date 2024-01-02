@@ -23,6 +23,7 @@ highlight(0, 'mkdLink', { fg = cp.oniViolet })
 highlight(0, 'mkdInlineURL', { link = 'mkdLink' })
 
 -- Change color of headings
+-- Could also go in kanagawa's setup-function in the `overrides` sections but these highlights are only needed in markdown files, so they don't have to be overwritten each time nvim starts.
 -- winterRed suboptimal because it's used in Visual mode but I will probably enter this mode on H1 rarely
 highlight(0, 'htmlH1', { fg = cp.sakuraPink, bg = cp.winterRed, bold = true })
 highlight(0, 'htmlH2', { fg = cp.lightBlue, bg = cp.waveBlue1 })
