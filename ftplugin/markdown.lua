@@ -80,11 +80,3 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     command = 'syntax clear htmlTag | syntax clear htmlError',
     desc = 'Clear highlighting for htmlTag, htmlError in Markdown files'
 })
-
--- Sometimes, in README.md files a colorcolumn makes sense to avoid long one line comments in code blocks which cause horizontal scrolling
-vim.api.nvim_create_autocmd('BufWinEnter', {
-    group = vim.api.nvim_create_augroup('set-colorcolumn-README.md', { clear = true }),
-    pattern = 'README.md',
-    command = 'set colorcolumn=70',
-    desc = 'Enable colorcolumn for proper line length, especially on GitHub'
-})
