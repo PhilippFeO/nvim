@@ -73,6 +73,7 @@ vim.api.nvim_set_keymap("i", "<C-l>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { noremap = t
 --[1] https://github.com/preservim/vim-markdown/issues?q=disable+html+highlight
 -- There is also 'BufReadPost'
 -- Has to be done AFTER/WITH 'BufWinEnter', ie. simply executing the command in this filetype plugin doesn't work
+-- TODO: Due to this html-whatever-highlight, Telescope's preview differs from my configured Markdown highlighting <28-12-2023>
 vim.api.nvim_create_autocmd('BufWinEnter', {
     group = vim.api.nvim_create_augroup('clear-htmlTag', { clear = true }),
     pattern = '*.md',
