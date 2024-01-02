@@ -124,13 +124,16 @@ require('lazy').setup({
     'quangnguyen30192/cmp-nvim-ultisnips',
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
+  {
+    -- setup in after/plugin/lualine.lua
+    'nvim-lualine/lualine.nvim',
+  },
 
 
   require('lazy.nvim-lspconfig-mason'),
   require('lazy.nvim-cmp'),
   require('lazy.git-plugins'),
   require('lazy.kanagawa'),
-  require('lazy.lualine'),
   require('lazy.treesitter'),
   require('lazy.telescope'),
   require('lazy.telescope-fzf-native'),

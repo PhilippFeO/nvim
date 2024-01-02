@@ -2,9 +2,19 @@ return {
   'nvim-lualine/lualine.nvim',
   opts = {
     options = {
-      theme = 'auto', -- Loads theme for my colorscheme or trys to generate one based on it. There are predefined themes but non for "kanagawa".
+      -- Luline searches for themes in lua/lualine/themes/ dir of every installed plugin
+      theme = 'auto', -- `auto` = load theme based on colorscheme
+      -- theme = 'kanagawa' works also
       component_separators = '|',
-      section_separators = '',
+      section_separators = { left = '', right = '' },
     },
+    -- sections = {
+    -- lualine_a = {
+    --   { 'mode', separator = { left = '',  }, right_padding = 2 },
+    -- },
+    --   lualine_b = {
+    --     { 'branch', fg = '#cc3300' }
+    --   }
+    -- }
   },
 }
