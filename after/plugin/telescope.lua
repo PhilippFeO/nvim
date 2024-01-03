@@ -12,7 +12,7 @@ require('telescope').setup { -- :h telescope.setup()
         -- ["<C-h>"] = "which_key",
       },
     },
-    prompt_prefix = '🔭 ',
+    prompt_prefix = ' ',
     path_display = { 'shorten', shorten = 4 },
     layout_config = { preview_width = 0.5 },
     -- might interfere with lsp_ pickers
