@@ -34,10 +34,6 @@ endsnippet
 
 # Links
 # ─────
-snippet s. "Insert |> at beginning of line" bA
-|> $0
-endsnippet
-
 snippet link "Create Markdown link" w
 [${1:Text}](${2:URL}) $0
 endsnippet
@@ -46,20 +42,6 @@ snippet flink "Insert file link" A
 [${1:Datei}](file:///home/philipp/${2:Pfad}/$1) $0
 endsnippet
 
-# Links for further reading are preceded by "|>" [1] and start at a new line
-#	[1]: Looks better with ligatures
-#	The first "l" has no meaning
-snippet llink "Create |>-Markdown link" bA
-|> [${1:Text}](${2:URL}) $0
-endsnippet
-
-snippet ilink "Create link to WWW with  " A
-[  ${1:Text}](${2:Ziel}) $0
-endsnippet
-
-snippet wlink "Create link within my Wiki with  " A
-[  ${1:Text}](${2:Ziel}) $0
-endsnippet
 
 # Code blocks
 # ───────────
