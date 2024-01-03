@@ -13,7 +13,7 @@ local highlight = vim.api.nvim_set_hl
 highlight(0, "htmlBold", { fg = cp.autumnRed, bold = true })
 highlight(0, 'htmlItalic', { fg = cp.roninYellow, italic = true })
 
-highlight(0, 'my_mkdCode', { fg = cp.waveAqua2, bold = true }) -- #993399
+highlight(0, 'my_mkdCode', { fg = cp.waveAqua2 }) -- #993399
 highlight(0, 'mkdCode', { link = 'my_mkdCode' })
 highlight(0, 'mkdCodeDelimiter', { link = 'my_mkdCode' })
 
@@ -25,7 +25,7 @@ highlight(0, 'mkdInlineURL', { link = 'mkdLink' })
 -- Change color of headings
 -- Could also go in kanagawa's setup-function in the `overrides` sections but these highlights are only needed in markdown files, so they don't have to be overwritten each time nvim starts.
 -- winterRed suboptimal because it's used in Visual mode but I will probably enter this mode on H1 rarely
-highlight(0, 'htmlH1', { fg = cp.sakuraPink, bg = cp.winterRed, bold = true })
+highlight(0, 'htmlH1', { fg = cp.sakuraPink, bg = cp.winterRed })
 highlight(0, 'htmlH2', { fg = cp.lightBlue, bg = cp.waveBlue1 })
 highlight(0, 'htmlH3', { fg = cp.springGreen, bg = cp.winterGreen })
 
