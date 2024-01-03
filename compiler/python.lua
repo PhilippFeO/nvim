@@ -5,6 +5,8 @@
 -- But since I won't publish my plugin, in principle I dont have to care
 -- `pytest -rs` prints information about as skip marked tests
 vim.cmd.CompilerSet([[makeprg=python3\ -m\ pytest\ -rs]])
+
+-- `h errorformat` for pytest: https://phelipetls.github.io/posts/vim-errorformat-for-pytest/
 -- from `h errorformat`
 vim.cmd.CompilerSet([[errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m]])
 
