@@ -33,7 +33,7 @@ highlight(0, 'htmlH3', { fg = cp.springGreen, bg = cp.winterGreen })
 -- ─── Mappings (esp. for my Wiki) ──────────
 -- Open help command enclosed in `` in new tab, ie. `h lua-guide`
 -- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
-vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { desc = 'Open help page reference in Wiki' })
+vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Open help page reference in Wiki' })
 
 
 -- Write the file name, fi. 'neovim highlight groups.md' as wiki tags, ':neovim:highlight:groups:' in the second line
@@ -52,7 +52,10 @@ vim.keymap.set('n', '<A-l>', function()
             '',
         })
     end,
-    { desc = 'Write file name as wiki tags in 2. line' })
+    {
+        buffer = true,
+        desc = 'Write file name as wiki tags in 2. line'
+    })
 
 
 -- ─── Spellchecking ────────────────────
@@ -65,7 +68,7 @@ vim.opt.spelllang = { "de", "en_us" }
 vim.opt.spellfile = { "/home/philipp/.config/nvim/spell/en.utf-8.add", "/home/philipp/.config/nvim/spell/de.utf-8.add" }
 
 -- Correct misspelled words with the first proposed word.
-vim.api.nvim_set_keymap("i", "<C-l>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { noremap = true })
+vim.keymap.set("i", "<C-l>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { buffer = true, desc = 'Correct last misspelled word' })
 
 
 -- ─── Autocommands ──────────
