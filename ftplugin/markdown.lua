@@ -31,6 +31,7 @@ highlight(0, 'htmlH3', { fg = cp.springGreen, bg = cp.winterGreen })
 
 
 -- ─── Mappings (esp. for my Wiki) ──────────
+vim.keymap.set('i', '<A-n>', '<Esc>b~A', { buffer = true, desc = 'Change case of current word.' })
 -- Open help command enclosed in `` in new tab, ie. `h lua-guide`
 -- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
 vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Open help page reference in Wiki' })
