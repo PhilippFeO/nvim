@@ -4,3 +4,4 @@ misc/
 projects/
 spell/
 test-init/
+count_config_lines.sh
