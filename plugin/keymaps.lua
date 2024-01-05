@@ -11,18 +11,23 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+-- Compile/Execute file and open Quickfix-List
 -- :make executes string behind makeprg
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
-vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>', { desc = 'Compile/Execute current file' })
+vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>',
+    { desc = '[m]ake/compile/execute current file' })
+-- Same as above but suppressing output of `make` via `:silent`
+vim.keymap.set('n', '<Leader>sc', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
+    { silent = true, desc = '[s]ilent make/[c]ompile/execute current file' })
 -- Generate substitution command for current word
-vim.keymap.set('n', '<Leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = '[s]ubstitute current word' })
 -- Copy into System Clipboard
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<Leader>w', '<Cmd>w<CR', { silent = true, desc = 'Save in Normal Mode' })
+vim.keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
 
