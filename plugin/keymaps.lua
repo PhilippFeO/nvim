@@ -15,23 +15,22 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
 vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>', { desc = 'Compile/Execute current file' })
--- Replace current Word by generating a :%s/…/…/gI Command
-vim.keymap.set('n', '<Leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = 'Replace current word' })
+-- Generate substitution command for current word
+vim.keymap.set('n', '<Leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = '[s]ubstitute current word' })
 -- Copy into System Clipboard
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
--- Make Scripts executable
-vim.keymap.set('n', '<Leader>x', '<cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
--- save and source current file (following <Localleader>ll for compiling LaTeX via vimtex)
-vim.keymap.set('n', '<Localleader>xx', '<Cmd>w | source %<CR>', { desc = 'Save and source current file' })
+vim.keymap.set('n', '<Leader>w', '<Cmd>w<CR', { silent = true, desc = 'Save in Normal Mode' })
+vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
 
 -- ┌────────────────┐
--- │ <C-?> Mappings │
+-- │ <C-…> Mappings │
 -- └────────────────┘
--- All mappings here use <C-…>
+-- Mapping involving CTRL, ie. <C-…>
+--
 -- Scroll half page down and center
 -- zz centers current line (no need to 'search' the screen as without `h zt`)
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll [d]own and center' })
@@ -39,7 +38,11 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll [d]own and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll [u]p and center' })
 -- `h jumplist` navigation
 vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in jumplist' })
-vim.keymap.set('n', '<C-i>', '<C-i>zz', { desc = 'Center after moving up in jumplist' })
+
+-- TODO: Breaks wiki.vim, iw. <Tab> doesn't trigger :WikiLinkNext <04-01-2024>
+--      ? <C-i> triggers :WikiLinkNext
+-- vim.keymap.set('n', '<C-i>', '<C-i>zz', { desc = 'Center after moving up in jumplist' })
+
 -- `h taglist` navigation
 vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
 
@@ -48,12 +51,11 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 -- │ "Letter" Mappings │
 -- └───────────────────┘
 -- All mappings here use merely letters, ie. no <Leader>, <C-…>, <A-…>, etc.
-
+--
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
--- Center view after going to last line
-vim.keymap.set('n', 'G', 'Gzt')
+vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -84,7 +86,8 @@ vim.keymap.set('v', 'K', ":m'<-2<CR>gv=gv", { desc = 'Move visually selected lin
 -- │ []-Mappings │
 -- └─────────────┘
 -- All mappings here start with [ or ]
--- when jumping to a function, I want to see as much as possible from it's body, hence zt and not zz
+--
+-- When jumping to a function, I want to see as much as possible from it's body, hence zt and not zz
 vim.keymap.set('n', '[m', '[mzt', { desc = 'Jump to previous @function.outer' })
 vim.keymap.set('n', ']m', ']mzt', { desc = 'Jump to next @function.outer' })
 -- Add empty lines
