@@ -111,6 +111,11 @@ require('lazy').setup({
       vim.g.wiki_global_load = false
       vim.g.wiki_write_on_nav = true
       vim.g.wiki_tag_scan_num_lines = 5
+      vim.g.wiki_select_method = {
+        tags = require("wiki.telescope").tags,
+        -- pages = require("wiki.ui_select").pages,
+        -- toc = require("wiki.ui_select").toc,
+      }
     end,
   },
 
@@ -195,6 +200,7 @@ vim.keymap.set('n', '<Leader>dk', vim.diagnostic.goto_prev, { desc = "LSP: Go to
 vim.keymap.set('n', '<Leader>dj', vim.diagnostic.goto_next, { desc = "LSP: Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "LSP: Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "LSP: Open diagnostics list" })
+
 
 -- the line beneath this is called `modeline`. see `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

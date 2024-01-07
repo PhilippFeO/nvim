@@ -12,7 +12,7 @@ require('telescope').setup { -- :h telescope.setup()
         -- ["<C-h>"] = "which_key",
       },
     },
-    prompt_prefix = ' ',
+    prompt_prefix = '  ',
     path_display = { 'shorten', shorten = 4 },
     layout_config = { preview_width = 0.5 },
     -- might interfere with lsp_ pickers
@@ -52,23 +52,28 @@ local nmap = function(keys, func, desc)
 
   vim.keymap.set('n', keys, func, { desc = desc })
 end
+
 -- ─── [f]ind keymaps ──────────
-nmap('<leader>fb', builtin.buffers, '[f]ind existing [b]uffers')
-nmap('<leader>ff', builtin.find_files, '[f]ind [f]iles')
+nmap('<Leader>fb', builtin.buffers, '[f]ind existing [b]uffers')
+nmap('<Leader>ff', builtin.find_files, '[f]ind [f]iles')
 
 -- ─── [s]earch keymaps ──────────
 nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
-nmap('<leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
-nmap('<leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
-nmap('<leader>sh', builtin.help_tags, '[s]earch [h]elp')
-nmap('<leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
+nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
+nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
+nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
+nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
-nmap('<leader>st', builtin.treesitter, '[s]earch [t]reesitter')
-nmap('<leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
-nmap('<leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
+nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
+nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
+nmap('<Leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
 
 -- ─── Git ──────────
-nmap('gs', builtin.git_status, '[g]it [s]tatus')
+nmap('<Leader>gs', builtin.git_status, '[g]it [s]tatus')
+
+-- ─── wiki.vim ──────────
+nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
+
 
 -- Telescope extensions
 -- ────────────────────
