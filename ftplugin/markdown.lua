@@ -5,10 +5,14 @@ vim.o.conceallevel = 2
 -- Sometimes, Neovim doesn't indent as I like and I feel that this option helps
 vim.opt.autoindent = false
 
+
+-- Try SidOfc/mkdx for highlighting. Has also some nice features.
+--  highlights defined in after/syntax/markdown.vim
+
 local colors = require("kanagawa.colors").setup()
 local cp = colors.palette
-
 local highlight = vim.api.nvim_set_hl
+
 -- Colors for **bold** and *italic* text
 highlight(0, "htmlBold", { fg = cp.autumnRed, bold = true })
 highlight(0, 'htmlItalic', { fg = cp.roninYellow, italic = true })
