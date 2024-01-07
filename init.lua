@@ -101,7 +101,6 @@ require('lazy').setup({
   {
     'lervag/wiki.vim',
     -- Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
-    -- Ansonsten wird irgndwie das Arbeitsverzeichnis für das wiki auf dieses Startverzeichnis gesetzt und telescope funktioniert nicht. Macht aber keinen Unterschied, wenn man init-test.lua verwendet.
     init = function()
       vim.g.wiki_root = '~/wiki'
       vim.g.wiki_index_name = 'Notizen'
