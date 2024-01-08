@@ -81,26 +81,25 @@ require('lazy').setup({
     'lervag/vimtex',
     lazy = false -- VimTeX must not be lazy loaded.
   },
-  {
-    'lervag/wiki.vim',
-    -- Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
-    init = function()
-      vim.g.wiki_root = '~/wiki'
-      vim.g.wiki_index_name = 'Notizen'
-      vim.g.wiki_filetypes = { 'md' }
-      vim.g.wiki_link_extension = '.md'
-      vim.g.wiki_link_target_type = 'md'
-      vim.g.wiki_global_load = false
-      vim.g.wiki_write_on_nav = true
-      vim.g.wiki_tag_scan_num_lines = 5
-      vim.g.wiki_select_method = {
-        tags = require("wiki.telescope").tags,
-        -- pages = require("wiki.ui_select").pages,
-        -- toc = require("wiki.ui_select").toc,
-      }
-    end,
-    -- ft = { 'markdown', 'wiki' } -- doesn't work
-  },
+  -- {
+  --   'lervag/wiki.vim',
+  --   -- Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
+  --   init = function()
+  --     vim.g.wiki_root = '~/wiki'
+  --     vim.g.wiki_index_name = 'Notizen'
+  --     vim.g.wiki_filetypes = { 'md' }
+  --     vim.g.wiki_link_extension = '.md'
+  --     vim.g.wiki_link_target_type = 'md'
+  --     vim.g.wiki_global_load = false
+  --     vim.g.wiki_write_on_nav = true
+  --     vim.g.wiki_tag_scan_num_lines = 5
+  --     vim.g.wiki_select_method = {
+  --       tags = require("wiki.telescope").tags,
+  --       -- pages = require("wiki.ui_select").pages,
+  --       -- toc = require("wiki.ui_select").toc,
+  --     }
+  --   end,
+  -- },
 
   -- ─── Snippets ──────────
   require('lazy.ultisnips'),
