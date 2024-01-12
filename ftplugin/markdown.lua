@@ -27,7 +27,6 @@ highlight(0, 'mkdLink', { fg = cp.oniViolet })
 highlight(0, 'mkdInlineURL', { link = 'mkdLink' })
 
 -- Change color of headings
--- Could also go in kanagawa's setup-function in the `overrides` sections but these highlights are only needed in markdown files, so they don't have to be overwritten each time nvim starts.
 -- winterRed suboptimal because it's used in Visual mode but I will probably enter this mode on H1 rarely
 highlight(0, 'htmlH1', { fg = cp.sakuraPink, bg = cp.winterRed })
 highlight(0, 'htmlH2', { fg = cp.lightBlue, bg = cp.waveBlue1 })
@@ -35,7 +34,7 @@ highlight(0, 'htmlH3', { fg = cp.springGreen, bg = cp.winterGreen })
 
 
 -- ─── Mappings (esp. for my Wiki) ──────────
-vim.keymap.set('i', '<A-n>', '<Esc>b~A', { buffer = true, desc = 'Change case of current word.' })
+vim.keymap.set('i', '<A-c>', '<Esc>b~A', { buffer = true, desc = '[A] – Change [c]ase of current word.' })
 -- Open help command enclosed in `` in new tab, ie. `h lua-guide`
 -- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
 vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Open help page reference in Wiki' })
