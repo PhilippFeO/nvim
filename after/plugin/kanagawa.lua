@@ -29,6 +29,11 @@ require('kanagawa').setup({
             -- Example syntax for Treesitter related highlight groups
             -- ['@text.diff.add'] = { fg = "blue" },
 
+            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },         -- add `blend = vim.o.pumblend` to enable transparency
+            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar = { bg = theme.ui.bg_m1 },
+            PmenuThumb = { bg = theme.ui.bg_p2 },
+
             -- -- Used by vim.lsp.buf.document_highlight() on CursorHold events
             -- -- TODO: Maybe some inter highlight group linking is possible to save some code and maintenance <19-12-2023>
             -- LspReferenceText = { bg = colors.palette.dragonBlack6, bold = true },
