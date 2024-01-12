@@ -83,6 +83,10 @@ nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
 
 -- Telescope extensions
 -- ────────────────────
+-- Interesting extensions:
+--    - live_grep_args: Options for ripgrep in picker, fi. `-t md` to search only markdown files
+--    - advanced_git_search: Better git search, afaik you select the file (via telescope) and then all commits affecting this file opens to be searched again
+
 -- ─── filelinks ──────────
 require('telescope').load_extension('filelinks')
 local filelinks = require('telescope').extensions['filelinks']
