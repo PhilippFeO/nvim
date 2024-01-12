@@ -54,11 +54,11 @@ local nmap = function(keys, func, desc)
 end
 
 -- ─── [f]ind keymaps ──────────
-nmap('<Leader>fb', builtin.buffers, '[f]ind existing [b]uffers')
-nmap('<Leader>ff', builtin.find_files, '[f]ind [f]iles')
+nmap('<Leader>f', builtin.find_files, 'find [f]iles')
 
 -- ─── [s]earch keymaps ──────────
 nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
+nmap('<Leader>sb', builtin.buffers, '[f]ind existing [b]uffers')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
