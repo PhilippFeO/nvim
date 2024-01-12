@@ -3,9 +3,15 @@
 -- ╰─────────────────────────╯
 -- See `:help telescope`
 
+local actions = require('telescope.actions')
+
 require('telescope').setup { -- :h telescope.setup()
   defaults = {
     mappings = {
+      n = {
+        -- There is also `send_selected_to_qflist`
+        ['<C-q>'] = actions.send_to_qflist + actions.open_qflist
+      },
       i = {
         ['<C-u>'] = true,
         ['<C-d>'] = true,
