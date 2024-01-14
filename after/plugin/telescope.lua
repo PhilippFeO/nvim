@@ -64,7 +64,8 @@ nmap('<Leader>f', builtin.find_files, 'find [f]iles')
 
 -- ─── [s]earch keymaps ──────────
 nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
-nmap('<Leader>sb', builtin.buffers, '[f]ind existing [b]uffers')
+nmap('<Leader>sb', builtin.buffers, '[s]ind existing [b]uffers')
+nmap('<Leader>sC', builtin.commands, '[s]earch [C]ommands')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
@@ -76,6 +77,7 @@ nmap('<Leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
 
 -- ─── Git ──────────
 nmap('<Leader>gs', builtin.git_status, '[g]it [s]tatus')
+nmap('<Leader>gb', builtin.git_bcommits, '[g]it Commits including current [b]uffer')
 
 -- ─── wiki.vim ──────────
 nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
@@ -86,6 +88,7 @@ nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
 -- Interesting extensions:
 --    - live_grep_args: Options for ripgrep in picker, fi. `-t md` to search only markdown files
 --    - advanced_git_search: Better git search, afaik you select the file (via telescope) and then all commits affecting this file opens to be searched again
+--        - evtl. ähnlich zu `builtin.git_bcommits`
 
 -- ─── filelinks ──────────
 require('telescope').load_extension('filelinks')
