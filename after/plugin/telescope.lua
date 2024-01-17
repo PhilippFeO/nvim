@@ -71,7 +71,7 @@ nmap('<Leader>f', builtin.find_files, 'find [f]iles')
 
 -- ─── [s]earch keymaps ──────────
 nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
-nmap('<Leader>sb', builtin.buffers, '[s]ind existing [b]uffers')
+nmap('<Leader>sb', builtin.buffers, '[s]earch existing [b]uffers')
 nmap('<Leader>sC', builtin.commands, '[s]earch [C]ommands')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
