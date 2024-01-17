@@ -18,10 +18,10 @@ require('telescope').setup { -- :h telescope.setup()
         -- ["<C-h>"] = "which_key",
       },
     },
-    prompt_prefix = '  ',
+    prompt_prefix = '  ',
     selection_caret = '  ',
     entry_prefix = '   ',
-    path_display = { 'shorten', shorten = 4 },
+    -- path_display = { 'shorten', shorten = 4 },
     layout_config = {
       preview_width = 0.5,
       prompt_position = 'top'
@@ -52,7 +52,7 @@ local builtin = require('telescope.builtin')
 local prepend_desc = function(desc)
   if desc then
     --     󰭎    🔭
-    desc = ' Tel: ' .. desc
+    desc = ' Tel: ' .. desc
   end
 
   return desc
