@@ -88,7 +88,7 @@ nmap('<Leader>en', function()
 end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────
-nmap('<Leader>gs', builtin.git_status, '[g]it [s]tatus')
+nmap('<Leader>tgs', builtin.git_status, '[t]elescope [g]it [s]tatus')
 nmap('<Leader>gb', builtin.git_bcommits, '[g]it Commits including current [b]uffer')
 
 -- ─── wiki.vim ──────────
