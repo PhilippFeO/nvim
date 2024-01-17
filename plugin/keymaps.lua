@@ -27,7 +27,7 @@ vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
+vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
 
@@ -105,11 +105,3 @@ vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty lin
 -- vim.keymap.set('n', '[[', '[[zz',
 -- { desc = 'Center view after going to previous section (in LaTeX)' })
 -- vim.keymap.set('n', ']]', ']]zz', { remap = true, desc = 'Center view after going to next section (in LaTeX)' })
-
-
--- ┌──────┐
--- │ Misc │
--- └──────┘
--- Go to previous buffer (especially when using a wiki)
-vim.keymap.set('n', '<BS>', '<Cmd>bprev<CR>')
-vim.keymap.set('n', '<C-BS>', '<Cmd>bnext<CR>')
