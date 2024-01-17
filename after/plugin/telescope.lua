@@ -19,8 +19,9 @@ require('telescope').setup { -- :h telescope.setup()
       },
     },
     prompt_prefix = '  ',
+    selection_caret = '  ',
+    entry_prefix = '   ',
     path_display = { 'shorten', shorten = 4 },
-    layout_config = { preview_width = 0.5 },
     -- might interfere with lsp_ pickers
     file_ignore_patterns = {
       "*.tif", -- heavily used in earth-observation/
