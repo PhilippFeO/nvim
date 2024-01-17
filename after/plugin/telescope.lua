@@ -22,6 +22,12 @@ require('telescope').setup { -- :h telescope.setup()
     selection_caret = '  ',
     entry_prefix = '   ',
     path_display = { 'shorten', shorten = 4 },
+    layout_config = {
+      preview_width = 0.5,
+      prompt_position = 'top'
+    },
+    -- Otherwise the first results show on the bottom although prompt is on top
+    sorting_strategy = 'ascending',
     -- might interfere with lsp_ pickers
     file_ignore_patterns = {
       "*.tif", -- heavily used in earth-observation/
