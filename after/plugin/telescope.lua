@@ -81,6 +81,11 @@ nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 nmap('<Leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
+-- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
+-- ie. it's return value, which is not callable. The solution below is callable.
+nmap('<Leader>en', function()
+  builtin.find_files({ cwd = '~/.config/nvim' })
+end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────
 nmap('<Leader>gs', builtin.git_status, '[g]it [s]tatus')
