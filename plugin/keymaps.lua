@@ -50,6 +50,9 @@ vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in ju
 
 -- `h taglist` navigation
 vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
+-- Quickfix list navigation
+vim.keymap.set('n', ']c', '<Cmd>cnext<CR>', { desc = 'Quickfix: :cnext' })
+vim.keymap.set('n', '[c', '<Cmd>cprevious<CR>', { desc = 'Quickfix: :cprevious' })
 
 
 -- ┌───────────────────┐
