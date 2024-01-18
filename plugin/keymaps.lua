@@ -27,7 +27,7 @@ vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
+vim.keymap.set('n', '<LocalLeader><LocalLeader>', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
 
