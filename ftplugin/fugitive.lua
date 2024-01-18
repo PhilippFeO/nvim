@@ -26,18 +26,20 @@ vim.cmd([[nmap <buffer> dt :Gtabedit <Plug><cfile><Bar>Gvdiffsplit<CR>]])
 --     desc = 'Keymap for vertical diff in new tab'
 -- })
 
+local git_keymap = function(lhs, rhs, desc)
+    vim.keymap.set('n', lhs, rhs, { buffer = true, desc = desc })
+end
+
 -- ─── git push ──────────
--- Git push origin HEAD
-vim.keymap.set('n', 'gp', '<Cmd>Git push origin HEAD<CR>', { buffer = true, desc = '[g]it [p]ush origin HEAD' })
+git_keymap('gp', '<Cmd>Git push<CR>', '[g]it [p]ush')
+git_keymap('cgp', ':Git push -u origin ', 'Populate Command line with ":Git push -u origin"')
 
 -- ─── git commit ──────────
--- git commit --amend --no-edit
-vim.keymap.set('n', 'gca', '<Cmd>Git commit --amend --no-edit<CR>',
-    { buffer = true, desc = '[g]it [c]ommit --[a]mend --no-edit' })
+git_keymap('cgc', ':Git commit ', 'Populate Commandline with "Git commit"')
 
 -- ─── git log ──────────
--- git log --graph
-vim.keymap.set('n', 'gll', '<Cmd>Git log --graph<CR>', { buffer = true, desc = '[g]it [l]og --graph' })
--- git log --graph --all -15
-vim.keymap.set('n', 'gla', '<Cmd>Git log --graph --all -15<CR>',
-    { buffer = true, desc = '[g]it [l]og --graph --[a]ll -15' })
+git_keymap('gll', '<Cmd>Git log --graph -15<CR>', '[g]it [l]og --graph -15')
+git_keymap('gla', '<Cmd>Git log --graph --all -15<CR>', '[g]it [l]og --graph --[a]ll -15')
+
+git_keymap('gh', '<Cmd>diffget //2<CR>', 'Take theirs (left side in 3-way-merge-pane)')
+git_keymap('gl', '<Cmd>diffget //3<CR>', 'Take ours (right side in 3-way-merge-pane)')
