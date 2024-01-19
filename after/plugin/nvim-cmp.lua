@@ -31,16 +31,21 @@ local kind_icons = {
   Variable = "x" -- ""
 }
 
+local cmp = require 'cmp'
 
+-- TODO: Herausfinden, was damit gemeint war/ist <19-01-2024>
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- nvim-cmp setup
-local cmp = require 'cmp'
+-- `()` were not inserted automatically when completing a function/method. This is fixed with code snippet below.
+-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#add-parentheses-after-selecting-function-or-method-item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
--- local luasnip = require 'ultisnips'
---luasnip.config.setup {}
 
 cmp.setup {
   -- enable snippet enginge. nvim-cmp needs a snippet enginge to work properly, even if no snippets are defined/used.
