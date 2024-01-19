@@ -95,7 +95,10 @@ cmp.setup {
     {
       name = 'path',
       option = { trailing_slash = true },
-      { name = 'buffer', keyword_length = 5 }, -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
+    },
+    {
+      name = 'buffer',
+      keyword_length = 5 -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
     },
   },
 
