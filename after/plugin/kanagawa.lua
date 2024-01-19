@@ -25,7 +25,6 @@ require('kanagawa').setup({
     -- 'overrides' is for highlight groups
     overrides = function(colors)
         local theme = colors.theme
-        local palette = colors.palette
         return {
             -- Example syntax for Treesitter related highlight groups
             -- ['@text.diff.add'] = { fg = "blue" },
@@ -47,7 +46,7 @@ require('kanagawa').setup({
             -- The default/recommened value `"none"` is the same as in a normal buffer => It blends into main window which makes it hard to distinguish between LSP-Documentation and Code. I've set it to the same value as the Pmenu displaying all results.
             -- IDEA: background of {Lazy, Mason}Normal also possible
             NormalFloat = { bg = theme.ui.bg_p2 },
-            FloatBorder = { bg = "none" },
+            FloatBorder = { bg = theme.ui.bg_p2 },
             FloatTitle = { bg = "none" },
 
             -- Save an hlgroup with dark background and dimmed foreground
