@@ -132,6 +132,12 @@ cmp.setup {
     entries = "custom" -- can be "custom", "wildmenu" or "native"
   },
 
+  window = {
+    documentation = {
+      border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
+    }
+  },
+
   experimental = {
     -- native_menu = false,
     ghost_text = false -- conflicts with Copilot or Codeium
