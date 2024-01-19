@@ -15,7 +15,7 @@ I moved some contents into (list by far not complete)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
 --  Otherwise wrong <Leader> is used.
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = 'ö'
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim

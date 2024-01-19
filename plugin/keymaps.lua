@@ -27,7 +27,7 @@ vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<LocalLeader><LocalLeader>', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
+vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
 
@@ -83,7 +83,7 @@ vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous hit of search' })
 vim.keymap.set('n', 'QQ', '<Cmd>q!<CR>', { desc = 'Force [QQ]uit (:q!)' })
 vim.keymap.set('n', 'QA', '<Cmd>qa!<CR>', { desc = 'Force [Q]uit [A]ll (:qa!)' })
 -- Press 'öl' to return to normal mode when in insert or visual mode
-vim.keymap.set({ 'i', 'v' }, 'öl', '<ESC>', { desc = 'Enter Normal Mode' })
+vim.keymap.set({ 'i', 'v' }, '<LocalLeader>l', '<ESC>', { desc = 'Enter Normal Mode' })
 -- Move visually selected lines
 -- Source: https://www.youtube.com/watch?v=w7i4amO_zaE&t=1464s
 vim.keymap.set('v', 'J', ":m'>+1<CR>gv=gv", { desc = 'Move visually selected lines down' })
