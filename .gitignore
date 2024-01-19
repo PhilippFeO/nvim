@@ -3,7 +3,7 @@ lazy-lock.json
 misc/
 projects/
 spell/
-test-init/
 count_config_lines.sh
 Neovim-Startausrüstung.pdf
-minimal_configs
+minimal_configs/
+myplugins/
