@@ -105,8 +105,7 @@ cmp.setup {
       name = 'buffer',
       keyword_length = 5 -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
     },
-    -- { name = 'ingredients', options = { documentation_string = '%s\n%s\n%s', lorem = 'ipsum' } },
-    { name = 'ingredients' },
+    { name = 'cmp-csv' },
   },
 
   formatting = {
