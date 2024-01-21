@@ -105,7 +105,7 @@ cmp.setup {
       name = 'buffer',
       keyword_length = 5 -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
     },
-    { name = 'cmp-csv' },
+    { name = 'cmp_csv' },
   },
 
   formatting = {
@@ -121,6 +121,7 @@ cmp.setup {
           nvim_lua = "[API]",
           path = "[Path]",
           buffer = "[Buf]",
+          cmp_csv = "[CSV]",
         })[entry.source.name]
         return vim_item
       else
