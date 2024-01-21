@@ -80,14 +80,14 @@ require('lazy').setup({
   },
 
   -- Becomes active after `:h timeoutlen`
-  {
-    'folke/which-key.nvim',
-    opts = {
-      disable = {
-        filetypes = { "TelescopePrompt" },
-      },
-    }
-  },
+  -- {
+  --   'folke/which-key.nvim',
+  --   opts = {
+  --     disable = {
+  --       filetypes = { "TelescopePrompt" },
+  --     },
+  --   }
+  -- },
 
   {
     -- Detect tabstop and shiftwidth automatically
