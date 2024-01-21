@@ -41,7 +41,8 @@ require('lazy').setup({
     dir = '~/dotfiles/nvim/lua/myplugins/cmp-csv',
     opts = {
       documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
-      csv_path = vim.fn.expand('~') .. '/programmieren/recipe-selector/res/ingredient_category_url.csv'
+      csv_path = '~/programmieren/recipe-selector/res/ingredient_category_url.csv',
+      filetype = 'yaml',
     }
   },
 
