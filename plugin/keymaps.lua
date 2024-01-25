@@ -106,6 +106,8 @@ vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty lin
 -- { desc = 'Center view after going to previous section (in LaTeX)' })
 -- vim.keymap.set('n', ']]', ']]zz', { remap = true, desc = 'Center view after going to next section (in LaTeX)' })
 
+vim.keymap.set('n', '{', '{zz', { desc = 'Center after {' })
+vim.keymap.set('n', '}', '}zz', { desc = 'Center after }' })
 
 -- ┌──────────────┐
 -- │ Alt-Mappings │
