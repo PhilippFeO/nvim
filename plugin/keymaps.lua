@@ -105,3 +105,10 @@ vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty lin
 -- vim.keymap.set('n', '[[', '[[zz',
 -- { desc = 'Center view after going to previous section (in LaTeX)' })
 -- vim.keymap.set('n', ']]', ']]zz', { remap = true, desc = 'Center view after going to next section (in LaTeX)' })
+
+
+-- ┌──────────────┐
+-- │ Alt-Mappings │
+-- └──────────────┘
+-- All mappings follow <A-…>
+vim.keymap.set('i', '<A-x>', '<C-o>', { desc = '<C-o> but easier to type' })
