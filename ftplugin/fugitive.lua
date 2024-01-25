@@ -41,5 +41,6 @@ git_keymap('cgc', ':Git commit ', 'Populate Commandline with "Git commit"')
 git_keymap('gll', '<Cmd>Git log --graph -15<CR>', '[g]it [l]og --graph -15')
 git_keymap('gla', '<Cmd>Git log --graph --all -15<CR>', '[g]it [l]og --graph --[a]ll -15')
 
+-- TODO: Only in `fugitive` buffers set and available (`buffer = true`) but not needed there <25-01-2024>
 git_keymap('gh', '<Cmd>diffget //2<CR>', 'Take theirs (left side in 3-way-merge-pane)')
 git_keymap('gl', '<Cmd>diffget //3<CR>', 'Take ours (right side in 3-way-merge-pane)')
