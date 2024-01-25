@@ -153,6 +153,8 @@ require('lazy').setup({
   require('lazy.telescope-fzf-native'),
   require('lazy.autoformat'),
 
+  require 'lazy.debug'
+
   -- note: next step on your neovim journey: add/configure additional "plugins" for kickstart
   --       these are some example plugins that i've included in the kickstart repository.
   --       uncomment any of the lines below to enable them.
@@ -173,7 +175,9 @@ require('lazy').setup({
 
 
 -- setup neovim lua configuration
-require('neodev').setup()
+require('neodev').setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
 
 -- some plugins, fi. UltiSnips, need python and a python interpreter with the
 -- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
