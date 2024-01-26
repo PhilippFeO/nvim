@@ -107,7 +107,7 @@ require('telescope').load_extension('filelinks')
 local filelinks = require('telescope').extensions['filelinks']
 filelinks.setup({
   working_dir = '~/wiki/',
-  format_string = '[  %s](%s)',
+  format_string = '  [%s](%s)',
   prompt_title = 'Wiki Files'
 })
 vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
