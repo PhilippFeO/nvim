@@ -62,17 +62,28 @@ nmap('<Leader>dt', dapui.toggle, '[d]apui [t]oggle')
 
 -- Open dapui automagically
 -- Scheme: Event -> run function
+-- TODO: Leave dapui open when debugging a (Python) test. <27-01-2024>
+--  No idea how. Probably by writing a function returning `dapui.close` on non pytest debug sessions, but do how do I determine this?
+-- `h dap-extensions` seems reasonable to start
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-dap_python = require('dap-python')
--- setup according to https://github.com/mfussenegger/nvim-dap-python
--- The debugger will automatically pick-up another virtual environment if it is activated before neovim is started.
--- TODO: Using an environment without debugpy also works. I thought it wouldn't. <26-026-01-2024
--- dap_python.setup(vim.fn.expand('$VIRTUAL_ENV'))
---
--- dap.continue does not work, test_method() does
-dap_python.setup('~/.venv/debugpy/bin/python')
-
-dap_python.test_runner = 'pytest'
+-- TODO: Read more about configurations. It seems to be an important topic. <27-0127-01-2024
+-- This enables debugging Tests in the first place (therefore an important topich).
+dap.configurations.python = {
+    {
+        name = "Pytest: Current File",
+        type = "python",
+        request = "launch",
+        module = "pytest",
+        -- TODO: Define args via `pytest.ini`. <27-01-2024>
+        args = {
+            "${file}",
+            "-sv",
+            -- "--log-cli-level=INFO",
+            -- "--log-file=test_out.log"
+        },
+        console = "integratedTerminal",
+    }
+}
