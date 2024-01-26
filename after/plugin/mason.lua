@@ -1,6 +1,23 @@
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
+-- Has to be loaded **after** Mason, ie. `require('mason').setup()`
+-- TODO: Change symbols of Breakpoint and conditional Breakpoint <25-01-2024
+-- `h sign_define()` vllt hilfreich
+-- Config von https://youtu.be/RziPWdTzSV8?t=539 vllt. hilfreich (schauen, wo er das definierte Zeichen verwendet)
+-- TODO: README und Doku durchlesen <25-01-2024>
+require('mason-nvim-dap').setup {
+  -- Makes a best effort to setup the various debuggers with
+  -- reasonable debug configurations
+  automatic_setup = true,
+
+  -- You'll need to check that you have the required things installed
+  -- online, please don't ask me how to install them :)
+  ensure_installed = {
+    'debugpy', -- s. https://github.com/mfussenegger/nvim-dap-python
+  },
+}
+
 -- contains keymaps
 local on_attach = require('lsp-keymaps') -- lua/lsp-keymaps.lua
 
