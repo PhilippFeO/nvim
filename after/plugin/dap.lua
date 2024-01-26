@@ -2,31 +2,10 @@
 -- Displays variable names next to their definition, uses TreeSitter to find the respective location
 require 'nvim-dap-virtual-text'.setup()
 
-local dap = require 'dap'
+
+-- ─── nvim-dap-ui ──────────
+
 local dapui = require 'dapui'
-
-
--- Basic debugging keymaps, feel free to change to your liking!
--- TODO: Log point message, fi. Breakpoint was hit <25-01-2024>
--- TODO: Make this function an own plugin using Closures <26-01-2024>
-local nmap = function(keys, func, desc)
-    if desc then
-        desc = '  DAP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { desc = desc })
-end
-nmap('<F5>', dap.continue) --Entry point for all Debugger things
-nmap('<F1>', dap.step_into, '  Step into')
-nmap('<F2>', dap.step_over, '  Step over')
-nmap('<F3>', dap.step_out, '  Step out')
-nmap('<leader>b', dap.toggle_breakpoint, '  Toggle Breakpoint')
-nmap('<leader>B', function()
-    dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-end, '  Toggle Conditional Breakpoint')
-nmap('<Leader>dc', dap.terminate, '󰗼  Terminate Debugging')
-
-
 -- TODO: `h nvim-dap-ui` <25-01-2024>
 -- Here you fi control the panes, s. https://youtu.be/0moS8UHupGc?t=1481
 dapui.setup {
@@ -52,6 +31,30 @@ dapui.setup {
     },
 }
 
+
+-- ─── nvim-dap ──────────
+
+local dap = require 'dap'
+
+-- Basic debugging keymaps, feel free to change to your liking!
+-- TODO: Log point message, fi. Breakpoint was hit <25-01-2024>
+-- TODO: Make this function an own plugin using Closures <26-01-2024>
+local nmap = function(keys, func, desc)
+    if desc then
+        desc = '  DAP: ' .. desc
+    end
+
+    vim.keymap.set('n', keys, func, { desc = desc })
+end
+nmap('<F5>', dap.continue) --Entry point for all Debugger things
+nmap('<F1>', dap.step_into, '  Step into')
+nmap('<F2>', dap.step_over, '  Step over')
+nmap('<F3>', dap.step_out, '  Step out')
+nmap('<Leader>b', dap.toggle_breakpoint, '  Toggle Breakpoint')
+nmap('<Leader>B', function()
+    dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+end, '  Toggle Conditional Breakpoint')
+nmap('<Leader>dc', dap.terminate, '󰗼  Terminate Debugging')
 nmap('<Leader>dr', function()
     dapui.open({ reset = true })
 end, '[d]apui [r]eset')
