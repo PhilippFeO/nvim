@@ -19,3 +19,7 @@ local transform_to_yaml = function()
 end
 
 vim.api.nvim_buf_create_user_command(0, 'ToYaml', transform_to_yaml, {})
+
+-- <C-v><CR> in Insert mode insert 'purple ^M'
+-- compare recording a macro into register `p`, than `:register p`
+-- vim.cmd([[let @p='0:ToYaml ^M jj']])
