@@ -47,8 +47,18 @@ dapui.setup {
 
 local dap = require 'dap'
 
+-- Open dapui automagically
+-- Scheme: Event -> run function
+-- TODO: Leave dapui open after debugging test is done, ie. after the `assert` statement. <27-01-2024>
+--  No idea how. Probably by writing a function returning `dapui.close` on non pytest debug sessions, but do how do I determine this?
+-- `h dap-extensions` seems reasonable to start
+dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+-- ─── dap & dapui keymaps ──────────
+
 -- Basic debugging keymaps, feel free to change to your liking!
--- TODO: Log point message, fi. Breakpoint was hit <25-01-2024>
 -- TODO: Make this function an own plugin using Closures <26-01-2024>
 local nmap = function(keys, func, desc)
     if desc then
