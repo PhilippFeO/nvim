@@ -68,7 +68,16 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    -- Use a sharp border with `FloatBorder` highlights
+    border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
+    -- add the title in hover float window
+    -- title = "hover"
+  }
+)
 
+-- ─── Python ──────────
 -- Pylsp needs it's own setup process. I don't know why.
 -- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
 require 'lspconfig'.pylsp.setup {
@@ -100,12 +109,3 @@ require 'lspconfig'.pylsp.setup {
   }
 }
 
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    -- Use a sharp border with `FloatBorder` highlights
-    border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
-    -- add the title in hover float window
-    -- title = "hover"
-  }
-)
