@@ -4,6 +4,17 @@ require 'nvim-dap-virtual-text'.setup()
 
 
 -- ─── nvim-dap-ui ──────────
+local wave_colors = require('kanagawa.colors').setup({ theme = 'wave' })
+vim.api.nvim_set_hl(0, 'breakpoint_linehl', { bg = wave_colors.palette.winterGreen })
+vim.api.nvim_set_hl(0, 'DapBreakpoint_texthl', { fg = wave_colors.palette.springGreen })
+-- There is also 'DapStopped'
+-- TODO: Name of sign for conditional breakpoint <27-01-2024>
+vim.fn.sign_define('DapBreakpoint', {
+    text = '',
+    texthl = 'DapBreakpoint_texthl',
+    linehl = 'breakpoint_linehl',
+    numhl = ''
+})
 
 local dapui = require 'dapui'
 -- TODO: `h nvim-dap-ui` <25-01-2024>
