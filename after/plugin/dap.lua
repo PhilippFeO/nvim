@@ -84,6 +84,8 @@ nmap('<Leader>dr', function()
 end, '[d]apui [r]eset')
 nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
 
+-- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 -- TODO: Both keymaps below don't work <27-01-2024>
 -- But starting with `dap.continue()` does, ie. selecting the Pytest configuration.

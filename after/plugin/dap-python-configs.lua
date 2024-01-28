@@ -47,7 +47,6 @@ local dap_py_in_term = {
     request = "launch",
     type = "python"
 }
-dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
