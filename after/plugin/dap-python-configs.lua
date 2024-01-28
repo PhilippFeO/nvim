@@ -48,8 +48,15 @@ local dap_py_in_term = {
     type = "python"
 }
 
+local dap_py_default = {
+    name = "Debug file (default config without 'console')",
+    program = "${file}",
+    request = "launch",
+    type = "python"
+}
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
+    dap_py_default,
     dap_py_ex_term,
     dap_pytest_config,
     dap_py_in_term,
