@@ -101,10 +101,40 @@ local dap_pytest_config = {
         -- "--log-file=test_out.log"
     },
     console = "integratedTerminal",
+    -- console = 'externalTerminal',
+    -- python_path = '~/.venv/recipe-selector/bin/python',
+    -- debugOptions = { 'RedirectOutput' },
 }
+
+local dap_py_ex_term = {
+    console = 'externalTerminal',
+    name = "Debug with externalTerminal",
+    program = "${file}",
+    request = "launch",
+    type = "python"
+}
+-- s. `h dap-terminal`
+-- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
+dap.defaults.fallback.external_terminal = {
+    command = '/home/philipp/.local/bin/kitty'
+}
+-- dap.defaults.fallback.force_external_terminal = true
+
+-- Not useable for complex issues like starting Neovim in subprocess
+local dap_py_in_term = {
+    console = 'integratedTerminal',
+    name = "Debug with integratedTerminal",
+    program = "${file}",
+    request = "launch",
+    type = "python"
+}
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
-    dap_pytest_config
+    dap_py_ex_term,
+    dap_pytest_config,
+    dap_py_in_term,
 }
 
 -- TODO: Both keymaps below don't work <27-01-2024>
