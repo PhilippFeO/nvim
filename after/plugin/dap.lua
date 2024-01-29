@@ -22,25 +22,52 @@ local dapui = require 'dapui'
 -- TODO: `h nvim-dap-ui` <25-01-2024>
 -- Here you fi control the panes, s. https://youtu.be/0moS8UHupGc?t=1481
 dapui.setup {
-    -- Set icons to characters that are more likely to work in every terminal.
     -- TODO: Highlight Groups dieser ändern, Highlightgroups sollte es in `h nvim-dap-ui` geben
     -- icons = {
     --     expanded = '▾',
     --     collapsed = '▸',
     --     current_frame = '*'
     -- },
+    mappings = {
+        remove = 'dd'
+    },
     controls = {
         icons = {
             -- nerdfonts: search for 'debug_'
             pause = '󰏤',
             play = '▶',
-            step_into = '',
-            step_over = '',
-            step_out = '', -- 󰆸
-            step_back = '',
             run_last = '▶▶',
-            terminate = '',
         },
+    },
+    layouts = {
+        {
+            position = "left",
+            size = 60,
+            elements = { {
+                id = "scopes",
+                size = 0.35
+            }, {
+                id = "watches",
+                size = 0.35
+            }, {
+                id = "breakpoints",
+                size = 0.1
+            }, {
+                id = "stacks",
+                size = 0.2
+            } },
+        },
+        {
+            position = "bottom",
+            size = 7,
+            elements = { {
+                id = "repl",
+                size = 0.5
+            }, {
+                id = "console",
+                size = 0.5
+            } },
+        }
     },
 }
 
