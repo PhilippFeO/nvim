@@ -1,6 +1,10 @@
 local wiki_utils = require('wiki_utils')
 
-vim.keymap.set('n', '<A-k>', wiki_utils.add_tag, { buffer = true })
+vim.keymap.set('n', '<A-k>', wiki_utils.add_tag, { buffer = true, desc = 'Add word under cursor as tag' })
+vim.keymap.set('n', '<A-l>', wiki_utils.filename_as_tags, {
+    buffer = true,
+    desc = 'Write file name as wiki tags in 2. line'
+})
 
 
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
@@ -43,28 +47,6 @@ vim.keymap.set('i', '<A-c>', '<Esc>b~A', { buffer = true, desc = '[A] – Change
 -- Open help command enclosed in `` in new tab, ie. `h lua-guide`
 -- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
 vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Open help page reference in Wiki' })
-
-
--- Write the file name, fi. 'neovim highlight groups.md' as wiki tags, ':neovim:highlight:groups:' in the second line
--- (I do/need this quite frequently while restructuring my wiki.)
-vim.keymap.set('n', '<A-l>', function()
-        -- expand file name macro
-        local file_name_spaces = vim.fn.expand('%:t:r')
-        -- replace spaces by :
-        local file_name_colon = file_name_spaces:gsub(' ', ':')
-        -- pre- and append :
-        file_name_colon = ':' .. file_name_colon .. ':'
-        -- write wiki tags
-        -- start=end implies inserting, otherwise contents are overwritten
-        vim.api.nvim_buf_set_lines(0, 1, 1, false, {
-            file_name_colon,
-            '',
-        })
-    end,
-    {
-        buffer = true,
-        desc = 'Write file name as wiki tags in 2. line'
-    })
 
 
 -- ─── Spellchecking ────────────────────
