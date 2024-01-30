@@ -30,7 +30,6 @@ vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into syste
 vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
 
-
 -- ┌────────────────┐
 -- │ <C-…> Mappings │
 -- └────────────────┘
@@ -50,9 +49,6 @@ vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in ju
 
 -- `h taglist` navigation
 vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in taglist' })
--- Quickfix list navigation
-vim.keymap.set('n', ']c', '<Cmd>cnext<CR>', { desc = 'Quickfix: :cnext' })
-vim.keymap.set('n', '[c', '<Cmd>cprevious<CR>', { desc = 'Quickfix: :cprevious' })
 
 
 -- ┌───────────────────┐
@@ -101,10 +97,11 @@ vim.keymap.set('n', ']m', ']mzt', { desc = 'Jump to next @function.outer' })
 -- Add empty lines
 vim.keymap.set('n', ']<Space>', '<Cmd>normal o<CR>', { desc = 'Add one empty line below cursor' })
 vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty line above cursor' })
--- vim.keymap.set('n', '[[', '[[zz', { remap = true, desc = 'Center view after going to previous section (in LaTeX)' })
--- vim.keymap.set('n', '[[', '[[zz',
--- { desc = 'Center view after going to previous section (in LaTeX)' })
--- vim.keymap.set('n', ']]', ']]zz', { remap = true, desc = 'Center view after going to next section (in LaTeX)' })
+vim.keymap.set('n', '[[', '[[zz', { desc = 'Center view after going to previous section' })
+vim.keymap.set('n', ']]', ']]zz', { desc = 'Center view after going to next section' })
+vim.keymap.set('n', '[q', '<Cmd>cprevious<CR>', { desc = "Previous Quickfix-List entry" })
+vim.keymap.set('n', ']q', '<Cmd>cnext<CR>', { desc = "Next Quickfix-List entry" })
+
 
 vim.keymap.set('n', '{', '{zz', { desc = 'Center after {' })
 vim.keymap.set('n', '}', '}zz', { desc = 'Center after }' })
