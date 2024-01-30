@@ -1,9 +1,9 @@
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
 vim.o.conceallevel = 2
--- vim.o.tabstop = 2
--- vim.o.shiftwidth = 2
+-- vim.bo.tabstop = 2
+-- vim.bo.shiftwidth = 2
 -- Sometimes, Neovim doesn't indent as I like and I feel that this option helps
-vim.opt.autoindent = false
+vim.bo.autoindent = false
 
 
 -- Try SidOfc/mkdx for highlighting. Has also some nice features.
