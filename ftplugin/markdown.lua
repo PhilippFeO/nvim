@@ -1,3 +1,8 @@
+local wiki_utils = require('wiki_utils')
+
+vim.keymap.set('n', '<A-k>', wiki_utils.add_tag, { buffer = true })
+
+
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
 vim.o.conceallevel = 2
 -- vim.bo.tabstop = 2
