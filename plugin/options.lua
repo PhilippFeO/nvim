@@ -1,6 +1,9 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+vim.o.grepprg = 'rg --vimgrep --column --no-heading $*'
+vim.o.grepformat = '%f:%l:%c:%m'
+
 -- Dont show modes like -- INSERT --, becaues Lualine does
 vim.opt.showmode = false
 
