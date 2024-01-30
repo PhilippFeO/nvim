@@ -38,6 +38,11 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[w]orkspace [l]ist Folders')
 
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "LSP: Go to previous diagnostic message" })
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "LSP: Go to next diagnostic message" })
+  vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = "LSP: Open floating diagnostic message" })
+  vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, { desc = "LSP: Open diagnostics list" })
+
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()

@@ -207,13 +207,5 @@ vim.api.nvim_create_autocmd('textyankpost', {
 })
 
 
--- diagnostic keymaps
--- TODO: Move to a better lsp-related location <19-12-2023>
-vim.keymap.set('n', '<Leader>dk', vim.diagnostic.goto_prev, { desc = "LSP: Go to previous diagnostic message" })
-vim.keymap.set('n', '<Leader>dj', vim.diagnostic.goto_next, { desc = "LSP: Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "LSP: Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "LSP: Open diagnostics list" })
-
-
 -- the line beneath this is called `modeline`. see `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
