@@ -106,6 +106,11 @@ cmp.setup {
       keyword_length = 5 -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
     },
     { name = 'cmp_csv' },
+
+    { name = 'cmp_help_tags',
+      -- TODO: What do `h keyword_pattern` and `h trigger_characters`? <01-02-2024>
+      keyword_length = 5
+    },
   },
 
   formatting = {
@@ -122,6 +127,7 @@ cmp.setup {
           path = "[Path]",
           buffer = "[Buf]",
           cmp_csv = "[CSV]",
+          cmp_help_tags = "[H]"
         })[entry.source.name]
         return vim_item
       else

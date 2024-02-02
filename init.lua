@@ -45,6 +45,16 @@ require('lazy').setup({
       filetype = 'yaml',
     }
   },
+  {
+    dir = '~/dotfiles/nvim/lua/myplugins/cmp-help-tags',
+    -- config = true -- runs setup({}) (with empty table)
+    opts = {
+      filetypes = {
+        'markdown',
+        'lua'
+      }
+    }
+  },
 
   {
     'PhilippFeO/telescope-filelinks.nvim',
