@@ -12,8 +12,11 @@ return {
         vim.g.UltiSnipsEditSplit = "vertical"
 
         -- setting absolute path prevents UltiSnips from scanning my whole <runtimepath> for the <schnipsel> directory
-        -- "UltiSnips" needed for vim-snippets/UltiSnips/ directory
-        vim.g.UltiSnipsSnippetDirectories = { "UltiSnips", "/home/philipp/dotfiles/nvim/schnipsel/" }
+        -- "UltiSnips" needed when using vim-snippets plugins via plugin manager
+        vim.g.UltiSnipsSnippetDirectories = {
+            vim.fn.expand('~/dotfiles/nvim/schnipsel/'),
+            vim.fn.expand('~/dotfiles/nvim/lua/localplugins/vim-snippets/UltiSnips/')
+        }
 
         -- Keymaps
         -- ───────
