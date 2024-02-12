@@ -103,35 +103,35 @@ nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
 --        - evtl. ähnlich zu `builtin.git_bcommits`
 
 -- ─── filelinks ──────────
-require('telescope').load_extension('filelinks')
-local filelinks = require('telescope').extensions['filelinks']
-filelinks.setup({
-  working_dir = '~/wiki/',
-  format_string = '  [%s](%s)',
-  prompt_title = 'Wiki Files'
-})
-vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
--- TODO: remap of keymaps? <21-12-2023>
-vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
-
-vim.keymap.set('n', '<Leader>lf', function()
-  filelinks.make_filelink({
-    working_dir = '/home/philipp/',
-    format_string = '[%s](%s)',
-    remove_extension = false,
-    prompt_title = 'Files in $HOME'
-  })
-end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
-
-vim.keymap.set('n', '<Leader>li', function()
-  filelinks.make_filelink({
-    format_string = '  ![%s](%s)',
-    remove_extension = false,
-    first_upper = false,
-    prepend_to_link = "~/wiki/",
-    find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
-  })
-end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
+-- require('telescope').load_extension('filelinks')
+-- local filelinks = require('telescope').extensions['filelinks']
+-- filelinks.setup({
+--   working_dir = '~/wiki/',
+--   format_string = '  [%s](%s)',
+--   prompt_title = 'Wiki Files'
+-- })
+-- vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
+-- -- TODO: remap of keymaps? <21-12-2023>
+-- vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
+--
+-- vim.keymap.set('n', '<Leader>lf', function()
+--   filelinks.make_filelink({
+--     working_dir = '/home/philipp/',
+--     format_string = '[%s](%s)',
+--     remove_extension = false,
+--     prompt_title = 'Files in $HOME'
+--   })
+-- end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
+--
+-- vim.keymap.set('n', '<Leader>li', function()
+--   filelinks.make_filelink({
+--     format_string = '  ![%s](%s)',
+--     remove_extension = false,
+--     first_upper = false,
+--     prepend_to_link = "~/wiki/",
+--     find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
+--   })
+-- end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
 
 -- ─── link_headings ──────────
 -- require('telescope').load_extension('link_headings')

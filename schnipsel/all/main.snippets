@@ -10,8 +10,9 @@ endglobal
 
 
 # Own todo-snippet because the default one is to detailed.
+# Overwrites vim-snippets/UltiSnips/all.snippets#todo
 snippet todo "TODO-Kommentar" bw
-`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`>$0
+`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`, Philipp Rost>$0
 endsnippet
 
 snippet „ "Insert German quotation marks" A
