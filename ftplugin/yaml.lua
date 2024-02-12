@@ -1,8 +1,15 @@
+-- Vimified version:
+--  %norm I  - name:
+--  %norm 0f,aquantity:
+--  split(getline('.'), ',')
+-- Insert spaces
+
 -- Macro, dann N@REGISTER, mit :norm klappt's nicht, weil neue Zeilen hinzukommen, auch wenn man im Makro jj am Ende tippt
 -- Replace 'first,second' with '  - name: first\n    quantity: second'
 -- Only used for wirting recipes
 local transform_to_yaml = function()
     local line = vim.api.nvim_get_current_line()
+    -- TODO: Maybe using string.split() (if lua provides one) <31-01-2024>
     local row = {}
     for value in line:gmatch("[^,]+") do
         table.insert(row, value)
