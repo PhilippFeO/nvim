@@ -37,9 +37,8 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-<<<<<<< HEAD
   {
-    dir = '~/dotfiles/nvim/lua/myplugins/cmp-csv',
+    'PhilippFeO/cmp-csv',
     opts = {
       documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
       csv_path = '~/programmieren/recipe-selector/res/ingredient_category_url.csv',
@@ -47,7 +46,7 @@ require('lazy').setup({
     }
   },
   {
-    dir = '~/dotfiles/nvim/lua/myplugins/cmp-help-tags',
+    'PhilippFeO/cmp-help-tags',
     -- config = true -- runs setup({}) (with empty table)
     opts = {
       filetypes = {
