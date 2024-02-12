@@ -14,7 +14,12 @@ require('mason-nvim-dap').setup {
   -- You'll need to check that you have the required things installed
   -- online, please don't ask me how to install them :)
   ensure_installed = {
-    'debugpy', -- s. https://github.com/mfussenegger/nvim-dap-python
+    -- DAP
+    'debugpy',            -- s. https://github.com/mfussenegger/nvim-dap-python
+    'bash-debug-adapter', -- Requires nodejs
+    -- LSP
+    'lua-language-server',
+    'python-lsp-server',
   },
 }
 
