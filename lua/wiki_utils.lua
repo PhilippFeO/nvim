@@ -27,7 +27,7 @@ M.filename_as_tags = function()
   -- write wiki tags
   -- start=end implies inserting, otherwise contents are overwritten
   local adjusted_tag_line_nr = vim.g.tag_line_number - 1 -- indexing starts at 0
-  vim.api.nvim_buf_set_lines(0, lua_adjusted_tag_line_nr, lua_adjusted_tag_line_nr, false, {
+  vim.api.nvim_buf_set_lines(0, adjusted_tag_line_nr, adjusted_tag_line_nr, false, {
     file_name_colon,
     '',
   })
