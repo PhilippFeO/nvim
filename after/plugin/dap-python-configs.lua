@@ -35,7 +35,7 @@ local dap_py_ex_term = {
 -- s. `h dap-terminal`
 -- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
 dap.defaults.fallback.external_terminal = {
-    command = '/home/philipp/.local/bin/kitty'
+    command = '/usr/bin/kitty'
 }
 -- dap.defaults.fallback.force_external_terminal = true
 

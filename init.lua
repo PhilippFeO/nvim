@@ -38,14 +38,6 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   {
-    'PhilippFeO/cmp-csv',
-    opts = {
-      documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
-      csv_path = '~/programmieren/recipe-selector/res/ingredient_category_url.csv',
-      filetype = 'yaml',
-    }
-  },
-  {
     'PhilippFeO/cmp-help-tags',
     -- config = true -- runs setup({}) (with empty table)
     opts = {

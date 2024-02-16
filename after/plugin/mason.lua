@@ -58,6 +58,7 @@ mason_lspconfig.setup {
 }
 
 -- copied from after/plugin/nvim-cmp.lua, because `capabilities` was flagged unknown by LSP
+-- Extends completion features, s. https://github.com/hrsh7th/cmp-nvim-lsp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 

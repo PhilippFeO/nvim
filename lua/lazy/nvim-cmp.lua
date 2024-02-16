@@ -5,11 +5,9 @@ return {
   dependencies = {
     -- !!! Don't forget to add the according sources in ./after/plugin/nvim-cmp.lua !!!
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path', -- Filename/Path completion
-    'hrsh7th/cmp-buffer', -- Completes words from current buffer
+    'hrsh7th/cmp-path',     -- Filename/Path completion
+    'hrsh7th/cmp-buffer',   -- Completes words from current buffer
     'hrsh7th/cmp-nvim-lua', -- Neovim's Lua API completion
-    -- 'hrsh7th/cmp-cmdline', -- TODO try
-    --'L3MON4D3/LuaSnip',
-    --'saadparwaiz1/cmp_luasnip', -- Completes LuaSnips
+    'hrsh7th/cmp-cmdline',  -- TODO try
   },
 }
