@@ -58,10 +58,6 @@ require('lazy').setup({
 
   {
     'PhilippFeO/telescope-filelinks.nvim',
-    -- `dev = true` implies using the local version of the plugin
-    -- location specified via `dev.path` in `opts` parameter (s. below)
-    dev = true,
-    branch = 'prepend_to_link',
   },
 
   {
