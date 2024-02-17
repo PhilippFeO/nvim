@@ -75,6 +75,7 @@ nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
 nmap('<Leader>sb', builtin.buffers, '[s]earch existing [b]uffers')
 nmap('<Leader>sC', builtin.commands, '[s]earch [C]ommands')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
+nmap('<Leader>sf', builtin.current_buffer_fuzzy_find, '[s]earch current [f]ile')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 -- Keymap for help_tags defined below
 -- nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
@@ -82,7 +83,6 @@ nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
-nmap('<Leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
 
 -- Open help tags in vertical split on default.
 -- Code of `h attach_mappings` copied from `h telescope.builtin.help_tags`.
