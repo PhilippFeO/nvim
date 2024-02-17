@@ -10,7 +10,8 @@ require('telescope').setup { -- :h telescope.setup()
     mappings = {
       n = {
         -- There is also `send_selected_to_qflist`
-        ['<C-q>'] = actions.send_to_qflist + actions.open_qflist
+        ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
+        ["kj"] = "close",
       },
       i = {
         ['<C-u>'] = true,
