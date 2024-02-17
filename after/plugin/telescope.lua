@@ -87,6 +87,7 @@ nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 -- Open help tags in vertical split on default.
 -- Code of `h attach_mappings` copied from `h telescope.builtin.help_tags`.
 -- Only if block at the end was changed.
+-- Procedure found on 'https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#actions'
 local action_state = require "telescope.actions.state"
 local action_set = require 'telescope.actions.set'
 local utils = require "telescope.utils"
