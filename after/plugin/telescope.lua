@@ -76,12 +76,48 @@ nmap('<Leader>sb', builtin.buffers, '[s]earch existing [b]uffers')
 nmap('<Leader>sC', builtin.commands, '[s]earch [C]ommands')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
-nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
+-- Keymap for help_tags defined below
+-- nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
 nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 nmap('<Leader>/', builtin.current_buffer_fuzzy_find, '[s]earch [b]uffer')
+
+-- Open help tags in vertical split on default.
+-- Code of `h attach_mappings` copied from `h telescope.builtin.help_tags`.
+-- Only if block at the end was changed.
+local action_state = require "telescope.actions.state"
+local action_set = require 'telescope.actions.set'
+local utils = require "telescope.utils"
+local my_help_tags = function()
+  local opts = {
+    attach_mappings = function(prompt_bufnr)
+      action_set.select:replace(function(_, cmd)
+        local selection = action_state.get_selected_entry()
+        if selection == nil then
+          utils.__warn_no_selection "builtin.help_tags"
+          return
+        end
+
+        actions.close(prompt_bufnr)
+        print(cmd)
+        if cmd == "default" then
+          vim.cmd("vert help " .. selection.value)
+        elseif cmd == "horizontal" then -- <C-x> opens horizontally
+          vim.cmd("help " .. selection.value)
+        elseif cmd == "tab" then        -- <C-t> opens in new tab
+          vim.cmd("tab help " .. selection.value)
+        end
+      end)
+
+      return true
+    end,
+  }
+  require('telescope.builtin').help_tags(opts)
+end
+nmap('<Leader>sh', my_help_tags, 'my help tags')
+
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
 nmap('<Leader>en', function()
