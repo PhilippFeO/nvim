@@ -84,7 +84,13 @@ vim.keymap.set({ 'i', 'v' }, '<LocalLeader>l', '<ESC>', { desc = 'Enter Normal M
 -- Source: https://www.youtube.com/watch?v=w7i4amO_zaE&t=1464s
 vim.keymap.set('v', 'J', ":m'>+1<CR>gv=gv", { desc = 'Move visually selected lines down' })
 vim.keymap.set('v', 'K', ":m'<-2<CR>gv=gv", { desc = 'Move visually selected lines up' })
-
+vim.keymap.set('c', '%%', function()
+    if vim.fn.getcmdtype() == ':' then
+        return vim.fn.expand('%:h') .. '/'
+    else
+        return '%%'
+    end
+end, { expr = true, desc = 'Insert directory of buffer' })
 
 -- ┌─────────────┐
 -- │ []-Mappings │
@@ -102,6 +108,8 @@ vim.keymap.set('n', ']]', ']]zz', { desc = 'Center view after going to next sect
 vim.keymap.set('n', '[q', '<Cmd>cprevious<CR>', { desc = "Previous Quickfix-List entry" })
 vim.keymap.set('n', ']q', '<Cmd>cnext<CR>', { desc = "Next Quickfix-List entry" })
 
+vim.keymap.set('n', '[b', '<Cmd>bprevious<CR>', { desc = "Previous Buffer" })
+vim.keymap.set('n', ']b', '<Cmd>bnext<CR>', { desc = "Next Buffer" })
 
 vim.keymap.set('n', '{', '{zz', { desc = 'Center after {' })
 vim.keymap.set('n', '}', '}zz', { desc = 'Center after }' })

@@ -46,6 +46,21 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+-- Completion for Command line, ie :-command mode.
+-- Very similar to default but activates automatically and has fuzzy finding capabilities
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
 
 cmp.setup {
   -- enable snippet enginge. nvim-cmp needs a snippet enginge to work properly, even if no snippets are defined/used.
@@ -112,6 +127,7 @@ cmp.setup {
       keyword_length = 5
     },
   },
+
 
   formatting = {
     format = function(entry, vim_item)

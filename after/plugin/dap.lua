@@ -100,6 +100,7 @@ nmap('<F5>', dap.continue) --Entry point for all Debugger things
 nmap('<F1>', dap.step_into, '  Step into')
 nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
+nmap('<F4>', dap.step_back, ' Step out')
 nmap('<Leader>b', dap.toggle_breakpoint, '  Toggle Breakpoint')
 nmap('<Leader>B', function()
     dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
