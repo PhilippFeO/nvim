@@ -74,17 +74,14 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+    ['<C-CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
     -- <C-n> and <C-p> to move between next and previous item
     ['<C-n>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-        -- elseif luasnip.expand_or_jumpable() then -- kickstart.nvim original...
-        --   luasnip.expand_or_jump()
-        -- ...UltiSnips version
       elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() then
         vim.fn["UltiSnips#ExpandSnippetOrJump."]()
       else
@@ -94,9 +91,6 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then -- kickstart.nvim original...
-        --   luasnip.jump(-1)
-        -- ...UltiSnips version
       elseif vim.fn["UltiSnips#CanJumpBackwards"]() then
         vim.fn["UltiSnips#JumpBackwards"]()
       else
