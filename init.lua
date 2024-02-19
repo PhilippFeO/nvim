@@ -47,14 +47,6 @@ require('lazy').setup({
       }
     }
   },
-  {
-    'PhilippFeO/cmp-csv',
-    opts = {
-      documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
-      csv_path = '~/programmieren/recipe-selector/res/ingredient_category_url.csv',
-      filetype = 'yaml',
-    }
-  },
 
   {
     'PhilippFeO/telescope-filelinks.nvim',
