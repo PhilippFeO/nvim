@@ -50,9 +50,10 @@ local dap_py_in_term = {
 
 local dap_py_default = {
     name = "Debug file (default config without 'console')",
-    program = "${file}",
+    program = vim.fn.expand('~') .. "/proj/cobra-bira/cobra_so2/cml_input.py",
     request = "launch",
-    type = "python"
+    type = "python",
+    -- justMyCode = false
 }
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
