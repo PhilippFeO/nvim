@@ -59,6 +59,9 @@ dap.configurations.cpp = {
                 ignoreFailures = false
             },
         },
+        cmd = {
+            '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/'
+        }
     },
     -- {
     --     name = 'Attach to gdbserver :1234',

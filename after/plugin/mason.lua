@@ -87,6 +87,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 -- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
 require 'lspconfig'.pylsp.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   -- on_attach = function()
   --   -- TODO: Kanagawa für Floating Windows besser konfigurieren (Rahmen, andere Farbe, etc) <25-11-2023>
   --   -- Not inherently LSP specific, because `vim.diagnostic` ist used and not `vim.lsp` but LSP provides the diagnostics (I guess)
@@ -118,4 +119,8 @@ require 'lspconfig'.pylsp.setup {
 require 'lspconfig'.clangd.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  -- cmd = {
+  --   vim.fn.expand('~/.local/share/nvim/mason/bin/clangd'),
+  --   '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/'
+  -- }
 }
