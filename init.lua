@@ -68,6 +68,7 @@ require('lazy').setup({
     'preservim/vim-markdown',
     init = function()
       vim.g.vim_markdown_conceal = true
+      vim.g.vim_markdown_math = 1
       vim.g.vim_markdown_folding_disabled = true
       vim.g.vim_markdown_toc_autofit = true   -- :Toc, :Tocv, :Toct
       vim.g.vim_markdown_strikethrough = true -- two ~ for strikethrough
