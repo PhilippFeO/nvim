@@ -77,14 +77,14 @@ nmap('<Leader>sC', builtin.commands, '[s]earch [C]ommands')
 nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sf', builtin.current_buffer_fuzzy_find, '[s]earch current [f]ile')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
--- Keymap for help_tags defined below
--- nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
 nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
-nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 
-nmap('<Leader>sh', require('telescope_utils').my_help_tags, '[s]earch [h]elp')
+-- Tweaked builtins to open in vertical split on default
+nmap('<Leader>sh', require('telescope_utils').vsplit_help_tags, '[s]earch [h]elp')
+nmap('<Leader>sm', require('telescope_utils').vsplit_man_pages, '[s]earch [m]an pages')
+nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
@@ -124,7 +124,7 @@ vim.keymap.set('n', '<Leader>lf', function()
     working_dir = '/home/philipp/',
     format_string = '[%s](%s)',
     remove_extension = false,
-    prompt_title = 'Files in $HOME'
+    prompt_title = 'Files in $HOME: ' .. vim.fn.expand('~')
   })
 end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
 
