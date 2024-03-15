@@ -121,6 +121,7 @@ require('lazy').setup({
       vim.g.wiki_tag_scan_num_lines = vim.g.tag_line_number
       vim.g.wiki_select_method = {
         tags = require("wiki.telescope").tags,
+        links = require("wiki.telescope").links,
         -- pages = require("wiki.ui_select").pages,
         -- toc = require("wiki.ui_select").toc,
       }

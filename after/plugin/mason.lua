@@ -117,6 +117,7 @@ lspconfig.pylsp.setup {
   }
 }
 
+-- ─── CMAKE ──────────
 lspconfig.cmake.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -129,6 +130,10 @@ lspconfig.clangd.setup {
   -- doesn't work :(
   -- cmd = {
   --   '/localhome/rost_ph/.local/share/nvim/mason/bin/clangd',
-  --   "--fallback-style='{IndentWidth: 4, ColumnLimit: 70}'",
+  --   --   '--background-index',
+  --   --   '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/src',
+  --   '--log=verbose', -- /localhome/rost_ph/.local/state/nvim/lsp.log
   -- }
+  --   "--fallback-style='{IndentWidth: 4, ColumnLimit: 70}'",
+  -- cmd = { "clangd", "--background-index" }
 }
