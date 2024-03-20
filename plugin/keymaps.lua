@@ -29,8 +29,24 @@ vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
+
+local bracketPairs = {
+    ['('] = ')',
+    [')'] = '(',
+    ['['] = ']',
+    [']'] = '[',
+    ['{'] = '}',
+    ['}'] = '{',
+    ['<'] = '>',
+    ['>'] = '<',
+}
+vim.keymap.set('n', '<LocalLeader>r', function()
+    local bracket = vim.fn.nr2char(vim.fn.getchar())
+    local counterpart = bracketPairs[bracket]
+    vim.cmd.execute('"normal mb%r' .. counterpart .. '`br' .. bracket .. '"')
+end, { desc = "Replace bracket pairs" })
+vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 
 -- ┌────────────────┐
 -- │ <C-…> Mappings │
