@@ -81,6 +81,7 @@ nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 -- nmap('<Leader>sh', builtin.help_tags, '[s]earch [h]elp')
 nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
+nmap('<Leader>sq', builtin.quickfix, '[s]earch [q]uickfix list')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 

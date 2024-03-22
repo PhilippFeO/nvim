@@ -1,1 +1,1 @@
-set.bo.relativenumber = true
+vim.o.relativenumber = true
