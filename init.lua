@@ -47,17 +47,7 @@ require('lazy').setup({
       }
     }
   },
-  {
-    'PhilippFeO/cmp-csv',
-    opts = {
-      documentation_format = "%s\n\nCategory:\n%s\n\nURL:\n%s",
-      csv_path = '~/programmieren/grocery-shopper/res/ingredient_category_url.csv',
-      filetype = 'yaml',
-    }
-  },
-  {
-    'PhilippFeO/telescope-filelinks.nvim',
-  },
+  'PhilippFeO/telescope-filelinks.nvim',
 
   -- {
   --   'PhilippFeO/telescope-link-headings.nvim',
@@ -70,6 +60,7 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
   'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
   'windwp/nvim-autopairs',       -- TODO: remove keymap for parentheses and quotation marks
+  { "folke/neodev.nvim", opts = {} },
 
   {
     'preservim/vim-markdown',
@@ -196,7 +187,8 @@ vim.g.python3_host_prog = '/usr/bin/python3'
 
 
 -- ─── Language ──────────
-vim.api.nvim_exec('language en_US.utf8', true)
+vim.api.nvim_exec2('language en_US.utf8', {})
+
 
 -- ─── :help in new tab ──────────
 vim.cmd.cabbrev('helpt', 'tab help')

@@ -50,14 +50,20 @@ vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Op
 
 
 -- ─── Spellchecking ────────────────────
+-- s. "Practical Vim" for Tips and Explanation
 -- Copied from ftplugin/tex_vimtex.lua
 -- Activate spellchecking
 -- Correct misspelled words with the first proposed word.
 vim.opt.spell = false
 vim.opt.spelllang = { "de", "en_us" }
--- I had to download the German spell files to make spell checking work (for German)
--- vim.opt.spellfile = { "/home/philipp/.config/nvim/spell/en.utf-8.add", "/home/philipp/.config/nvim/spell/de.utf-8.add" }
-
+vim.opt.spellfile = {
+    vim.fn.expand("~/.config/nvim/spell/de.utf-8.add"),
+    vim.fn.expand("~/.config/nvim/spell/en.utf-8.add")
+}
+vim.keymap.set('n',
+    '<Leader>d',
+    '1zg',
+    { desc = "Add word to German spellfile" })
 -- Correct misspelled words with the first proposed word.
 vim.keymap.set("i", "<C-l>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { buffer = true, desc = 'Correct last misspelled word' })
 vim.keymap.set('i', '<C-x><C-s>', '<C-x>s<CR>',

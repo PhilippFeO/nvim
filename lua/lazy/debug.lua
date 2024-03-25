@@ -4,6 +4,7 @@ return {
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
+    'nvim-neotest/nvim-nio', -- required by nvim-dap-ui
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
