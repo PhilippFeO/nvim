@@ -11,17 +11,22 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+-- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
 -- :make executes string behind makeprg
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
-vim.keymap.set('n', '<Leader>mm', '<Cmd>make %<CR>',
+vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>',
     { desc = 'make/compile/execute current file' })
+-- Without "<Cmd>" letters are typed
 vim.keymap.set('n', '<Leader>ma', ':make % ',
     { desc = '[m]ake with CLI [a]rguments' })
+vim.keymap.set('n', '<Leader>mr', '<Cmd>make | !./%<<CR>',
+    { desc = '[m]ake and [r]un current file' })
 -- Same as above but suppressing output of `make` via `:silent`
 vim.keymap.set('n', '<Leader>ms', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
     { silent = true, desc = '[m]ake/compile/execute [s]ilently current file' })
+
 -- Generate substitution command for current word
 vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = '[s]ubstitute current word' })
