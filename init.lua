@@ -111,7 +111,8 @@ require('lazy').setup({
 
   {
     'lervag/vimtex',
-    lazy = false -- VimTeX must not be lazy loaded.
+    lazy = false, -- VimTeX must not be lazy loaded.
+    ft = { 'tex' },
   },
   {
     'lervag/wiki.vim',
