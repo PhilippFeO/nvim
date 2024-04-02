@@ -19,10 +19,14 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>',
     { desc = 'make/compile/execute current file' })
 -- Without "<Cmd>" letters are typed
-vim.keymap.set('n', '<Leader>ma', ':make % ',
+vim.keymap.set('n', '<Leader>ma', ':make %< ',
     { desc = '[m]ake with CLI [a]rguments' })
-vim.keymap.set('n', '<Leader>mr', '<Cmd>make | !./%<<CR>',
+-- %< == Filename without extension, s. Wiki > neovim.md
+vim.keymap.set('n', '<Leader>mr', '<Cmd>make run<CR>',
     { desc = '[m]ake and [r]un current file' })
+-- Run Tests
+vim.keymap.set('n', '<Leader>mt', '<Cmd>make test<CR>',
+    { desc = '[m]ake and run [t]ests' })
 -- Same as above but suppressing output of `make` via `:silent`
 vim.keymap.set('n', '<Leader>ms', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
     { silent = true, desc = '[m]ake/compile/execute [s]ilently current file' })

@@ -1,0 +1,1 @@
+-- vim.o.makeprg = [[make --no-print-directory -C build/]]

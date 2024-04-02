@@ -1,2 +1,4 @@
-vim.keymap.set('n', '<Leader>mm', '<Cmd>cd build<CR> | <Cmd>make<CR> | <Cmd>cd ..<CR>',
-    { desc = 'make/compile/execute current file' })
+vim.o.makeprg = [[make --no-print-directory -C ../build/]]
+
+-- vim.keymap.set('n', '<Leader>mr', '<Cmd>make | !./%:t:r<CR>',
+--     { desc = '[m]ake and [r]un current file' })
