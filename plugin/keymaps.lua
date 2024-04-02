@@ -17,9 +17,12 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 -- maybe vim.fn.expand('%') is useful for having absolute paths
 vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>',
     { desc = '[m]ake/compile/execute current file' })
+vim.keymap.set('n', '<Leader>mt', '<Cmd>make test<CR>',
+    { desc = '[m]ake (run) current [t]ests' })
 -- Same as above but suppressing output of `make` via `:silent`
-vim.keymap.set('n', '<Leader>sc', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
-    { silent = true, desc = '[s]ilent make/[c]ompile/execute current file' })
+vim.keymap.set('n', '<Leader>ms', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
+    { silent = true, desc = '[s]ilent [m]ake/compile/execute current file' })
+
 -- Generate substitution command for current word
 vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = '[s]ubstitute current word' })
