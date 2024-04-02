@@ -58,6 +58,7 @@ require('lazy').setup({
 
   {
     'PhilippFeO/telescope-filelinks.nvim',
+    dev = true
   },
 
   -- {
