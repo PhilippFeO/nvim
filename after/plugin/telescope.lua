@@ -84,7 +84,7 @@ nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 
 -- Tweaked builtins to open in vertical split on default
 nmap('<Leader>sh', require('telescope_utils').vsplit_help_tags, '[s]earch [h]elp')
-nmap('<Leader>sm', require('telescope_utils').vsplit_man_pages, '[s]earch [m]an pages')
+-- nmap('<Leader>sm', require('telescope_utils').vsplit_man_pages, '[s]earch [m]an pages')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
