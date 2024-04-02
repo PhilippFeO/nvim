@@ -87,28 +87,20 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 -- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
 require 'lspconfig'.pylsp.setup {
   on_attach = on_attach,
-  -- on_attach = function()
-  --   -- TODO: Kanagawa für Floating Windows besser konfigurieren (Rahmen, andere Farbe, etc) <25-11-2023>
-  --   -- Not inherently LSP specific, because `vim.diagnostic` ist used and not `vim.lsp` but LSP provides the diagnostics (I guess)
-  --   vim.keymap.set("n", "<Leader>dj", vim.diagnostic.goto_next, {
-  --     buffer = 0,
-  --     desc = {
-  --       "next [d]iagnositc [j] (vim motion)"
-  --     }
-  --   })
-  --   vim.keymap.set("n", "<Leader>dk", vim.diagnostic.goto_prev, {
-  --     buffer = 0,
-  --     desc = {
-  --       "previous [d]iagnositc [k] (vim motion)"
-  --     }
-  --   })
-  -- end,
+  capabilities = capabilities,
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
           maxLineLength = 150
-        }
+        },
+        -- type checking, s. Wiki for more information
+        pylsp_mypy = {
+          enabled = true,
+          live_mode = true,
+          dmypy = false,
+          overrides = { "--python-executable", vim.fn.expand("~/.venv/recipe-selector/bin/python"), '--namespace-packages', true },
+        },
       }
     }
   }
