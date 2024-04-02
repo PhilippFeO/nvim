@@ -27,7 +27,7 @@ vim.cmd([[nmap <buffer> dt :Gtabedit <Plug><cfile><Bar>Gvdiffsplit<CR>]])
 -- })
 
 local git_keymap = function(lhs, rhs, desc)
-    vim.keymap.set('n', lhs, rhs, { desc = desc })
+    vim.keymap.set('n', lhs, rhs, { buffer = true, desc = desc })
 end
 
 -- ─── git push ──────────
