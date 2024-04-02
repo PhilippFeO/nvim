@@ -3,9 +3,11 @@
 -- ╰─────────────────────────╯
 -- See `:help telescope`
 
+local telescope = require 'telescope'
+
 local actions = require('telescope.actions')
 
-require('telescope').setup { -- :h telescope.setup()
+telescope.setup { -- :h telescope.setup()
   defaults = {
     mappings = {
       n = {
@@ -39,9 +41,9 @@ require('telescope').setup { -- :h telescope.setup()
     },
   },
 }
-require('telescope').load_extension('dap')
+telescope.load_extension('dap')
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+pcall(telescope.load_extension, 'fzf')
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = 'TelescopeNormal' })
 -- vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = '', fg = '#555555' })
@@ -108,8 +110,8 @@ nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
 --        - evtl. ähnlich zu `builtin.git_bcommits`
 
 -- ─── filelinks ──────────
-require('telescope').load_extension('filelinks')
-local filelinks = require('telescope').extensions['filelinks']
+telescope.load_extension('filelinks')
+local filelinks = telescope.extensions['filelinks']
 filelinks.setup({
   working_dir = '~/wiki/',
   format_string = '  [%s](%s)',
@@ -139,8 +141,8 @@ vim.keymap.set('n', '<Leader>li', function()
 end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
 
 -- ─── link_headings ──────────
--- require('telescope').load_extension('link_headings')
--- local link_headings = require('telescope').extensions['link_headings']
+-- telescope.load_extension('link_headings')
+-- local link_headings = telescope.extensions['link_headings']
 -- link_headings.setup({
 --   working_dir = '~/wiki/',
 --   format_picker_entry = '%s   (%s)'
