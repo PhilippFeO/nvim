@@ -117,9 +117,10 @@ filelinks.setup({
   format_string = '  [%s](%s)',
   prompt_title = 'Wiki Files'
 })
-vim.keymap.set('n', '<Leader>lw', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
+vim.keymap.set('n', '<Leader>lw', function() filelinks.make_filelink({}) end,
+  { desc = prepend_desc('[l]ink to [w]iki page') })
 -- TODO: remap of keymaps? <21-12-2023>
-vim.keymap.set('i', '<C-k>', filelinks.make_filelink, { desc = prepend_desc('[l]ink to [w]iki page') })
+vim.keymap.set('i', '<C-k>', function() filelinks.make_filelink({}) end, { desc = prepend_desc('[l]ink to [w]iki page') })
 
 vim.keymap.set('n', '<Leader>lf', function()
   filelinks.make_filelink({
