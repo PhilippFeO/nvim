@@ -1,6 +1,9 @@
 local wiki_utils = require('wiki_utils')
 
-vim.keymap.set('n', '<A-k>', wiki_utils.add_tag, { buffer = true, desc = 'Add word under cursor as tag' })
+vim.keymap.set('n', '<A-k>', wiki_utils.add_tag, {
+    buffer = true,
+    desc = 'Add word under cursor as tag'
+})
 vim.keymap.set('n', '<A-l>', wiki_utils.filename_as_tags, {
     buffer = true,
     desc = 'Write file name as wiki tags in 2. line'
@@ -9,11 +12,8 @@ vim.keymap.set('n', '<A-l>', wiki_utils.filename_as_tags, {
 
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
 vim.o.conceallevel = 2
--- vim.bo.tabstop = 2
--- vim.bo.shiftwidth = 2
 -- Sometimes, Neovim doesn't indent as I like and I feel that this option helps
 vim.bo.autoindent = false
-
 
 -- Try SidOfc/mkdx for highlighting. Has also some nice features.
 --  highlights defined in after/syntax/markdown.vim
@@ -50,16 +50,24 @@ vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Op
 
 
 -- ─── Spellchecking ────────────────────
+-- s. "Practical Vim" for Tips and Explanation
 -- Copied from ftplugin/tex_vimtex.lua
 -- Activate spellchecking
 -- Correct misspelled words with the first proposed word.
 vim.opt.spell = false
 vim.opt.spelllang = { "de", "en_us" }
--- I had to download the German spell files to make spell checking work (for German)
-vim.opt.spellfile = { "/home/philipp/.config/nvim/spell/en.utf-8.add", "/home/philipp/.config/nvim/spell/de.utf-8.add" }
-
+vim.opt.spellfile = {
+    vim.fn.expand("~/.config/nvim/spell/de.utf-8.add"),
+    vim.fn.expand("~/.config/nvim/spell/en.utf-8.add")
+}
+vim.keymap.set('n',
+    '<Leader>d',
+    '1zg',
+    { desc = "Add word to German spellfile" })
 -- Correct misspelled words with the first proposed word.
 vim.keymap.set("i", "<C-l>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { buffer = true, desc = 'Correct last misspelled word' })
+vim.keymap.set('i', '<C-x><C-s>', '<C-x>s<CR>',
+    { remap = true, desc = 'Correct last misspelled word on current line (Practical Vim)' })
 
 
 -- ─── Autocommands ──────────

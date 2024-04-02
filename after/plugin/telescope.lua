@@ -79,6 +79,7 @@ nmap('<Leader>sd', builtin.diagnostics, '[s]earch [d]iagnostics')
 nmap('<Leader>sf', builtin.current_buffer_fuzzy_find, '[s]earch current [f]ile')
 nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
+nmap('<Leader>sq', builtin.quickfix, '[s]earch [q]uickfix list')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
 nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 

@@ -82,10 +82,12 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   }
 )
 
+local lspconfig = require 'lspconfig'
+
 -- ─── Python ──────────
 -- Pylsp needs it's own setup process. I don't know why.
 -- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
-require 'lspconfig'.pylsp.setup {
+lspconfig.pylsp.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -106,8 +108,23 @@ require 'lspconfig'.pylsp.setup {
   }
 }
 
--- ─── C++ ──────────
-require 'lspconfig'.clangd.setup {
+-- ─── CMAKE ──────────
+lspconfig.cmake.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+-- ─── C++ ──────────
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- doesn't work :(
+  -- cmd = {
+  --   '/localhome/rost_ph/.local/share/nvim/mason/bin/clangd',
+  --   --   '--background-index',
+  --   --   '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/src',
+  --   '--log=verbose', -- /localhome/rost_ph/.local/state/nvim/lsp.log
+  -- }
+  --   "--fallback-style='{IndentWidth: 4, ColumnLimit: 70}'",
+  -- cmd = { "clangd", "--background-index" }
 }

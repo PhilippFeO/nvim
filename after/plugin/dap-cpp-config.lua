@@ -30,6 +30,8 @@ dap.configurations.cpp = {
     },
 }
 
+require('dap').set_log_level('TRACE')
+
 -- ─── Cpptools ──────────
 -- taken from
 -- https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
@@ -50,7 +52,7 @@ dap.configurations.cpp = {
         end,
         cwd = '${workspaceFolder}',
         stopAtEntry = true,
-        externalConsole = true,
+        -- externalConsole = true,
         -- gdb pretty printing
         setupCommands = {
             {
@@ -59,25 +61,43 @@ dap.configurations.cpp = {
                 ignoreFailures = false
             },
         },
+        -- cmd = {
+        --     '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/'
+        -- }
     },
-    -- {
-    --     name = 'Attach to gdbserver :1234',
-    --     type = 'cppdbg',
-    --     request = 'launch',
-    --     MIMode = 'gdb',
-    --     miDebuggerServerAddress = 'localhost:1234',
-    --     miDebuggerPath = '/usr/bin/gdb',
-    --     cwd = '${workspaceFolder}',
-    --     program = function()
-    --         return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    --     end,
-    --     -- gdb pretty printing
-    --     setupCommands = {
-    --         {
-    --             text = '-enable-pretty-printing',
-    --             description = 'enable pretty printing',
-    --             ignoreFailures = false
-    --         },
-    --     },
-    -- },
+    {
+        name = "Launch S5p-UPAS with SO2, Across-Track",
+        type = "cppdbg",
+        request = "launch",
+        program = vim.fn.expand('~/proj/upas-s5p/UPAS-L2/build/verbose/upas-l2'),
+        args = {
+            '--so2',
+            vim.fn.expand(
+                '~/proj/upas-s5p/UPAS-L2/build/netCDF_startfiles/S5P_OFFL_L1B_IR_UVN_20240315T062230_20240315T080401_33268_03_020100_20240315T095524.nc'),
+            vim.fn.expand(
+                '~/proj/upas-s5p/UPAS-L2/build/netCDF_startfiles/S5P_OFFL_L1B_RA_BD3_20240315T094531_20240315T112702_33270_03_020100_20240315T131648.nc'),
+            '-b',
+            '2000',
+            '-n',
+            '10',
+            '-t',
+            '1', -- Sequentiell
+            '--aux-cloud $(find . -name "*L2__CLOUD*.nc" | sort -n | tail -n 1)',
+            '--aux-o3 $(find . -name "*L2__O3*.nc" | sort -n | tail -n 1)',
+        },
+        cwd = vim.fn.expand('~/proj/upas-s5p/UPAS-L2/build/verbose/'),
+        stopAtEntry = true,
+        -- externalConsole = true,
+        -- gdb pretty printing
+        setupCommands = {
+            {
+                text = '-enable-pretty-printing',
+                description = 'enable pretty printing',
+                ignoreFailures = false
+            },
+        },
+        -- cmd = {
+        --     '--compile-commands-dir=/localhome/rost_ph/proj/upas-l2/UPAS-L2/build'
+        -- }
+    }
 }

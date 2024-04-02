@@ -11,17 +11,25 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+-- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
 -- :make executes string behind makeprg
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
-vim.keymap.set('n', '<Leader>m', '<Cmd>make %<CR>',
-    { desc = '[m]ake/compile/execute current file' })
+vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>',
+    { desc = 'make/compile/execute current file' })
+-- Without "<Cmd>" letters are typed
+vim.keymap.set('n', '<Leader>ma', ':make %< ',
+    { desc = '[m]ake with CLI [a]rguments' })
+-- %< == Filename without extension, s. Wiki > neovim.md
+vim.keymap.set('n', '<Leader>mr', '<Cmd>make run<CR>',
+    { desc = '[m]ake and [r]un current file' })
+-- Run Tests
 vim.keymap.set('n', '<Leader>mt', '<Cmd>make test<CR>',
-    { desc = '[m]ake (run) current [t]ests' })
+    { desc = '[m]ake and run [t]ests' })
 -- Same as above but suppressing output of `make` via `:silent`
 vim.keymap.set('n', '<Leader>ms', '<Cmd>silent make %<CR> | <Cmd>cwindow 3<CR>',
-    { silent = true, desc = '[s]ilent [m]ake/compile/execute current file' })
+    { silent = true, desc = '[m]ake/compile/execute [s]ilently current file' })
 
 -- Generate substitution command for current word
 vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
@@ -30,8 +38,24 @@ vim.keymap.set('n', '<Leader>c', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
+
+local bracketPairs = {
+    ['('] = ')',
+    [')'] = '(',
+    ['['] = ']',
+    [']'] = '[',
+    ['{'] = '}',
+    ['}'] = '{',
+    ['<'] = '>',
+    ['>'] = '<',
+}
+vim.keymap.set('n', '<LocalLeader>r', function()
+    local bracket = vim.fn.nr2char(vim.fn.getchar())
+    local counterpart = bracketPairs[bracket]
+    vim.cmd.execute('"normal mb%r' .. counterpart .. '`br' .. bracket .. '"')
+end, { desc = "Replace bracket pairs" })
+vim.keymap.set('n', '<LocalLeader>w', '<Cmd>w<CR>', { silent = true, desc = 'Save in Normal Mode' })
 
 -- ┌────────────────┐
 -- │ <C-…> Mappings │
