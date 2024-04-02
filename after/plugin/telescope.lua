@@ -24,7 +24,6 @@ telescope.setup { -- :h telescope.setup()
     prompt_prefix = '  ',
     selection_caret = '  ',
     entry_prefix = '   ',
-    -- path_display = { 'shorten', shorten = 4 },
     layout_config = {
       preview_width = 0.5,
       prompt_position = 'top'
