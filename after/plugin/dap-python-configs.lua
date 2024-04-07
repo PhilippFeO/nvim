@@ -98,7 +98,7 @@ local dap_py_inTerm = {
 
 local dap_py_default = {
     name = "Debug file (default config without 'console')",
-    program = vim.fn.expand('~') .. "/proj/cobra-bira/cobra_so2/cml_input.py",
+    program = '${file}',
     request = "launch",
     type = "python",
     -- justMyCode = false
