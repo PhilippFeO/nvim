@@ -1,7 +1,42 @@
+# ╭──────╮
+# │ upas │
+# ╰──────╯
 snippet lfloat "Insert 'L1::L1FloatType'" A
 L1::L1FloatType
 endsnippet
 
 snippet ldatas "Insert 'L1::t_L1DatasetSpectral'" A
 L1::t_L1DatasetSpectral
+endsnippet
+
+
+# ╭──────╮
+# │ dlib │
+# ╰──────╯
+snippet ddmat "dlib::matrix<double>" A
+dlib::matrix<double> $0
+endsnippet
+
+snippet dmat "dlib::matrix<…>" A
+dlib::matrix<${1:Type}> $0
+endsnippet
+
+snippet matd "matrix<double>" wA
+matrix<double>
+endsnippet
+
+snippet matft "matrix<L1::L1FloatType>" wA
+matrix<L1::L1FloatType>
+endsnippet
+
+snippet matt "matrix<…>" wA
+matrix<${1:Type}> $0
+endsnippet
+
+
+# ╭───────╮
+# │ blitz │
+# ╰───────╯
+snippet rall "Range::all()" A
+Range::all()
 endsnippet
