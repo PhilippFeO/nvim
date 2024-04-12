@@ -11,8 +11,11 @@ endglobal
 
 # Own todo-snippet because the default one is to detailed.
 # Overwrites vim-snippets/UltiSnips/all.snippets#todo
-snippet todo "TODO-Kommentar" bw
-`!p snip.rv=get_comment_format()[0]` TODO: $1 <`!v strftime('%d-%m-%Y')`>$0
+# get_comment_format() doesn't contain single line C-style comment, hence if-else
+# get_comment_format(), Pyton: ['#', '#', '#', '']
+# get_comment_format(), C++: ['/*', '*', '*/', ' ']
+snippet todo "TODO-Kommentar" bwA
+`!p snip.rv='//' if (cf:=get_comment_format()[0]) != '#' else cf` TODO: $1 <`!v strftime('%d-%m-%Y')`> $0
 endsnippet
 
 snippet „ "Insert German quotation marks" A
