@@ -93,7 +93,13 @@ lspconfig.basedpyright.setup {
       -- reportUnusedImport = false,
       -- basedpyright very intrusive with errors, this calms it down
       typeCheckingMode = "standard",
-    }
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
   }
 }
 
@@ -120,6 +126,7 @@ lspconfig.basedpyright.setup {
 --     }
 --   }
 -- }
+
 
 -- ─── CMAKE ──────────
 lspconfig.cmake.setup {
