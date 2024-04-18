@@ -23,7 +23,7 @@ require('mason-nvim-dap').setup {
 }
 
 -- contains keymaps
-local on_attach = require('lsp-keymaps') -- lua/lsp-keymaps.lua
+local on_attach = require 'lsp-keymaps' -- lua/lsp-keymaps.lua
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -82,7 +82,10 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   }
 )
 
+
 local lspconfig = require 'lspconfig'
+
+-- ─── Python ──────────
 lspconfig.basedpyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -94,38 +97,73 @@ lspconfig.basedpyright.setup {
       -- basedpyright very intrusive with errors, this calms it down
       typeCheckingMode = "standard",
     },
+    -- Ignore all files for analysis to exclusively use Ruff for linting
     python = {
       analysis = {
-        -- Ignore all files for analysis to exclusively use Ruff for linting
         ignore = { '*' },
       },
     },
   }
 }
 
--- ─── Python ──────────
--- Pylsp needs it's own setup process. I don't know why.
--- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
--- lspconfig.pylsp.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   settings = {
---     pylsp = {
---       plugins = {
---         pycodestyle = {
---           maxLineLength = 150
---         },
---         -- type checking, s. Wiki for more information
---         pylsp_mypy = {
---           enabled = true,
---           live_mode = true,
---           dmypy = false,
---           overrides = { "--python-executable", vim.fn.expand("~/.venv/recipe-selector/bin/python"), '--namespace-packages', true },
---         },
---       }
---     }
---   }
--- }
+lspconfig.pylsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    pylsp = {
+      -- :PyLspInstall <tab>
+      plugins = {
+        -- Unklar, was es macht, wird ggfl. auch von ruff[-lsp] übernommen
+        rope = {
+          enabled = false,
+        },
+        -- All disabled to avoid overlap with ruff-lsp
+        -- list from python-lsp-ruff
+        pycodestyle = {
+          enabled = false,
+          maxLineLength = 150
+        },
+        mccabe = {
+          enabled = false,
+        },
+        pydocstyle = {
+          enabled = false,
+        },
+        -- autopep8, yapf formatieren beide, Unterschied unklar. yapf = false, autopep8 = true macht es so, wie ich es möchte
+        yapf = {
+          enabled = false,
+        },
+        autopep8 = {
+          enabled = true,
+        },
+        -- deaktivert pycodestyle, mccabe, autopep8, pydocstyle, yapf, kann man aber wieder aktivieren
+        -- 2024-04-18: nicht installiert
+        ruff = {
+          enabled = false,                                   -- Enable the plugin
+          formatEnabled = false,                             -- Enable formatting using ruffs formatter
+          config = vim.fn.expand '~/.config/ruff/ruff.toml', -- Custom config for ruff to use
+        }
+      }
+    }
+  }
+}
+
+-- https://github.com/astral-sh/ruff-lsp
+-- Findet ~/.config/ruff/ruff.toml selbstständig
+lspconfig.ruff_lsp.setup {
+  on_attach = function(client, bufnr)
+    -- Disable formatting
+    client.server_capabilities.documentFormattingProvider = false
+    -- TODO: Herausfinden, wofür dRFP ist <18-04-2024>
+    -- client.server_capabilities.documentRangeFormattingProvider = false
+
+    -- local file, err = io.open("/tmp/ruff-caps.txt", "w")
+    -- file:write(vim.inspect(client.server_capabilities))
+
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
 
 
 -- ─── CMAKE ──────────
