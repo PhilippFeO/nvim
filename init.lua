@@ -47,17 +47,17 @@ require('lazy').setup({
       }
     }
   },
+  'PhilippFeO/telescope-filelinks.nvim',
   {
     'PhilippFeO/cmp-csv',
     opts = {
       documentation_format = '%s (Col 1)\n%s (Col 2)\n%s (Col 3)',
-      csv_path = vim.fn.expand '~/programmieren/grocery-shopper/.resources/ingredient_category_url.csv',
+      csv_path = vim.fn.expand '~/Documents/Kochen/res/ingredient_category_url.csv',
       filetype = 'yaml',
       completion_column = 1,
       skip_rows = 0,
     }
   },
-  'PhilippFeO/telescope-filelinks.nvim',
 
   -- {
   --   'PhilippFeO/telescope-link-headings.nvim',
