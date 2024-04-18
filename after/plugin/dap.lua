@@ -23,11 +23,11 @@ local dapui = require 'dapui'
 -- Here you fi control the panes, s. https://youtu.be/0moS8UHupGc?t=1481
 dapui.setup {
     -- TODO: Highlight Groups dieser ändern, Highlightgroups sollte es in `h nvim-dap-ui` geben
-    -- icons = {
-    --     expanded = '▾',
-    --     collapsed = '▸',
-    --     current_frame = '*'
-    -- },
+    icons = {
+        expanded = '▾',
+        collapsed = '▸',
+        current_frame = '*'
+    },
     mappings = {
         remove = 'dd'
     },
@@ -102,7 +102,7 @@ nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
 nmap('<F4>', dap.step_back, ' Step out')
 
-nmap('<Leader>b', dap.toggle_breakpoint, '  Toggle Breakpoint')
+nmap('<Leader>bb', dap.toggle_breakpoint, '  Toggle Breakpoint')
 nmap('<Leader>B', function()
     dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
 end, '  Toggle Conditional Breakpoint')

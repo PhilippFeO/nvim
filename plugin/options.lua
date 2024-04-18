@@ -8,6 +8,7 @@ vim.o.suffixesadd = '.lua,.py'
 -- `.` = dir of curent file
 -- `` (emtpy) = working dir
 vim.o.path = vim.o.path .. 'lua/'
+vim.o.path = vim.o.path .. '..'
 
 vim.o.grepprg = 'rg --vimgrep --column --no-heading $*'
 vim.o.grepformat = '%f:%l:%c:%m'

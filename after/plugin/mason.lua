@@ -83,30 +83,50 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 )
 
 local lspconfig = require 'lspconfig'
+lspconfig.basedpyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    basedpyright = {
+      -- reportImplicitOverride = false,
+      reportMissingSuperCall = "none",
+      -- reportUnusedImport = false,
+      -- basedpyright very intrusive with errors, this calms it down
+      typeCheckingMode = "standard",
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  }
+}
 
 -- ─── Python ──────────
 -- Pylsp needs it's own setup process. I don't know why.
 -- TODO: Bei mason-Entwickler nachfragen <03-12-2023>
-lspconfig.pylsp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          maxLineLength = 150
-        },
-        -- type checking, s. Wiki for more information
-        pylsp_mypy = {
-          enabled = true,
-          live_mode = true,
-          dmypy = false,
-          overrides = { "--python-executable", vim.fn.expand("~/.venv/recipe-selector/bin/python"), '--namespace-packages', true },
-        },
-      }
-    }
-  }
-}
+-- lspconfig.pylsp.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     pylsp = {
+--       plugins = {
+--         pycodestyle = {
+--           maxLineLength = 150
+--         },
+--         -- type checking, s. Wiki for more information
+--         pylsp_mypy = {
+--           enabled = true,
+--           live_mode = true,
+--           dmypy = false,
+--           overrides = { "--python-executable", vim.fn.expand("~/.venv/recipe-selector/bin/python"), '--namespace-packages', true },
+--         },
+--       }
+--     }
+--   }
+-- }
+
 
 -- ─── CMAKE ──────────
 lspconfig.cmake.setup {

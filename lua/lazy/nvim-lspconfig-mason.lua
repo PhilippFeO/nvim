@@ -1,6 +1,7 @@
 --  The configuration is done in after/plugin/lsp.lua
 return {
   'neovim/nvim-lspconfig', -- LSP Configuration
+  -- opts = { opts = { inlay_hints = { enabled = true } } },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     'williamboman/mason.nvim',

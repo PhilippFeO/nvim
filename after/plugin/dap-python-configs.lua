@@ -11,14 +11,21 @@ local dap = require('dap')
 
 dap.adapters.my_python_adapter = {
     type = 'executable',
-    command = os.getenv('HOME') .. '/.venv/debugpy/bin/python',
+    command = vim.fn.expand '~/.venv/debugpy/bin/python',
     args = { '-m', 'debugpy.adapter' }
 }
 
 -- s. `h dap-terminal`
 -- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
+local command = function()
+    if vim.fn.hostname() == 'klapprechner' then
+        return vim.fn.expand('~/.local/bin/kitty')
+    else
+        return vim.fn.expand('/usr/bin/kitty')
+    end
+end
 dap.defaults.fallback.external_terminal = {
-    command = vim.fn.expand('~/.local/bin/kitty')
+    command = command()
 }
 -- dap.defaults.fallback.force_external_terminal = true
 
@@ -63,20 +70,20 @@ local dap_grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
-    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
+    cwd = vim.fn.expand '~/proj/grocery-shopper/',
     args = { '-n', '2' }
 }
 
 local dap_grocery_shopper_custom_args = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with custom Arguments",
-    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
+    cwd = vim.fn.expand '~/proj/grocery-shopper/',
     args = function()
         local cli_args = vim.fn.input 'Debug with Arguments: '
         local cli_args_table = {}
@@ -98,7 +105,7 @@ local dap_py_inTerm = {
 
 local dap_py_default = {
     name = "Debug file (default config without 'console')",
-    program = vim.fn.expand('~') .. "/proj/cobra-bira/cobra_so2/cml_input.py",
+    program = '${file}',
     request = "launch",
     type = "python",
     -- justMyCode = false
