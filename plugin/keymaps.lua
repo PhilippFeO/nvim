@@ -1,3 +1,6 @@
+vim.keymap.set('n', '<BS>', '<Cmd>bdelete<CR>', { desc = 'Delete Buffer' })
+
+
 -- ┌───────────────────┐
 -- │ <Leader> Mappings │
 -- └───────────────────┘
