@@ -47,6 +47,16 @@ require('lazy').setup({
       }
     }
   },
+  {
+    'PhilippFeO/cmp-csv',
+    opts = {
+      documentation_format = '%s (Col 1)\n%s (Col 2)\n%s (Col 3)',
+      csv_path = vim.fn.expand '~/programmieren/grocery-shopper/.resources/ingredient_category_url.csv',
+      filetype = 'yaml',
+      completion_column = 1,
+      skip_rows = 0,
+    }
+  },
   'PhilippFeO/telescope-filelinks.nvim',
 
   -- {
@@ -77,16 +87,6 @@ require('lazy').setup({
     end,
     ft = 'markdown'
   },
-
-  -- Becomes active after `:h timeoutlen`
-  -- {
-  --   'folke/which-key.nvim',
-  --   opts = {
-  --     disable = {
-  --       filetypes = { "TelescopePrompt" },
-  --     },
-  --   }
-  -- },
 
   {
     -- Detect tabstop and shiftwidth automatically

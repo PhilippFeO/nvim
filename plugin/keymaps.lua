@@ -11,6 +11,7 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
 -- :make executes string behind makeprg
@@ -21,9 +22,12 @@ vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>',
 -- Without "<Cmd>" letters are typed
 vim.keymap.set('n', '<Leader>ma', ':make %< ',
     { desc = '[m]ake with CLI [a]rguments' })
--- %< == Filename without extension, s. Wiki > neovim.md
+-- %< = Filename without extension, s. Wiki > neovim.md
 vim.keymap.set('n', '<Leader>mr', '<Cmd>make run<CR>',
     { desc = '[m]ake and [r]un current file' })
+-- TODO: Transform to Autocommand triggering for grocery_shopper dir <17-04-2024>
+vim.keymap.set('n', '<Leader>mp', '<Cmd>make pdf<CR>',
+    { desc = '[m]ake [p]df' })
 -- Run Tests
 vim.keymap.set('n', '<Leader>mt', '<Cmd>make test<CR>',
     { desc = '[m]ake and run [t]ests' })
@@ -87,9 +91,11 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 -- See `h vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- Remap for dealing with line wrap
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('n', '<C-j>', 'gj', { remap = true })
+vim.keymap.set('n', '<C-k>', 'gk', { remap = true })
 -- Mit <J> kann man im Normal-Mode die untere Zeile an die aktuelle hängen,
 -- allerdings wird dabei der Cursor an die Schnittstelle gesetzt. Das folgende
 -- Mapping sorgt dafür, dass der Cursor an aktueller Stelle verbleibt
