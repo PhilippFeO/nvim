@@ -7,3 +7,12 @@ local colors = require('kanagawa.colors').setup()
 local cp = colors.palette
 vim.api.nvim_set_hl(0, 'MyLineNr', { fg = cp.sakuraPink })
 vim.o.winhighlight = 'LineNr:MyLineNr'
+
+vim.api.nvim_create_autocmd(
+    'FileType', {
+        group = vim.api.nvim_create_augroup('Quickfix-List-Window', { clear = true }),
+        pattern = 'qf',
+        command = vim.cmd.wincmd('J'),
+        desc = 'Spread Quickfix-List over full breadth when using splits'
+    }
+)
