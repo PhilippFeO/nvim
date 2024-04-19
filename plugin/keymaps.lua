@@ -20,7 +20,7 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 -- :make executes string behind makeprg
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
-vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make<CR>',
+vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make | cwindow 12<CR>',
     { desc = 'make/compile/execute current file' })
 -- Without "<Cmd>" letters are typed
 vim.keymap.set('n', '<Leader>ma', ':make %< ',
@@ -35,7 +35,7 @@ vim.keymap.set('n', '<Leader>mp', '<Cmd>make pdf<CR>',
 vim.keymap.set('n', '<Leader>mt', '<Cmd>w | make test<CR>',
     { desc = '[m]ake and run [t]ests' })
 -- Same as above but suppressing output of `make` via `:silent`
-vim.keymap.set('n', '<Leader>ms', '<Cmd>w | silent make %<CR> | <Cmd>cwindow 3<CR>',
+vim.keymap.set('n', '<Leader>ms', '<Cmd>w | silent make | cwindow 12<CR>',
     { silent = true, desc = '[m]ake/compile/execute [s]ilently current file' })
 
 -- Generate substitution command for current word
@@ -142,8 +142,12 @@ vim.keymap.set('n', ']<Space>', '<Cmd>normal o<CR>', { desc = 'Add one empty lin
 vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty line above cursor' })
 vim.keymap.set('n', '[[', '[[zz', { desc = 'Center view after going to previous section' })
 vim.keymap.set('n', ']]', ']]zz', { desc = 'Center view after going to next section' })
-vim.keymap.set('n', '[q', '<Cmd>cprevious<CR>', { desc = "Previous Quickfix-List entry" })
-vim.keymap.set('n', ']q', '<Cmd>cnext<CR>', { desc = "Next Quickfix-List entry" })
+vim.keymap.set('n', '[q', '<Cmd>cprevious | copen | norm zt<C-e><C-w>pzz<CR>', { desc = "Previous Quickfix-List entry" })
+-- Öffne QuickFix-Liste oder springe zu ihr
+-- Schiebe Einträge nach oben
+-- Scrolle eine Zeile hoch (Jetzt sollte aktiver QF-Eintrag ganz oben stehen)
+-- Springe zurück ins lezte aktive Fenster (manchmal hat man 2 offen)
+vim.keymap.set('n', ']q', '<Cmd>cnext | copen | norm zt<C-e><C-w>pzz<CR>', { desc = "Next Quickfix-List entry" })
 
 vim.keymap.set('n', '[b', '<Cmd>bprevious<CR>', { desc = "Previous Buffer" })
 vim.keymap.set('n', ']b', '<Cmd>bnext<CR>', { desc = "Next Buffer" })
