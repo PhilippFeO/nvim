@@ -1,11 +1,14 @@
-local release = false
-if release then
-    vim.o.makeprg = [[make --no-print-directory -C ~/proj/upas-s5p/UPAS-L2/build/release]]
-else
-    vim.o.makeprg = [[make --no-print-directory -C ~/proj/upas-s5p/UPAS-L2/build/verbose]]
-end
-
 -- Verzeichnisabhängige Pfade (bspw. für S4-UPAS: Mit if-else und vim.fn.expand('%:p') arbeiten)
+if string.find(vim.fn.expand('%:p'), 'UPAS-L2') then
+    local release = false
+    if release then
+        vim.o.makeprg = [[make --no-print-directory -C ~/proj/upas-s5p/UPAS-L2/build/release]]
+    else
+        vim.o.makeprg = [[make --no-print-directory -C ~/proj/upas-s5p/UPAS-L2/build/verbose]]
+    end
+else
+    vim.o.makeprg = [[make --no-print-directory -C ../build]]
+end
 
 -- Vim is PWD aware when listing the file path in the quickfix list, ie. only the missing part is displayed (fi. /localhome/rost_ph/proj/upas-s5p/ is skipped)
 -- Pfade werden relativ zum PWD angezeigt und verarbeitet, Nur '/localhome/' abschneiden geht also nicht
