@@ -1,5 +1,6 @@
 -- Verzeichnisabhängige Pfade (bspw. für S4-UPAS: Mit if-else und vim.fn.expand('%:p') arbeiten)
-if string.find(vim.fn.expand('%:p'), 'UPAS-L2') then
+-- Ohne 'true' funktioniert es nicht, schaltet 'Lua-Magic' aus
+if string.find(vim.fn.expand('%:p'), 'UPAS-L2', 1, true) then
     local release = false
     if release then
         vim.o.makeprg = [[make --no-print-directory -C ~/proj/upas-s5p/UPAS-L2/build/release]]
