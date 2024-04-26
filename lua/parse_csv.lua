@@ -1,5 +1,5 @@
 -- TODO: Pass path in any option table <19-01-2024>
-local filename = '/home/philipp/programmieren/recipe-selector/res/ingredient_category_url.csv'
+local filename = vim.fn.expand('~') .. 'programmieren/recipe-selector/res/ingredient_category_url.csv'
 
 -- Function to parse CSV file and return a table of tables
 local file = assert(io.open(filename, "r"), "Error opening file: " .. filename)
