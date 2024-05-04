@@ -93,6 +93,7 @@ vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center after moving down in ju
 
 -- TODO: Breaks wiki.vim, iw. <Tab> doesn't trigger :WikiLinkNext <04-01-2024>
 --      ? <C-i> triggers :WikiLinkNext
+--      > In Issues nachsehen, ich habe dort mal gefragt
 -- vim.keymap.set('n', '<C-i>', '<C-i>zz', { desc = 'Center after moving up in jumplist' })
 
 -- `h taglist` navigation
