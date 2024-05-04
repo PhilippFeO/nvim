@@ -19,6 +19,12 @@ require('mason-nvim-dap').setup {
     -- LSP
     'lua-language-server',
     'python-lsp-server',
+    "basedpyright",
+    "bash-debug-adapter",
+    "bash-language-server",
+    "ruff-lsp",
+    "shellcheck",
+    "texlab",
   },
 }
 
