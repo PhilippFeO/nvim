@@ -70,20 +70,20 @@ local dap_grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
-    program = vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/proj/grocery-shopper/',
+    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
     args = { '-n', '2' }
 }
 
 local dap_grocery_shopper_custom_args = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with custom Arguments",
-    program = vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/proj/grocery-shopper/',
+    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
     args = function()
         local cli_args = vim.fn.input 'Debug with Arguments: '
         local cli_args_table = {}
