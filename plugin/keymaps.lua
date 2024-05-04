@@ -1,4 +1,17 @@
 vim.keymap.set('n', '<BS>', '<Cmd>bdelete<CR>', { desc = 'Delete Buffer' })
+-- cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>'
+vim.keymap.set('c', '<Enter>', function()
+    local cmdtype = vim.fn.getcmdtype()
+    if cmdtype == '/' or cmdtype == '?' then
+        return '<Enter>zz'
+    else
+        return '<Enter>'
+    end
+end, {
+    silent = true,
+    expr = true,
+    desc = 'Center after searching with / or ?',
+})
 
 
 -- ┌───────────────────┐
