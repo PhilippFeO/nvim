@@ -21,6 +21,7 @@ if string.find(vim.fn.expand('%:p'), 'UPAS-L2', 1, true) then
   -- ^=: prepend to string
   -- %-G: Ignore
   vim.cmd('CompilerSet errorformat^=%-G' .. upas_efm_stump .. '%tarning:\\ %.%#\\ [-Wunused-parameter]')
+  vim.cmd('CompilerSet errorformat^=%-G' .. upas_efm_stump .. '%tarning:\\ %.%#\\ [-Wunused-variable]')
   -- Manchmal gibt's weitere Fehlermeldungen bzgl einer XML-Datei. Diese beginnt mit heutigem Datum. Fabian meinte, die könne ich ignorieren.
   vim.cmd('CompilerSet errorformat^=%-G' .. vim.fn.strftime("%Y-%m-%d") .. '%.%#')
   -- Ich benutze diese Variabe aber g++ ist scheinbar zu doof.
@@ -35,6 +36,5 @@ if string.find(vim.fn.expand('%:p'), 'UPAS-L2', 1, true) then
 else
   vim.cmd([[CompilerSet makeprg=make\ --no-print-directory\ -C\ ../build]])
   -- %:p:h Path without file (and trailing /)
-  vim.o.errorformat = vim.fn.expand('%:p:h') .. '/%f:%l:%c: %m'
-  vim.cmd('CompilerSet errorformat+=' .. vim.fn.expand('%:p:h') .. '/%f:%l:%c: %m')
+  vim.cmd('CompilerSet errorformat+=' .. vim.fn.expand('%:p:h') .. '/%f:%l:%c:\\ %m')
 end
