@@ -5,7 +5,7 @@ local augroup = vim.api.nvim_create_augroup
 -- Disable signcolumn in my wiki (I won't commit it and need no git-signs information)
 autocmd('BufWinEnter', {
     group = augroup('Disable-Signcolumn', { clear = true }),
-    pattern = '/home/philipp/wiki/*',
+    pattern = vim.fn.expand('~') .. '/wiki/*',
     callback = function()
         vim.wo.signcolumn = 'no'
     end,

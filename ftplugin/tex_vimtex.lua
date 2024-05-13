@@ -55,7 +55,8 @@ vim.g.vimtex_syntax_conceal = {
 vim.opt.spell = true
 vim.opt.spelllang = { "de", "en_us" }
 -- I had to download the German spell files to make spell checking work (for German)
-vim.opt.spellfile = { "/home/philipp/.config/nvim/spell/en.utf-8.add", "/home/philipp/.config/nvim/spell/de.utf-8.add" }
+vim.opt.spellfile = { vim.fn.expand('~') .. "/.config/nvim/spell/en.utf-8.add", vim.fn.expand('~') ..
+"/.config/nvim/spell/de.utf-8.add" }
 -- vim.opt.spelloptions = { "camel" } -- Spellchecking on CamelCase words
 
 

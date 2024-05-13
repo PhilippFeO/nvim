@@ -124,7 +124,7 @@ vim.keymap.set('i', '<C-k>', function() filelinks.make_filelink({}) end, { desc 
 
 vim.keymap.set('n', '<Leader>lf', function()
   filelinks.make_filelink({
-    working_dir = '/home/philipp/',
+    working_dir = vim.fn.expand('~'),
     format_string = '[%s](%s)',
     remove_extension = false,
     prompt_title = 'Files in $HOME: ' .. vim.fn.expand('~')
