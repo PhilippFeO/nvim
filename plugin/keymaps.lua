@@ -59,7 +59,7 @@ vim.keymap.set('n', '<Leader>ms', '<Cmd>w | silent make | cwindow 12<CR>',
 vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
 vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
 vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<Leader>x', '<Cmd>!chmod +x %<CR>', { desc = 'Make script executable' })
+vim.keymap.set('n', '<Leader>x', '<cmd>source %<CR>', { desc = 'Source current Lua file' })
 
 local bracketPairs = {
     ['('] = ')',
