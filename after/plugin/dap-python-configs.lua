@@ -56,6 +56,7 @@ local dap_pytest_config = {
     redirectOutput = true,
     -- Display return value of function in DAP Scopes window
     showReturnValue = false,
+    -- justMyCode = true,
 }
 
 local dap_py_exTerm = {
