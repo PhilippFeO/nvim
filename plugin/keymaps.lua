@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<BS>', '<Cmd>bdelete<CR>', { desc = 'Delete Buffer' })
+vim.keymap.set('n', '<BS>', '<Cmd>close<CR>', { desc = 'Delete Buffer' })
 -- cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>'
 vim.keymap.set('c', '<Enter>', function()
     local cmdtype = vim.fn.getcmdtype()
@@ -108,6 +108,7 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ 'n' }, 'CC', '<Cmd>cclose<CR>', { desc = 'Close Quickfix-List window' })
 vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
 -- Remap for dealing with line wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
