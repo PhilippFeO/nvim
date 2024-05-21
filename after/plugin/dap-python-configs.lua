@@ -18,10 +18,10 @@ dap.adapters.my_python_adapter = {
 -- s. `h dap-terminal`
 -- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
 local command = function()
-    if vim.fn.hostname() == 'klapprechner' then
-        return vim.fn.expand('~/.local/bin/kitty')
-    else
+    if DLR_Machine then
         return vim.fn.expand('/usr/bin/kitty')
+    else
+        return vim.fn.expand('~/.local/bin/kitty')
     end
 end
 dap.defaults.fallback.external_terminal = {
@@ -70,20 +70,22 @@ local dap_grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
-    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
+        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
+    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
     args = { '-n', '2' }
 }
 
 local dap_grocery_shopper_custom_args = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with custom Arguments",
-    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
+        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/programmieren/grocery-shopper/',
+    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
     args = function()
         local cli_args = vim.fn.input 'Debug with Arguments: '
         local cli_args_table = {}

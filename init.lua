@@ -11,6 +11,8 @@ I moved some contents into (list by far not complete)
   lua/lazy/ Stuff for loading plugins initially (setup is done somewhere else)
 ]]
 
+DLR_Machine = vim.fn.hostname() == "eoc-001810l.intra.dlr.de"
+
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
 --  Otherwise wrong <Leader> is used.
@@ -56,7 +58,8 @@ require('lazy').setup({
       filetype = 'yaml',
       completion_column = 1,
       skip_rows = 0,
-    }
+    },
+    cond = not DLR_Machine,
   },
 
   -- {
