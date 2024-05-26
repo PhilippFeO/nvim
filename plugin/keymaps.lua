@@ -19,6 +19,15 @@ end, {
 -- └───────────────────┘
 -- <Leader>, <LocalLeader> is set in init.lua, because lazy.nvim wishes so
 --
+vim.keymap.set('n', '<Leader>et', function()
+    local f = io.open('todo.md', 'r')
+    if f ~= nil then
+        io.close(f)
+        vim.cmd.tabedit('todo.md')
+    else
+        print("File 'todo.md' doesn't exists")
+    end
+end, { desc = 'Edit todo.md' })
 -- Dieses Kopieren und Einfügen ohne dass das Markierte gespeichert wird und den alten Text überschreibt. Klappt irgendwie mit <Leader> nicht.
 -- Im Visual-Mode markiertes wird durch vorher Geyanktes ersetzt ohne dass markierter Teil "das neue zu ersetzende" ist
 vim.keymap.set('x', '<Leader>p', [["_dP]], { desc = 'Delete into \"_ and paste' })
