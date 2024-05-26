@@ -92,6 +92,22 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 local lspconfig = require 'lspconfig'
 
 -- ─── Python ──────────
+--[[ TODO:  <25-05-2024>
+https://www.reddit.com/r/neovim/comments/1bt3dy0/comment/l5813wf/?context=3
+basedpyright = {
+	settings = {
+		basedpyright = {
+			typeCheckingMode = "all",
+			analysis = {
+				diagnosticSeverityOverrides = {
+					reportMissingParameterType = false,
+					reportUnknownParameterType = false,
+				},
+			},
+		},
+	},
+},
+--]]
 lspconfig.basedpyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
