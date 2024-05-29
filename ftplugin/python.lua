@@ -1,5 +1,5 @@
 -- Loads RUNTIMEPATH/compiler/python.lua
--- vim.cmd.compiler('python')
+vim.cmd.compiler('python')
 
 
 -- ─── User Commands ──────────
