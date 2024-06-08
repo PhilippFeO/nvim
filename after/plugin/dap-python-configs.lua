@@ -97,6 +97,15 @@ local dap_grocery_shopper_custom_args = {
     end,
 }
 
+local dap_diary_args = {
+    name = 'Tagebuch with CLI args',
+    request = 'launch',
+    type = 'python',
+    program = vim.fn.expand '~/.tagebuch/my_html_handler.py',
+    cwd = vim.fn.expand '~/.tagebuch',
+    args = { vim.fn.expand '~/.tagebuch/2020/09-September/13-09-2020-Sonntag-Bamberg/13-09-2020-Bamberg.html' },
+}
+
 -- Not useable for complex issues like starting Neovim in subprocess
 local dap_py_inTerm = {
     console = 'integratedTerminal',
@@ -121,6 +130,7 @@ dap.configurations.python = {
     dap_py_inTerm,
     dap_grocery_shopper,
     dap_grocery_shopper_custom_args,
+    dap_diary_args,
 }
 
 
