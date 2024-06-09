@@ -103,7 +103,7 @@ local dap_diary_args = {
     type = 'python',
     program = vim.fn.expand '~/.tagebuch/my_html_handler.py',
     cwd = vim.fn.expand '~/.tagebuch',
-    args = { vim.fn.expand '~/.tagebuch/2020/09-September/13-09-2020-Sonntag-Bamberg/13-09-2020-Bamberg.html' },
+    args = { vim.fn.expand '~/.tagebuch/2024/06-Juni/05-06-2024-Mittwoch-Lindau/05-06-2024-Mittwoch-Lindau.html' },
 }
 
 -- Not useable for complex issues like starting Neovim in subprocess
