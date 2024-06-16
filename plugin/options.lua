@@ -68,7 +68,7 @@ vim.opt.mouse = ""
 --  %=  shift to the right
 --  %m  idicates modified or not
 --  %f  path to file
-vim.o.winbar = "%=%m %f"
+-- vim.o.winbar = "%=%m %f"
 
 -- Fenstertitel zeigt Dateiname
 vim.opt.title = true
