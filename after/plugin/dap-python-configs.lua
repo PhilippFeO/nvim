@@ -122,6 +122,19 @@ local dap_py_default = {
     type = "python",
     -- justMyCode = false
 }
+
+-- https://code.visualstudio.com/docs/python/tutorial-django
+-- https://stackoverflow.com/questions/62944425/how-to-debug-django-in-vscode-with-autoreload-turned-on
+local django = {
+    name = "Django Debugger",
+    type = "debugpy",
+    request = "launch",
+    program = "${workspaceFolder}/manage.py",
+    args = { "runserver" },
+    django = true,
+    justMyCode = true
+}
+
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
     dap_py_default,
@@ -131,6 +144,7 @@ dap.configurations.python = {
     dap_grocery_shopper,
     dap_grocery_shopper_custom_args,
     dap_diary_args,
+    django,
 }
 
 
