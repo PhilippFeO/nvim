@@ -34,7 +34,7 @@ dap.defaults.fallback.external_terminal = {
 
 -- This enables debugging Tests in the first place.
 -- More information in my Wiki
-local dap_pytest_config = {
+local pytest_default_config = {
     name = "Pytest: Current File",
     type = "python",
     request = "launch", -- or 'attach' TODO: What does attach? <27-01-2024>
@@ -43,14 +43,14 @@ local dap_pytest_config = {
     args = {
         "${file}",
         "-rA",
-        "-s",
+        "-sv",
         -- "--log-cli-level=INFO",
         -- "--log-file=test_out.log"
     },
     -- integratedTerminal: Terminal in split next to Code; doesn't close on dap.disconnect()
     -- externalTerminal: own terminal window for output
     -- internalConsole: print output in dap-repl window (default)
-    -- console = "integratedTerminal",
+    -- console = "internalConsole",
     -- If true and console = 'externalTerminal', then output is printed in 'externalTerminal' only
     -- If false, then no ouput is printed
     redirectOutput = true,
@@ -59,7 +59,7 @@ local dap_pytest_config = {
     -- justMyCode = true,
 }
 
-local dap_py_exTerm = {
+local default_external_terminal = {
     console = 'externalTerminal',
     name = "Debug with externalTerminal",
     program = "${file}",
@@ -67,7 +67,7 @@ local dap_py_exTerm = {
     type = "python"
 }
 
-local dap_grocery_shopper = {
+local grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
@@ -79,7 +79,7 @@ local dap_grocery_shopper = {
     args = { '-n', '2' }
 }
 
-local dap_grocery_shopper_custom_args = {
+local grocery_shopper_custom_args = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with custom Arguments",
     program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
@@ -97,8 +97,8 @@ local dap_grocery_shopper_custom_args = {
     end,
 }
 
-local dap_diary_args = {
-    name = 'Tagebuch with CLI args',
+local diary_Lindau = {
+    name = 'Tagebuch: Lindau',
     request = 'launch',
     type = 'python',
     program = vim.fn.expand '~/.tagebuch/my_html_handler.py',
@@ -107,7 +107,7 @@ local dap_diary_args = {
 }
 
 -- Not useable for complex issues like starting Neovim in subprocess
-local dap_py_inTerm = {
+local default_integrated_terminal = {
     console = 'integratedTerminal',
     name = "Debug with integratedTerminal",
     program = "${file}",
@@ -115,7 +115,7 @@ local dap_py_inTerm = {
     type = "python"
 }
 
-local dap_py_default = {
+local default_no_console = {
     name = "Debug file (default config without 'console')",
     program = '${file}',
     request = "launch",
@@ -137,15 +137,20 @@ local django = {
 
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
 dap.configurations.python = {
-    dap_py_default,
-    dap_py_exTerm,
-    dap_pytest_config,
-    dap_py_inTerm,
-    dap_grocery_shopper,
-    dap_grocery_shopper_custom_args,
-    dap_diary_args,
+    default_no_console,
+    default_external_terminal,
+    default_integrated_terminal,
+    pytest_default_config,
+    grocery_shopper,
+    grocery_shopper_custom_args,
+    diary_Lindau,
     django,
 }
+
+local M = {
+    pytest_default_config = pytest_default_config,
+}
+return M
 
 
 -- To be used in keymaps to start config directly, s. dap.lua
