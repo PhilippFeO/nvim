@@ -11,6 +11,11 @@ I moved some contents into (list by far not complete)
   lua/lazy/ Stuff for loading plugins initially (setup is done somewhere else)
 ]]
 
+-- make 'require' work on 'after/plugin/' files
+-- fi. necessary to pass a config to 'dap-python.test_method()'
+local home_dir = os.getenv("HOME")
+package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
+
 DLR_Machine = vim.fn.hostname() == "eoc-001810l.intra.dlr.de"
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
