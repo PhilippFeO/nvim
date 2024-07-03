@@ -18,10 +18,10 @@ npairs.setup({
     }
 })
 
--- local Rule = require('nvim-autopairs.rule')
+local Rule = require('nvim-autopairs.rule')
 -- check_for more information on defining rules:
 --  https://github.com/windwp/nvim-autopairs/wiki/Rules-API
--- Currently, I use a snippet because it is easier to type
--- npairs.add_rule(Rule('„', '“')) -- German quotation marks
+-- There was also a „ snippet in main.snippets, which worked
+npairs.add_rule(Rule('„', '“')) -- German quotation marks
 
 npairs.remove_rule('`') -- remove rule `
