@@ -22,15 +22,6 @@ require('mason-nvim-dap').setup {
 	},
 }
 
--- -- Configure Border of LSP induced Floating Windows
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
--- 	vim.lsp.handlers.hover, {
--- 		-- Use a sharp border with `FloatBorder` highlights
--- 		border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
--- 		-- add the title in hover float window
--- 		-- title = "hover"
--- 	}
--- )
 
 -- copied from after/plugin/nvim-cmp.lua, because `capabilities` was flagged unknown by LSP
 -- Extends completion features, s. https://github.com/hrsh7th/cmp-nvim-lsp
@@ -50,11 +41,16 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- And the manual setup, fi with python, doesn't work with lua_ls.
 local servers = {
 	-- https://luals.github.io/wiki/settings/
+	-- mytable@…: mytable@inse<C-Enter> -> table.insert(mytable, )
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
 			telemetry = { enable = false },
 			diagnostics = { globals = { 'vim' } }, -- Get the language server to recognize the `vim` global
+			completion = {
+				callSnippets = "Both",            -- "Disable", "Replace"
+				displayContext = 6,
+			},
 			-- hint.enable -> hint = { enable … }
 			hint = {
 				enable = true,
@@ -64,6 +60,8 @@ local servers = {
 		}
 	},
 }
+
+
 -- Ensure the servers above are installed
 mason_lspconfig.setup {
 	ensure_installed = vim.tbl_keys(servers),
