@@ -87,45 +87,6 @@ dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
--- ─── dap & dapui keymaps ──────────
-
--- Basic debugging keymaps, feel free to change to your liking!
--- TODO: Make this function an own plugin using Closures <26-01-2024>
-local nmap = function(keys, func, desc)
-    if desc then
-        desc = '  DAP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { desc = desc })
-end
-nmap('<F5>', dap.continue) --Entry point for all Debugger things
-nmap('<F1>', dap.step_into, '  Step into')
-nmap('<F2>', dap.step_over, '  Step over')
-nmap('<F3>', dap.step_out, '  Step out')
-nmap('<F4>', dap.step_back, ' Step out')
-
-nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
-nmap('<Leader>dB', function()
-    dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-end, '  Toggle Conditional Breakpoint')
-nmap('<Leader>lb', function()
-    dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-end, 'Set [l]ogging [b]reakpoint')
-
-nmap('<Leader>dc', dap.terminate, '󰗼  Terminate Debugging')
-nmap('<Leader>dl', dap.run_last, '[d]ebug with [l]ast configuration')
-nmap('<Leader>dm', function()
-    require 'dap-python'.test_method({
-        -- necessary, if 'console' not explicitly set in config
-        console = 'internalConsole',
-        test_runner = 'pytest',
-        config = require 'dap-python-configs'.pytest_default_config
-    })
-end, '[d]ebug [m]ethod')
-nmap('<Leader>dr', function()
-    dapui.open({ reset = true })
-end, '[d]apui [r]eset')
-nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
 
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
 dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
