@@ -17,6 +17,10 @@ local on_attach = function(client, bufnr)
   nmap('<leader>r', vim.lsp.buf.rename, '[r]ename')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
 
+  nmap('<Leader>i', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+  end, '[i]nlay hints')
+
   nmap('gd', vim.lsp.buf.definition, '[g]oto [g]efinition (as in plain vim)')
   nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
   nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
@@ -25,11 +29,9 @@ local on_attach = function(client, bufnr)
   -- basically a searchable structure/outline of the document
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
 
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation (twice for jumping into window)')
-
   -- Lesser used LSP functionality
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
   -- "Workspace" related
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
@@ -38,20 +40,14 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[w]orkspace [l]ist Folders')
 
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "LSP: Go to previous diagnostic message" })
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "LSP: Go to next diagnostic message" })
-  vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = "LSP: Open floating diagnostic message" })
-  vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, { desc = "LSP: Open diagnostics list" })
+  -- '<C-w>d' can be substituted by 'vim.diagnostic.open_float'
+  vim.keymap.set('n', '<Leader>e', '<C-w>d', { remap = true, desc = "Open floating diagnostic message" })
+  nmap('<Leader>q', vim.diagnostic.setloclist, "Open diagnostics list as Location List")
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
-
-  -- Doesn't work here, I don't have any clue
-  -- Not inherently LSP specific, because `vim.diagnostic` ist used and not `vim.lsp` but LSP provides the diagnostics
-  -- nmap('<Leader>dj', vim.diagnostic.goto_next, 'next [d]iagnositc [j] (vim motion)')
-  -- nmap('<Leader>dk', vim.diagnostic.goto_prev, 'next [d]iagnositc [k] (vim motion)')
 end
 
 return on_attach

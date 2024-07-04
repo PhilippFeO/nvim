@@ -8,6 +8,6 @@ return {
     'williamboman/mason-lspconfig.nvim',
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim', -- GitHub: Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
+    'folke/lazydev.nvim', -- GitHub: Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
   },
 }
