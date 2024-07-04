@@ -1,7 +1,7 @@
 -- TODO: README and docs <25-01-2024>
 -- Displays variable names next to their definition, uses TreeSitter to find the respective location
-require 'nvim-dap-virtual-text'.setup()
--- ─── nvim-dap-ui ──────────
+require 'nvim-dap-virtual-text'.setup({})
+
 -- TODO: Open dapui normally also with tabs of the elements <27-01-2024>
 
 -- ─── signs ──────────
@@ -20,7 +20,8 @@ vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'SignColumn' })
 
 local dapui = require 'dapui'
 -- TODO: `h nvim-dap-ui` <25-01-2024>
--- Here you fi control the panes, s. https://youtu.be/0moS8UHupGc?t=1481
+-- control the panes, s. https://youtu.be/0moS8UHupGc?t=1481
+---@diagnostic disable-next-line: missing-fields
 dapui.setup {
     -- TODO: Highlight Groups dieser ändern, Highlightgroups sollte es in `h nvim-dap-ui` geben
     icons = {
@@ -31,7 +32,10 @@ dapui.setup {
     mappings = {
         remove = 'dd'
     },
+    ---@diagnostic disable-next-line: missing-fields
     controls = {
+        enabled = true,
+        ---@diagnostic disable-next-line: missing-fields
         icons = {
             -- nerdfonts: search for 'debug_'
             pause = '󰏤',
