@@ -2,7 +2,7 @@
 -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 
 
--- bdelete! *dap-termina* schließt integratedTerminal
+-- bdelete! *dap-terminal* schließt integratedTerminal
 -- TODO: nach/mit dap.disconnect() oder dap.close() <17-03-2024>
 -- https://github.com/mfussenegger/nvim-dap/issues/278
 
@@ -147,20 +147,8 @@ dap.configurations.python = {
     django,
 }
 
+-- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
 local M = {
     pytest_default_config = pytest_default_config,
 }
 return M
-
-
--- To be used in keymaps to start config directly, s. dap.lua
--- TODO: Doesn't work but I want to be prepared <28-01-2024>
--- local M = {}
---
--- M.dap_pytest_config = dap_pytest_config
--- M.dap_py_in_term = dap_py_ex_term
--- M.dap_py_in_term = dap_py_in_term
---
--- return M
---
---
