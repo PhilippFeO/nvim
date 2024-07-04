@@ -2,7 +2,10 @@ local dap = require 'dap'
 local dapui = require 'dapui'
 local nmap = require 'utils'.nmap('  DAP')
 
-nmap('<F5>', dap.continue) --Entry point for all Debugger things
+nmap('<F5>', function()
+  vim.cmd.set('mouse=n')
+  dap.continue()
+end, 'Start debugging or continue') --Entry point for all Debugger things
 nmap('<F1>', dap.step_into, '  Step into')
 nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
@@ -16,7 +19,10 @@ nmap('<Leader>lb', function()
   dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
 end, 'Set [l]ogging [b]reakpoint')
 
-nmap('<Leader>dc', dap.terminate, '󰗼  Terminate Debugging')
+nmap('<Leader>dc', function()
+  dap.terminate()
+  vim.cmd.set('mouse=')
+end, '󰗼  Terminate Debugging')
 nmap('<Leader>dl', dap.run_last, '[d]ebug with [l]ast configuration')
 nmap('<Leader>dm', function()
   require 'dap-python'.test_method({
