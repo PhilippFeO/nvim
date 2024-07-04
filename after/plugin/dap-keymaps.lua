@@ -1,15 +1,7 @@
 local dap = require 'dap'
 local dapui = require 'dapui'
+local nmap = require 'utils'.nmap('  DAP')
 
--- Basic debugging keymaps, feel free to change to your liking!
--- TODO: Make this function an own plugin using Closures <26-01-2024>
-local nmap = function(keys, func, desc)
-  if desc then
-    desc = '  DAP: ' .. desc
-  end
-
-  vim.keymap.set('n', keys, func, { desc = desc })
-end
 nmap('<F5>', dap.continue) --Entry point for all Debugger things
 nmap('<F1>', dap.step_into, '  Step into')
 nmap('<F2>', dap.step_over, '  Step over')
