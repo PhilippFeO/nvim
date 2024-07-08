@@ -96,9 +96,11 @@ require('lazy').setup({
     'quangnguyen30192/cmp-nvim-ultisnips',
     -- Hier erhalte ich Fehler
     -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
-    commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
+    -- Hier funktioniert's
+    -- commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
+
 
   require 'plugins.vim-sleuth',
   require 'plugins.wiki',

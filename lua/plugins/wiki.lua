@@ -2,7 +2,7 @@ return {
   'lervag/wiki.vim',
   -- Man muss wiki <leader>ww am besten im Verzeichnis selbst aufrufen
   init = function()
-    vim.g.tag_line_number = 2   -- NO official wiki.vim variable, I have introduced it for `wiki_utils.add_tag()`
+    vim.g.tag_line_number = 2 -- NO official wiki.vim variable, I have introduced it for `wiki_utils.add_tag()`
     vim.g.wiki_root = '~/wiki'
     vim.g.wiki_index_name = 'Notizen'
     vim.g.wiki_filetypes = { 'md' }
