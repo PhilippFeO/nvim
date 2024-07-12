@@ -82,6 +82,16 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
   'windwp/nvim-autopairs',
 
+  -- -- kanagawa colors and themes are in misc/
+  -- {
+  --   'norcalli/nvim-colorizer.lua',
+  --   -- runs setup({})
+  --   -- otherwise:
+  --   --    require'colorizer'.setup()
+  --   -- after require 'lazy'.setup()
+  --   config = true
+  -- },
+
   {
     'lervag/vimtex',
     lazy = false, -- VimTeX must not be lazy loaded.
