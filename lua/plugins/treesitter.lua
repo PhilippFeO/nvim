@@ -6,6 +6,5 @@ return {
   config = function()
     pcall(require('nvim-treesitter.install').update { with_sync = true })
   end,
-  -- enabled = false,
-  commit = '7d0b475'
+  -- commit = '7d0b475'
 }
