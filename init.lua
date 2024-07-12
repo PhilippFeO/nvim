@@ -110,6 +110,7 @@ require('lazy').setup({
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
 
+  require 'plugins.octo',
   require 'plugins.vim-sleuth',
   require 'plugins.wiki',
   require 'plugins.vim-markdown',
