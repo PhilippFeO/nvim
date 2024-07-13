@@ -33,38 +33,46 @@ vim.bo.autoindent = false
 local colors = require("kanagawa.colors").setup()
 local cp = colors.palette
 local highlight = vim.api.nvim_set_hl
+local WAVE_BLUE = '#65AD99'
 
 -- Colors for **bold** and *italic* text
-highlight(0, "@text.strong.markdown_inline", { fg = cp.autumnRed, bold = true })
-highlight(0, '@text.emphasis.markdown_inline', { fg = cp.roninYellow, italic = true })
+highlight(0, "@markup.strong.markdown_inline", { fg = cp.autumnRed, bold = true })
+highlight(0, '@markup.italic.markdown_inline', { fg = cp.roninYellow, italic = true })
 
-highlight(0, 'my_mkdCode', { fg = '#65AD99' })
-highlight(0, '@text.literal.markdown_inline', { link = 'my_mkdCode' })
-highlight(0, '@punctuation.delimiter.markdown_inline', { fg = cp.sakuraPink })
-
+highlight(0, 'my_mkdCode', { fg = cp.sakuraPink })
+-- Contents of `…`, ie the inlined code itself
+highlight(0, '@markup.raw.markdown_inline', { link = 'my_mkdCode' })
+-- `…` of inline code
+highlight(0, '@markup.raw.block.markdown', { fg = cp.sakuraPink })
+highlight(0, 'mkdCodeStart', { fg = cp.sakuraPink })
+highlight(0, 'mkdCodeEnd', { fg = cp.sakuraPink })
+-- Language part of Codeblock
 highlight(0, '@label.markdown', { link = 'my_mkdCode' })
-highlight(0, '@punctuation.delimiter.markdown', { link = '@punctuation.delimiter.markdown_inline' })
-
 
 
 -- Change color of the link alias in []
-highlight(0, '@text.reference.markdown_inline', { fg = cp.oniViolet })
-highlight(0, '@text.uri.markdown_inline', { fg = cp.sakuraPink })
+-- []() of link (not contents)
+highlight(0, '@markup.link.markdown_inline', { fg = cp.oniViolet })
+-- Contents of []
+highlight(0, '@markup.link.label.markdown_inline', { fg = WAVE_BLUE })
+-- Contents of ()
+highlight(0, '@markup.link.url.markdown_inline', { fg = cp.sakuraPink })
 -- URLs not enclosed in []()
-highlight(0, 'my_URL', { link = '@text.reference.markdown_inline' })
+highlight(0, 'my_URL', { link = '@markup.link.label.markdown_inline' })
 vim.cmd [[syntax match my_URL /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/]]
+-- `h /\@<=`
+-- \@N<=, bzw \@1<=
+highlight(0, 'my_mkdLink_paren', { link = '@markup.link.markdown_inline' })
+-- vim.cmd [[syntax match my_URL /(?<=\])[^(]*\((.*?)\)/]]
+vim.cmd [[syntax match my_mkdLink_paren /](/]]
+vim.cmd [[syntax match my_mkdLink_paren /)$/]]
+
 
 -- Change color of headings
--- winterRed suboptimal because it's used in Visual mode but I will probably enter this mode on H1 rarely
-highlight(0, '@text.title.1.markdown', { fg = cp.sakuraPink, bg = cp.winterRed })
-highlight(0, '@text.title.1.marker.markdown', { link = '@text.title.1.markdown' })
-highlight(0, '@text.title.2.markdown', { fg = cp.lightBlue, bg = cp.waveBlue1 })
-highlight(0, '@text.title.2.marker.markdown', { link = '@text.title.2.markdown' })
-highlight(0, '@text.title.3.markdown', { fg = cp.springGreen, bg = cp.winterGreen })
-highlight(0, '@text.title.3.marker.markdown', { link = '@text.title.3.markdown' })
-highlight(0, '@text.title.4.markdown', { fg = cp.lotusOrange2, bg = cp.lotusGray2 })
-highlight(0, '@text.title.4.marker.markdown', { link = '@text.title.4.markdown' })
-
+highlight(0, '@markup.heading.1.markdown', { fg = cp.sakuraPink, bg = cp.winterRed })
+highlight(0, '@markup.heading.2.markdown', { fg = cp.lightBlue, bg = cp.waveBlue1 })
+highlight(0, '@markup.heading.3.markdown', { fg = cp.springGreen, bg = cp.winterGreen })
+highlight(0, '@markup.heading.4.markdown', { fg = cp.lotusOrange2, bg = cp.lotusGray2 })
 
 
 
