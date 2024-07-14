@@ -12,6 +12,29 @@ autocmd('BufWinEnter', {
     desc = 'Disable signcolumn in Wiki'
 })
 
+-- Keymap to search files ignored by .gitignore.
+-- I ignore regular wiki pages I don't want to upload to GitHub but sometimes
+-- I want to read or edit them (obviously) and Telescope, ie. ripgrep is '.gitignore'
+-- aware.
+-- `no_ignore` also set in kitty-config to open Wiki.
+autocmd('User', {
+    group = augroup('Wiki-Group', { clear = true }),
+    pattern = 'WikiBufferInitialized',
+    callback = function()
+        vim.keymap.set('n', '<Leader>f', function()
+            local builtin = require('telescope.builtin')
+            builtin.find_files({ no_ignore = true })
+        end, { desc = "Finde Dateien mit 'no_ignore=true'" })
+    end,
+    desc = 'Modify Telescope.find_files to search ignored files.'
+})
+
+autocmd('BufReadPost', {
+    group = augroup('HTMLdjango', { clear = true }),
+    pattern = '*/kursverwaltung/*.html',
+    command = 'set ft=htmldjango',
+    desc = 'Set ft to "htmldjango" within kursverwaltung/'
+})
 -- ─── LSP Autocommands ──────────
 -- TODO: Edit kanagawa.nvim or highlight groups using kanagawa's palette because highlight group colors are ugly
 -- TODO: Which highlight group is used by vim.lsp.buf.document_highlight()?
@@ -46,20 +69,3 @@ autocmd('BufWinEnter', {
 --    command = 'Codeium Disable',
 --    desc = 'Disable Codeium on startup.'
 --})
-
--- Keymap to search files ignored by .gitignore.
--- I ignore regular wiki pages I don't want to upload to GitHub but sometimes
--- I want to read or edit them (obviously) and Telescope, ie. ripgrep is '.gitignore'
--- aware.
--- `no_ignore` also set in kitty-config to open Wiki.
-autocmd('User', {
-    group = augroup('Wiki-Group', { clear = true }),
-    pattern = 'WikiBufferInitialized',
-    callback = function()
-        vim.keymap.set('n', '<Leader>f', function()
-            local builtin = require('telescope.builtin')
-            builtin.find_files({ no_ignore = true })
-        end, { desc = "Finde Dateien mit 'no_ignore=true'" })
-    end,
-    desc = 'Modify Telescope.find_files to search ignored files.'
-})

@@ -63,7 +63,7 @@ vim.cmd [[syntax match my_URL /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/]]
 -- `h /\@<=`
 -- \@N<=, bzw \@1<=
 highlight(0, 'my_mkdLink_paren', { link = '@markup.link.markdown_inline' })
--- vim.cmd [[syntax match my_URL /(?<=\])[^(]*\((.*?)\)/]]
+vim.cmd [[syntax match my_URL /(?<=\])[^(]*\((.*?)\)/]]
 vim.cmd [[syntax match my_mkdLink_paren /](/]]
 vim.cmd [[syntax match my_mkdLink_paren /)$/]]
 
