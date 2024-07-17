@@ -121,8 +121,6 @@ require('lazy').setup({
   require 'plugins.nvim-cmp',
   require 'plugins.git-plugins',
   require 'plugins.kanagawa',
-  { "ellisonleao/gruvbox.nvim", priority = 1000,     config = true },
-  { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
   require 'plugins.treesitter',
   require 'plugins.telescope',
   require 'plugins.telescope-fzf-native',
