@@ -82,6 +82,16 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
   'windwp/nvim-autopairs',
 
+  -- -- kanagawa colors and themes are in misc/
+  -- {
+  --   'norcalli/nvim-colorizer.lua',
+  --   -- runs setup({})
+  --   -- otherwise:
+  --   --    require'colorizer'.setup()
+  --   -- after require 'lazy'.setup()
+  --   config = true
+  -- },
+
   {
     'lervag/vimtex',
     lazy = false, -- VimTeX must not be lazy loaded.
@@ -98,10 +108,11 @@ require('lazy').setup({
     -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
     -- Hier funktioniert's
     -- commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
+    -- Bei neustem Commit auch
+    commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
-
-
+  require 'plugins.octo',
   require 'plugins.vim-sleuth',
   require 'plugins.wiki',
   require 'plugins.vim-markdown',
@@ -110,6 +121,8 @@ require('lazy').setup({
   require 'plugins.nvim-cmp',
   require 'plugins.git-plugins',
   require 'plugins.kanagawa',
+  { "ellisonleao/gruvbox.nvim", priority = 1000,     config = true },
+  { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
   require 'plugins.treesitter',
   require 'plugins.telescope',
   require 'plugins.telescope-fzf-native',

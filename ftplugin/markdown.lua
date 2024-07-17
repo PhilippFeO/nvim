@@ -8,6 +8,17 @@ vim.keymap.set('n', '<A-l>', wiki_utils.filename_as_tags, {
     buffer = true,
     desc = 'Write file name as wiki tags in 2. line'
 })
+-- ─── Mappings (esp. for my Wiki) ──────────
+vim.keymap.set('i', '<A-c>', '<Esc>b~A', {
+    buffer = true,
+    desc = '[A] – Change [c]ase of current word.'
+})
+-- Open help command enclosed in `` in new tab, ie. `h lua-guide`
+-- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
+vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', {
+    buffer = true,
+    desc = 'Open help page reference in Wiki'
+})
 
 
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
@@ -16,37 +27,53 @@ vim.o.conceallevel = 2
 vim.bo.autoindent = false
 
 -- Try SidOfc/mkdx for highlighting. Has also some nice features.
---  highlights defined in after/syntax/markdown.vim
+-- highlights defined in after/syntax/markdown.vim
+-- https://github.com/lukas-reineke/headlines.nvim
 
 local colors = require("kanagawa.colors").setup()
 local cp = colors.palette
 local highlight = vim.api.nvim_set_hl
+local WAVE_BLUE = '#65AD99'
 
 -- Colors for **bold** and *italic* text
-highlight(0, "htmlBold", { fg = cp.autumnRed, bold = true })
-highlight(0, 'htmlItalic', { fg = cp.roninYellow, italic = true })
+highlight(0, "@markup.strong.markdown_inline", { fg = cp.autumnRed, bold = true })
+highlight(0, '@markup.italic.markdown_inline', { fg = cp.roninYellow, italic = true })
 
-highlight(0, 'my_mkdCode', { fg = cp.waveAqua2 }) -- #993399
-highlight(0, 'mkdCode', { link = 'my_mkdCode' })
-highlight(0, 'mkdCodeDelimiter', { link = 'my_mkdCode' })
+highlight(0, 'my_mkdCode', { fg = cp.sakuraPink })
+-- Contents of `…`, ie the inlined code itself
+highlight(0, '@markup.raw.markdown_inline', { link = 'my_mkdCode' })
+-- `…` of inline code
+highlight(0, '@markup.raw.block.markdown', { fg = cp.sakuraPink })
+highlight(0, 'mkdCodeStart', { fg = cp.sakuraPink })
+highlight(0, 'mkdCodeEnd', { fg = cp.sakuraPink })
+-- Language part of Codeblock
+highlight(0, '@label.markdown', { link = 'my_mkdCode' })
+
 
 -- Change color of the link alias in []
-highlight(0, 'mkdLink', { fg = cp.oniViolet })
+-- []() of link (not contents)
+highlight(0, '@markup.link.markdown_inline', { fg = cp.oniViolet })
+-- Contents of []
+highlight(0, '@markup.link.label.markdown_inline', { fg = WAVE_BLUE })
+-- Contents of ()
+highlight(0, '@markup.link.url.markdown_inline', { fg = cp.sakuraPink })
 -- URLs not enclosed in []()
-highlight(0, 'mkdInlineURL', { link = 'mkdLink' })
+highlight(0, 'my_URL', { link = '@markup.link.label.markdown_inline' })
+vim.cmd [[syntax match my_URL /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/]]
+-- `h /\@<=`
+-- \@N<=, bzw \@1<=
+highlight(0, 'my_mkdLink_paren', { link = '@markup.link.markdown_inline' })
+-- vim.cmd [[syntax match my_URL /(?<=\])[^(]*\((.*?)\)/]]
+vim.cmd [[syntax match my_mkdLink_paren /](/]]
+vim.cmd [[syntax match my_mkdLink_paren /)$/]]
+
 
 -- Change color of headings
--- winterRed suboptimal because it's used in Visual mode but I will probably enter this mode on H1 rarely
-highlight(0, 'htmlH1', { fg = cp.sakuraPink, bg = cp.winterRed })
-highlight(0, 'htmlH2', { fg = cp.lightBlue, bg = cp.waveBlue1 })
-highlight(0, 'htmlH3', { fg = cp.springGreen, bg = cp.winterGreen })
+highlight(0, '@markup.heading.1.markdown', { fg = cp.sakuraPink, bg = cp.winterRed })
+highlight(0, '@markup.heading.2.markdown', { fg = cp.lightBlue, bg = cp.waveBlue1 })
+highlight(0, '@markup.heading.3.markdown', { fg = cp.springGreen, bg = cp.winterGreen })
+highlight(0, '@markup.heading.4.markdown', { fg = cp.lotusOrange2, bg = cp.lotusGray2 })
 
-
--- ─── Mappings (esp. for my Wiki) ──────────
-vim.keymap.set('i', '<A-c>', '<Esc>b~A', { buffer = true, desc = '[A] – Change [c]ase of current word.' })
--- Open help command enclosed in `` in new tab, ie. `h lua-guide`
--- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
-vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', { buffer = true, desc = 'Open help page reference in Wiki' })
 
 
 -- ─── Spellchecking ────────────────────

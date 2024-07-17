@@ -9,5 +9,8 @@ return {
     'hrsh7th/cmp-buffer',   -- Completes words from current buffer
     'hrsh7th/cmp-nvim-lua', -- Neovim's Lua API completion
     'hrsh7th/cmp-cmdline',  -- TODO try
+    -- Only works if filetype=gitcommit
+    -- https://github.com/petertriho/cmp-git/
+    'petertriho/cmp-git',
   },
 }

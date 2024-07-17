@@ -1,6 +1,4 @@
---[[
-  I disabled every luasnip related line of code. Search for "luasnip" to reverse this step after installing luasnip.
---]]
+-- I disabled every luasnip related line of code. Search for "luasnip" to reverse this step after installing luasnip.
 
 -- it also possible to use Unicode symbols like 📂️, 🚀️, etc.
 local kind_icons = {
@@ -103,9 +101,11 @@ cmp.setup {
   -- This behavior can also be achieved by the <priority> key
   -- Don't forget to add a menu entry below
   sources = {
-    { name = 'nvim_lsp' },
+    { name = 'git' },
     { name = 'ultisnips' },
     { name = 'nvim_lua' },
+    { name = 'nvim_lsp' },
+    { name = 'lazydev' },
     {
       name = 'path',
       option = { trailing_slash = true },
@@ -131,9 +131,10 @@ cmp.setup {
         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
         -- Source description
         vim_item.menu = ({
-          nvim_lsp = "[LSP]",
+          git = "[GIT]",
           ultisnip = "[UltiS]",
           nvim_lua = "[API]",
+          nvim_lsp = "[N-LSP]",
           path = "[Path]",
           buffer = "[Buf]",
           cmp_csv = "[CSV]",
@@ -172,3 +173,5 @@ cmp.setup {
     --    }
   },
 }
+
+require("cmp_git").setup()

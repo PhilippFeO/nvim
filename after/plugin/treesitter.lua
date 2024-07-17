@@ -1,3 +1,5 @@
+vim.treesitter.language.register('markdown', 'octo')
+
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'lua', 'python', 'vim', 'vimdoc' },
