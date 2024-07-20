@@ -1,8 +1,18 @@
 vim.treesitter.language.register('markdown', 'octo')
 
+local defaults = { 'lua', 'python', 'vim', 'vimdoc' }
+if DLR_Machine then
+  for _, language in ipairs({ 'cpp', 'cmake' }) do
+    table.insert(defaults, language)
+  end
+end
+
 require('nvim-treesitter.configs').setup {
+  modules = "",
+  sync_install = false,
+
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'vim', 'vimdoc' },
+  ensure_installed = defaults,
 
   -- treesitter and vimtex concealing collide, so I disable syntax highlighting for LaTeX
   -- s. :h vimtex-faq-treesitter
@@ -11,7 +21,7 @@ require('nvim-treesitter.configs').setup {
   additional_vim_regex_highlighting = false,
 
   -- Autoinstall languages that are not installed. Defaults to false.
-  auto_install = true,
+  auto_install = false,
 
   highlight = { enable = true },
   --indent = { enable = true, disable = { 'python' } }, -- TODO Herausfinden, was diese Zeile macht. Da ich es nicht weiß, habe ich sie auskommentiert.
