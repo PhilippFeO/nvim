@@ -7,5 +7,10 @@ return {
     -- OR 'ibhagwan/fzf-lua',
     'nvim-tree/nvim-web-devicons',
   },
-  opts = {},
+  config = function()
+    require 'octo'.setup({ enable_builtin = true })
+  end,
+  keys = {
+    { '<Leader>o', '<Cmd>Octo<CR>', desc = 'Octo: [o]cto-Befehlsübersicht' }
+  }
 }
