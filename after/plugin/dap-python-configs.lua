@@ -130,7 +130,7 @@ local django = {
     type = "debugpy",
     request = "launch",
     program = "${workspaceFolder}/manage.py",
-    args = { "runserver" },
+    args = { "runserver", "--settings=kursverwaltung.settings_dev" },
     django = true,
     justMyCode = true
 }
