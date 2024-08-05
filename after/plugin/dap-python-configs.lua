@@ -131,6 +131,9 @@ local django = {
     request = "launch",
     program = "${workspaceFolder}/manage.py",
     args = { "runserver", "--settings=kursverwaltung.settings_dev" },
+    env = {
+        EMAIL_HOST_USER = 'lorem@ipsum.de',
+    },
     django = true,
     justMyCode = true
 }
