@@ -132,7 +132,12 @@ local django = {
     program = "${workspaceFolder}/manage.py",
     args = { "runserver", "--settings=kursverwaltung.settings_dev" },
     django = true,
-    justMyCode = true
+    justMyCode = true,
+    env = {
+        EMAIL_HOST_USER = 'lorem@ipsum.de',
+        SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+        -- DEBUG = true,
+    }
 }
 
 -- Make configuration avialable, ie. entry for menu after `h dap.continue()` was called
