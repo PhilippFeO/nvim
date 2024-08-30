@@ -1,67 +1,67 @@
-snippet feat "'✨ Feat:' in Git Commit Msg" bA
-✨ Feat: $0
-endsnippet
-
-snippet improve "'🚀 Improve:' in Git Commit Msg" bA
-🚀 Improve: $0
-endsnippet
-
-snippet update "'🎨 Update:' in Git Commit Msg" bA
-🎨 Update: $0
-endsnippet
-
-snippet wip "'🚧 Wip:' in Git Commit Msg" bA
-🚧 Wip: $0
-endsnippet
-
-snippet typo "'✏️a Typo(s)' in Git Commit Msg" bA
-✏️T Typo: $0
-endsnippet
-
-snippet revert "'⏪️ Revert changes' in Git Commit Msg" bA
-⏪️ Revert changes: $0
-endsnippet
-
-snippet rename "'🚚 Rename:' in Git Commit Msg" bA
-🚚 Rename: $0
-endsnippet
-
-snippet move "'🚚 Move:' in Git Commit Msg" bA
-🚚 Move: $0
-endsnippet
-
-snippet comment "'#️⃣ Add/Update Comments:' in Git Commit Msg" bA
-✒️ Add/Update Comments: $0
-endsnippet
-
-snippet logs "'🔊 Logs:' in Git Commit Msg" bA
-🔊 Logs: $0
-endsnippet
-
-snippet ignore "'🙈 Ignore:' in Git Commit Msg" bA
-🙈 Ignore: $0
-endsnippet
-
-snippet fix "'🐛 Fix:' in Git Commit Msg" bA
-🐛 Fix: $0
-endsnippet
-
-snippet refactor "'♻️  Refactor' in Git Commit Msg " bA
-♻️ Refactor: $0
-endsnippet
-
-# TODO: Kann man wasl. mit Regex zusammenfassen <21-01-2024>
-snippet readme "'📝 Readme:' in Git Commit Msg" bA
-📜 Readme: $0
-endsnippet
-
-snippet docs "'📝 Docs:' in Git Commit Msg" bA
-📜 Docs: $0
-endsnippet
-
-snippet remove "'🔥 Remove:' in Git Commit Msg" bA
-🔥 Remove: $0
-endsnippet
 # Man kann alles in Makro packen. Auf geyankte Werte kann man mit <C-r> oder "REGISTER zugreifen.
 # Ist eine gute Übung
 # TODO: Durchsuchbar mit Telescope machen <18-01-2024>
+
+# ─── feat ──────────
+snippet feat "'feat: ✨' (feat) in Git Commit Msg" bA
+feat: ✨ $0
+endsnippet
+
+snippet ifeat "'feat: 🚀' (improve feat) in Git Commit Msg" bA
+feat: 🚀 $0
+endsnippet
+
+snippet ufeat "'feat: 🎨' (feat update) in Git Commit Msg" bA
+feat: 🎨 $0
+endsnippet
+
+snippet dfeat "'feat: 📝' (docs/readme feat) in Git Commit Msg" bA
+feat: 📜 $0
+endsnippet
+
+snippet rfeat "'feat: 🔥' (remove feat) in Git Commit Msg" bA
+feat: 🔥 $0
+endsnippet
+
+# ─── fix ──────────
+snippet fix "'fix: 🐛' (fix) in Git Commit Msg" bA
+fix: 🐛 $0
+endsnippet
+
+snippet tfix "'fix: ✏️T' (fix typo) in Git Commit Msg" bA
+fix: ✏️: $0
+endsnippet
+
+snippet rfix "'revert ⏪️' (fix revert) in Git Commit Msg" bA
+fix: ⏪️ $0
+endsnippet
+
+# ─── chore ──────────
+snippet rchore "'chore 🚚:' (rename chore) in Git Commit Msg" bA
+chore: 🚚 $0
+endsnippet
+
+snippet mchore "'chore: 🚚' (move chore) in Git Commit Msg" bA
+chore: 🚚 $0
+endsnippet
+
+snippet cchore "'chore: ✒️:' (comment chore) in Git Commit Msg" bA
+chore ✒️:: $0
+endsnippet
+
+snippet lchore "'chore: 🔊' (logs chore) in Git Commit Msg" bA
+chore: 🔊 $0
+endsnippet
+
+snippet ichore "'chore: 🙈' (ignore chore) in Git Commit Msg" bA
+chore: 🙈 $0
+endsnippet
+
+snippet fchore "'chore: ♻️ ' (refactor chore) in Git Commit Msg " bA
+chore: ♻️  $0
+endsnippet
+
+# ─── misc ──────────
+snippet wip "'wip: 🚧' in Git Commit Msg" bA
+wip: 🚧 $0
+endsnippet
