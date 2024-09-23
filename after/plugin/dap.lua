@@ -1,6 +1,8 @@
 -- TODO: README and docs <25-01-2024>
 -- Displays variable names next to their definition, uses TreeSitter to find the respective location
-require 'nvim-dap-virtual-text'.setup({})
+require 'nvim-dap-virtual-text'.setup({
+    enabled = false
+})
 
 -- TODO: Open dapui normally also with tabs of the elements <27-01-2024>
 
