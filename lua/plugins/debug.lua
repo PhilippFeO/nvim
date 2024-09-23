@@ -13,6 +13,7 @@ return {
     -- TODO: GitHub-Seite konsultieren <13-03-2023> --
     'mfussenegger/nvim-dap-python',
 
+    -- https://github.com/theHamsta/nvim-dap-virtual-text
     'theHamsta/nvim-dap-virtual-text',
     'nvim-telescope/telescope-dap.nvim',
   },
