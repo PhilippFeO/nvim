@@ -76,7 +76,8 @@ local grocery_shopper = {
     request = "launch",
     type = "python",
     cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
-    args = { '-n', '2' }
+    -- args = { '-n', '2' }
+    args = { '--pdf', 'Broccolipasta.yaml' }
 }
 
 local grocery_shopper_custom_args = {
