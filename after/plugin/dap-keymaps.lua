@@ -10,6 +10,7 @@ nmap('<F1>', dap.step_into, '  Step into')
 nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
 nmap('<F4>', dap.step_back, ' Step out')
+nmap('<Leader>ds', dap.run_to_cursor, '[d]ap run to cur[s]or')
 
 nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
 nmap('<Leader>dB', function()
@@ -36,3 +37,7 @@ nmap('<Leader>dr', function()
   dapui.open({ reset = true })
 end, '[d]apui [r]eset')
 nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
+vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>', {
+  desc = '  DAP: [d]ap [e]val expression',
+})
+nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
