@@ -25,8 +25,10 @@ telescope.setup { -- :h telescope.setup()
     selection_caret = '  ',
     entry_prefix = '   ',
     layout_config = {
-      preview_width = 0.5,
-      prompt_position = 'top'
+      horizontal = {
+        preview_width = 0.6,
+        prompt_position = 'top'
+      },
     },
     -- Otherwise the first results show on the bottom although prompt is on top
     sorting_strategy = 'ascending',
