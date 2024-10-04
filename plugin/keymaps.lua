@@ -143,8 +143,8 @@ vim.keymap.set('n', 'QA', '<Cmd>qa!<CR>', { desc = 'Force [Q]uit [A]ll (:qa!)' }
 vim.keymap.set({ 'i', 'v' }, '<LocalLeader>l', '<ESC>', { desc = 'Enter Normal Mode' })
 -- Move visually selected lines
 -- Source: https://www.youtube.com/watch?v=w7i4amO_zaE&t=1464s
-vim.keymap.set('v', 'J', ":m'>+1<CR>gv=gv", { desc = 'Move visually selected lines down' })
-vim.keymap.set('v', 'K', ":m'<-2<CR>gv=gv", { desc = 'Move visually selected lines up' })
+-- Usually, :substitute works on lines only, \%V makes it work on visual selection
+vim.keymap.set('v', ':vs', ":s/\\%V\\%V/<Left><Left><Left><Left>", { desc = ':s for visual selection' })
 vim.keymap.set('c', '%%', function()
     if vim.fn.getcmdtype() == ':' then
         return vim.fn.expand('%:h') .. '/'
