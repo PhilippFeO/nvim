@@ -107,7 +107,7 @@ local diary_Lindau = {
 }
 
 local l1formatter = {
-    name = 'L1-Formatter',
+    name = 'L1-Formatter TDS 0.12',
     request = 'launch',
     type = 'python',
     program = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src/GeneratorL1b.py',
@@ -136,6 +136,22 @@ local l1formatter = {
     },
 }
 
+local l1formatter_TDS013 = {
+    -- a to have it in front of the other L1-Formatter config
+    name = 'a L1-Formatter TDS 0.13',
+    request = 'launch',
+    type = 'python',
+    program = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src/GeneratorL1b.py',
+    cwd = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src',
+    args = {
+        '-i',
+        './TDS_0.13/data/detector_orientation_from_South_to_North/broken_cloud/lv1__ECA2_A1_09_20030624_SN__0.13.nc',
+        './TDS_0.13/data/detector_orientation_from_South_to_North/broken_cloud/lv1__ECA2_A1_14_20030624_SN__0.13.nc',
+        './TDS_0.13/data/detector_orientation_from_South_to_North/broken_cloud/lv1__ECA2_A1_17_20030624_SN__0.13.nc',
+        '-t', '4',
+        '-o', 'output/',
+    },
+}
 -- Not useable for complex issues like starting Neovim in subprocess
 local default_integrated_terminal = {
     console = 'integratedTerminal',
@@ -181,6 +197,7 @@ dap.configurations.python = {
     diary_Lindau,
     django,
     l1formatter,
+    l1formatter_TDS013,
 }
 
 -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
