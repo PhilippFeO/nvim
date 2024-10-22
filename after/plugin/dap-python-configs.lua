@@ -106,6 +106,18 @@ local diary_Lindau = {
     args = { vim.fn.expand '~/.tagebuch/2024/06-Juni/05-06-2024-Mittwoch-Lindau/05-06-2024-Mittwoch-Lindau.html' },
 }
 
+
+
+-- Work configs
+-- ────────────
+local TDS_creation = {
+    name = 'Create TDS',
+    request = 'launch',
+    type = 'python',
+    program = vim.fn.expand '~/proj/l2op/formatter_tools/createTDS.py',
+    args = { '--config_file', 'cfg/config_SO2.ini' }
+}
+
 local l1formatter_tds012 = {
     name = 'L1-Formatter TDS 0.12',
     request = 'launch',
@@ -212,6 +224,7 @@ dap.configurations.python = {
     django,
     l1formatter_tds012,
     l1formatter_tds013,
+    TDS_creation,
 }
 
 -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
