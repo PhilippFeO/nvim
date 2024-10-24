@@ -115,7 +115,7 @@ local TDS_creation = {
     request = 'launch',
     type = 'python',
     program = vim.fn.expand '~/proj/l2op/formatter_tools/createTDS.py',
-    args = { '--config_file', 'cfg/config_SO2.ini' }
+    args = { '--config_file', 'cfg/config_TDS_0.13.ini' }
 }
 
 local l1formatter_tds012 = {
