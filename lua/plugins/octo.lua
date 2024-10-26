@@ -10,7 +10,8 @@ return {
   config = function()
     require 'octo'.setup({ enable_builtin = true })
   end,
-  -- keys = {
-  --   { '<Leader>o', '<Cmd>Octo<CR>', desc = 'Octo: [o]cto-Befehlsübersicht' }
-  -- }
+  keys = {
+    -- { '<Leader>o', '<Cmd>Octo<CR>', desc = 'Octo: [o]cto-Befehlsübersicht' }
+    { '<Leader>iu', '<Cmd>Octo issue url<CR>', desc = 'Octo: [i]ssue [u]rl' },
+  }
 }
