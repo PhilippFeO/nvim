@@ -16,7 +16,12 @@ I moved some contents into (list by far not complete)
 local home_dir = os.getenv("HOME")
 package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
 
-DLR_Machine = vim.fn.hostname() == "eoc-001810l.intra.dlr.de"
+start_idx, _ = string.find(vim.fn.hostname(), 'dlr.de')
+if start_idx then
+  DLR_Machine = true
+else
+  DLR_Machine = false
+end
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
