@@ -108,16 +108,17 @@ require('lazy').setup({
   'honza/vim-snippets',
   {
     -- ultisnips sources for LSP
+    -- Ich hatte in letzter Zeit (2024-11-01) oft das Problem, dass irgendwann die Schnipsel nicht mehr funktionierten, bspw. `ilink` im Wiki oder `feat` in Git. Keine Ahnung, woran das liegt.
     'quangnguyen30192/cmp-nvim-ultisnips',
     -- Hier erhalte ich Fehler
     -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
     -- Hier funktioniert's
-    -- commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
-    -- Bei neustem Commit auch
     commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
+
   require 'plugins.octo',
+  require 'plugins.gitlinker',
   require 'plugins.vim-sleuth',
   require 'plugins.wiki',
   require 'plugins.vim-markdown',
