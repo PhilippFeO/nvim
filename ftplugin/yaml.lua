@@ -14,8 +14,8 @@ local transform_to_yaml = function()
     for value in line:gmatch("[^,]+") do
         table.insert(row, value)
     end
-    local yaml_name = string.format('  - name: %s', row[2])
-    local yaml_quantity = string.format('    quantity: %s', row[1])
+    local yaml_name = string.format('  - name: %s', row[1])
+    local yaml_quantity = string.format('    quantity: %s', row[2])
     local linenr = vim.api.nvim_win_get_cursor(0)[1]
     -- Although line numbering starts with 1, a 0-based index is necessary, s. `h nvim_buf_set_lines`
     local adjusted_linenr = linenr - 1
