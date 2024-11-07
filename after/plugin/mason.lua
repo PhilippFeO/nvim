@@ -16,7 +16,7 @@ require('mason-nvim-dap').setup {
 		'bash-language-server',
 		'python-lsp-server',
 		'basedpyright',
-		'ruff-lsp',
+		'ruff',
 		'shellcheck',
 		'texlab',
 	},
@@ -131,7 +131,7 @@ lspconfig.pylsp.setup {
 				rope = {
 					enabled = false,
 				},
-				-- All disabled to avoid overlap with ruff-lsp
+				-- All disabled to avoid overlap with ruff
 				-- list from python-lsp-ruff
 				pycodestyle = {
 					enabled = false,
@@ -164,7 +164,7 @@ lspconfig.pylsp.setup {
 
 -- https://github.com/astral-sh/ruff-lsp
 -- Findet ~/.config/ruff/ruff.toml selbstständig
-lspconfig.ruff_lsp.setup {
+lspconfig.ruff.setup {
 	on_attach = function(client, bufnr)
 		-- Disable formatting
 		client.server_capabilities.documentFormattingProvider = false
