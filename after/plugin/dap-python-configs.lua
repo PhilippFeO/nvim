@@ -178,6 +178,25 @@ local l1formatter_tds013 = {
         '-o', 'output/',
     },
 }
+
+local ECA_tds013 = {
+    name = 'ECA-Formatter TDS 0.13',
+    request = 'launch',
+    type = 'python',
+    program = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
+    cwd = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src',
+    args = { '/groups/UCACHE/mf-atp/users/rost_ph/tds/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
+        '-l',
+        'TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/lv1__ECA2____03_20030624_SN__0.13.nc',
+        '-t',
+        '7',
+        '-o',
+        'output/',
+        '--unofficial_product'
+    }
+}
+
+
 -- Not useable for complex issues like starting Neovim in subprocess
 local default_integrated_terminal = {
     console = 'integratedTerminal',
@@ -225,6 +244,7 @@ dap.configurations.python = {
     l1formatter_tds012,
     l1formatter_tds013,
     TDS_creation,
+    ECA_tds013,
 }
 
 -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
