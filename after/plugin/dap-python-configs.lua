@@ -185,9 +185,11 @@ local ECA_tds013 = {
     type = 'python',
     program = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
     cwd = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src',
-    args = { '/groups/UCACHE/mf-atp/users/rost_ph/tds/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
+    args = {
         '-l',
         'TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/lv1__ECA2____03_20030624_SN__0.13.nc',
+        '-i',
+        'TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/inp__ECA2____03_20030624_SN__0.13.nc',
         '-t',
         '7',
         '-o',
