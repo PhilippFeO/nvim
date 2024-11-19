@@ -6,20 +6,23 @@ nmap('<F5>', function()
   vim.cmd.set('mouse=n')
   dap.continue()
 end, 'Start debugging or continue') --Entry point for all Debugger things
+
 nmap('<F1>', dap.step_into, '  Step into')
 nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
 nmap('<F4>', dap.step_back, ' Step out')
-nmap('<Leader>ds', dap.run_to_cursor, '[d]ap run to cur[s]or')
+nmap('<Leader>do', dap.run_to_cursor, '[d]ap run to curs[o]r')
 
 nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
-nmap('<Leader>dB', function()
+nmap('<Leader>dn', function()
   dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
 end, '  Toggle Conditional Breakpoint')
+
 nmap('<Leader>dp', function()
   dap.list_breakpoints()
   vim.cmd('copen')
 end, '  List Breakpoints')
+
 nmap('<Leader>lb', function()
   dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
 end, 'Set [l]ogging [b]reakpoint')
@@ -28,7 +31,9 @@ nmap('<Leader>dc', function()
   dap.terminate()
   vim.cmd.set('mouse=')
 end, '󰗼  Terminate Debugging')
+
 nmap('<Leader>dl', dap.run_last, '[d]ebug with [l]ast configuration')
+
 nmap('<Leader>dm', function()
   require 'dap-python'.test_method({
     -- necessary, if 'console' not explicitly set in config
@@ -37,11 +42,14 @@ nmap('<Leader>dm', function()
     config = require 'dap-python-configs'.pytest_default_config
   })
 end, '[d]ebug single [m]ethod')
+
 nmap('<Leader>dr', function()
   dapui.open({ reset = true })
 end, '[d]apui [r]eset')
+
 nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
 vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>', {
   desc = '  DAP: [d]ap [e]val expression',
 })
+
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')

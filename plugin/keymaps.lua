@@ -187,3 +187,43 @@ vim.keymap.set('n', '}', '}zz', { desc = 'Center after }' })
 -- └──────────────┘
 -- All mappings follow <A-…>
 vim.keymap.set('i', '<A-x>', '<C-o>', { desc = '<C-o> but easier to type' })
+-- Flip boolean
+vim.keymap.set('n', '<A-f>', function()
+        -- Save position to reset cursor after replacement
+        local pos = vim.api.nvim_win_get_cursor(0)
+        -- Set cursor at the start of the line
+        -- (otherwise matches before the cursor are ignored)
+        vim.api.nvim_win_set_cursor(0, { vim.fn.line('.'), 0 })
+
+        local bool_val_map = {
+            'true',
+            'false',
+            'True',
+            'False',
+        }
+        local bool_val_inverted_map = {
+            'false',
+            'true',
+            'False',
+            'True',
+        }
+        for i = 1, #bool_val_map do
+            -- Search for boolean value in current line
+            -- `:h /ignorecase`
+            local pattern = string.format('\\C%s', bool_val_map[i])
+            local search_result = vim.fn.search(pattern, '', vim.fn.line('.'))
+            -- Check if the search was successful
+            if search_result > 0 then
+                -- Flip boolean value
+                vim.cmd(string.format('s/%s/%s/', bool_val_map[i], bool_val_inverted_map[i]))
+                break
+            end
+        end
+
+        -- Set cursor to the position bevore replacement
+        vim.api.nvim_win_set_cursor(0, pos)
+    end,
+    {
+        desc = '[f]lip bool',
+    }
+)
