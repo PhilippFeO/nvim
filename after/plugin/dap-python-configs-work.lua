@@ -73,34 +73,48 @@ local ECA_tds013 = {
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
-  cwd = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src',
+  cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
   args = {
     '-l',
-    'TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/lv1__ECA2____03_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
     '-i',
-    'TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/inp__ECA2____03_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2_A__17_20030624_SN__0.13.nc',
     '-t',
-    '7',
+    '1',
     '-o',
-    'output/',
-    '--unofficial_product'
+    './output/',
+    '--unofficial_product',
   }
 }
 
-local ECA_processor = {
-  name = 'ECA Prozessor',
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand '~/proj/ECA/jof-generator/JOFileGenerator.py',
-  args = {
-    '--config_file',
-    'cfg/ECA_config.ini'
-  },
-  cwd = vim.fn.expand '~/proj/ECA/jof-generator/',
-}
+-- local ECA_formatter = {
+--   name = 'ECA Formatter',
+--   request = 'launch',
+--   type = 'python',
+--   program = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py ',
+--   cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
+--   args = {
+--     '-l',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
+--     '-i',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2_A__09_20030624_SN__0.13.nc',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2_A__14_20030624_SN__0.13.nc',
+--     './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2_A__17_20030624_SN__0.13.nc',
+--     '-t',
+--     '1',
+--     '-o',
+--     './output/test/inputs/debug',
+--     '--unofficial_product',
+--   },
+-- }
 
 return {
-  ECA_processor,
   ECA_tds013,
   TDS_creation,
   l1formatter_tds012,
