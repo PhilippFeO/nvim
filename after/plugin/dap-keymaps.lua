@@ -3,6 +3,7 @@ local dapui = require 'dapui'
 local nmap = require 'utils'.nmap('  DAP')
 
 nmap('<F5>', function()
+  vim.cmd('write')
   vim.cmd.set('mouse=n')
   dap.continue()
 end, 'Start debugging or continue') --Entry point for all Debugger things
@@ -32,7 +33,10 @@ nmap('<Leader>dc', function()
   vim.cmd.set('mouse=')
 end, '󰗼  Terminate Debugging')
 
-nmap('<Leader>dl', dap.run_last, '[d]ebug with [l]ast configuration')
+nmap('<Leader>dl', function()
+  vim.cmd('write')
+  dap.run_last
+end, '[d]ebug with [l]ast configuration')
 
 nmap('<Leader>dm', function()
   require 'dap-python'.test_method({
