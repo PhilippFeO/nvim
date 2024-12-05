@@ -35,7 +35,7 @@ end, '󰗼  Terminate Debugging')
 
 nmap('<Leader>dl', function()
   vim.cmd('write')
-  dap.run_last
+  dap.run_last()
 end, '[d]ebug with [l]ast configuration')
 
 nmap('<Leader>dm', function()
