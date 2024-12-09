@@ -174,6 +174,9 @@ vim.cmd.cabbrev('helpt', 'tab help')
 vim.cmd.cabbrev('thelp', 'tab help')
 vim.cmd.cabbrev('ht', 'tab help')
 
+vim.cmd.cabbrev('tn', 'tabnew')
+vim.cmd.cabbrev('qc', 'cclose')
+
 -- ─── Highlight on yank ──────────
 -- see `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('yankhighlight', { clear = true })

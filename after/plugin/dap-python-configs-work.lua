@@ -47,13 +47,13 @@ local l1formatter_tds013 = {
   cwd = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src',
   args = {
     '-i',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20031224_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20031224_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20031224_SN__0.13.nc',
     '-t',
-    '9',
+    '7',
     '-o',
-    'output/',
+    'output',
   },
 }
 

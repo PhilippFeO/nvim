@@ -39,6 +39,9 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
+vim.keymap.set('n', '<Leader><Leader>x', '<Cmd>write | source %<CR>', { desc = 'Execute (source) current file' })
+vim.keymap.set('n', '<Leader>x', ':w | .lua<CR>', { desc = 'Execute current line' })
+vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'Execute selected lines' })
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
