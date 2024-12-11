@@ -110,3 +110,7 @@ vim.opt.splitright = true
 -- Horizontale Teilungen <:sp> werden unten (nicht darüber) angezeigt
 -- split horizontally below when using :sp, :split
 vim.opt.splitbelow = true
+
+vim.opt.list = true
+-- Show NON BREAKING SPACE as '%'
+vim.opt.listchars = 'nbsp:%'
