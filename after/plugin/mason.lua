@@ -164,20 +164,20 @@ lspconfig.pylsp.setup {
 
 -- https://github.com/astral-sh/ruff-lsp
 -- Findet ~/.config/ruff/ruff.toml selbstständig
-lspconfig.ruff.setup {
-	on_attach = function(client, bufnr)
-		-- Disable formatting
-		client.server_capabilities.documentFormattingProvider = false
-		-- TODO: Herausfinden, wofür dRFP ist <18-04-2024>
-		-- client.server_capabilities.documentRangeFormattingProvider = false
-
-		-- local file, err = io.open("/tmp/ruff-caps.txt", "w")
-		-- file:write(vim.inspect(client.server_capabilities))
-
-		on_attach(client, bufnr)
-	end,
-	capabilities = capabilities,
-}
+-- lspconfig.ruff.setup {
+-- 	on_attach = function(client, bufnr)
+-- 		-- Disable formatting
+-- 		client.server_capabilities.documentFormattingProvider = false
+-- 		-- TODO: Herausfinden, wofür dRFP ist <18-04-2024>
+-- 		-- client.server_capabilities.documentRangeFormattingProvider = false
+--
+-- 		-- local file, err = io.open("/tmp/ruff-caps.txt", "w")
+-- 		-- file:write(vim.inspect(client.server_capabilities))
+--
+-- 		on_attach(client, bufnr)
+-- 	end,
+-- 	capabilities = capabilities,
+-- }
 
 
 -- ─── CMAKE ──────────
