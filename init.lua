@@ -127,7 +127,7 @@ require('lazy').setup({
   require 'plugins.nvim-cmp',
   require 'plugins.git-plugins',
   require 'plugins.kanagawa',
-  -- require 'plugins.treesitter',
+  require 'plugins.treesitter',
   require 'plugins.telescope',
   require 'plugins.telescope-fzf-native',
   require 'plugins.autoformat',
