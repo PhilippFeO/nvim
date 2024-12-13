@@ -120,47 +120,47 @@ lspconfig.basedpyright.setup {
 	}
 }
 
-lspconfig.pylsp.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		pylsp = {
-			-- :PyLspInstall <tab>
-			plugins = {
-				-- Unklar, was es macht, wird ggfl. auch von ruff[-lsp] übernommen
-				rope = {
-					enabled = false,
-				},
-				-- All disabled to avoid overlap with ruff
-				-- list from python-lsp-ruff
-				pycodestyle = {
-					enabled = false,
-					maxLineLength = 150
-				},
-				mccabe = {
-					enabled = false,
-				},
-				pydocstyle = {
-					enabled = false,
-				},
-				-- autopep8, yapf formatieren beide, Unterschied unklar. yapf = false, autopep8 = true macht es so, wie ich es möchte
-				yapf = {
-					enabled = false,
-				},
-				autopep8 = {
-					enabled = true,
-				},
-				-- deaktivert pycodestyle, mccabe, autopep8, pydocstyle, yapf, kann man aber wieder aktivieren
-				-- 2024-04-18: nicht installiert
-				ruff = {
-					enabled = false,                              -- Enable the plugin
-					formatEnabled = false,                        -- Enable formatting using ruffs formatter
-					config = vim.fn.expand '~/.config/ruff/ruff.toml', -- Custom config for ruff to use
-				}
-			}
-		}
-	}
-}
+-- lspconfig.pylsp.setup {
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		pylsp = {
+-- 			-- :PyLspInstall <tab>
+-- 			plugins = {
+-- 				-- Unklar, was es macht, wird ggfl. auch von ruff[-lsp] übernommen
+-- 				rope = {
+-- 					enabled = false,
+-- 				},
+-- 				-- All disabled to avoid overlap with ruff
+-- 				-- list from python-lsp-ruff
+-- 				pycodestyle = {
+-- 					enabled = false,
+-- 					maxLineLength = 150
+-- 				},
+-- 				mccabe = {
+-- 					enabled = false,
+-- 				},
+-- 				pydocstyle = {
+-- 					enabled = false,
+-- 				},
+-- 				-- autopep8, yapf formatieren beide, Unterschied unklar. yapf = false, autopep8 = true macht es so, wie ich es möchte
+-- 				yapf = {
+-- 					enabled = false,
+-- 				},
+-- 				autopep8 = {
+-- 					enabled = false,
+-- 				},
+-- 				-- deaktivert pycodestyle, mccabe, autopep8, pydocstyle, yapf, kann man aber wieder aktivieren
+-- 				-- 2024-04-18: nicht installiert
+-- 				-- ruff = {
+-- 				-- 	enabled = false,                              -- Enable the plugin
+-- 				-- 	formatEnabled = false,                        -- Enable formatting using ruffs formatter
+-- 				-- 	config = vim.fn.expand '~/.config/ruff/ruff.toml', -- Custom config for ruff to use
+-- 				-- }
+-- 			}
+-- 		}
+-- 	}
+-- }
 
 -- https://github.com/astral-sh/ruff-lsp
 -- Findet ~/.config/ruff/ruff.toml selbstständig
