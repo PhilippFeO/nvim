@@ -1,6 +1,33 @@
 -- Loads RUNTIMEPATH/compiler/python.lua
 vim.cmd.compiler('python')
 
+local q = require 'vim.treesitter.query'
+
+local formatTS = function()
+    local bufnr = 0
+    local language_tree = vim.treesitter.get_parser(bufnr, 'python')
+    local syntax_tree = language_tree:parse()
+    local root = syntax_tree[1]:root()
+
+    local query = vim.treesitter.query.parse('python', [[
+    (argument_list) @al (#gsub! ".*" "7, 7")
+    ]])
+
+    print('Done')
+
+    for _, captures, metadata in query:iter_matches(root, bufnr) do
+        print(vim.inspect(captures))
+        -- print(vim.treesitter.get_node_text(captures[1], bufnr))
+        -- print(vim.inspect(metadata))
+    end
+end
+
+vim.api.nvim_create_user_command(
+    'FormatTS',
+    formatTS,
+    {}
+)
+
 
 -- ─── User Commands ──────────
 -- Save and execute python program
