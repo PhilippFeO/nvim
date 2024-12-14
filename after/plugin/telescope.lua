@@ -71,7 +71,23 @@ local nmap = function(keys, func, desc)
 end
 
 -- ─── [f]ind keymaps ──────────
-nmap('<Leader>f', builtin.find_files, 'find [f]iles')
+nmap('<Leader>f', function()
+  ---@diagnostic disable-next-line: param-type-mismatch
+  if string.find(vim.uv.cwd(), "grocery") then
+    builtin.find_files({
+      -- .gitignore still active
+      search_dirs = {
+        vim.uv.cwd(),
+        vim.uv.cwd() .. '/recipes/',
+        vim.uv.cwd() .. '/misc/',
+        vim.uv.cwd() .. '/.resources/',
+      }
+    })
+  else
+    builtin.find_files()
+  end
+end
+, 'find [f]iles')
 
 -- ─── [s]earch keymaps ──────────
 nmap('<Leader>sa', builtin.autocommands, '[s]earch [a]utocommands')
