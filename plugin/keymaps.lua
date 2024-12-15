@@ -1,7 +1,10 @@
-vim.keymap.set('n', '<Leader>n', function() vim.fn.getreg("a") end, { desc = 'Get contents of register a' })
+vim.keymap.set('n', '<Leader>n', function()
+    local x = vim.fn.getreg("a")
+    print(x)
+end, { desc = 'Get contents of register a' })
 
 
-vim.keymap.set('n', '<BS>', '<Cmd>bdelete<CR>', { desc = 'Delete Buffer' })
+vim.keymap.set('n', '<BS>', vim.cmd.close, { desc = 'Close window' })
 -- cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>'
 vim.keymap.set('c', '<Enter>', function()
     local cmdtype = vim.fn.getcmdtype()
