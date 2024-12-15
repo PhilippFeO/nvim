@@ -9,16 +9,21 @@ local actions = require('telescope.actions')
 
 telescope.setup { -- :h telescope.setup()
   defaults = {
+    -- see `h telescope.mappings`
+    -- worth reading once and a while, because options are possible
     mappings = {
       n = {
         -- There is also `send_selected_to_qflist`
         ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
-        ["kj"] = "close",
       },
       i = {
-        ['<C-u>'] = true,
-        ['<C-d>'] = true,
-        -- ["<C-h>"] = "which_key",
+        ['kj'] = 'close', -- equivalent to `require 'telescope.actions'.close
+        ['<C-u>'] = 'results_scrolling_up',
+        ['<C-d>'] = 'results_scrolling_down',
+        ['<TAB>'] = 'select_tab',
+        ['<M-t>'] = 'select_tab',
+        ['<M-v>'] = 'select_vertical',
+        ['<M-x>'] = 'select_horizontal',
       },
     },
     prompt_prefix = '  ',
@@ -72,6 +77,7 @@ end
 
 -- ─── [f]ind keymaps ──────────
 nmap('<Leader>f', function()
+  -- In 'kursverwaltung' lies a `.ignore` file, which defines directories to be ignored, fi. `*migrations*`
   ---@diagnostic disable-next-line: param-type-mismatch
   if string.find(vim.uv.cwd(), "grocery") then
     builtin.find_files({
@@ -103,7 +109,6 @@ nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
 
 -- Tweaked builtins to open in vertical split on default
 nmap('<Leader>sh', require('telescope_utils').vsplit_help_tags, '[s]earch [h]elp')
--- nmap('<Leader>sm', require('telescope_utils').vsplit_man_pages, '[s]earch [m]an pages')
 nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
