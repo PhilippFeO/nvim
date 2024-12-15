@@ -24,7 +24,6 @@ end, {
 -- │ <Leader> Mappings │
 -- └───────────────────┘
 -- <Leader>, <LocalLeader> is set in init.lua, because lazy.nvim wishes so
---
 vim.keymap.set('n', '<Leader>et', function()
     local f = io.open('todo.md', 'r')
     if f ~= nil then
@@ -178,12 +177,13 @@ vim.keymap.set('n', ']<Space>', '<Cmd>normal o<CR>', { desc = 'Add one empty lin
 vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty line above cursor' })
 vim.keymap.set('n', '[[', '[[zz', { desc = 'Center view after going to previous section' })
 vim.keymap.set('n', ']]', ']]zz', { desc = 'Center view after going to next section' })
-vim.keymap.set('n', '[q', '<Cmd>cprevious | copen | norm zt<C-e><C-w>pzz<CR>', { desc = "Previous Quickfix-List entry" })
+vim.keymap.set('n', '<A-j>', '<Cmd>cprevious | copen | norm zt<C-e><C-w>pzz<CR>',
+    { desc = "Previous Quickfix-List entry" })
 -- Öffne QuickFix-Liste oder springe zu ihr
 -- Schiebe Einträge nach oben
 -- Scrolle eine Zeile hoch (Jetzt sollte aktiver QF-Eintrag ganz oben stehen)
 -- Springe zurück ins lezte aktive Fenster (manchmal hat man 2 offen)
-vim.keymap.set('n', ']q', '<Cmd>cnext | copen | norm zt<C-e><C-w>pzz<CR>', { desc = "Next Quickfix-List entry" })
+vim.keymap.set('n', '<A-k>', '<Cmd>cnext | copen | norm zt<C-e><C-w>pzz<CR>', { desc = "Next Quickfix-List entry" })
 
 vim.keymap.set('n', '[b', '<Cmd>bprevious<CR>', { desc = "Previous Buffer" })
 vim.keymap.set('n', ']b', '<Cmd>bnext<CR>', { desc = "Next Buffer" })
