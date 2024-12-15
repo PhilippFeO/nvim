@@ -63,6 +63,7 @@ local servers = {
 
 
 -- Ensure the servers above are installed
+---@diagnostic disable-next-line: missing-fields
 mason_lspconfig.setup {
 	ensure_installed = vim.tbl_keys(servers),
 }
@@ -84,8 +85,9 @@ mason_lspconfig.setup_handlers {
 local lspconfig = require 'lspconfig'
 
 -- ─── Python ──────────
---[[ TODO:  <25-05-2024>
-https://www.reddit.com/r/neovim/comments/1bt3dy0/comment/l5813wf/?context=3
+--[[
+Example from https://www.reddit.com/r/neovim/comments/1bt3dy0/comment/l5813wf/?context=3
+
 basedpyright = {
 	settings = {
 		basedpyright = {
@@ -100,6 +102,7 @@ basedpyright = {
 	},
 },
 --]]
+
 lspconfig.basedpyright.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -110,6 +113,14 @@ lspconfig.basedpyright.setup {
 			-- reportUnusedImport = false,
 			-- basedpyright very intrusive with errors, this calms it down
 			typeCheckingMode = "standard",
+			-- works, if pyproject.toml is used
+			reportAttributeAccessIssue = false,
+			-- doesn't work, even if pyproject.toml is used
+			analysis = {
+				inlayHints = {
+					callArgumentNames = true -- = basedpyright.analysis.inlayHints.callArgumentNames
+				}
+			}
 		},
 		-- Ignore all files for analysis to exclusively use Ruff for linting
 		python = {
@@ -150,13 +161,6 @@ lspconfig.pylsp.setup {
 				autopep8 = {
 					enabled = false,
 				},
-				-- deaktivert pycodestyle, mccabe, autopep8, pydocstyle, yapf, kann man aber wieder aktivieren
-				-- 2024-04-18: nicht installiert
-				-- ruff = {
-				-- 	enabled = false,                              -- Enable the plugin
-				-- 	formatEnabled = false,                        -- Enable formatting using ruffs formatter
-				-- 	config = vim.fn.expand '~/.config/ruff/ruff.toml', -- Custom config for ruff to use
-				-- }
 			}
 		}
 	}
@@ -165,7 +169,8 @@ lspconfig.pylsp.setup {
 -- Configure `ruff-lsp`.
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
 -- For the default config, along with instructions on how to customize the settings
-lspconfig.ruff_lsp.setup {
+-- Currently, I am using ~/.config/ruff/ruff.toml to control ruff-lsp
+lspconfig.ruff.setup {
 	init_options = {
 		settings = {
 			-- Any extra CLI arguments for `ruff` go here.
