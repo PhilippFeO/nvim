@@ -1,14 +1,14 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Both make `require('lazy.kanagawa')` in init.lua jumpable
+-- Both (suffixesadd, path) make `require('lazy.kanagawa')` in init.lua jumpable
+-- (Naive explanation) When typing `gf`, every combination will be built. Then it is checked whether it's a file and can be opened.
 -- Add suffix implicitly when using `gf`
 vim.o.suffixesadd = '.lua,.py'
 -- Analogous to `h suffixesadd` but for prepending
 -- `.` = dir of curent file
 -- `` (emtpy) = working dir
-vim.o.path = vim.o.path .. 'lua/'
-vim.o.path = vim.o.path .. '..'
+vim.o.path = vim.o.path .. './lua/,../,lua.'
 
 vim.o.grepprg = 'rg --vimgrep --column --no-heading $*'
 vim.o.grepformat = '%f:%l:%c:%m'
