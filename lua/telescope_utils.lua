@@ -20,12 +20,11 @@ local opts = {
       end
 
       actions.close(prompt_bufnr)
-      -- print(cmd)
-      if cmd == "default" then
+      if cmd == "default" or cmd == "vertical" then -- <CR>, <C-v> opens vertically
         vim.cmd("vert help " .. selection.value)
-      elseif cmd == "horizontal" then -- <C-x> opens horizontally
+      elseif cmd == "horizontal" then               -- <C-x> opens horizontally
         vim.cmd("help " .. selection.value)
-      elseif cmd == "tab" then        -- <C-t> opens in new tab
+      elseif cmd == "tab" then                      -- <C-t> opens in new tab
         vim.cmd("tab help " .. selection.value)
       end
     end)
