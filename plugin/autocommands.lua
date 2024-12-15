@@ -69,3 +69,13 @@ autocmd('BufReadPost', {
 --    command = 'Codeium Disable',
 --    desc = 'Disable Codeium on startup.'
 --})
+
+
+autocmd('TermOpen', {
+    group = augroup('custom-term-open', { clear = true }),
+    callback = function()
+        vim.opt_local.relativenumber = false
+        vim.opt_local.number = false
+    end
+
+})
