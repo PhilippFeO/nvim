@@ -93,7 +93,7 @@ vim.opt.expandtab = true -- Deaktivieren per <set noexpandtab>
 vim.opt.softtabstop = 4
 
 -- Disable swap- and backup file
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 -- set nobackup
 
 -- Immer N Zeilen nach oben und nach unten haben, wenn man vertikal navigiert.
