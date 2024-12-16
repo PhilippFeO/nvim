@@ -93,7 +93,7 @@ nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
 nmap('<Leader>en', function()
-  builtin.find_files({ cwd = '~/.config/nvim' })
+  builtin.find_files({ cwd = vim.fn.stdpath('config') })
 end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────

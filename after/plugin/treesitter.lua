@@ -79,3 +79,9 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+
+vim.api.nvim_exec([[
+  set foldmethod=manual
+  set foldexpr=nvim_treesitter#foldexpr()
+]], false)
