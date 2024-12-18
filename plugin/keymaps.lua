@@ -41,12 +41,12 @@ vim.keymap.set('n', '<Leader>h', '<C-w>h', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader>j', '<C-w>j', { remap = true, desc = 'Go to window below' })
 vim.keymap.set('n', '<Leader>k', '<C-w>k', { remap = true, desc = 'Go to window above' })
 vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window on the right' })
-vim.keymap.set('n', '<Leader>st', function()
+vim.keymap.set('n', '<Leader>te', function()
     vim.cmd.vnew()
     vim.cmd.terminal()
     vim.cmd.wincmd('J')
     vim.api.nvim_win_set_height(0, 10)
-end, { desc = 'Open [s]mall [t]erminal, <C-d> kills it after "entering" it' })
+end, { desc = 'Open [te]rminal, <C-d> kills it after "entering" it' })
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
