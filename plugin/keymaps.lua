@@ -49,8 +49,8 @@ vim.keymap.set('n', '<Leader>te', function()
     vim.api.nvim_win_set_height(0, 10)
 end, { desc = 'Open [te]rminal, <C-d> kills it after "entering" it' })
 vim.keymap.set('n', '<Leader><Leader>x', '<Cmd>write | source %<CR>', { desc = 'Execute (source) current file' })
-vim.keymap.set('n', '<Leader>x', ':w | .lua<CR>', { desc = 'Execute current line' })
-vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'Execute selected lines' })
+vim.keymap.set('n', '<Leader>x', '.lua<CR>', { desc = 'E[x]ecute current line' })
+vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines' })
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
