@@ -110,3 +110,6 @@ vim.opt.splitright = true
 -- Horizontale Teilungen <:sp> werden unten (nicht darüber) angezeigt
 -- split horizontally below when using :sp, :split
 vim.opt.splitbelow = true
+
+-- To demystify white space in files, fi. tab vs. space
+vim.opt.list = true

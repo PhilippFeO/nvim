@@ -16,7 +16,7 @@ I moved some contents into (list by far not complete)
 local home_dir = os.getenv("HOME")
 package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
 
-start_idx, _ = string.find(vim.fn.hostname(), 'dlr.de')
+local start_idx, _ = string.find(vim.fn.hostname(), 'dlr.de')
 if start_idx then
   DLR_Machine = true
 else
@@ -173,6 +173,9 @@ vim.api.nvim_exec2('language en_US.utf8', {})
 vim.cmd.cabbrev('helpt', 'tab help')
 vim.cmd.cabbrev('thelp', 'tab help')
 vim.cmd.cabbrev('ht', 'tab help')
+
+vim.cmd.cabbrev('tn', 'tabnew')
+vim.cmd.cabbrev('qc', 'cclose')
 
 -- ─── Highlight on yank ──────────
 -- see `:help vim.highlight.on_yank()`

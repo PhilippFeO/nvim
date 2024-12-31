@@ -79,7 +79,7 @@ end
 nmap('<Leader>f', function()
   -- In 'kursverwaltung' lies a `.ignore` file, which defines directories to be ignored, fi. `*migrations*`
   ---@diagnostic disable-next-line: param-type-mismatch
-  if string.find(vim.uv.cwd(), "grocery") then
+  if string.find(vim.uv.cwd(), 'grocery') then
     builtin.find_files({
       -- .gitignore still active
       search_dirs = {
@@ -114,7 +114,7 @@ nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
 nmap('<Leader>en', function()
-  builtin.find_files({ cwd = '~/.config/nvim' })
+  builtin.find_files({ cwd = vim.fn.stdpath('config') })
 end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────

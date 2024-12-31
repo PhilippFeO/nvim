@@ -8,7 +8,7 @@ if DLR_Machine then
 end
 
 require('nvim-treesitter.configs').setup {
-  modules = "",
+  modules = {},
   sync_install = false,
 
   -- Add languages to be installed here that you want installed for treesitter
