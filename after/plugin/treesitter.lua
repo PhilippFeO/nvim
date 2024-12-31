@@ -7,6 +7,13 @@ if DLR_Machine then
   end
 end
 
+
+-- Default values in `h nvim-treesitter-context`
+require 'treesitter-context'.setup {
+  multiline_threshold = 1, -- Maximum number of lines to show for a single context
+}
+
+
 require('nvim-treesitter.configs').setup {
   modules = {},
   sync_install = false,
