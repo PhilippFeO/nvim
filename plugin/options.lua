@@ -110,3 +110,6 @@ vim.opt.splitright = true
 -- Horizontale Teilungen <:sp> werden unten (nicht darüber) angezeigt
 -- split horizontally below when using :sp, :split
 vim.opt.splitbelow = true
+
+-- "=:;" handy for C-style languages
+vim.bo.matchpairs = vim.bo.matchpairs .. ",„:“,=:;"
