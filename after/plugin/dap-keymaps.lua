@@ -1,11 +1,31 @@
+--[[
+
+READ: `h dap.set_exception_breakpoints()`!
+Maybe useful if debugging session directly terminates in case of an exception in the python code
+
+--]]
+
+
+
+
+
+
+
 local dap = require 'dap'
 local dapui = require 'dapui'
+local telescope = require 'telescope'
 local nmap = require 'utils'.nmap('  DAP')
 
 nmap('<F5>', function()
   vim.cmd('write')
   vim.cmd.set('mouse=n')
-  dap.continue()
+  -- if a session is active, continue
+  if dap.session() then
+    dap.continue()
+    -- else, open configuration picker (and start it)
+  else
+    telescope.extensions.dap.configurations {}
+  end
 end, 'Start debugging or continue') --Entry point for all Debugger things
 
 nmap('<F1>', dap.step_into, '  Step into')
@@ -20,8 +40,9 @@ nmap('<Leader>dn', function()
 end, '  Toggle Conditional Breakpoint')
 
 nmap('<Leader>dp', function()
-  dap.list_breakpoints()
-  vim.cmd('copen')
+  -- dap.list_breakpoints()
+  -- vim.cmd('copen')
+  telescope.extensions.dap.list_breakpoints {}
 end, '  List Breakpoints')
 
 nmap('<Leader>lb', function()
