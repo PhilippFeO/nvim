@@ -47,7 +47,11 @@ telescope.setup { -- :h telescope.setup()
     },
   },
 }
+
+-- https://github.com/nvim-telescope/telescope-dap.nvim
+-- Picker for DAP, fi. Configurations
 telescope.load_extension('dap')
+
 -- Enable telescope fzf native, if installed
 pcall(telescope.load_extension, 'fzf')
 
