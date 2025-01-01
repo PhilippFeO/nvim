@@ -169,13 +169,14 @@ vim.g.python3_host_prog = '/usr/bin/python3'
 vim.api.nvim_exec2('language en_US.utf8', {})
 
 
--- ─── :help in new tab ──────────
+-- ─── Command shortcuts ──────────
+-- Trigger by adding ' ', ie `:ht `
+vim.cmd.cabbrev('tn', 'tabnew')
+vim.cmd.cabbrev('qc', 'cclose')
+-- :help in new tab
 vim.cmd.cabbrev('helpt', 'tab help')
 vim.cmd.cabbrev('thelp', 'tab help')
 vim.cmd.cabbrev('ht', 'tab help')
-
-vim.cmd.cabbrev('tn', 'tabnew')
-vim.cmd.cabbrev('qc', 'cclose')
 
 -- ─── Highlight on yank ──────────
 -- see `:help vim.highlight.on_yank()`
