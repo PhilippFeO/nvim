@@ -1,3 +1,24 @@
+-- Create a keymap to jump from an ingredient in a yaml file to it's entry in .resources/ingredient_category_url.csv
+-- Only if in the grocery-shopper dir and for yaml files
+local group = vim.api.nvim_create_augroup('IngredientToCSV', { clear = true })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    group = group,
+    pattern = '*/grocery-shopper/*',
+    callback = function()
+        vim.keymap.set('n', '<Leader>cs', function()
+                local cword = vim.fn.expand('<cword>')
+                local vimgrep_args = '/^' .. cword .. '/ .resources/ingredient_category_url.csv'
+                vim.cmd.vimgrep(vimgrep_args)
+            end,
+            {
+                buffer = 0,
+                desc = 'Go to ingredient in [cs]v file'
+            }
+        )
+    end,
+    desc = 'Create keymap to jump from Ingredient to CSV'
+})
+
 -- Vimified version:
 --  %norm I  - name:
 --  %norm 0f,aquantity:
