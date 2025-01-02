@@ -65,9 +65,6 @@ vim.keymap.set('n', '<Leader>ma', ':make %< ',
 -- %< == Filename without extension, s. Wiki > neovim.md
 vim.keymap.set('n', '<Leader>mr', '<Cmd>w | make run<CR>',
     { desc = '[m]ake and [r]un current file' })
--- TODO: Transform to Autocommand triggering for grocery_shopper dir <17-04-2024>
-vim.keymap.set('n', '<Leader>mp', '<Cmd>make pdf<CR>',
-    { desc = '[m]ake [p]df' })
 -- Run Tests
 vim.keymap.set('n', '<Leader>mt', '<Cmd>w | make test<CR>',
     { desc = '[m]ake and run [t]ests' })

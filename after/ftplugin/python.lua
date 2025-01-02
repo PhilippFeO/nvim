@@ -1,6 +1,15 @@
 -- Loads RUNTIMEPATH/compiler/python.lua
 vim.cmd.compiler('python')
 
+local group_id = vim.api.nvim_create_augroup("MakePDF", { clear = true })
+vim.api.nvim_create_autocmd('VimEnter', {
+    group = group_id,
+    pattern = '*/grocery_shopper/*',
+    callback = function()
+        vim.keymap.set('n', '<Leader>mp', '<Cmd>make pdf<CR>', { desc = '[m]ake [p]df' })
+    end
+})
+
 
 -- ─── User Commands ──────────
 -- Save and execute python program

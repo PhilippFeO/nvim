@@ -76,8 +76,8 @@ local grocery_shopper = {
     request = "launch",
     type = "python",
     cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
-    -- args = { '-n', '2' }
-    args = { '--pdf', 'Broccolipasta.yaml' }
+    args = { '-n', '2' }
+    -- args = { '--pdf', 'Spätzle.yaml' }
 }
 
 local grocery_shopper_custom_args = {
@@ -96,6 +96,18 @@ local grocery_shopper_custom_args = {
         end
         return cli_args_table
     end,
+}
+
+local grocery_shopper_pdf = {
+    console = 'externalTerminal',
+    name = "Debug grocery_shopper with '--pdf Spätzle.yaml'",
+    -- needs absolute path
+    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
+        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    request = "launch",
+    type = "python",
+    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
+    args = { '--pdf', 'Spätzle.yaml' }
 }
 
 local diary_Lindau = {
@@ -149,6 +161,7 @@ local configs = {
     pytest_default_config,
     grocery_shopper,
     grocery_shopper_custom_args,
+    grocery_shopper_pdf,
     diary_Lindau,
     django,
 }
