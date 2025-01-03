@@ -131,7 +131,7 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.telescope-fzf-native',
   require 'plugins.autoformat',
-  require 'plugins.debug'
+  require 'plugins.debug',
 
   -- note: next step on your neovim journey: add/configure additional "plugins" for kickstart
   --       these are some example plugins that i've included in the kickstart repository.

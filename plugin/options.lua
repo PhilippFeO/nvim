@@ -32,6 +32,8 @@ vim.o.hlsearch = false
 vim.o.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
+-- no capital letters: ignore case while searching
+-- with capital letters: respect case while searching
 vim.o.smartcase = true
 -- Ignore case during search
 -- TODO: Difference to smartcase unclear
