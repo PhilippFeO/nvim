@@ -238,10 +238,58 @@ local OTO_formatter = {
     '1',
     '-o',
     'output/test/inputs/Ozone',
-
-
   }
 }
+local CLD_formatter = {
+  name = 'CLD-Formatter TDS 0.13',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/proj/l2op/formatter_tools/CLD_formatter/tool_src/GeneratorCLD.py',
+  cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
+  args = {
+    '-l',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/01/lv1__ECA2____01_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/02/lv1__ECA2____02_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/lv1__ECA2____03_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/04/lv1__ECA2____04_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/05/lv1__ECA2____05_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/06/lv1__ECA2____06_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/07/lv1__ECA2____07_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/08/lv1__ECA2____08_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2____09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/10/lv1__ECA2____10_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/11/lv1__ECA2____11_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/12/lv1__ECA2____12_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/13/lv1__ECA2____13_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2____14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/15/lv1__ECA2____15_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/16/lv1__ECA2____16_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2____17_20030624_SN__0.13.nc',
+    '-i',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/01/inp__ECA2____01_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/02/inp__ECA2____02_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/03/inp__ECA2____03_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/04/inp__ECA2____04_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/05/inp__ECA2____05_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/06/inp__ECA2____06_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/07/inp__ECA2____07_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/08/inp__ECA2____08_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2____09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/10/inp__ECA2____10_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/11/inp__ECA2____11_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/12/inp__ECA2____12_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/13/inp__ECA2____13_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2____14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/15/inp__ECA2____15_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/16/inp__ECA2____16_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2____17_20030624_SN__0.13.nc',
+    '-t',
+    '1',
+    '-o',
+    'output/test/inputs/Cloud',
+  }
+}
+
 
 
 return {
@@ -253,4 +301,5 @@ return {
   l1formatter_tds012,
   l1formatter_tds013,
   OTO_formatter,
+  CLD_formatter,
 }
