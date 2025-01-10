@@ -48,6 +48,10 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader><Leader>x', '<Cmd>write | source %<CR>', { desc = 'Execute (source) current file' })
 vim.keymap.set('n', '<Leader>x', '.lua<CR>', { desc = 'E[x]ecute current line' })
 vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines' })
+vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.toggle() end,
+    { desc = 'toggle treesitter-[c]ontext' }
+)
+
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
