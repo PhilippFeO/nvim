@@ -1,3 +1,7 @@
+local dap = require 'dap'
+local dapui = require 'dapui'
+
+
 vim.keymap.set('n', '<Leader>n', function()
     local x = vim.fn.getreg("a")
     print(x)
@@ -44,6 +48,10 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader><Leader>x', '<Cmd>write | source %<CR>', { desc = 'Execute (source) current file' })
 vim.keymap.set('n', '<Leader>x', '.lua<CR>', { desc = 'E[x]ecute current line' })
 vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines' })
+vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.toggle() end,
+    { desc = 'toggle treesitter-[c]ontext' }
+)
+
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
@@ -122,7 +130,18 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set({ 'n' }, 'CC', '<Cmd>cclose<CR>', { desc = 'Close Quickfix-List window' })
+vim.keymap.set({ 'n' }, 'CC', function()
+        vim.cmd.cclose()
+        -- Reset DAP-UI if debug session is running
+        if dap.session() then
+            dapui.open({ reset = true })
+        end
+        -- Jump back to previous window, `CTRL-W_p == :wincmd p == vim.cmd.wincmd('p')`
+        -- `h :wincmd`, `h CTRL-W_p`
+        vim.cmd.wincmd('p')
+    end,
+    { desc = 'Close Quickfix-List window' }
+)
 vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
 -- Remap for dealing with line wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

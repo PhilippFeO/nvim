@@ -11,6 +11,9 @@ end
 -- Default values in `h nvim-treesitter-context`
 require 'treesitter-context'.setup {
   multiline_threshold = 1, -- Maximum number of lines to show for a single context
+  mode = 'topline',
+  -- max_lines = 5,
+  -- trim_scope = 'outer',
 }
 
 

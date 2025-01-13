@@ -17,10 +17,25 @@ local telescope = require 'telescope'
 local nmap = require 'utils'.nmap('  DAP')
 
 nmap('<F5>', function()
-  vim.cmd('write')
+  if vim.o.buftype == '' then
+    vim.cmd('write')
+  end
   vim.cmd.set('mouse=n')
   -- if a session is active, continue
   if dap.session() then
+    -- Make pressing `F5` buffer independent, ie. it works in every window/buffer
+    local buffers_in_tab = vim.fn.tabpagebuflist()
+    -- Contains buffer numbers of the DAP-UI buffers
+    for _, bufnr in ipairs(buffers_in_tab) do
+      -- find the one with the python file
+      -- => Won't work on other files
+      -- => Probably won't work when multiple python files are open in a split
+      if vim.fn.bufname(bufnr):sub(-3, -1) == '.py' then
+        -- find window numbers holding the current buffer. There will (very probably) only one.
+        local winnr = vim.fn.win_findbuf(bufnr)
+        vim.fn.win_gotoid(winnr[1])
+      end
+    end
     dap.continue()
     -- else, open configuration picker (and start it)
   else
@@ -40,9 +55,9 @@ nmap('<Leader>dn', function()
 end, '  Toggle Conditional Breakpoint')
 
 nmap('<Leader>dp', function()
-  -- dap.list_breakpoints()
-  -- vim.cmd('copen')
-  telescope.extensions.dap.list_breakpoints {}
+  dap.list_breakpoints()
+  vim.cmd.copen()
+  -- telescope.extensions.dap.list_breakpoints {}
 end, '  List Breakpoints')
 
 nmap('<Leader>lb', function()

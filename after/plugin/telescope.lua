@@ -114,7 +114,7 @@ nmap('<Leader>gf', require 'telescope-live-filetype-grep'.live_filetype_grep, 'l
 
 -- Tweaked builtins to open in vertical split on default
 nmap('<Leader>sh', require('telescope_utils').vsplit_help_tags, '[s]earch [h]elp')
-nmap('<Leader>sm', builtin.man_pages, '[s]earch [m]an pages')
+nmap('<Leader>sm', require('telescope_utils').tab_man_pages, '[s]earch [m]an pages')
 
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
