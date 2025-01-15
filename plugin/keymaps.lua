@@ -51,6 +51,7 @@ vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines'
 vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.toggle() end,
     { desc = 'toggle treesitter-[c]ontext' }
 )
+vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' })
 
 
 -- ─── make ──────────
