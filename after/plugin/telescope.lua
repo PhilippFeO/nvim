@@ -8,6 +8,12 @@ local telescope = require 'telescope'
 local actions = require('telescope.actions')
 
 telescope.setup { -- :h telescope.setup()
+  extensions = {
+    ["ui-select"] = {
+      -- https://github.com/nvim-telescope/telescope-ui-select.nvim
+      require("telescope.themes").get_dropdown {}
+    }
+  },
   defaults = {
     -- see `h telescope.mappings`
     -- worth reading once and a while, because options are possible
@@ -47,6 +53,9 @@ telescope.setup { -- :h telescope.setup()
     },
   },
 }
+
+
+require("telescope").load_extension("ui-select")
 
 -- https://github.com/nvim-telescope/telescope-dap.nvim
 -- Picker for DAP, fi. Configurations
