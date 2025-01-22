@@ -36,7 +36,7 @@ dapui.setup {
     },
     ---@diagnostic disable-next-line: missing-fields
     controls = {
-        enabled = true,
+        enabled = false,
         ---@diagnostic disable-next-line: missing-fields
         icons = {
             -- nerdfonts: search for 'debug_'
