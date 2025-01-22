@@ -143,7 +143,7 @@ vim.keymap.set({ 'n' }, 'CC', function()
     end,
     { desc = 'Close Quickfix-List window' }
 )
-vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
+vim.keymap.set('n', 'G', 'Gzz') -- Elevate view after going to last line
 -- Remap for dealing with line wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
