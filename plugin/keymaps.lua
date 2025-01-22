@@ -130,6 +130,7 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 --
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
+vim.keymap.set('n', 'gd', 'gdzz', { remap = true, desc = '[g]oto [d]efinition and center (ugdzz)' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n' }, 'CC', function()
         vim.cmd.cclose()
