@@ -56,10 +56,12 @@ nmap('<Leader>dn', function()
 end, '  Toggle Conditional Breakpoint')
 
 nmap('<Leader>dp', function()
-  dap.list_breakpoints()
-  vim.cmd.copen()
-  -- telescope.extensions.dap.list_breakpoints {}
-end, '  List Breakpoints')
+  local bufnr = vim.fn.bufnr('DAP Breakpoints')
+  -- All windows holding the buffer
+  -- Almost certainly, there is only one window
+  local winnr = vim.fn.win_findbuf(bufnr)
+  vim.fn.win_gotoid(winnr[1])
+end, 'Goto [d]ap [b]reakpoints')
 
 nmap('<Leader>lb', function()
   dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
