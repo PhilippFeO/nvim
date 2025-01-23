@@ -48,7 +48,7 @@ dapui.setup {
     layouts = {
         {
             position = "bottom",
-            size = 7,
+            size = 10,
             elements = {
                 {
                     id = "watches",

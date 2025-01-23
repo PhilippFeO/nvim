@@ -53,7 +53,6 @@ vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.to
 )
 vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' })
 
-
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
 -- :make executes string behind makeprg
