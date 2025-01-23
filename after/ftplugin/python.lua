@@ -23,7 +23,7 @@ vim.api.nvim_create_user_command('P', 'w | !python3 %', {})
 -- Erinnerung: <leader> <leader> x um Datei zu speichern und auszuführen
 
 local bufnr = -1
-local group_id = vim.api.nvim_create_augroup("SaveAndExecute", { clear = true })
+group_id = vim.api.nvim_create_augroup("SaveAndExecute", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
     group = group_id,
