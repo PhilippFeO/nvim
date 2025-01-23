@@ -36,7 +36,7 @@ dapui.setup {
     },
     ---@diagnostic disable-next-line: missing-fields
     controls = {
-        enabled = true,
+        enabled = false,
         ---@diagnostic disable-next-line: missing-fields
         icons = {
             -- nerdfonts: search for 'debug_'
@@ -47,33 +47,41 @@ dapui.setup {
     },
     layouts = {
         {
-            position = "left",
-            size = 60,
-            elements = { {
-                id = "scopes",
-                size = 0.35
-            }, {
-                id = "watches",
-                size = 0.35
-            }, {
-                id = "breakpoints",
-                size = 0.1
-            }, {
-                id = "stacks",
-                size = 0.2
-            } },
+            position = "bottom",
+            size = 10,
+            elements = {
+                {
+                    id = "watches",
+                    size = 0.6,
+                },
+                {
+                    id = "repl",
+                    size = 0.4,
+                },
+            },
         },
         {
-            position = "bottom",
-            size = 7,
-            elements = { {
-                id = "repl",
-                size = 0.5
-            }, {
-                id = "console",
-                size = 0.5
-            } },
-        }
+            position = "left",
+            size = 45,
+            elements = {
+                {
+                    id = "console",
+                    size = 0.2,
+                },
+                {
+                    id = "scopes",
+                    size = 0.4
+                },
+                {
+                    id = "breakpoints",
+                    size = 0.2
+                },
+                {
+                    id = "stacks",
+                    size = 0.2
+                },
+            },
+        },
     },
 }
 

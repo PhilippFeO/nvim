@@ -51,7 +51,7 @@ vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines'
 vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.toggle() end,
     { desc = 'toggle treesitter-[c]ontext' }
 )
-
+vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' })
 
 -- ─── make ──────────
 -- Compile/Execute file and open Quickfix-List
@@ -78,10 +78,8 @@ vim.keymap.set('n', '<Leader>ms', '<Cmd>w | silent make | cwindow 12 | wincmd k<
 --     { desc = '[s]ubstitute current word' })
 
 -- Copy into System Clipboard
-vim.keymap.set('v', '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
-vim.keymap.set('n', '<Leader>y', [["+y]], { desc = 'Copy line into system clipboard' })
-vim.keymap.set('n', '<Leader>Y', [["+Y]], { desc = 'Copy rest of line into system clipboard' })
-vim.keymap.set('n', '<Leader>x', '<cmd>source %<CR>', { desc = 'Source current Lua file' })
+vim.keymap.set({ 'v', 'n' }, '<Leader>y', [["+y]], { desc = 'Copy into system clipboard' })
+vim.keymap.set('n', '<Leader>Y', [["+v$y]], { desc = 'Copy rest of line into system clipboard' })
 
 local bracketPairs = {
     ['('] = ')',
@@ -129,6 +127,7 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 --
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
+vim.keymap.set('n', 'gd', 'gdzz', { remap = true, desc = '[g]oto [d]efinition and center (ugdzz)' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n' }, 'CC', function()
         vim.cmd.cclose()
@@ -142,7 +141,7 @@ vim.keymap.set({ 'n' }, 'CC', function()
     end,
     { desc = 'Close Quickfix-List window' }
 )
-vim.keymap.set('n', 'G', 'Gzt') -- Elevate view after going to last line
+vim.keymap.set('n', 'G', 'Gzz') -- Elevate view after going to last line
 -- Remap for dealing with line wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

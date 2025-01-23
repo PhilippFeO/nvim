@@ -1,12 +1,12 @@
 -- Work configs
 -- ────────────
 local TDS_creation = {
-  name = 'Create TDS (eca2a_twice.ini)',
+  name = 'Create TDS (eca2_IRR.ini)',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/proj/l2op/formatter_tools/createTDS.py',
   cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
-  args = { '--config_file', 'eca2a_twice.ini' },
+  args = { '--config_file', 'eca2_IRR.ini' },
 }
 
 local l1formatter_tds012 = {

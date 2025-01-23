@@ -28,8 +28,9 @@ nmap('<F5>', function()
     -- Contains buffer numbers of the DAP-UI buffers
     for _, bufnr in ipairs(buffers_in_tab) do
       -- find the one with the python file
-      -- => Won't work on other files
-      -- => Probably won't work when multiple python files are open in a split
+      -- => Won't work on other file types
+      -- => Probably won't work when multiple python files are open in a split in the same tab
+      -- `bufname('.py')` won't work if multiple buffers match this string but I only want buffers from the current tab
       if vim.fn.bufname(bufnr):sub(-3, -1) == '.py' then
         -- find window numbers holding the current buffer. There will (very probably) only one.
         local winnr = vim.fn.win_findbuf(bufnr)
@@ -55,10 +56,17 @@ nmap('<Leader>dn', function()
 end, '  Toggle Conditional Breakpoint')
 
 nmap('<Leader>dp', function()
-  dap.list_breakpoints()
-  vim.cmd.copen()
-  -- telescope.extensions.dap.list_breakpoints {}
-end, '  List Breakpoints')
+  if dap.session() then
+    local bufnr = vim.fn.bufnr('DAP Breakpoints')
+    -- All windows holding the buffer
+    -- Almost certainly, there is only one window
+    local winnr = vim.fn.win_findbuf(bufnr)
+    vim.fn.win_gotoid(winnr[1])
+  else
+    dap.list_breakpoints()
+    vim.cmd.copen()
+  end
+end, 'Goto [d]ap [b]reakpoints')
 
 nmap('<Leader>lb', function()
   dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
@@ -93,3 +101,11 @@ vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>
 })
 
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
+
+nmap('<Leader>dw', function()
+  local bufnr = vim.fn.bufnr('DAP Watches')
+  -- All windows holding the buffer
+  -- Almost certainly, there is only one window
+  local winnr = vim.fn.win_findbuf(bufnr)
+  vim.fn.win_gotoid(winnr[1])
+end, 'Goto [d]ap [w]atches')
