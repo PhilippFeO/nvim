@@ -5,12 +5,13 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     group = group,
     pattern = '*/grocery-shopper/*',
     callback = function()
-        vim.keymap.set('n', '<Leader>cs', function()
+        vim.keymap.set('n', 'gd', function()
                 local cword = vim.fn.expand('<cword>')
                 local vimgrep_args = '/^' .. cword .. '/ .resources/ingredient_category_url.csv'
                 vim.cmd.vimgrep(vimgrep_args)
             end,
             {
+                remap = true,
                 buffer = 0,
                 desc = 'Go to ingredient in [cs]v file'
             }
