@@ -266,7 +266,29 @@ local OTO_formatter = {
     '-t',
     '1',
     '-o',
-    'output/test/inputs/Ozone',
+    'output/',
+  }
+}
+
+local OTO_formatter_eca2a = {
+  name = 'OTO-Formatter ECA2_A*',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/proj/l2op/formatter_tools/OTO_formatter/tool_src/GeneratorOTO.py',
+  cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
+  args = {
+    '-l',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
+    '-i',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2_A__17_20030624_SN__0.13.nc',
+    '-t',
+    '14',
+    '-o',
+    'output/test/inputs/OTO-NaN',
   }
 }
 
@@ -380,6 +402,7 @@ return {
   l1formatter_t1,
   l1formatter_t2,
   OTO_formatter,
+  OTO_formatter_eca2a,
   CLD_formatter,
   fcsformatter,
 }
