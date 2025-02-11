@@ -10,8 +10,8 @@ local TDS_creation = {
 }
 
 
-local l1formatter_t1 = {
-  name = 'L1-Formatter t=1',
+local l1formatter_t3 = {
+  name = 'L1-Formatter t=3',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src/GeneratorL1b.py',
@@ -36,14 +36,14 @@ local l1formatter_t1 = {
     './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/16/lv1__ECA2____16_20030620_SN__0.13.nc',
     './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2____17_20030620_SN__0.13.nc',
     '-t',
-    '1',
+    '3',
     '-o',
     'output/',
   }
 }
 
-local l1formatter_t2 = {
-  name = 'L1-Formatter t=2',
+local l1formatter_t4 = {
+  name = 'L1-Formatter t=4',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src/GeneratorL1b.py',
@@ -68,7 +68,7 @@ local l1formatter_t2 = {
     './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/16/lv1__ECA2_C__16_20030623_SN__0.13.nc',
     './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_C__17_20030623_SN__0.13.nc',
     '-t',
-    '2',
+    '4',
     '-o',
     'output/',
   }
@@ -392,6 +392,29 @@ local fcsformatter = {
   }
 }
 
+local GSR_formatter = {
+  name = 'GSR-Formatter',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/proj/l2op/formatter_tools/GSR_formatter/tool_src/GeneratorGSR.py',
+  cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
+  args = {
+    '-l',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
+    '-i',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2_A__09_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2_A__14_20030624_SN__0.13.nc',
+    './TDS_0.13/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2_A__17_20030624_SN__0.13.nc',
+    '-t',
+    '14',
+    '-o',
+    'output/test/inputs/GSR',
+    '--target_product',
+    'default',
+  }
+}
 
 return {
   ECA_tds013,
@@ -399,10 +422,11 @@ return {
   ECA_tds013_t13,
   ECA_tds013_ozone,
   TDS_creation,
-  l1formatter_t1,
-  l1formatter_t2,
+  l1formatter_t3,
+  l1formatter_t4,
   OTO_formatter,
   OTO_formatter_eca2a,
   CLD_formatter,
   fcsformatter,
+  GSR_formatter,
 }
