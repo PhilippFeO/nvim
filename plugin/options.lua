@@ -115,3 +115,7 @@ vim.opt.splitbelow = true
 
 -- "=:;" handy for C-style languages
 vim.bo.matchpairs = vim.bo.matchpairs .. ",„:“,=:;"
+
+-- Open Files in the netrw window (not in a split)
+-- Maybe `h g:netrw_liststyle` (with value 3) makes also sense
+vim.g.netrw_chgwin = 0
