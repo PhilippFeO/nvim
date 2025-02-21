@@ -96,8 +96,8 @@ local dap = require 'dap'
 --  No idea how. Probably by writing a function returning `dapui.close` on non pytest debug sessions, but do how do I determine this?
 -- `h dap-extensions` seems reasonable to start
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
--- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
--- dap.listeners.before.event_exited['dapui_config'] = dapui.close
+dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
 
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
