@@ -124,26 +124,22 @@ local ECA_tds013 = {
     '--unofficial_product',
   }
 }
+
 local ECA_tds013_t12 = {
-  name = 'ECA-Formatter TDS 0.13 t=12',
+  name = 'ECA2_A Dec 24',
   request = 'launch',
   type = 'python',
-  program = vim.fn.expand '~/proj/l2op/formatter_tools/ECA_formatter/tool_src/GeneratorECA.py',
+  program = vim.fn.expand '~/proj/l2op/formatter_tools/L1b_formatter/tool_src/GeneratorL1b.py',
   cwd = vim.fn.expand '~/proj/l2op/formatter_tools/',
   args = {
-    '-l',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20030624_SN__0.13.nc',
     '-i',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/inp__ECA2_A__09_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/inp__ECA2_A__14_20030624_SN__0.13.nc',
-    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/inp__ECA2_A__17_20030624_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/09/lv1__ECA2_A__09_20031224_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/14/lv1__ECA2_A__14_20031224_SN__0.13.nc',
+    './TDS_0.13/data/detector_orientation_from_South_to_North/clearsky_fullycloudy/17/lv1__ECA2_A__17_20031224_SN__0.13.nc',
     '-t',
-    '12',
+    '1',
     '-o',
-    'output/test/inputs/Twice',
-    '--unofficial_product',
+    'output/test/inputs/Victor'
   }
 }
 
