@@ -96,8 +96,19 @@ local dap = require 'dap'
 --  No idea how. Probably by writing a function returning `dapui.close` on non pytest debug sessions, but do how do I determine this?
 -- `h dap-extensions` seems reasonable to start
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
--- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
--- dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+local function toggle_closing_dapui()
+    if not dap.listeners.before.event_terminated['dapui_config'] and not dap.listeners.before.event_exited['dapui_config'] then
+        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+        dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    else
+        dap.listeners.before.event_terminated['dapui_config'] = nil
+        dap.listeners.before.event_exited['dapui_config'] = nil
+    end
+end
+-- Run function, so the default is that dapui closes
+toggle_closing_dapui()
+vim.keymap.set('n', '<Leader>dt', toggle_closing_dapui, { desc = '[t]oggle closing DAPUI automatically' })
 
 
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`

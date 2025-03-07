@@ -138,8 +138,8 @@ local default_no_console = {
 
 -- https://code.visualstudio.com/docs/python/tutorial-django
 -- https://stackoverflow.com/questions/62944425/how-to-debug-django-in-vscode-with-autoreload-turned-on
-local django = {
-    name = "Django Debugger",
+local kursverwaltung = {
+    name = "Kursverwaltung",
     type = "debugpy",
     request = "launch",
     program = "${workspaceFolder}/manage.py",
@@ -153,6 +153,28 @@ local django = {
     justMyCode = true,
 }
 
+local kursverwaltung_unittest = {
+    name = "Kursverwaltung - Unittest",
+    type = "python",
+    request = "launch", -- or 'attach' TODO: What does attach? <27-01-2024>
+    module = "pytest",
+    -- TODO: Define args via `pytest.ini`. <27-01-2024>
+    args = {
+        "${file}",
+        "-rA",
+        "-sv",
+    },
+    redirectOutput = true,
+    -- Display return value of function in DAP Scopes window
+    showReturnValue = false,
+    -- justMyCode = true,
+    env = {
+        EMAIL_HOST_USER = 'lorem@ipsum.de',
+        SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+        -- DEBUG = true,
+    }
+}
+
 
 local configs = {
     default_no_console,
@@ -163,7 +185,8 @@ local configs = {
     grocery_shopper_custom_args,
     grocery_shopper_pdf,
     diary_Lindau,
-    django,
+    kursverwaltung,
+    kursverwaltung_unittest,
 }
 
 local work_configs = require('dap-python-configs-work')
