@@ -69,6 +69,8 @@ vim.keymap.set('n', '<Leader>mr', '<Cmd>w | make run<CR>',
 -- Run Tests
 vim.keymap.set('n', '<Leader>mt', '<Cmd>w | make test<CR>',
     { desc = '[m]ake and run [t]ests' })
+vim.keymap.set('n', '<Leader>mkt', '<Cmd>w | make! test<CR>',
+    { desc = "[m]ake and run [t]ests but don't jump to error" })
 -- Same as above but suppressing output of `make` via `:silent`
 vim.keymap.set('n', '<Leader>ms', '<Cmd>w | silent make | cwindow 12 | wincmd k<CR>',
     { silent = true, desc = '[m]ake/compile/execute [s]ilently current file' })
