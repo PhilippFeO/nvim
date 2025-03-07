@@ -10,6 +10,16 @@ vim.api.nvim_create_autocmd('VimEnter', {
     end
 })
 
+-- Highlights
+-- ──────────
+local kanagawa_palette = require("kanagawa.colors").setup().palette
+-- Manly used when working with *.ju.py files
+local highlight = vim.api.nvim_set_hl
+highlight(0, 'JupyniumMarkdownCellSeparator', { fg = kanagawa_palette.oniViolet2 })
+-- Clear highlight of Markdown cells (distracting)
+highlight(0, 'JupyniumMarkdownCellContent', {})
+highlight(0, 'JupyniumCodeCellSeparator', { italic = false, fg = kanagawa_palette.autumnGreen })
+
 
 -- ─── User Commands ──────────
 -- Save and execute python program

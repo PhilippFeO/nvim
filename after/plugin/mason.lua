@@ -108,6 +108,8 @@ lspconfig.basedpyright.setup {
 	capabilities = capabilities,
 	settings = {
 		basedpyright = {
+			-- Used for open_meteo
+			reportOptionalMemberAccess = "none",
 			-- reportImplicitOverride = false,
 			reportMissingSuperCall = "none",
 			-- reportUnusedImport = false,
@@ -115,6 +117,7 @@ lspconfig.basedpyright.setup {
 			typeCheckingMode = "standard",
 			-- works, if pyproject.toml is used
 			reportAttributeAccessIssue = false,
+			-- reportUnknownVariableType = 'none',
 			-- doesn't work, even if pyproject.toml is used
 			analysis = {
 				inlayHints = {
