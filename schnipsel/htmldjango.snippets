@@ -1,7 +1,15 @@
-snippet ## "Kommentar in htmldjango" bA
+snippet ## "Line comment for  htmldjango" bA
 {# $1 #}$0
 endsnippet
 
-snippet %% "Django-Template-Code" A
-{% $1 %}$0
+snippet %% "Template code for htmldjango" A
+{% $1 %}
+  $0
+{% end$1 %}
+endsnippet
+
+snippet if "if-block for htmldjango" bwA
+{% if $0 %}
+  $1
+{% endif %}
 endsnippet
