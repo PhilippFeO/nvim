@@ -109,3 +109,5 @@ nmap('<Leader>dw', function()
   local winnr = vim.fn.win_findbuf(bufnr)
   vim.fn.win_gotoid(winnr[1])
 end, 'Goto [d]ap [w]atches')
+
+nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
