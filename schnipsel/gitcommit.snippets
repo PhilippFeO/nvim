@@ -3,65 +3,41 @@
 # TODO: Durchsuchbar mit Telescope machen <18-01-2024>
 
 # ─── feat ──────────
-snippet feat "'feat: ✨' (feat) in Git Commit Msg" bA
-feat: ✨ $0
+snippet feat "'feat:' in Git Commit Msg" bA
+feat(${1:Kontext}): $0
 endsnippet
 
-snippet feati "'feat: 🚀' (feat improve) in Git Commit Msg" bA
-feat: 🚀 $0
+snippet ifeat "'feat: Verbessere' in Git Commit Msg" bA
+feat(${1:Kontext}): ${2|Verbessere ,Improve |} $0
 endsnippet
 
-snippet featu "'feat: 🎨' (feat update) in Git Commit Msg" bA
-feat: 🎨 $0
+snippet ufeat "'feat: Aktualisiere' in Git Commit Msg" bA
+feat(${1:Kontext}): ${2|Aktualisiere ,Update |} $0
 endsnippet
 
-snippet featd "'feat: 📝' (/readme doc feat) in Git Commit Msg" bA
-feat: 📜 $0
-endsnippet
-
-snippet featr "'feat: 🔥' (feat remove) in Git Commit Msg" bA
-feat: 🔥 $0
+snippet rfeat "'feat: Entferne …' in Git Commit Msg" bA
+feat(${1:Kontext}): ${2|Entferne ,Remove |} $0
 endsnippet
 
 # ─── fix ──────────
-snippet fix "'fix: 🐛' (fix) in Git Commit Msg" bA
-fix: 🐛 $0
-endsnippet
-
-snippet fixt "'fix: ✏️T' (fix typo) in Git Commit Msg" bA
-fix: ✏️ $0
-endsnippet
-
-snippet fixr "'revert ⏪️' (fix revert) in Git Commit Msg" bA
-fix: ⏪️ $0
+snippet fix "'fix: ' in Git Commit Msg" bA
+fix(${1:Kontext}): $0
 endsnippet
 
 # ─── chore ──────────
-snippet choren "'chore 🚚:' (chore rename) in Git Commit Msg" bA
-chore: 🚚 $0
+snippet chore "'chore:' in Git Commit Msg" bA
+chore(${1:Kontext}): $0
 endsnippet
 
-snippet chorem "'chore: 🚚' (chore move) in Git Commit Msg" bA
-chore: 🚚 $0
+snippet mchore "'chore: Verschiebe' in Git Commit Msg" bA
+chore(${1:Kontext}): ${2|Verschiebe ,Move |} $0
 endsnippet
 
-snippet chorec "'chore: ✒️:' (chore comment) in Git Commit Msg" bA
-chore ✒️:: $0
-endsnippet
-
-snippet chorel "'chore: 🔊' (chore logs) in Git Commit Msg" bA
-chore: 🔊 $0
-endsnippet
-
-snippet chorei "'chore: 🙈' (chore ignore) in Git Commit Msg" bA
-chore: 🙈 $0
-endsnippet
-
-snippet chorer "'chore: ♻️ ' (chore refactor) in Git Commit Msg " bA
-chore: ♻️  $0
+snippet rchore "'chore: Refactor' in Git Commit Msg " bA
+chore(${1:Kontext}): ${2|Formatiere ,Refactor |} $0
 endsnippet
 
 # ─── misc ──────────
-snippet wip "'wip: 🚧' in Git Commit Msg" bA
-wip: 🚧 $0
+snippet wip "'wip:' in Git Commit Msg" bA
+wip(${1:Kontext}): $0
 endsnippet
