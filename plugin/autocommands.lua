@@ -12,6 +12,13 @@ autocmd('BufWinEnter', {
     desc = 'Disable signcolumn in Wiki'
 })
 
+-- autocmd('BufWinEnter', {
+--     group = augroup('Disable-Ruff', { clear = true }),
+--     pattern = vim.fn.expand('~') .. '/python/atp-osse/*',
+--     command = 'LspStop ruff',
+--     desc = 'Disable ruff for atp-osse',
+-- })
+
 -- Keymap to search files ignored by .gitignore.
 -- I ignore regular wiki pages I don't want to upload to GitHub but sometimes
 -- I want to read or edit them (obviously) and Telescope, ie. ripgrep is '.gitignore'
