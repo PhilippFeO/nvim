@@ -1,5 +1,22 @@
 -- Work configs
 -- ────────────
+--
+local pyan = {
+  name = 'pyan',
+  -- needs absolute path
+  program = DLR_Machine and vim.fn.expand '~/python/pyan/pyan/main.py',
+  request = "launch",
+  type = "python",
+  cwd = DLR_Machine and vim.fn.expand '~/python/pyan/pyan/',
+  args = {
+    -- '--root',
+    -- DLR_Machine and vim.fn.expand '~/python/fc_test',
+    '--svg',
+    DLR_Machine and vim.fn.expand '~/python/fc_test/fc_test/fc_test.py',
+  },
+  justMyCode = false,
+}
+
 
 local atp_osse = {
   name = 'ATP OSSE',
@@ -464,4 +481,5 @@ return {
   CLD_formatter,
   fcsformatter,
   GSR_formatter,
+  pyan,
 }

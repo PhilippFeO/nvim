@@ -136,6 +136,14 @@ local default_no_console = {
     -- justMyCode = false
 }
 
+local default_no_console_foreign_code = {
+    name = "Debug file (default config without 'console' + justmyCode=false)",
+    program = '${file}',
+    request = "launch",
+    type = "python",
+    justMyCode = false,
+}
+
 -- https://code.visualstudio.com/docs/python/tutorial-django
 -- https://stackoverflow.com/questions/62944425/how-to-debug-django-in-vscode-with-autoreload-turned-on
 local kursverwaltung = {
@@ -180,6 +188,7 @@ local configs = {
     default_no_console,
     default_external_terminal,
     default_integrated_terminal,
+    default_no_console_foreign_code,
     pytest_default_config,
     grocery_shopper,
     grocery_shopper_custom_args,
