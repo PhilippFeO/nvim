@@ -117,6 +117,7 @@ require('lazy').setup({
     init = function() require("cmp_nvim_ultisnips").setup({}) end,
   },
 
+  require 'plugins.nvim-ufo',
   require 'plugins.autoformat',
   require 'plugins.debug',
   require 'plugins.git-plugins',
