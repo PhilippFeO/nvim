@@ -1,0 +1,28 @@
+snippet SP "SurffreundProfil (Klasse)" wA
+SurffreundProfil
+endsnippet
+
+snippet tSP "'SurffreundProfil' (Klasse, Type-Hint)" wA
+'SurffreundProfil',
+endsnippet
+
+snippet sp "surffreundprofil (variable)" wA
+surffreundprofil
+endsnippet
+
+snippet Ev "Event (Klasse)" wA
+Event
+endsnippet
+
+snippet tEv "'Event' (Klasse, Type-Hint)" wA
+'Event',
+endsnippet
+
+snippet kvfix "Default Fixture-Signatur (surffreundprofil1, event)" wA
+@pytest.fixture
+def ${1:fixture_name}(
+  event: 'Event',
+  surffreundprofil1: 'SurffreundProfil',
+):
+  $0
+endsnippet

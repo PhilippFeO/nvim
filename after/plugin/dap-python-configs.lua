@@ -171,7 +171,7 @@ local kursverwaltung_unittest = {
         "${file}",
         "-rA",
         "-sv",
-        './tests/test_booking.py::test_booking_subtracts_event_cost_from_profile_credits',
+        './tests/test_send_mail_helper.py'
     },
     justMyCode = false,
     redirectOutput = true,

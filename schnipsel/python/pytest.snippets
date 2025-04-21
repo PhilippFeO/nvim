@@ -1,0 +1,9 @@
+snippet tfix "Fixture defintion" bA
+@pytest.fixture
+def ${1:fixture_name}(${2:parameters}):
+  $0
+endsnippet
+
+snippet tparam "Parametrized Fixture" bA
+@pytest.mark.parametrize('${1:Parameter}_str', [${2:value1}, ${3:value2}])
+endsnippet
