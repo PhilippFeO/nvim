@@ -163,7 +163,7 @@ local kursverwaltung = {
 
 local kursverwaltung_unittest = {
     name = "Kursverwaltung - Unittest",
-    type = "python",
+    type = "debugpy",
     request = "launch", -- or 'attach' TODO: What does attach? <27-01-2024>
     module = "pytest",
     -- TODO: Define args via `pytest.ini`. <27-01-2024>
@@ -171,7 +171,7 @@ local kursverwaltung_unittest = {
         "${file}",
         "-rA",
         "-sv",
-        './tests/test_send_mail_helper.py'
+        './tests/users/management/test_reset_credit_balance.py',
     },
     justMyCode = false,
     redirectOutput = true,

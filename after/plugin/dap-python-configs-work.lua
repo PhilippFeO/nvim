@@ -1,6 +1,23 @@
 -- Work configs
 -- ────────────
---
+
+local treesitter = {
+  name = 'Treesitter Callgraph',
+  type = 'debugpy',
+  request = 'launch',
+  module = 'pytest',
+  args = {
+    vim.fn.getcwd(),
+    '-c',
+    vim.fn.getcwd() .. '/test/pytest.ini',
+  },
+  justMyCode = true,
+  redirectOutput = true,
+  env = {
+    PYTHONPATH = vim.fn.getcwd(),
+  }
+}
+
 local pyan = {
   name = 'pyan',
   -- needs absolute path
