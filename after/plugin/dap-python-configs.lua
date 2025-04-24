@@ -132,7 +132,8 @@ local default_no_console = {
     name = "Debug file (default config without 'console')",
     program = '${file}',
     request = "launch",
-    type = "python",
+    type = "debugpy",
+    cwd = DLR_Machine and vim.fn.expand '~/python/tree-sitter-demo-py/',
     -- justMyCode = false
 }
 

@@ -6,6 +6,7 @@ local treesitter = {
   type = 'debugpy',
   request = 'launch',
   module = 'pytest',
+  cwd = DLR_Machine and vim.fn.expand '~/python/tree-sitter-demo-py/',
   args = {
     vim.fn.getcwd(),
     '-c',
@@ -499,4 +500,5 @@ return {
   fcsformatter,
   GSR_formatter,
   pyan,
+  treesitter,
 }
