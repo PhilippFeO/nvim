@@ -172,9 +172,9 @@ local kursverwaltung_unittest = {
         "${file}",
         "-rA",
         "-sv",
-        './tests/users/management/test_reset_credit_balance.py',
+        './tests/test_assert_equal_by_value.py',
     },
-    justMyCode = false,
+    -- justMyCode = false,
     redirectOutput = true,
     -- Display return value of function in DAP Scopes window
     showReturnValue = false,

@@ -19,6 +19,16 @@ autocmd('BufWinEnter', {
 --     desc = 'Disable ruff for atp-osse',
 -- })
 
+
+autocmd('BufWinEnter', {
+    group = augroup('CloseFolds', { clear = true }),
+    pattern = '*.py',
+    callback = function()
+        require('ufo').closeAllFolds()
+    end,
+    desc = 'Close all Folds using nvim-ufo'
+})
+
 -- Keymap to search files ignored by .gitignore.
 -- I ignore regular wiki pages I don't want to upload to GitHub but sometimes
 -- I want to read or edit them (obviously) and Telescope, ie. ripgrep is '.gitignore'
