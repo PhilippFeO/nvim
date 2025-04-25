@@ -2,7 +2,15 @@
 -- ────────────
 
 local treesitter = {
-  name = 'Treesitter Callgraph',
+  name = "Tree-Sitter Callgraph",
+  program = '${file}',
+  request = "launch",
+  type = "debugpy",
+  cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
+}
+
+local treesitter_pytest = {
+  name = 'Treesitter Callgraph: Unittests',
   type = 'debugpy',
   request = 'launch',
   module = 'pytest',
@@ -500,5 +508,6 @@ return {
   fcsformatter,
   GSR_formatter,
   pyan,
+  treesitter_pytest,
   treesitter,
 }
