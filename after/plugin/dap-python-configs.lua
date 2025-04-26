@@ -172,7 +172,7 @@ local kursverwaltung_unittest = {
         "${file}",
         "-rA",
         "-sv",
-        './tests/test_assert_equal_by_value.py',
+        './tests/become_or_resign_event_ww/test_resign_as_event_ww.py::test_two_event_ww_one_resigns',
     },
     -- justMyCode = false,
     redirectOutput = true,
