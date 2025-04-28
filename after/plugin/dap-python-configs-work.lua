@@ -3,7 +3,7 @@
 
 local treesitter = {
   name = "Tree-Sitter Callgraph",
-  program = '${file}',
+  program = vim.fn.expand '~/python/tree-sitter-callgraph/parser_ts/main.py',
   request = "launch",
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',

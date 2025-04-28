@@ -41,7 +41,7 @@ local pytest_default_config = {
     module = "pytest",
     -- TODO: Define args via `pytest.ini`. <27-01-2024>
     args = {
-        "${file}",
+        -- "${file}",
         "-rA",
         "-sv",
         -- "--log-cli-level=INFO",
@@ -169,16 +169,15 @@ local kursverwaltung_unittest = {
     module = "pytest",
     -- TODO: Define args via `pytest.ini`. <27-01-2024>
     args = {
-        "${file}",
         "-rA",
         "-sv",
+        -- "${file}",
         './tests/test_assert_equal_by_value.py',
     },
     -- justMyCode = false,
     redirectOutput = true,
     -- Display return value of function in DAP Scopes window
     showReturnValue = false,
-    -- justMyCode = true,
     env = {
         EMAIL_HOST_USER = 'lorem@ipsum.de',
         SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
