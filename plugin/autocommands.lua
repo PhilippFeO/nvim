@@ -21,7 +21,7 @@ autocmd('BufWinEnter', {
 
 
 -- WinEnter, WinNew
-autocmd('BufReadPost', {
+autocmd('FileReadPost', {
     group = augroup('CloseFolds', { clear = true }),
     pattern = '*.py',
     callback = function()

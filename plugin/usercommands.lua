@@ -25,24 +25,32 @@ local jump_to_last_valid_qf_entry = function()
             local qf_entry = qflist[i]
             local valid = qf_entry.valid
             if valid == 1 then
-                print(vim.inspect(qf_entry))
+                -- print(vim.inspect(qf_entry))
                 local bufnr = qf_entry.bufnr
-                local lnum = qf_entry.lnum
-                -- local text = qf_entry.text
+                local bufname = vim.fn.bufname(bufnr)
+                -- Dont jump to error in installed packages
+                if string.find(bufname, "site-packages", 1, true) == nil then
+                    local lnum = qf_entry.lnum
+                    -- local text = qf_entry.text
 
-                -- Get the specified line (line_number is 1-based)
-                -- Convert to 0-based index
-                -- TODO: Only works after the second run or buffers was entered/opened/visible <29-04-2025>
-                local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
+                    -- Create new tab and set it's buffer to the buffer where the error resides
+                    -- (nvim_buf_get_lines() doesn't work with unlisted buffers and sometime, esp. after starting nvim, the buffer hasn't been listed/opened, wherefore nvim_buf_get_lines() fails)
+                    vim.cmd('tabnew | buffer' .. bufnr)
 
-                -- Find the first non-whitespace character
-                -- %S matches any non-whitespace character
-                local col_first_non_whitespace = line:find("%S") - 1
+                    -- Get the specified line (line_number is 1-based)
+                    -- Convert to 0-based index
+                    -- Doesn't work with unlisted buffers :( => buffer was openend in a new tab beforehand
+                    local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
 
-                -- Switch to the specified buffer, line and row
-                vim.api.nvim_set_current_buf(qf_entry.bufnr)
-                vim.api.nvim_win_set_cursor(0, { lnum, col_first_non_whitespace })
-                return
+                    -- Find the first non-whitespace character
+                    -- %S matches any non-whitespace character
+                    local col_first_non_whitespace = line:find("%S") - 1
+
+                    -- Switch to the specified buffer, line and row
+                    vim.api.nvim_set_current_buf(qf_entry.bufnr)
+                    vim.api.nvim_win_set_cursor(0, { lnum, col_first_non_whitespace })
+                    return
+                end
             end
         end
     else
@@ -50,4 +58,11 @@ local jump_to_last_valid_qf_entry = function()
     end
 end
 
-vim.api.nvim_create_user_command('LastQuickfix', jump_to_last_valid_qf_entry, {})
+vim.api.nvim_create_user_command(
+    'LastQuickfix',
+    jump_to_last_valid_qf_entry,
+    {
+        -- Whether command can be followed by a '|' (to allow chaining)
+        bar = true
+    }
+)

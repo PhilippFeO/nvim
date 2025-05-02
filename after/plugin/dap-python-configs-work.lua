@@ -7,6 +7,9 @@ local treesitter = {
   request = "launch",
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
+  args = {
+    './parser_ts/source_code.py'
+  }
 }
 
 local treesitter_pytest = {
