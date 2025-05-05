@@ -3,12 +3,12 @@
 
 local treesitter = {
   name = "Tree-Sitter Callgraph",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/parser_ts/main.py',
+  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/main.py',
   request = "launch",
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
-    './parser_ts/source_code.py'
+    './tscg/source_code.py'
   }
 }
 
