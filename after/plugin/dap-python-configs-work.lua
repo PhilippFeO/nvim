@@ -31,7 +31,8 @@ local treesitter_children = {
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
     './tscg/cursor_source_code.py'
-  }
+  },
+  justMyCode = false,
 }
 
 local treesitter_pytest = {
