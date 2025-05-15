@@ -78,6 +78,7 @@ nmap('<Leader>dc', function()
 end, '󰗼  Terminate Debugging')
 
 nmap('<Leader>dl', function()
+  vim.cmd('cclose')
   vim.cmd('write')
   dap.run_last()
 end, '[d]ebug with [l]ast configuration')

@@ -60,7 +60,7 @@ vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' }
 -- maybe vim.fn.expand('%') is useful for having absolute paths
 -- vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make | cwindow 12 | wincmd k<CR>',
 -- vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make vim-run | cwindow | clast | cprevious<CR>',
-vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make vim-run | LastQuickfix <bar> cwindow <bar> wincmd k<CR>',
+vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make vim-run | LastQuickfix | cwindow | wincmd k<CR>zb',
     { desc = 'make/compile/execute current file' })
 -- Without "<Cmd>" letters are typed
 vim.keymap.set('n', '<Leader>ma', ':make %< ',
