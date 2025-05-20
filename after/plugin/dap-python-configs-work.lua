@@ -9,30 +9,8 @@ local treesitter = {
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
     './tscg/source_code.py'
-  }
-}
-
-local treesitter_cursor = {
-  name = "Tree-Sitter Callgraph: Cursor",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/treecursor.py',
-  request = "launch",
-  type = "debugpy",
-  cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
-  args = {
-    './tscg/cursor_source_code.py'
-  }
-}
-
-local treesitter_children = {
-  name = "Tree-Sitter Callgraph: Children",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/children.py',
-  request = "launch",
-  type = "debugpy",
-  cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
-  args = {
-    './tscg/cursor_source_code.py'
   },
-  justMyCode = false,
+  -- justMyCode = false,
 }
 
 local treesitter_pytest = {
@@ -536,6 +514,4 @@ return {
   pyan,
   treesitter_pytest,
   treesitter,
-  treesitter_cursor,
-  treesitter_children,
 }
