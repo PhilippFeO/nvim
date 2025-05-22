@@ -47,20 +47,6 @@ dapui.setup {
     },
     layouts = {
         {
-            position = "bottom",
-            size = 10,
-            elements = {
-                {
-                    id = "watches",
-                    size = 0.6,
-                },
-                {
-                    id = "repl",
-                    size = 0.4,
-                },
-            },
-        },
-        {
             position = "left",
             size = 45,
             elements = {
@@ -70,7 +56,7 @@ dapui.setup {
                 },
                 {
                     id = "scopes",
-                    size = 0.4
+                    size = 0.2
                 },
                 {
                     id = "breakpoints",
@@ -79,6 +65,20 @@ dapui.setup {
                 {
                     id = "stacks",
                     size = 0.2
+                },
+                {
+                    id = "repl",
+                    size = 0.2,
+                },
+            },
+        },
+        {
+            position = "bottom",
+            size = 15,
+            elements = {
+                {
+                    id = "watches",
+                    size = 1,
                 },
             },
         },

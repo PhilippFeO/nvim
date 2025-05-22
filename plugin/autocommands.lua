@@ -20,7 +20,8 @@ autocmd('BufWinEnter', {
 -- })
 
 
-autocmd('BufWinEnter', {
+-- WinEnter, WinNew
+autocmd('FileReadPost', {
     group = augroup('CloseFolds', { clear = true }),
     pattern = '*.py',
     callback = function()
