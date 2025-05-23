@@ -171,7 +171,7 @@ local kursverwaltung_unittest = {
     args = {
         "-rA",
         "-sv",
-        -- './tests/test_assert_equal_by_value.py',
+        './tests/test_assert_equal_by_value.py',
         './tests/'
     },
     -- justMyCode = false,
