@@ -110,13 +110,13 @@ local grocery_shopper_pdf = {
     args = { '--pdf', 'Spätzle.yaml' }
 }
 
-local diary_Lindau = {
-    name = 'Tagebuch: Lindau',
+local diary = {
+    name = 'Tagebuch: Look into the past',
     request = 'launch',
     type = 'python',
-    program = vim.fn.expand '~/.tagebuch/my_html_handler.py',
+    program = vim.fn.expand '~/.tagebuch/look_into_the_past.py',
     cwd = vim.fn.expand '~/.tagebuch',
-    args = { vim.fn.expand '~/.tagebuch/2024/06-Juni/05-06-2024-Mittwoch-Lindau/05-06-2024-Mittwoch-Lindau.html' },
+    -- args = { vim.fn.expand '~/.tagebuch/2024/06-Juni/05-06-2024-Mittwoch-Lindau/05-06-2024-Mittwoch-Lindau.html' },
 }
 
 -- Not useable for complex issues like starting Neovim in subprocess
@@ -195,7 +195,7 @@ local configs = {
     grocery_shopper,
     grocery_shopper_custom_args,
     grocery_shopper_pdf,
-    diary_Lindau,
+    diary,
     kursverwaltung,
     kursverwaltung_unittest,
 }
