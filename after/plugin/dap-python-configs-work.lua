@@ -3,24 +3,24 @@
 
 local treesitter = {
   name = "Tree-Sitter Callgraph",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/main.py',
+  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/__main__.py',
   request = "launch",
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
-    './tscg/source_code.py'
+    './tscg'
   },
   -- justMyCode = false,
 }
 
 local treesitter_mc = {
-  name = "Tree-Sitter Callgraph – Module Code",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/main.py',
+  name = "Tree-Sitter Callgraph – justMyCode=false",
+  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/__main__.py',
   request = "launch",
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
-    './tscg/source_code.py'
+    './tscg'
   },
   justMyCode = false,
 }
