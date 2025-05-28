@@ -8,7 +8,7 @@ local treesitter = {
   type = "debugpy",
   cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
-    './tscg'
+    vim.fn.expand '~/python/kursverwaltung/kursverwaltung/'
   },
   -- justMyCode = false,
 }
