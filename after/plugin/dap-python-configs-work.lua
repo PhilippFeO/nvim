@@ -1,18 +1,15 @@
 -- Work configs
 -- ────────────
 
-local treesitter = {
-  name = "Tree-Sitter Callgraph",
-  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/__main__.py',
+local netcdfcartopy = {
+  name = "netCDF + cartopy",
+  program = vim.fn.expand '~/python/netcdfcartopy/netcdfcartopy/__main__.py',
   request = "launch",
   type = "debugpy",
-  cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
-  args = {
-    -- vim.fn.expand '~/python/kursverwaltung/kursverwaltung/'
-    vim.fn.expand 'tscg',
-    -- '--ignore',
-    -- 'ignore_me',
-  },
+  cwd = vim.fn.expand '~/python/netcdfcartopy/',
+  -- args = {
+  --   vim.fn.expand 'tscg',
+  -- },
   -- justMyCode = false,
 }
 
@@ -26,6 +23,21 @@ local treesitter_mc = {
     './tscg'
   },
   justMyCode = false,
+}
+
+local treesitter = {
+  name = "Tree-Sitter Callgraph",
+  program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/__main__.py',
+  request = "launch",
+  type = "debugpy",
+  cwd = vim.fn.expand '~/python/tree-sitter-callgraph/',
+  args = {
+    -- vim.fn.expand '~/python/kursverwaltung/kursverwaltung/'
+    vim.fn.expand 'tscg',
+    -- '--ignore',
+    -- 'ignore_me',
+  },
+  -- justMyCode = false,
 }
 
 local treesitter_pytest = {
@@ -530,4 +542,5 @@ return {
   treesitter_pytest,
   treesitter,
   treesitter_mc,
+  netcdfcartopy,
 }
