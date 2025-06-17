@@ -83,6 +83,14 @@ local atp_osse = {
   cwd = vim.fn.expand '~/python/atp-osse/',
 }
 
+local atp_osse_working = {
+  name = 'ATP OSSE Working',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/python/atp-osse-working/src/main.py',
+  cwd = vim.fn.expand '~/python/atp-osse-working/',
+}
+
 local TDS_creation = {
   name = 'Create TDS',
   request = 'launch',
@@ -525,7 +533,6 @@ local GSR_formatter = {
 }
 
 return {
-  atp_osse,
   ECA_tds013,
   ECA_tds013_t12,
   ECA_tds013_t13,
@@ -543,4 +550,6 @@ return {
   treesitter,
   treesitter_mc,
   netcdfcartopy,
+  atp_osse,
+  atp_osse_working,
 }
