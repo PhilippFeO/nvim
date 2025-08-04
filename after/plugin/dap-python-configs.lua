@@ -156,7 +156,7 @@ local kursverwaltung = {
     env = {
         EMAIL_HOST_USER = 'lorem@ipsum.de',
         SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
-        DEBUG = true,
+        DEBUG = 'true',
     },
     django = true,
     justMyCode = true,
