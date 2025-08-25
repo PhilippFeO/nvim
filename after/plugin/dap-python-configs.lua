@@ -162,8 +162,25 @@ local kursverwaltung = {
     justMyCode = true,
 }
 
+-- https://code.visualstudio.com/docs/python/tutorial-django
+-- https://stackoverflow.com/questions/62944425/how-to-debug-django-in-vscode-with-autoreload-turned-on
+local kursverwaltung_docker = {
+    name = "Kursverwaltung – docker",
+    type = "debugpy",
+    request = "launch",
+    program = "${workspaceFolder}/manage.py",
+    args = { "runserver", "localhost:8889", "--settings=kursverwaltung.settings_dev" },
+    env = {
+        EMAIL_HOST_USER = 'lorem@ipsum.de',
+        SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+        DEBUG = 'true',
+    },
+    django = true,
+    justMyCode = true,
+}
+
 local kursverwaltung_unittest = {
-    name = "Kursverwaltung - Unittest",
+    name = "Kursverwaltung – Unittest",
     type = "debugpy",
     request = "launch", -- or 'attach' TODO: What does attach? <27-01-2024>
     module = "pytest",
