@@ -169,7 +169,7 @@ local kursverwaltung_docker = {
     type = "debugpy",
     request = "launch",
     program = "${workspaceFolder}/manage.py",
-    args = { "runserver", "localhost:8889", "--settings=kursverwaltung.settings_dev" },
+    args = { "runserver", "localhost:5678", "--settings=kursverwaltung.settings_dev" },
     env = {
         EMAIL_HOST_USER = 'lorem@ipsum.de',
         SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
@@ -213,6 +213,7 @@ local configs = {
     grocery_shopper_pdf,
     diary,
     kursverwaltung,
+    kursverwaltung_docker,
     kursverwaltung_unittest,
 }
 
