@@ -15,6 +15,15 @@ dap.adapters.my_python_adapter = {
     args = { '-m', 'debugpy.adapter' }
 }
 
+dap.adapters.python = {
+    type = 'server',
+    host = 'localhost',
+    port = 5678,
+    options = {
+        source_filetype = 'python',
+    },
+}
+
 -- s. `h dap-terminal`
 -- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
 local command = function()
@@ -31,6 +40,23 @@ dap.defaults.fallback.external_terminal = {
 
 
 -- ─── Configurations ──────────
+
+local test_docker = {
+    name = "Test Docker Debugging",
+    type = "python",
+    request = "attach",
+    connect = {
+        host = "localhost",
+        port = 5678,
+    },
+    pathMappings = {
+        {
+            localRoot = vim.fn.getcwd(),
+            remoteRoot = '.',
+        },
+    },
+    justMyCode = true,
+}
 
 -- This enables debugging Tests in the first place.
 -- More information in my Wiki
@@ -167,16 +193,40 @@ local kursverwaltung = {
 local kursverwaltung_docker = {
     name = "Kursverwaltung – docker",
     type = "debugpy",
-    request = "launch",
-    program = "${workspaceFolder}/manage.py",
-    args = { "runserver", "localhost:5678", "--settings=kursverwaltung.settings_dev" },
-    env = {
-        EMAIL_HOST_USER = 'lorem@ipsum.de',
-        SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
-        DEBUG = 'true',
-    },
-    django = true,
+    request = "attach",
+    -- program = "${workspaceFolder}/manage.py",
+    -- args = { "runserver", "localhost:5678", "--settings=kursverwaltung.settings_dev" },
+    -- env = {
+    --     EMAIL_HOST_USER = 'lorem@ipsum.de',
+    --     SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+    --     DEBUG = 'true',
+    -- },
+    -- django = true,
     justMyCode = true,
+    connect = {
+        host = '127.0.0.1',
+        port = 5678,
+    },
+}
+
+local kursverwaltung_docker_2 =
+{
+    name = 'Kursverwaltung – docker, die Zweite',
+    type = 'python',
+    request = 'attach',
+    connect = {
+        host = 'localhost',
+        port = 5678,
+    },
+    -- mode = 'remote',
+    -- redirectOutput = true,
+    justMyCode = true,
+    pathMappings = {
+        {
+            localRoot = vim.fn.getcwd(),
+            remoteRoot = '/app',
+        },
+    },
 }
 
 local kursverwaltung_unittest = {
@@ -214,7 +264,9 @@ local configs = {
     diary,
     kursverwaltung,
     kursverwaltung_docker,
+    kursverwaltung_docker_2,
     kursverwaltung_unittest,
+    test_docker,
 }
 
 local work_configs = require('dap-python-configs-work')
