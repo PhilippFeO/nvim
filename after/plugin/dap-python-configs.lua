@@ -15,15 +15,6 @@ dap.adapters.my_python_adapter = {
     args = { '-m', 'debugpy.adapter' }
 }
 
--- dap.adapters.python = {
---     type = 'server',
---     host = 'localhost',
---     port = 5678,
---     options = {
---         source_filetype = 'python',
---     },
--- }
-
 -- s. `h dap-terminal`
 -- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
 local command = function()
