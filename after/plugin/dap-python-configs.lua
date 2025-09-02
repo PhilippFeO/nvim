@@ -229,6 +229,7 @@ local kursverwaltung_docker = {
         -- localRoot/kursverwaltung/views.py -> remoteRoot/kursverwaltung/views.py
         {
             -- Verzeichnis unter dem der Quellcode bei mir lokal liegt
+            -- (Ich sollte in ~/programmieren/kursverwaltung/kursverwaltung/ sein)
             localRoot = vim.fn.getcwd(),
             -- Verzeichnis, unter dem der Quellcode auf dem anderen Rechner liegt
             remoteRoot = '/home/developer/development/kursverwaltung',
