@@ -7,10 +7,6 @@ Maybe useful if debugging session directly terminates in case of an exception in
 
 
 
-
-
-
-
 local dap = require 'dap'
 local dapui = require 'dapui'
 local telescope = require 'telescope'
@@ -88,13 +84,15 @@ nmap('<Leader>dm', function()
     -- necessary, if 'console' not explicitly set in config
     console = 'internalConsole',
     test_runner = 'pytest',
-    config = require 'dap-python-configs'.pytest_default_config
+    -- ! Don't forget to add the respective config in the returned table
+    -- config = require 'dap-configs.python'.pytest_default_config,
+    config = require 'dap-configs.python-kursverwaltung'.kursverwaltung_docker_unittest,
   })
 end, '[d]ebug single [m]ethod')
 
 nmap('<Leader>dr', function()
   dapui.open({ reset = true })
-end, '[d]apui [r]eset')
+end, '[d]apui [r]eset GUI')
 
 nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
 vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>', {
