@@ -112,12 +112,16 @@ local kursverwaltung_docker_listen = {
 
 
 return {
-  kursverwaltung,
-  kursverwaltung_docker,
-  kursverwaltung_docker_unittest,
-  kursverwaltung_unittest,
-  kursverwaltung_docker_listen,
-  -- key-value-pair necessary to use in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
-  kursverwaltung_unittest = kursverwaltung_unittest,
-  kursverwaltung_docker_unittest = kursverwaltung_docker_unittest,
+  configs = {
+    kursverwaltung,
+    kursverwaltung_docker,
+    kursverwaltung_docker_unittest,
+    kursverwaltung_unittest,
+    kursverwaltung_docker_listen,
+  },
+  -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
+  test_configs = {
+    kursverwaltung_unittest = kursverwaltung_unittest,
+    kursverwaltung_docker_unittest = kursverwaltung_docker_unittest,
+  },
 }

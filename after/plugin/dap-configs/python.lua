@@ -165,12 +165,14 @@ local configs = {
 -- ! Can only extend two lists
 dap.configurations.python = vim.list_extend(
     configs,
-    require 'dap-configs.python-kursverwaltung'
+    require 'dap-configs.python-kursverwaltung'.configs
 -- require 'dap-configs.python-work'
 )
 
 -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
 local M = {
-    pytest_default_config = pytest_default_config,
+    test_configs = {
+        pytest_default_config = pytest_default_config,
+    }
 }
 return M
