@@ -1,10 +1,13 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+vim.o.exrc = true
+vim.opt.runtimepath:append('.nvim')
+
 -- Both (suffixesadd, path) make `require('lazy.kanagawa')` in init.lua jumpable
 -- (Naive explanation) When typing `gf`, every combination will be built. Then it is checked whether it's a file and can be opened.
 -- Add suffix implicitly when using `gf`
-vim.o.suffixesadd = '.lua,.py'
+vim.o.suffixesadd = '.lua,.py,'
 -- Analogous to `h suffixesadd` but for prepending
 -- `.` = dir of curent file
 -- `` (emtpy) = working dir
