@@ -159,15 +159,22 @@ local configs = {
     pytest_default_config = pytest_default_config,
 }
 
-
 -- Make configurations avialable, ie. entry for menu after `h dap.continue()` was called
--- Will skip key-value-pairs in `src`
--- ! Can only extend two lists
-dap.configurations.python = vim.list_extend(
+
+local my_configs = {
     configs,
-    require 'dap-configs.python-kursverwaltung'.configs
--- require 'dap-configs.python-work'
-)
+    require 'dap-configs.python-kursverwaltung'.configs,
+    require 'dap-configs.python-tagebuch'.configs,
+}
+
+local all_configs = {}
+for _, list in ipairs(my_configs) do
+    for _, value in ipairs(list) do
+        table.insert(all_configs, value)
+    end
+end
+
+dap.configurations.python = all_configs
 
 -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
 local M = {
