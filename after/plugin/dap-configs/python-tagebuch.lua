@@ -11,13 +11,13 @@ local past_entries = {
   name = 'Tagebuch: Öffne vergangene Einträge',
   request = 'launch',
   type = 'python',
-  program = vim.fn.expand '~/.tagebuch/tagebuch/past.py',
+  program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
   -- program = 'tagebuch',
   cwd = vim.fn.expand '~/.tagebuch',
-  args = { '2025-10-03' },
-  env = {
-    PYTHONPATH = "/home/philipp/.tagebuch/.venv/tagebuch/bin/python3",
-  }
+  args = { '--past', '2025-10-03' },
+  -- env = {
+  --   PYTHONPATH = "/home/philipp/.tagebuch/.venv/tagebuch/bin/python3",
+  -- }
 }
 
 return {
