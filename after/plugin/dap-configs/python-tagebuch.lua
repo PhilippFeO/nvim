@@ -23,6 +23,6 @@ local past_entries = {
 return {
   configs = {
     open_diary_entry,
-    -- past_entries,
+    past_entries,
   },
 }

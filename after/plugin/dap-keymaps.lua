@@ -6,7 +6,6 @@ Maybe useful if debugging session directly terminates in case of an exception in
 --]]
 
 
-
 local dap = require 'dap'
 local dapui = require 'dapui'
 local telescope = require 'telescope'
