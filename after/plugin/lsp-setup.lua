@@ -1,97 +1,21 @@
--- -- Configure Border of LSP induced Floating Windows
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
---   vim.lsp.handlers.hover, {
---     -- Use a sharp border with `FloatBorder` highlights
---     border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
---     -- add the title in hover float window
---     -- title = "hover"
---   }
--- )
+local border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' }
 
---[[
-
-lsp.txt:
-with({handler}, {override_config})                            *vim.lsp.with()*
-    Function to manage overriding defaults for LSP handlers.
-
-    Parameters: ~
-      • {handler}          (`lsp.Handler`) See |lsp-handler|
-      • {override_config}  (`table`) Table containing the keys to override
-                           behavior of the {handler}
-
-                                                                 *lsp-handler*
-LSP handlers are functions that handle |lsp-response|s to requests made by Nvim
-to the server. (Notifications, as opposed to requests, are fire-and-forget:
-there is no response, so they can't be handled. |lsp-notification|)
-
-Each response handler has this signature: >
-
-    function(err, result, ctx, config)
-<
-    Parameters: ~
-      • {err}     (`table|nil`) Error info dict, or `nil` if the request
-                  completed.
-      • {result}  (`Result|Params|nil`) `result` key of the |lsp-response| or
-                  `nil` if the request failed.
-      • {ctx}     (`table`) Table of calling state associated with the
-                  handler, with these keys:
-                  • {method}     (`string`) |lsp-method| name.
-                  • {client_id}  (`number`) |vim.lsp.Client| identifier.
-                  • {bufnr}      (`Buffer`) Buffer handle.
-                  • {params}     (`table|nil`) Request parameters table.
-                  • {version}    (`number`) Document version at time of
-                                 request. Handlers can compare this to the
-                                 current document version to check if the
-                                 response is "stale". See also |b:changedtick|.
-      • {config}  (`table`) Handler-defined configuration table, which allows
-                  users to customize handler behavior.
-                  For an example, see:
-                      |vim.lsp.diagnostic.on_publish_diagnostics()|
-                  To configure a particular |lsp-handler|, see:
-                      |lsp-handler-configuration|
-
-    Returns: ~
-        Two values `result, err` where `err` is shaped like an RPC error: >
-            { code, message, data? }
-<        You can use |vim.lsp.rpc.rpc_response_error()| to create this object.
-
-
-                                           *vim.lsp.handlers.signature_help()*
-signature_help({_}, {result}, {ctx}, {config})
-    |lsp-handler| for the method "textDocument/signatureHelp".
-
-    The active parameter is highlighted with |hl-LspSignatureActiveParameter|. >lua
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-          vim.lsp.handlers.signature_help, {
-            -- Use a sharp border with `FloatBorder` highlights
-            border = "single"
-          }
-        )
-<
-
-    Parameters: ~
-      • {result}  (`lsp.SignatureHelp`) Response from the language server
-      • {ctx}     (`lsp.HandlerContext`) Client context
-      • {config}  (`table`) Configuration table.
-                  • border: (default=nil)
-                    • Add borders to the floating window
-                    • See |vim.lsp.util.open_floating_preview()| for more
-                      options
-
-
---]]
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    -- Use a sharp border with `FloatBorder` highlights
-    border = "single",
-    -- add the title in hover float window
-    title = "hover"
-  }
+vim.keymap.set(
+  { 'n', 'v' },
+  'K',
+  function()
+    vim.lsp.buf.hover({
+      border = border
+    })
+  end,
+  { desc = 'Hover', }
 )
 
--- Show diagnostics next to the code
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+  virtual_text = true, -- Show diagnostics next to the code
+  ---@diagnostic disable-next-line: assign-type-mismatch
+  float = { border = border },
+})
 
 
 -- Keymaps
