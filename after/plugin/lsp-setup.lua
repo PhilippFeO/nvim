@@ -36,10 +36,22 @@ keymap_set(
   { desc = "Open diagnostics list as Location List" }
 )
 
-
 local function lsp_desc(desc)
   return 'LSP: ' .. desc
 end
+
+-- TODO: To make this work via the command line, ie
+-- `nvim -c "Telescope lsp_dynamic_workspace_symbols`,
+-- the LSP has to be started beforehand, even if non python
+-- file (fi. plain nvim) was opened.
+keymap_set(
+  'n',
+  '<Leader>as',
+  require('telescope.builtin').lsp_dynamic_workspace_symbols,
+  { desc = lsp_desc('[a]ll workspace [s]ymbols') }
+)
+
+
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -96,7 +108,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Workspace related
     keymap_set(
       'n',
-      '<leader>as',
+      '<Leader>as',
       require('telescope.builtin').lsp_dynamic_workspace_symbols,
       { desc = lsp_desc('[a]ll workspace [s]ymbols') }
     )

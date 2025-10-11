@@ -1,10 +1,21 @@
+local create_diary_entry = {
+  name = 'Tagebuch: Erstelle Eintrag für heutigen Tag',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
+  -- Application uses `input(…)`
+  console = 'internalTerminal',
+  cwd = vim.fn.expand '~/.tagebuch/',
+  args = { '--today' },
+}
+
 local open_diary_entry = {
-  name = 'Tagebuch: Erstelle und öffne Eintrag',
+  name = 'Tagebuch: Öffne Eintrag für übergebenes Datum',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
   cwd = vim.fn.expand '~/.tagebuch/',
-  args = { vim.fn.expand '~/.tagebuch/2025/10-Oktober/2025-10-03/' },
+  args = { '--open', os.date('%Y-%m-%d') },
 }
 
 local past_entries = {
@@ -22,6 +33,7 @@ local past_entries = {
 
 return {
   configs = {
+    create_diary_entry,
     open_diary_entry,
     past_entries,
   },
