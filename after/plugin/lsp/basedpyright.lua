@@ -30,3 +30,7 @@ vim.lsp.config['basedpyright'] = {
 		},
 	}
 }
+
+
+-- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
+-- vim.lsp.enable('basedpyright')

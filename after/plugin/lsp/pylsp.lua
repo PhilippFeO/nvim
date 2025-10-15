@@ -39,3 +39,6 @@ vim.lsp.config['pylsp'] = {
 		}
 	}
 }
+
+-- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
+-- vim.lsp.enable('pylsp')

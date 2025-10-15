@@ -40,7 +40,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Manual LSP configuration
 -- ────────────────────────
 
-local lspconfig = require 'lspconfig'
+-- local lspconfig = require 'lspconfig'
 
 -- ─── Python ──────────
 -- Example from https://www.reddit.com/r/neovim/comments/1bt3dy0/comment/l5813wf/?context=3
