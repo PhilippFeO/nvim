@@ -3,10 +3,8 @@ local create_diary_entry = {
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
-  -- Application uses `input(…)`
-  console = 'internalConsole',
-  cwd = vim.fn.expand '~/.tagebuch/',
   args = { '--today' },
+  cwd = vim.fn.expand '~/.tagebuch/',
 }
 
 local open_diary_entry = {
@@ -14,8 +12,8 @@ local open_diary_entry = {
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
-  cwd = vim.fn.expand '~/.tagebuch/',
   args = { '--open', os.date('%Y-%m-%d') },
+  cwd = vim.fn.expand '~/.tagebuch/',
 }
 
 local past_entries = {
@@ -24,17 +22,27 @@ local past_entries = {
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
   -- program = 'tagebuch',
-  cwd = vim.fn.expand '~/.tagebuch/',
   args = { '--past', '2025-10-03' },
+  cwd = vim.fn.expand '~/.tagebuch/',
   -- env = {
   --   PYTHONPATH = "/home/philipp/.tagebuch/.venv/tagebuch/bin/python3",
   -- }
 }
 
+local add_fotos = {
+  name = 'Tagebuch: Füge Fotos zu Tagebuch hinzu',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/.tagebuch/tagebuch/add_fotos.py',
+  args = { vim.fn.expand '~/.tagebuch/2025/10/2025-10-03/', },
+  cwd = vim.fn.expand '~/.tagebuch/',
+
+}
 return {
   configs = {
     create_diary_entry,
     open_diary_entry,
     past_entries,
+    add_fotos,
   },
 }
