@@ -1,6 +1,5 @@
+local border = require('utils').border
 local keymap_set = vim.keymap.set
-local border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' }
-
 
 vim.diagnostic.config({
   virtual_text = true, -- Show diagnostics next to the code

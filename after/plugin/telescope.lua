@@ -123,7 +123,7 @@ nmap('<Leader>sg', builtin.live_grep, '[s]earch project with [g]rep')
 nmap('<Leader>sk', builtin.keymaps, '[s]earch [k]eymaps (normal mode)')
 nmap('<Leader>sq', builtin.quickfix, '[s]earch [q]uickfix list')
 nmap('<Leader>st', builtin.treesitter, '[s]earch [t]reesitter')
-nmap('<Leader>sw', builtin.grep_string, '[s]earch [w]ord under cursor')
+nmap('<Leader>tw', builtin.grep_string, '[t]elescope search [w]ord under cursor')
 nmap('<Leader>gf', require 'telescope-live-filetype-grep'.live_filetype_grep, 'live [g]rep with [f]iletype')
 
 -- Tweaked builtins to open in vertical split on default

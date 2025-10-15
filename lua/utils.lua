@@ -10,6 +10,9 @@ local nmap = function(desc_prefix)
   return t
 end
 
+local border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' }
+
 return {
-  nmap = nmap
+  nmap = nmap,
+  border = border,
 }

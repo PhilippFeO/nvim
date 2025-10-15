@@ -7,8 +7,8 @@ Maybe useful if debugging session directly terminates in case of an exception in
 
 
 local dap = require 'dap'
-local dapui = require 'dapui'
 local telescope = require 'telescope'
+local dap_view = require 'dap-view'
 local nmap = require 'utils'.nmap('  DAP')
 
 nmap('<F5>', function()
@@ -70,10 +70,14 @@ end, 'Set [l]ogging [b]reakpoint')
 nmap('<Leader>dc', function()
   dap.terminate()
   vim.cmd.set('mouse=')
+  -- Maybe toggle() is also useful
+  dap_view.close()
 end, '󰗼  Terminate Debugging')
 
 nmap('<Leader>dl', function()
   vim.cmd('cclose')
+  -- To run the most recent changes and with presumably edited Config
+  -- (DAP configs are sourced on `BufWritePost`)
   vim.cmd('write')
   dap.run_last()
 end, '[d]ebug with [l]ast configuration')
@@ -89,17 +93,19 @@ nmap('<Leader>dm', function()
   })
 end, '[d]ebug single [m]ethod')
 
-nmap('<Leader>dr', function()
-  dapui.open({ reset = true })
-end, '[d]apui [r]eset GUI')
-
-nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
-vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>', {
-  desc = '  DAP: [d]ap [e]val expression',
-})
+nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
 
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
 
+
+-- Dapui-Keymaps
+-- ─────────────
+local dapui = require 'dapui'
+
+nmap('<Leader>dr', function()
+  dapui.open({ reset = true })
+end, '[d]apui [r]eset GUI')
+nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
 nmap('<Leader>dw', function()
   local bufnr = vim.fn.bufnr('DAP Watches')
   -- All windows holding the buffer
@@ -108,4 +114,45 @@ nmap('<Leader>dw', function()
   vim.fn.win_gotoid(winnr[1])
 end, 'Goto [d]ap [w]atches')
 
-nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
+
+-- Dapview-Keymaps
+-- ────────────────
+
+nmap('<Leader>ae', function(expr)
+  dap_view.add_expr(expr)
+end, '[a]dd [e]xpression under cursor')
+nmap('<Leader>jw', function()
+  dap_view.jump_to_view 'watches'
+end, '[j]ump to [w]atches')
+nmap('<Leader>sw', function()
+  dap_view.show_view 'watches'
+end, '[s]how to [w]atches')
+
+-- Works, even if I don't use the UI provided by dapui
+-- vim.keymap.set({ 'v', 'n' }, '<Leader>de', '<Cmd>lua require("dapui").eval()<CR>', {
+--   desc = '  DAP: [d]ap [e]val expression',
+-- })
+vim.keymap.set({ 'v', 'n' }, '<Leader>de', function()
+  dapui.eval()
+end, {
+  desc = '  DAP: [d]ap [e]val expression',
+})
+
+
+-- There is also internal methods to evaluate expression and display them in a floating window:
+--  - require('dap.ui.widgets').hover()
+--  - The one below
+--  - etc.
+-- The problem with all of them is, that the cursor enters these windows and I have to quit them manually. With require('dapui').eval() this does not happen and the window vanishes when I move the cursor. Setting up an autocommand on CursorMoved also didn't work because it was triggered every time I type the keys defined below.
+-- => I'll go with require('dapui').eval()
+--
+-- local border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' }
+-- nmap('<Leader>th', function()
+--   local widgets = require('dap.ui.widgets')
+--   local float_win = widgets.cursor_float(widgets.expression,
+--     {
+--       border = border,
+--       -- focusable = false,
+--     })
+--   print(vim.inspect(vim.api.nvim_win_get_config(float_win.win)))
+-- end)

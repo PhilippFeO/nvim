@@ -4,7 +4,7 @@ local create_diary_entry = {
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
   -- Application uses `input(…)`
-  console = 'internalTerminal',
+  console = 'internalConsole',
   cwd = vim.fn.expand '~/.tagebuch/',
   args = { '--today' },
 }

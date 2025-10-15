@@ -120,6 +120,7 @@ require('lazy').setup({
   require 'plugins.nvim-ufo',
   require 'plugins.autoformat',
   require 'plugins.debug',
+  -- require 'plugins.nvim-dap-view',
   require 'plugins.git-plugins',
   require 'plugins.gitlinker',
   require 'plugins.jupynium',

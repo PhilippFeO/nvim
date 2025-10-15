@@ -26,7 +26,7 @@ vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', {
 vim.o.conceallevel = 2
 -- Keep concealing of current line in Normal mode, empty == unconceal everything
 -- Ie. in Visual mode, no concealing is applied
-vim.o.concealcursor = 'n'
+-- vim.o.concealcursor = 'n'
 -- Sometimes, Neovim doesn't indent as I like and I feel that this option helps
 vim.bo.autoindent = false
 

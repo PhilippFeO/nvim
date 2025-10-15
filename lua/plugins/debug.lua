@@ -16,5 +16,25 @@ return {
     -- https://github.com/theHamsta/nvim-dap-virtual-text
     'theHamsta/nvim-dap-virtual-text',
     'nvim-telescope/telescope-dap.nvim',
+
+    -- ─── nvim-dap-view ──────────
+    {
+      "igorlfs/nvim-dap-view",
+      ---@module 'dap-view'
+      ---@type dapview.Config
+      -- Are passed to `require 'dap-view.setup()`
+      opts = {
+        auto_toggle = true,
+        windows = {
+          terminal = {
+            width = 0.3,
+            position = 'right',
+          }
+        },
+        help = {
+          border = require('utils').border,
+        },
+      },
+    },
   },
 }
