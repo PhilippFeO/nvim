@@ -117,12 +117,13 @@ dapui.setup {
 
 -- ─── nvim-dap ──────────
 
--- Open dapui automagically
+-- Open dapui automaticly
 -- Scheme: Event -> run function
 -- TODO: Leave dapui open after debugging test is done, ie. after the `assert` statement. <27-01-2024>
 --  No idea how. Probably by writing a function returning `dapui.close` on non pytest debug sessions, but do how do I determine this?
 -- `h dap-extensions` seems reasonable to start
-dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+
+-- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 
 local function toggle_closing_dapui()
     if not dap.listeners.before.event_terminated['dapui_config'] and not dap.listeners.before.event_exited['dapui_config'] then
