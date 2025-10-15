@@ -21,8 +21,12 @@ vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', {
 })
 
 
+-- Both options led to concealed markdown code block markers (```[language] and ```)
 -- Conceal markdown formatting, fi. *italic* with italic text and no '*'
 vim.o.conceallevel = 2
+-- Keep concealing of current line in Normal mode, empty == unconceal everything
+-- Ie. in Visual mode, no concealing is applied
+vim.o.concealcursor = 'n'
 -- Sometimes, Neovim doesn't indent as I like and I feel that this option helps
 vim.bo.autoindent = false
 
@@ -72,7 +76,10 @@ vim.cmd [[syntax match my_mkdLink_paren /)$/]]
 highlight(0, '@markup.heading.1.markdown', { fg = cp.sakuraPink, bg = cp.winterRed })
 highlight(0, '@markup.heading.2.markdown', { fg = cp.lightBlue, bg = cp.waveBlue1 })
 highlight(0, '@markup.heading.3.markdown', { fg = cp.springGreen, bg = cp.winterGreen })
-highlight(0, '@markup.heading.4.markdown', { fg = cp.lotusOrange2, bg = cp.lotusGray2 })
+highlight(0, '@markup.heading.4.markdown', {
+    fg = cp.lotusOrange2,
+    --bg = cp.lotusGray2
+})
 
 
 
