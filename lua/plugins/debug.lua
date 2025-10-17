@@ -26,6 +26,7 @@ return {
       opts = {
         auto_toggle = true,
         windows = {
+          height = 0.3,
           terminal = {
             width = 0.3,
             position = 'right',
