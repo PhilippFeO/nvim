@@ -34,7 +34,7 @@ local add_fotos = {
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/add_fotos.py',
-  args = { vim.fn.expand '~/.tagebuch/2025/10/2025-10-03/', },
+  args = { vim.fn.expand '~/Bilder/z_tmp/test_tagebuch/', },
   cwd = vim.fn.expand '~/.tagebuch/',
 
 }

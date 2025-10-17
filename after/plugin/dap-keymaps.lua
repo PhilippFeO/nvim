@@ -98,29 +98,29 @@ nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpo
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
 
 
--- Dapui-Keymaps
--- ─────────────
-local dapui = require 'dapui'
-
-nmap('<Leader>dr', function()
-  dapui.open({ reset = true })
-end, '[d]apui [r]eset GUI')
-nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
-nmap('<Leader>dw', function()
-  local bufnr = vim.fn.bufnr('DAP Watches')
-  -- All windows holding the buffer
-  -- Almost certainly, there is only one window
-  local winnr = vim.fn.win_findbuf(bufnr)
-  vim.fn.win_gotoid(winnr[1])
-end, 'Goto [d]ap [w]atches')
+-- -- Dapui-Keymaps
+-- -- ─────────────
+-- local dapui = require 'dapui'
+--
+-- nmap('<Leader>dr', function()
+--   dapui.open({ reset = true })
+-- end, '[d]apui [r]eset GUI')
+-- nmap('<Leader>du', dapui.toggle, '[d]ap[u]i toggle')
+-- nmap('<Leader>dw', function()
+--   local bufnr = vim.fn.bufnr('DAP Watches')
+--   -- All windows holding the buffer
+--   -- Almost certainly, there is only one window
+--   local winnr = vim.fn.win_findbuf(bufnr)
+--   vim.fn.win_gotoid(winnr[1])
+-- end, 'Goto [d]ap [w]atches')
 
 
 -- Dapview-Keymaps
 -- ────────────────
 
-nmap('<Leader>ae', function(expr)
+nmap('<Leader>a', function(expr)
   dap_view.add_expr(expr)
-end, '[a]dd [e]xpression under cursor')
+end, '[a]dd expression under cursor')
 nmap('<Leader>jw', function()
   dap_view.jump_to_view 'watches'
 end, '[j]ump to [w]atches')
