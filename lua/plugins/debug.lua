@@ -25,6 +25,7 @@ return {
       -- Are passed to `require 'dap-view.setup()`
       opts = {
         auto_toggle = true,
+        sections = { 'watches', 'scopes', 'exceptions', 'breakpoints', 'threads', 'session', 'repl' },
         windows = {
           height = 0.3,
           terminal = {
