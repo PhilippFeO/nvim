@@ -161,3 +161,19 @@ vim.api.nvim_create_autocmd("User", {
     callback = TexFocusVim,
     desc = "Refocus Neovim after forward search and compilation"
 })
+
+
+-- Keymaps
+-- ───────
+vim.keymap.set({ 'n', 'v', 'i' }, 'j', 'gj',
+    {
+        desc = 'Make <j> act as <gj>, ie. "visual line j"',
+        -- Only for the buffer. It should really really only apply to tex files
+        buffer = true,
+    })
+vim.keymap.set({ 'n', 'v', 'i' }, 'k', 'gk',
+    {
+        desc = 'Make <j> act as <gj>, ie. "visual line j"',
+        -- Only for the buffer. It should really really only apply to tex files
+        buffer = true,
+    })

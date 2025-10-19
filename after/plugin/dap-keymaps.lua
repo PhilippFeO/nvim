@@ -133,7 +133,7 @@ end, '[s]how to [w]atches')
 --   desc = '  DAP: [d]ap [e]val expression',
 -- })
 vim.keymap.set({ 'v', 'n' }, '<Leader>de', function()
-  dapui.eval()
+  require 'dapui'.eval()
 end, {
   desc = '  DAP: [d]ap [e]val expression',
 })
