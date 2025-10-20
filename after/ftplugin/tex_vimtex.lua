@@ -165,15 +165,25 @@ vim.api.nvim_create_autocmd("User", {
 
 -- Keymaps
 -- ───────
-vim.keymap.set({ 'n', 'v', 'i' }, 'j', 'gj',
+vim.keymap.set({ 'n', 'v' }, 'j', 'gj',
     {
         desc = 'Make <j> act as <gj>, ie. "visual line j"',
         -- Only for the buffer. It should really really only apply to tex files
         buffer = true,
     })
-vim.keymap.set({ 'n', 'v', 'i' }, 'k', 'gk',
+vim.keymap.set({ 'n', 'v' }, 'k', 'gk',
     {
         desc = 'Make <j> act as <gj>, ie. "visual line j"',
         -- Only for the buffer. It should really really only apply to tex files
         buffer = true,
     })
+vim.keymap.set('n', '<Leader>s', function()
+    local line_nmb = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, line_nmb, line_nmb, true, {
+        '',
+        '\\bigskip',
+    })
+end, {
+    desc = 'Insert `\\bigskip`',
+    buffer = 0,
+})
