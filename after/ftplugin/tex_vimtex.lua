@@ -2,6 +2,9 @@
 -- │ lervag/vimtex configuration │
 -- ╰─────────────────────────────╯
 
+vim.list = true
+vim.listchars = 'space:•'
+
 -- Experimental
 -- ────────────
 vim.g.vimtex_format_enabled = true
