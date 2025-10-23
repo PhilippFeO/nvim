@@ -3,7 +3,7 @@
 -- ╰─────────────────────────────╯
 
 vim.list = true
-vim.listchars = 'space:•'
+vim.opt.listchars = 'space:•'
 
 -- Experimental
 -- ────────────
