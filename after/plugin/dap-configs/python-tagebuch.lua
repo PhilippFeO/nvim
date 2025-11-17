@@ -36,13 +36,31 @@ local add_fotos = {
   program = vim.fn.expand '~/.tagebuch/tagebuch/add_fotos.py',
   args = { vim.fn.expand '~/Bilder/z_tmp/test_tagebuch/', },
   cwd = vim.fn.expand '~/.tagebuch/',
-
 }
+
+local create_db = {
+  name = 'Tagebuch: Erstelle DB',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/.tagebuch/tagebuch/create_db.py',
+}
+
+local test_create_db = {
+  name = 'Tagebuch: Teste DB-Erstellung (create_db.py)',
+  request = 'launch',
+  type = 'python',
+  module = 'pytest',
+  args = { '-rA', '-sv', './tests/test_create_db.py' },
+  -- program = vim.fn.expand '~/.tagebuch/tests/test_create_db.py',
+}
+
 return {
   configs = {
     create_diary_entry,
     open_diary_entry,
     past_entries,
     add_fotos,
+    create_db,
+    test_create_db,
   },
 }
