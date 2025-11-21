@@ -38,29 +38,7 @@ local kursverwaltung_unittest = {
 }
 
 
-local kursverwaltung_docker_unittest = {
-  name = 'Kursverwaltung – docker – Unittest',
-  type = 'python',
-  request = 'attach',
-  connect = {
-    host = 'localhost',
-    port = 5678,
-  },
-  -- Damit Print-Ausgaben im Debugger auftauchen
-  redirectOutput = true,
-  justMyCode = true,
-  pathMappings = {
-    {
-      localRoot = vim.fn.getcwd(),
-      remoteRoot = '/home/developer/development/kursverwaltung',
-    },
-  },
-  env = {
-    EMAIL_HOST_USER = 'lorem@ipsum.de',
-    SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
-    DEBUG = 'true',
-  },
-}
+
 
 local kursverwaltung_docker = {
   name = 'Kursverwaltung – docker',
@@ -86,11 +64,11 @@ local kursverwaltung_docker = {
   },
 }
 
-local kursverwaltung_docker_listen = {
-  name = 'Kursverwaltung – docker – listen',
+local kursverwaltung_docker_unittest = {
+  name = 'Kursverwaltung – docker – Unittest',
   type = 'python',
-  request = 'listen',
-  listen = {
+  request = 'attach',
+  connect = {
     host = 'localhost',
     port = 5678,
   },
@@ -98,18 +76,45 @@ local kursverwaltung_docker_listen = {
   redirectOutput = true,
   justMyCode = true,
   pathMappings = {
-    -- Die Dateipfade werden relativ zu diesen Verzeichnissen aufgelöst:
-    -- localRoot/kursverwaltung/views.py -> remoteRoot/kursverwaltung/views.py
     {
-      -- Verzeichnis unter dem der Quellcode bei mir lokal liegt
-      -- (Ich sollte in ~/programmieren/kursverwaltung/kursverwaltung/ sein)
       localRoot = vim.fn.getcwd(),
-      -- Verzeichnis, unter dem der Quellcode auf dem anderen Rechner liegt
       remoteRoot = '/home/developer/development/kursverwaltung',
     },
   },
+  env = {
+    EMAIL_HOST_USER = 'lorem@ipsum.de',
+    SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+    DEBUG = 'true',
+  },
 }
 
+
+local kursverwaltung_docker_unittest_current = {
+  name = 'Kursverwaltung – Unittest – Gegenwärtige Entwicklung',
+  type = 'python',
+  request = 'attach',
+  connect = {
+    host = 'localhost',
+    port = 5678,
+  },
+  -- Damit Print-Ausgaben im Debugger auftauchen
+  redirectOutput = true,
+  justMyCode = true,
+  pathMappings = {
+    {
+      localRoot = vim.fn.getcwd(),
+      remoteRoot = '/home/developer/development/kursverwaltung',
+    },
+  },
+  env = {
+    EMAIL_HOST_USER = 'lorem@ipsum.de',
+    SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+    DEBUG = 'true',
+  },
+  args = {
+    '-m', 'pytest', './tests/test_remove_ww_aww_status.py',
+  }
+}
 
 return {
   configs = {
@@ -117,7 +122,7 @@ return {
     kursverwaltung_docker,
     kursverwaltung_docker_unittest,
     kursverwaltung_unittest,
-    kursverwaltung_docker_listen,
+    kursverwaltung_docker_unittest_current,
   },
   -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
   test_configs = {
