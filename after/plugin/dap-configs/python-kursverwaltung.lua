@@ -103,13 +103,15 @@ local kursverwaltung_docker_unittest_current = {
       remoteRoot = '/home/developer/development/kursverwaltung',
     },
   },
-  env = {
-    EMAIL_HOST_USER = 'lorem@ipsum.de',
-    SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
-    DEBUG = 'true',
-  },
+  -- env = {
+  --   EMAIL_HOST_USER = 'lorem@ipsum.de',
+  --   SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+  --   DEBUG = 'true',
+  -- },
+  module = 'pytest',
   args = {
-    '-m', 'pytest', './kursverwaltung/tests/test_remove_ww_aww_status.py',
+    -- '-m', 'pytest',
+    './tests/test_remove_ww_aww_status.py',
   }
 }
 
