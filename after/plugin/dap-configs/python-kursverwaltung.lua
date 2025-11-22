@@ -37,9 +37,6 @@ local kursverwaltung_unittest = {
   }
 }
 
-
-
-
 local kursverwaltung_docker = {
   name = 'Kursverwaltung – docker',
   type = 'python',
@@ -112,7 +109,7 @@ local kursverwaltung_docker_unittest_current = {
     DEBUG = 'true',
   },
   args = {
-    '-m', 'pytest', './tests/test_remove_ww_aww_status.py',
+    '-m', 'pytest', './kursverwaltung/tests/test_remove_ww_aww_status.py',
   }
 }
 
