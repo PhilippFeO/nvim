@@ -59,9 +59,10 @@ local tests = {
   request = 'launch',
   type = 'python',
   module = 'pytest',
-  args = { '-rA', '-sv', './tests/test_create_db.py', './tests/test_helper.py', },
+  args = { '-rA', '-sv', './tests/test_create_db.py', './tests/test_helper.py', './tests/test_new_entry.py', },
   -- program = vim.fn.expand '~/.tagebuch/tests/test_create_db.py',
 }
+
 return {
   configs = {
     create_diary_entry,
@@ -69,7 +70,10 @@ return {
     past_entries,
     add_fotos,
     create_db,
+    test_create_db,
+    tests,
   },
+  -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
   test_configs = {
     test_create_db,
     tests,
