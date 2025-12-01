@@ -59,7 +59,7 @@ local tests = {
   request = 'launch',
   type = 'python',
   module = 'pytest',
-  args = { '-rA', '-sv', './tests/test_create_db.py', './tests/test_helper.py', './tests/test_new_entry.py', },
+  args = { '-rA', '-sv', './tests/test_create_db.py', './tests/test_helper.py', './tests/test_new_entry.py', './tests/test_render_diary_template.py', },
   -- program = vim.fn.expand '~/.tagebuch/tests/test_create_db.py',
 }
 
