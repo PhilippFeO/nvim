@@ -12,7 +12,8 @@ local open_diary_entry = {
   request = 'launch',
   type = 'python',
   program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
-  args = { '--open', os.date('%Y-%m-%d') },
+  -- args = { '--open', os.date('%Y-%m-%d') },
+  args = { '--open', '2026-01-11' },
   cwd = vim.fn.expand '~/.tagebuch/',
 }
 
@@ -29,12 +30,21 @@ local past_entries = {
   -- }
 }
 
+local past_last_month = {
+  name = 'Tagebuch: Öffne letzten Monat',
+  request = 'launch',
+  type = 'python',
+  program = vim.fn.expand '~/.tagebuch/tagebuch/__main__.py',
+  args = { '--last-month' },
+  cwd = vim.fn.expand '~/.tagebuch/',
+}
+
 local add_fotos = {
   name = 'Tagebuch: Füge Fotos zu Tagebuch hinzu',
   request = 'launch',
   type = 'python',
-  program = vim.fn.expand '~/.tagebuch/tagebuch/add_fotos.py',
-  args = { vim.fn.expand '~/Bilder/z_tmp/test_tagebuch/', },
+  program = vim.fn.expand 'tagebuch/__main__.py',
+  args = { '--add-fotos', vim.fn.expand '.tmp/diese_fotos_einsortieren/', },
   cwd = vim.fn.expand '~/.tagebuch/',
 }
 
@@ -72,6 +82,7 @@ return {
     create_db,
     test_create_db,
     tests,
+    past_last_month,
   },
   -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
   test_configs = {
