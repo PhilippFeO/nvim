@@ -27,9 +27,9 @@ return {
         auto_toggle = true,
         -- sections = { 'watches', 'scopes', 'exceptions', 'breakpoints', 'threads', 'sessions', 'repl' },
         windows = {
-          height = 0.3,
+          size = 0.3,
           terminal = {
-            width = 0.3,
+            size = 0.3,
             position = 'right',
           }
         },
