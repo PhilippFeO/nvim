@@ -1,15 +1,30 @@
 ;Used by nvim-ufo
-; What will be folded by default
+; Every `[…] @fold` defines what will be folded by default
+
 [
+  ; (with_statement)
+  ; (try_statement)
+  ; (argument_list) ; De facto Funktionsaufrufe, die sich über mehrere Zeilen erstrecken
   (function_definition)
-  (with_statement)
-  (try_statement)
   (import_from_statement)
-  (argument_list)
   (string)
+  ; ─── Logging ──────────
+  ; log_defaults = {…}
+  (assignment
+    left: (identifier) @log_defaults (#eq? @log_defaults "log_defaults"))
+  ; Alle Logging-Aufrufe, bspw. `logger.info()` oder `logging.info()`
+  (call
+    function: (attribute
+      attribute: (identifier) @log-call)
+        (#any-of? @log-call
+          "debug"
+          "info"
+          "warning"
+          "error"
+          "critical"))
 ] @fold
 
-; not sure, what `+` is for
+; `+`: One or more (like in Regex)
 [
   (import_statement)
   (import_from_statement)

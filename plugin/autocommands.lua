@@ -1,8 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-local dap = require('dap')
-
 -- Disable signcolumn in my wiki (I won't commit it and need no git-signs information)
 autocmd('BufWinEnter', {
     group = augroup('Disable-Signcolumn', { clear = true }),
@@ -13,23 +11,6 @@ autocmd('BufWinEnter', {
     desc = 'Disable signcolumn in Wiki'
 })
 
--- autocmd('BufWinEnter', {
---     group = augroup('Disable-Ruff', { clear = true }),
---     pattern = vim.fn.expand('~') .. '/python/atp-osse/*',
---     command = 'LspStop ruff',
---     desc = 'Disable ruff for atp-osse',
--- })
-
-
--- WinEnter, WinNew
-autocmd('FileReadPost', {
-    group = augroup('CloseFolds', { clear = true }),
-    pattern = '*.py',
-    callback = function()
-        require('ufo').closeAllFolds()
-    end,
-    desc = 'Close all Folds using nvim-ufo'
-})
 
 -- Keymap to search files ignored by .gitignore.
 -- I ignore regular wiki pages I don't want to upload to GitHub but sometimes
@@ -54,6 +35,8 @@ autocmd('BufReadPost', {
     command = 'set ft=htmldjango',
     desc = 'Set ft to "htmldjango" within kursverwaltung/'
 })
+
+
 -- ─── LSP Autocommands ──────────
 -- TODO: Edit kanagawa.nvim or highlight groups using kanagawa's palette because highlight group colors are ugly
 -- TODO: Which highlight group is used by vim.lsp.buf.document_highlight()?

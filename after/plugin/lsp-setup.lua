@@ -15,9 +15,16 @@ vim.diagnostic.config({
 keymap_set(
   { 'n', 'v' }, 'K',
   function()
-    vim.lsp.buf.hover({
-      border = border
-    })
+    -- Open preview window of folded code block (nvim-ufo)
+    local lnum = vim.api.nvim_win_get_cursor(0)[1]
+    local fold_start = vim.fn.foldclosed(lnum)
+    if fold_start ~= -1 then
+      require('ufo').peekFoldedLinesUnderCursor(false, false)
+    else -- Open LSP documentation
+      vim.lsp.buf.hover({
+        border = border
+      })
+    end
   end,
   { desc = 'Hover', }
 )
