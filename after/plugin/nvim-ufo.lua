@@ -10,9 +10,10 @@ vim.o.foldenable = true
 vim.keymap.set('n', 'yR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'yM', require('ufo').closeAllFolds)
 
+local normal_bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg -- is returned in Decimal not Hexadecimal
 vim.api.nvim_set_hl(0, 'UfoFoldPreviewBorder', {
   fg = require("kanagawa.colors").setup().palette.sakuraPink,
-  bg = '#1f1f28',
+  bg = string.format('#%06x', normal_bg),
 })
 
 -- -- Option 2: nvim lsp as LSP client
