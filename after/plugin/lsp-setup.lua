@@ -1,5 +1,4 @@
 local border = require('utils').border
-local keymap_set = vim.keymap.set
 
 vim.diagnostic.config({
   virtual_text = true, -- Show diagnostics next to the code
@@ -12,31 +11,26 @@ vim.diagnostic.config({
 -- ───────
 -- We create a function that lets us more easily define mappings specific
 -- for LSP related items. It sets the mode, buffer and description for us each time.
-keymap_set(
+vim.keymap.set(
   { 'n', 'v' }, 'K',
   function()
-    -- Open preview window of folded code block (nvim-ufo)
-    local lnum = vim.api.nvim_win_get_cursor(0)[1]
-    local fold_start = vim.fn.foldclosed(lnum)
-    if fold_start ~= -1 then
-      require('ufo').peekFoldedLinesUnderCursor(false, false)
-    else -- Open LSP documentation
-      vim.lsp.buf.hover({
-        border = border
-      })
-    end
+    -- without this line the nvim-ufo preview doesn't work
+    local _ = require('ufo').peekFoldedLinesUnderCursor()
+    vim.lsp.buf.hover({
+      border = border,
+    })
   end,
-  { desc = 'Hover', }
+  { desc = 'Hover' }
 )
-keymap_set(
+vim.keymap.set(
   'n', '<Leader>e',
   vim.diagnostic.open_float, -- '<C-w>d' == 'vim.diagnostic.open_float'
   {
     remap = true,
-    desc = "Open floating diagnostic message"
+    desc = "Open floating diagnostic message",
   }
 )
-keymap_set(
+vim.keymap.set(
   'n', '<Leader>q',
   vim.diagnostic.setloclist,
   { desc = "Open diagnostics list as Location List" }
@@ -50,7 +44,7 @@ end
 -- `nvim -c "Telescope lsp_dynamic_workspace_symbols`,
 -- the LSP has to be started beforehand, even if non python
 -- file (fi. plain nvim) was opened.
-keymap_set(
+vim.keymap.set(
   'n',
   '<Leader>as',
   require('telescope.builtin').lsp_dynamic_workspace_symbols,
@@ -68,37 +62,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
-    keymap_set(
+    vim.keymap.set(
       'n', 'grd',
       vim.lsp.buf.declaration,
       { desc = lsp_desc('[g]oto [d]eclaration') }
     )
-    keymap_set(
+    vim.keymap.set(
       'n', 'grD',
       vim.lsp.buf.definition,
       { desc = lsp_desc('[g]oto [D]efinition (as in plain vim)') }
     )
-    keymap_set(
+    vim.keymap.set(
       'n', '<Leader>ds',
       require('telescope.builtin').lsp_document_symbols,
       { desc = lsp_desc('[d]ocument [s]ymbols') })
-    keymap_set(
+    vim.keymap.set(
       'n', 'gO',
       require('telescope.builtin').lsp_document_symbols,
       {
         remap = true,
-        desc = lsp_desc('document symbols (remapped to use telescope)')
+        desc = lsp_desc('document symbols (remapped to use telescope)'),
       }
     )
-    keymap_set(
+    vim.keymap.set(
       'n', 'grr',
-      require 'telescope.builtin'.lsp_references,
+      require('telescope.builtin').lsp_references,
       {
         -- remap = true,
         desc = '[g]oto [rr]eferences',
       }
     )
-    keymap_set(
+    vim.keymap.set(
       'n', '<Leader>i',
       function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
@@ -108,20 +102,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- difference to `h vim.lsp.buf.hover` unclear
     -- Guess, hover is more general
-    keymap_set(
+    vim.keymap.set(
       'n', '<C-k>',
       vim.lsp.buf.signature_help,
       { desc = lsp_desc('Signature Documentation') }
     )
 
     -- Workspace related
-    keymap_set(
+    vim.keymap.set(
       'n',
       '<Leader>as',
       require('telescope.builtin').lsp_dynamic_workspace_symbols,
       { desc = lsp_desc('[a]ll workspace [s]ymbols') }
     )
-    keymap_set(
+    vim.keymap.set(
       'n',
       '<leader>af',
       function()

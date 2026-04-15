@@ -2,19 +2,72 @@
 
 
 vim.o.foldcolumn = '0' -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider needs a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+-- ─── Keymaps ──────────
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'yR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'yM', require('ufo').closeAllFolds)
+vim.keymap.set('n', 'zR', function()
+  require('ufo').openAllFolds()
+  vim.cmd.normal('zz')
+end
+)
+vim.keymap.set('n', 'zM', function()
+  require('ufo').closeAllFolds()
+  vim.cmd.normal('zz')
+end)
+-- Toggle Folds via <CR>
+vim.keymap.set('n', '<CR>', 'za', { remap = true })
 
+-- ─── Highlight Groups ──────────
+local kanagawa_colors = require("kanagawa.colors").setup().palette
 local normal_bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg -- is returned in Decimal not Hexadecimal
 vim.api.nvim_set_hl(0, 'UfoFoldPreviewBorder', {
-  fg = require("kanagawa.colors").setup().palette.sakuraPink,
+  fg = kanagawa_colors.sakuraPink,
   bg = string.format('#%06x', normal_bg),
 })
+-- Do not highlight Folded lines. This creates to much visual noise, ...
+vim.api.nvim_set_hl(0, 'Folded', {
+  bg = string.format('#%06x', normal_bg),
+})
+-- ... rather work with a brigh UfoFoldedEllipsis.
+vim.api.nvim_set_hl(0, 'UfoFoldedEllipsis', {
+  fg = kanagawa_colors.springBlue,
+})
+-- Color is the original bg color for Folded. A construction as for `normal_bg` can't be used because Folded is altered within this file, hence it would yield the new bg value.
+vim.api.nvim_set_hl(0, 'UfoFoldedBg', {
+  bg = '#2a2a37',
+})
+
+
+local handler = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
+  local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+  local sufWidth = vim.fn.strdisplaywidth(suffix)
+  local targetWidth = width - sufWidth
+  local curWidth = 0
+  for _, chunk in ipairs(virtText) do
+    local chunkText = chunk[1]
+    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    if targetWidth > curWidth + chunkWidth then
+      table.insert(newVirtText, chunk)
+    else
+      chunkText = truncate(chunkText, targetWidth - curWidth)
+      local hlGroup = chunk[2]
+      table.insert(newVirtText, { chunkText, hlGroup })
+      chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      -- str width returned from truncate() may less than 2nd argument, need padding
+      if curWidth + chunkWidth < targetWidth then
+        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+      end
+      break
+    end
+    curWidth = curWidth + chunkWidth
+  end
+  table.insert(newVirtText, { suffix, 'MoreMsg' })
+  return newVirtText
+end
 
 -- -- Option 2: nvim lsp as LSP client
 -- -- Tell the server the capability of foldingRange,
@@ -40,6 +93,8 @@ vim.api.nvim_set_hl(0, 'UfoFoldPreviewBorder', {
 require('ufo').setup({
   -- How long the unfolded code will be highlighted
   open_fold_hl_timeout = 2000,
+  fold_virt_text_handler = handler,
+  ---@diagnostic disable-next-line: unused-local
   provider_selector = function(bufnr, filetype, buftype)
     return { 'treesitter', 'indent' }
   end,
@@ -64,6 +119,11 @@ require('ufo').setup({
       border = require('utils').border,
       -- Normal: Basically the Background of the Editor
       winhighlight = 'Normal:Normal,FloatBorder:UfoFoldPreviewBorder',
+    },
+    mappings = {
+      switch = 'K',
+      scrollU = '<C-u>',
+      scrollD = '<C-d>',
     },
   },
 })
