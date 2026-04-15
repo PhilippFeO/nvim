@@ -1,10 +1,25 @@
 -- https://github.com/kevinhwang91/nvim-ufo
 
 
-vim.o.foldcolumn = '0' -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider needs a large value, feel free to decrease the value
+-- ─── Foldcolumn ──────────
+-- Basically the width of columns for indicating folds
+-- '0': No foldcolumn at all
+-- '1': Merges multiple foldlevels into one column (or in general: #foldlevel < #foldcolumn merging is done)''
+-- 'auto[1-9]': automatic width of foldcolumn depending on foldlevel
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99 -- Using ufo provider needs a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+-- Only visible if `h foldcolumn` > 0
+vim.opt.fillchars = {
+  fold = '',
+  -- foldopen = '',
+  foldopen = '',
+  foldclose = '',
+  foldsep = ' ', -- No '|'
+  -- foldinner = ' ',
+}
+
 
 -- ─── Keymaps ──────────
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
@@ -20,6 +35,7 @@ end)
 -- Toggle Folds via <CR>
 vim.keymap.set('n', '<CR>', 'za', { remap = true })
 
+
 -- ─── Highlight Groups ──────────
 local kanagawa_colors = require("kanagawa.colors").setup().palette
 local normal_bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg -- is returned in Decimal not Hexadecimal
@@ -33,7 +49,7 @@ vim.api.nvim_set_hl(0, 'Folded', {
 })
 -- ... rather work with a brigh UfoFoldedEllipsis.
 vim.api.nvim_set_hl(0, 'UfoFoldedEllipsis', {
-  fg = kanagawa_colors.springBlue,
+  fg = kanagawa_colors.waveAqua1,
 })
 -- Color is the original bg color for Folded. A construction as for `normal_bg` can't be used because Folded is altered within this file, hence it would yield the new bg value.
 vim.api.nvim_set_hl(0, 'UfoFoldedBg', {
@@ -41,6 +57,9 @@ vim.api.nvim_set_hl(0, 'UfoFoldedBg', {
 })
 
 
+--- Custom function to display the folded line, here:
+---   `<Contents of line> + <suffix>`.
+--- As far as I can see, the contents of the line have to be collected explicitly, bevore the suffix is appended but I haven't inspected the code in detail. Code taken from the README.md.
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (' 󰁂 %d '):format(endLnum - lnum)
@@ -65,7 +84,8 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     end
     curWidth = curWidth + chunkWidth
   end
-  table.insert(newVirtText, { suffix, 'MoreMsg' })
+  --- Highlight Group for the suffix
+  table.insert(newVirtText, { suffix, 'UfoFoldedEllipsis' })
   return newVirtText
 end
 
