@@ -11,14 +11,14 @@ vim.o.foldlevel = 99 -- Using ufo provider needs a large value, feel free to dec
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 -- Only visible if `h foldcolumn` > 0
-vim.opt.fillchars = {
+vim.opt.fillchars:append({
   fold = '',
   -- foldopen = '',
   foldopen = '',
   foldclose = '',
   foldsep = ' ', -- No '|'
   -- foldinner = ' ',
-}
+})
 
 
 -- ─── Keymaps ──────────

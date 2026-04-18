@@ -32,127 +32,161 @@ vim.g.maplocalleader = 'ö'
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system {
+  vim.fn.system({
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable', -- latest stable release
     lazypath,
-  }
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
 --  You can configure plugins using the `config` key.
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-require('lazy').setup({
+require('lazy').setup(
   {
-    'PhilippFeO/cmp-help-tags',
-    -- config = true -- runs setup({}) (with empty table)
-    opts = {
-      filetypes = {
-        'markdown',
-        'lua'
-      }
-    }
-  },
-  'PhilippFeO/telescope-filelinks.nvim',
-  {
-    'PhilippFeO/cmp-csv',
-    opts = {
-      documentation_format = '%s (Col 1)\n%s (Col 2)\n%s (Col 3)',
-      csv_path = vim.fn.expand '~/programmieren/grocery-shopper/.resources/ingredient_category_url.csv',
-      filetype = 'yaml',
-      completion_column = 1,
-      skip_rows = 0,
+    {
+      'PhilippFeO/cmp-help-tags',
+      -- config = true -- runs setup({}) (with empty table)
+      opts = {
+        filetypes = {
+          'markdown',
+          'lua',
+        },
+      },
     },
-    cond = not DLR_Machine,
-  },
+    'PhilippFeO/telescope-filelinks.nvim',
+    {
+      'PhilippFeO/cmp-csv',
+      opts = {
+        documentation_format = '%s (Col 1)\n%s (Col 2)\n%s (Col 3)',
+        csv_path = vim.fn.expand(
+          '~/programmieren/grocery-shopper/.resources/ingredient_category_url.csv'),
+        filetype = 'yaml',
+        completion_column = 1,
+        skip_rows = 0,
+      },
+      cond = not DLR_Machine,
+    },
 
-  {
-    'PhilippFeO/telescope-link-headings.nvim',
-    -- `dev = true` implies using the local version of the plugin
-    -- location specified via `dev.path` in `opts` parameter (s. below)
-    dev = true,
-    branch = 'master',
-    cond = false,
-  },
+    {
+      'PhilippFeO/telescope-link-headings.nvim',
+      -- `dev = true` implies using the local version of the plugin
+      -- location specified via `dev.path` in `opts` parameter (s. below)
+      dev = true,
+      branch = 'master',
+      cond = false,
+    },
 
-  -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
-  -- setup in after/plugin/lualine.lua
-  'nvim-lualine/lualine.nvim',
-  'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
-  'windwp/nvim-autopairs',
+    -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
+    -- setup in after/plugin/lualine.lua
+    'nvim-lualine/lualine.nvim',
+    'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
+    'windwp/nvim-autopairs',
 
-  -- -- kanagawa colors and themes are in misc/
-  -- {
-  --   'norcalli/nvim-colorizer.lua',
-  --   -- runs setup({})
-  --   -- otherwise:
-  --   --    require'colorizer'.setup()
-  --   -- after require 'lazy'.setup()
-  --   config = true
-  -- },
+    -- -- kanagawa colors and themes are in misc/
+    -- {
+    --   'norcalli/nvim-colorizer.lua',
+    --   -- runs setup({})
+    --   -- otherwise:
+    --   --    require'colorizer'.setup()
+    --   -- after require 'lazy'.setup()
+    --   config = true
+    -- },
 
-  {
-    'lervag/vimtex',
-    lazy = false, -- VimTeX must not be lazy loaded.
-    ft = { 'tex' },
-  },
+    {
+      'lervag/vimtex',
+      lazy = false, -- VimTeX must not be lazy loaded.
+      ft = { 'tex' },
+    },
 
-  -- ─── Snippets ──────────
-  require 'plugins.ultisnips',
-  'honza/vim-snippets',
-  {
-    -- ultisnips sources for LSP
-    -- Ich hatte in letzter Zeit (2024-11-01) oft das Problem, dass irgendwann die Schnipsel nicht mehr funktionierten, bspw. `ilink` im Wiki oder `feat` in Git. Keine Ahnung, woran das liegt.
-    'quangnguyen30192/cmp-nvim-ultisnips',
-    -- Hier erhalte ich Fehler
-    -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
-    -- Hier funktioniert's
-    commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
-    init = function() require("cmp_nvim_ultisnips").setup({}) end,
-  },
+    -- ─── Snippets ──────────
+    require('plugins.ultisnips'),
+    'honza/vim-snippets',
+    {
+      -- ultisnips sources for LSP
+      -- Ich hatte in letzter Zeit (2024-11-01) oft das Problem, dass irgendwann die Schnipsel nicht mehr funktionierten, bspw. `ilink` im Wiki oder `feat` in Git. Keine Ahnung, woran das liegt.
+      'quangnguyen30192/cmp-nvim-ultisnips',
+      -- Hier erhalte ich Fehler
+      -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
+      -- Hier funktioniert's
+      commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
+      init = function() require("cmp_nvim_ultisnips").setup({}) end,
+    },
 
-  require 'plugins.nvim-ufo',
-  require 'plugins.autoformat',
-  require 'plugins.debug',
-  -- require 'plugins.nvim-dap-view',
-  require 'plugins.git-plugins',
-  require 'plugins.gitlinker',
-  require 'plugins.jupynium',
-  require 'plugins.kanagawa',
-  require 'plugins.lazydev',
-  require 'plugins.nvim-cmp',
-  require 'plugins.nvim-lspconfig-mason',
-  require 'plugins.octo',
-  require 'plugins.telescope',
-  require 'plugins.telescope-fzf-native',
-  require 'plugins.treesitter',
-  require 'plugins.vim-markdown',
-  require 'plugins.vim-sleuth',
-  require 'plugins.wiki',
+    {
+      'tpope/vim-fugitive',
+      enabled = false,
+    },
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    { 'lewis6991/gitsigns.nvim' },
 
-  -- note: next step on your neovim journey: add/configure additional "plugins" for kickstart
-  --       these are some example plugins that i've included in the kickstart repository.
-  --       uncomment any of the lines below to enable them.
-  -- require 'plugins.lazy.debug', -- Already configured for python but better check it again
+    {
+      "NeogitOrg/neogit",
+      lazy = true,
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- required
 
-  -- note: the import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    you can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --
-  --    for additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  --
-  --    an additional note is that if you only copied in the `init.lua`, you can just comment this line
-  --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
-  -- { import = 'custom.plugins' },
-}, {
-  dev = { path = '~/dotfiles/nvim/lua/myplugins/' }
-})
+        -- Only one of these is needed.
+        "sindrets/diffview.nvim", -- optional
+        -- "esmuellert/codediff.nvim", -- optional
+
+        -- For a custom log pager
+        -- "m00qek/baleia.nvim", -- optional
+
+        -- Only one of these is needed.
+        "nvim-telescope/telescope.nvim", -- optional
+        -- "ibhagwan/fzf-lua",              -- optional
+        -- "nvim-mini/mini.pick",           -- optional
+        -- "folke/snacks.nvim",             -- optional
+      },
+      cmd = "Neogit",
+      keys = {
+        { "<leader>gs", "<cmd>Neogit kind=floating<cr>", desc = "Show Neogit UI" },
+      },
+      kind = "floating",
+    },
+
+    require('plugins.nvim-ufo'),
+    require('plugins.autoformat'),
+    require('plugins.debug'),
+    -- require 'plugins.nvim-dap-view',
+    require('plugins.gitlinker'),
+    require('plugins.jupynium'),
+    require('plugins.kanagawa'),
+    require('plugins.lazydev'),
+    require('plugins.nvim-cmp'),
+    require('plugins.nvim-lspconfig-mason'),
+    require('plugins.octo'),
+    require('plugins.telescope'),
+    require('plugins.telescope-fzf-native'),
+    require('plugins.treesitter'),
+    require('plugins.vim-markdown'),
+    require('plugins.vim-sleuth'),
+    require('plugins.wiki'),
+
+    -- note: next step on your neovim journey: add/configure additional "plugins" for kickstart
+    --       these are some example plugins that i've included in the kickstart repository.
+    --       uncomment any of the lines below to enable them.
+    -- require 'plugins.lazy.debug', -- Already configured for python but better check it again
+
+    -- note: the import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+    --    you can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+    --    up-to-date with whatever is in the kickstart repo.
+    --
+    --    for additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+    --
+    --    an additional note is that if you only copied in the `init.lua`, you can just comment this line
+    --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
+    -- { import = 'custom.plugins' },
+  }, {
+    dev = { path = '~/dotfiles/nvim/lua/myplugins/' },
+  })
 
 
 -- setup neovim lua configuration

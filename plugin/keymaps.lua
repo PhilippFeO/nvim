@@ -1,5 +1,5 @@
-local dap = require 'dap'
-local dapui = require 'dapui'
+local dap = require('dap')
+local dapui = require('dapui')
 
 
 vim.keymap.set('n', '<Leader>n', function()
@@ -8,7 +8,32 @@ vim.keymap.set('n', '<Leader>n', function()
 end, { desc = 'Get contents of register a' })
 
 
-vim.keymap.set('n', '<BS>', vim.cmd.close, { desc = 'Close window' })
+vim.keymap.set('n', '<BS>', function()
+    -- Check all windows in the current tabpage. If any window contains a 'Diffview.nvim' buffer (name starting with 'diffview:'), close the tab, otherwise, close the current window.
+    local tab = vim.api.nvim_get_current_tabpage()
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        local name = vim.api.nvim_buf_get_name(buf)
+        if name:match('^diffview:') then
+            vim.cmd('DiffviewClose')
+            return
+        end
+    end
+    -- no diffview buffer found in this tab -> close current window
+    -- otherwise try to close current window but handle "last window" error
+    local ok, err = pcall(vim.cmd.close)
+    if not ok then
+        -- detect last-window error (E444)
+        local err_code = 'E444'
+        if tostring(err):match(err_code) or tostring(err):match('Cannot close last window') then
+            vim.notify('Closing last window not possible (' .. err_code .. ').', vim.log.levels.WARN)
+        else
+            -- rethrow other errors
+            error(err)
+        end
+    end
+end, { desc = 'Close window or "diffview:"-Tab' })
+
 -- cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>'
 vim.keymap.set('c', '<Enter>', function()
     local cmdtype = vim.fn.getcmdtype()
@@ -48,7 +73,7 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l', { remap = true, desc = 'Go to window 
 vim.keymap.set('n', '<Leader><Leader>x', '<Cmd>write | source %<CR>', { desc = 'Execute (source) current file' })
 vim.keymap.set('n', '<Leader>x', '.lua<CR>', { desc = 'E[x]ecute current line' })
 vim.keymap.set('v', '<Leader>x', ':lua<CR>', { desc = 'E[x]ecute selected lines' })
-vim.keymap.set('n', '<LocalLeader>c', function() require 'treesitter-context'.toggle() end,
+vim.keymap.set('n', '<LocalLeader>c', function() require('treesitter-context').toggle() end,
     { desc = 'toggle treesitter-[c]ontext' }
 )
 vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' })
