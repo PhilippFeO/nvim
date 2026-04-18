@@ -34,8 +34,6 @@ vim.lsp.config('lua_ls', {
       format = {
         enable = true,
         defaultConfig = {
-          align_call_args = 'true',
-          align_function_params = 'true',
           space_around_assign_operator = 'true',
           -- `f('lorem')('ipsum')` wont becom `f 'lorem' 'ipsum'`
           call_arg_parentheses = 'always',
