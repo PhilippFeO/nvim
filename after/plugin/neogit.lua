@@ -2,7 +2,7 @@
 -- y: Öffne alle Revisions (Zweige (remote, loka), Tags, Stashes, …)
 -- „Popups“ öffnen sich und bieten weitere Optionen für Befehl an.
 
-local neogit = require('neogit')
+
 local ngit = require("neogit.lib.git")
 -- local ngit = neogit.lib.git
 -- local b = ngit.branch.current()
@@ -33,14 +33,11 @@ local function final_cleanup(_)
     -- remotes: append -r
     -- => git branch -d -r NAME
     result = ngit.cli.branch.delete.name(current_branch).call({ await = true })
-    if result and result:success() or false then
+    if result:success() then
       -- result = ngit.cli.branch.delete.remotes.name(remote .. '/' .. current_branch).call({ await = true })
-      local r = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
-      print(vim.inspect(r))
+      ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
     end
   end
-
-  return result and result:success() or false
 end
 
 
