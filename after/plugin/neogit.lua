@@ -4,12 +4,6 @@
 
 
 local ngit = require("neogit.lib.git")
--- local ngit = neogit.lib.git
--- local b = ngit.branch.current()
--- 'connected' Upstream branch
--- print(vim.inspect(ngit.branch.upstream(b)))
--- print(vim.inspect(ngit.cli.branch.delete.name('test')))
--- print(vim.inspect(ngit.cli.branch.delete.remotes.name('test').call({ await = true })))
 
 -- Execute after PR was merged
 --  - Fetches new main
