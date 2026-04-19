@@ -145,11 +145,9 @@ require('lazy').setup(
         -- "nvim-mini/mini.pick",           -- optional
         -- "folke/snacks.nvim",             -- optional
       },
-      cmd = "Neogit",
       keys = {
         { "<leader>gs", "<cmd>Neogit kind=floating<cr>", desc = "Show Neogit UI" },
       },
-      kind = "floating",
     },
 
     require('plugins.nvim-ufo'),
