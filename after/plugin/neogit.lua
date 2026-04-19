@@ -5,10 +5,11 @@
 
 local ngit = require("neogit.lib.git")
 
--- Execute after PR was merged
---  - Fetches new main
---  - checks it out
---  - deletes feature branch it's remote counterpart
+-- Does the following on a feature branch (Execute after PR was merged):
+--  git fetch origin/main (with --prune, s. .gitconfig)
+--  git checkout origin/main
+--  git push origin --delete feature
+--  git branch -d feature
 local function final_cleanup(_)
   local remote = ngit.branch.upstream_remote()
   local current_branch = ngit.branch.current()
@@ -17,23 +18,20 @@ local function final_cleanup(_)
   local result
   if remote and current_branch and main and upstream_main then
     -- TODO(Philipp): Add --prune <19-04-2026>
-    print('Fetch from "' .. remote .. main .. '"')
+    print('Fetch from ' .. remote .. '/' .. main)
     ngit.fetch.fetch(remote, main)
     -- Or `checkout(main)`?
     -- upstream_main, if pushing to main is permitted
     print('Checkout ' .. upstream_main)
     ngit.branch.checkout(upstream_main)
     -- delete: append -d
-    -- remotes: append -r
+    -- (remotes: append -r)
     -- => git branch -d -r NAME
     print('Delete ' .. remote .. '/' .. current_branch)
     result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
-    local tmp = result:success()
-    print('tmp: ')
-    print(tmp)
-    if tmp then
+    if result:success() then
       print('Delete ' .. current_branch)
-      result = ngit.cli.branch.delete.name(current_branch).call({ await = true })
+      ngit.cli.branch.delete.name(current_branch).call({ await = true })
     end
   end
 end
@@ -82,6 +80,7 @@ require('neogit').setup({
 })
 
 
+-- Must come after require('neogit').setup().
 local kanagawa_colors = require("kanagawa.colors").setup().palette
 vim.api.nvim_set_hl(0, 'NeogitSectionHeader', {
   fg = kanagawa_colors.dragonBlue,
