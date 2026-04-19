@@ -28,7 +28,8 @@ local function final_cleanup(_)
     -- => git branch -d -r NAME
     result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
     local tmp = result:success()
-    print('tmp: ' .. tmp)
+    print('tmp: ')
+    print(tmp)
     if tmp then
       -- result = ngit.cli.branch.delete.remotes.name(remote .. '/' .. current_branch).call({ await = true })
       result = ngit.cli.branch.delete.name(current_branch).call({ await = true })
