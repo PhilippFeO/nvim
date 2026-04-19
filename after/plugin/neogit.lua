@@ -34,27 +34,13 @@ local function final_cleanup(_)
     -- => git branch -d -r NAME
     result = ngit.cli.branch.delete.name(current_branch).call({ await = true })
     if result and result:success() or false then
-      result = ngit.cli.branch.delete.remotes.name(remote .. '/' .. current_branch).call({ await = true })
+      -- result = ngit.cli.branch.delete.remotes.name(remote .. '/' .. current_branch).call({ await = true })
+      local r = ngit.cli.push.delete.remote(remote).to(current_branch)
+      print(vim.inspect(r))
     end
   end
 
   return result and result:success() or false
-
-  -- -- You can access the popup state (enabled flags) like so:
-  -- local cli_args = popup:get_arguments()
-  --
-  -- -- You can use Neogit's git abstraction for many common operations
-  -- -- local git = require("neogit.lib.git")
-  --
-  -- -- The input library provides some helpful interfaces for getting user
-  -- -- input
-  -- local input = require("neogit.lib.input")
-  -- local user_input = input.get_user_input("User-specified free text for the action")
-  --
-  -- vim.notify(
-  --   "Hello from my custom action!\n"
-  --   .. "CLI args: `" .. table.concat(cli_args, " ") .. "`\n"
-  --   .. "User input: `" .. user_input .. "`")
 end
 
 
