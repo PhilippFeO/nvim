@@ -19,19 +19,20 @@ local function final_cleanup(_)
     -- TODO(Philipp): Add --prune <19-04-2026>
     print('Fetch from "' .. remote .. main .. '"')
     ngit.fetch.fetch(remote, main)
-    -- Oder `checkout(main)`?
+    -- Or `checkout(main)`?
     -- upstream_main, if pushing to main is permitted
     print('Checkout ' .. upstream_main)
     ngit.branch.checkout(upstream_main)
     -- delete: append -d
     -- remotes: append -r
     -- => git branch -d -r NAME
+    print('Delete ' .. remote .. '/' .. current_branch)
     result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
     local tmp = result:success()
     print('tmp: ')
     print(tmp)
     if tmp then
-      -- result = ngit.cli.branch.delete.remotes.name(remote .. '/' .. current_branch).call({ await = true })
+      print('Delete ' .. current_branch)
       result = ngit.cli.branch.delete.name(current_branch).call({ await = true })
     end
   end
