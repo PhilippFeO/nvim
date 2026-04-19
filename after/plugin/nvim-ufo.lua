@@ -17,6 +17,7 @@ vim.opt.fillchars:append({
   foldopen = '',
   foldclose = '',
   foldsep = ' ', -- No '|'
+  -- Doesn't work with Neovim 0.11
   -- foldinner = ' ',
 })
 
@@ -26,14 +27,14 @@ vim.opt.fillchars:append({
 vim.keymap.set('n', 'zR', function()
   require('ufo').openAllFolds()
   vim.cmd.normal('zz')
-end
-)
+end)
 vim.keymap.set('n', 'zM', function()
   require('ufo').closeAllFolds()
   vim.cmd.normal('zz')
 end)
--- Toggle Folds via <CR>
-vim.keymap.set('n', '<CR>', 'za', { remap = true })
+-- Toggle Folds
+vim.keymap.set('n', '<Leader>o', 'za', { remap = true })
+vim.keymap.set('n', 'ya', 'za', { remap = true })
 
 
 -- ─── Highlight Groups ──────────
