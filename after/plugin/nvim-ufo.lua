@@ -39,7 +39,7 @@ vim.keymap.set('n', '<CR>', 'za', { remap = true })
 -- ─── Highlight Groups ──────────
 local kanagawa_colors = require("kanagawa.colors").setup().palette
 local normal_bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg -- is returned in Decimal not Hexadecimal
-vim.api.nvim_set_hl(0, 'UfoFoldPreviewBorder', {
+vim.api.nvim_set_hl(0, 'MyUfoFoldPreviewBorder', {
   fg = kanagawa_colors.sakuraPink,
   bg = string.format('#%06x', normal_bg),
 })
@@ -138,7 +138,7 @@ require('ufo').setup({
       winblend = 0,
       border = require('utils').border,
       -- Normal: Basically the Background of the Editor
-      winhighlight = 'Normal:Normal,FloatBorder:UfoFoldPreviewBorder',
+      winhighlight = 'Normal:Normal,FloatBorder:MyUfoFoldPreviewBorder',
     },
     mappings = {
       switch = 'K',
