@@ -127,26 +127,27 @@ require('lazy').setup(
     { 'lewis6991/gitsigns.nvim' },
 
     {
-      "NeogitOrg/neogit",
+      'NeogitOrg/neogit',
       lazy = true,
       dependencies = {
-        "nvim-lua/plenary.nvim", -- required
+        'nvim-lua/plenary.nvim', -- required
 
         -- Only one of these is needed.
-        "sindrets/diffview.nvim", -- optional
-        -- "esmuellert/codediff.nvim", -- optional
+        'sindrets/diffview.nvim', -- optional
+        -- 'esmuellert/codediff.nvim', -- optional
 
         -- For a custom log pager
-        -- "m00qek/baleia.nvim", -- optional
+        -- 'm00qek/baleia.nvim', -- optional
 
         -- Only one of these is needed.
-        "nvim-telescope/telescope.nvim", -- optional
-        -- "ibhagwan/fzf-lua",              -- optional
-        -- "nvim-mini/mini.pick",           -- optional
-        -- "folke/snacks.nvim",             -- optional
+        'nvim-telescope/telescope.nvim', -- optional
+        -- 'ibhagwan/fzf-lua',              -- optional
+        -- 'nvim-mini/mini.pick',           -- optional
+        -- 'folke/snacks.nvim',             -- optional
       },
       keys = {
-        { "<leader>gs", "<cmd>Neogit kind=floating<cr>", desc = "Show Neogit UI" },
+        { '<leader>gs', '<cmd>Neogit kind=floating<cr>', desc = 'Show Neogit UI in floating window' },
+        { '<leader>gt', '<cmd>Neogit kind=tab<cr>',      desc = 'Show Neogit UI in new tab' },
       },
     },
 
