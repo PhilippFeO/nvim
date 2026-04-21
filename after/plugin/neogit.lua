@@ -35,6 +35,7 @@ local function final_cleanup(_)
     result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
     if result:success() then
       print('Delete ' .. current_branch)
+      -- git branch -v | grep "\[entfernt\]" | cut -f 3 -d ' ' | xargs git branch -D
       ngit.cli.branch.delete.name(current_branch).call({ await = true })
     end
   end
