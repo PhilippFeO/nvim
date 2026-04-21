@@ -21,12 +21,11 @@ local function final_cleanup(_)
   end
   local upstream_mdb = ngit.branch.upstream(main_dev_branch)
   local result
-  if remote and current_branch and main_dev_branch and upstream_mdb then
+  if remote and current_branch and upstream_mdb then
     print('Fetch from ' .. remote .. '/' .. main_dev_branch)
     -- Done with --prune, s. ~/.gitconfig
     ngit.fetch.fetch(remote, main_dev_branch)
     -- Or `checkout(main)`?
-    -- upstream_main, if pushing to main is permitted
     print('Checkout ' .. upstream_mdb)
     ngit.branch.checkout(upstream_mdb)
     -- delete: append -d
