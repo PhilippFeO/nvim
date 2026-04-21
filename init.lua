@@ -148,6 +148,7 @@ require('lazy').setup(
       keys = {
         { '<leader>gs', '<cmd>Neogit kind=floating<cr>', desc = 'Show Neogit UI in floating window' },
         { '<leader>gt', '<cmd>Neogit kind=tab<cr>',      desc = 'Show Neogit UI in new tab' },
+        { '<leader>gv', '<cmd>Neogit kind=vsplit<cr>',   desc = 'Show Neogit UI in vertical split' },
       },
     },
 
