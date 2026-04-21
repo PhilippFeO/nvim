@@ -2,8 +2,8 @@
 -- y: Öffne alle Revisions (Zweige (remote, loka), Tags, Stashes, …)
 -- „Popups“ öffnen sich und bieten weitere Optionen für Befehl an.
 
-
 local ngit = require("neogit.lib.git")
+-- ngit.config.set('neogit.baseBranch', 'origin/dev') --get("neogit.baseBranch")
 
 -- Does the following on a feature branch (Execute after PR was merged):
 --  git fetch origin/main (with --prune, s. .gitconfig)
@@ -13,17 +13,22 @@ local ngit = require("neogit.lib.git")
 local function final_cleanup(_)
   local remote = ngit.branch.upstream_remote()
   local current_branch = ngit.branch.current()
-  local main = ngit.branch.base_branch()
-  local upstream_main = ngit.branch.upstream(main)
+  local main_dev_branch
+  if vim.fn.getcwd():find('kursverwaltung', 1, true) then
+    main_dev_branch = 'dev'
+  else
+    main_dev_branch = 'main'
+  end
+  local upstream_mdb = ngit.branch.upstream(main_dev_branch)
   local result
-  if remote and current_branch and main and upstream_main then
-    -- TODO(Philipp): Add --prune <19-04-2026>
-    print('Fetch from ' .. remote .. '/' .. main)
-    ngit.fetch.fetch(remote, main)
+  if remote and current_branch and main_dev_branch and upstream_mdb then
+    print('Fetch from ' .. remote .. '/' .. main_dev_branch)
+    -- Done with --prune, s. ~/.gitconfig
+    ngit.fetch.fetch(remote, main_dev_branch)
     -- Or `checkout(main)`?
     -- upstream_main, if pushing to main is permitted
-    print('Checkout ' .. upstream_main)
-    ngit.branch.checkout(upstream_main)
+    print('Checkout ' .. upstream_mdb)
+    ngit.branch.checkout(upstream_mdb)
     -- delete: append -d
     -- (remotes: append -r)
     -- => git branch -d -r NAME
