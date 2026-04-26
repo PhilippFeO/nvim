@@ -117,11 +117,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     )
     vim.keymap.set(
       'n',
-      '<leader>af',
+      '<leader>ld',
       function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end,
-      { desc = lsp_desc('[a]ll workspace list [f]olders') }
+      { desc = lsp_desc('[l]ist all workspace [d]irectories/folders') }
     )
   end,
   desc = 'Lorem Ipsum',
