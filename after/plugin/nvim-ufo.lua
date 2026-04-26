@@ -33,8 +33,7 @@ vim.keymap.set('n', 'zM', function()
   vim.cmd.normal('zz')
 end)
 -- Toggle Folds
-vim.keymap.set('n', '<Leader>o', 'za', { remap = true })
-vim.keymap.set('n', 'ya', 'za', { remap = true })
+vim.keymap.set('n', '<Leader>af', 'za', { remap = true })
 
 
 -- ─── Highlight Groups ──────────
