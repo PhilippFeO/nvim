@@ -2,7 +2,8 @@ require('mason').setup()
 
 -- Has to be loaded **after** Mason, ie. `require('mason').setup()`
 -- TODO: README und Doku durchlesen <25-01-2024>
-require('mason-nvim-dap').setup {
+require('mason-nvim-dap').setup({
+  automatic_installation = {},
   -- Makes a best effort to setup the various debuggers with
   -- reasonable debug configurations
   automatic_setup = true,
@@ -11,10 +12,10 @@ require('mason-nvim-dap').setup {
     'bash-debug-adapter',
     'shellcheck',
   },
-}
+})
 
 -- Ensure the servers above are installed
-require 'mason-lspconfig'.setup {
+require('mason-lspconfig').setup({
   automatic_enable = true,
   ensure_installed = {
     'basedpyright',
@@ -29,7 +30,7 @@ require 'mason-lspconfig'.setup {
     -- 'debugpy',
     -- 'shellcheck',
     -- 'bash-debug-adapter',
-  }
-}
+  },
+})
 
 -- local on_attach = require 'lsp-keymaps' -- lua/lsp-keymaps.lua
