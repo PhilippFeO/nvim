@@ -62,15 +62,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
+    vim.keymap.set('n', 'gd', 'gdzz',
+      {
+        remap = true,
+        desc = '[g]oto [d]eclaration via Vim and center (faster than `vim.lsp.buf.definition()`)',
+      })
     vim.keymap.set(
-      'n', 'grd',
+      'n', 'gdl',
       vim.lsp.buf.declaration,
-      { desc = lsp_desc('[g]oto [d]eclaration') }
+      { desc = lsp_desc('[g]oto [d]eclaration via LSP (slower than Vim\'s `gd`)') }
     )
     vim.keymap.set(
-      'n', 'grD',
+      'n', 'gD',
       vim.lsp.buf.definition,
-      { desc = lsp_desc('[g]oto [D]efinition (as in plain vim)') }
+      { desc = lsp_desc('[g]oto [D]efinition') }
     )
     vim.keymap.set(
       'n', '<Leader>ds',
