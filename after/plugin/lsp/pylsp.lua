@@ -1,12 +1,22 @@
 vim.lsp.config['pylsp'] = {
-	-- on_attach = on_attach,
 	-- capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		-- disable some capabilities and use basedpyright instead
+		client.server_capabilities.hoverProvider = false
+		client.server_capabilities.renameProvider = false
+		-- signatureHelpProvider takes a table as argument (default):
+		--		signatureHelpProvider = {
+		--			triggerCharacters = { "(", ",", "=" }
+		--		},
+		-- To disable it, delete the entry by setting it to nil
+		client.server_capabilities.signatureHelpProvider = nil
+	end,
 	settings = {
 		pylsp = {
 			python = {
 				analysis = {
 					diagnosticSeverityOverrides = {
-						reportUnusedCallResult = "none" -- Disable unused call expression reporting
+						reportUnusedCallResult = "none", -- Disable unused call expression reporting
 					},
 				},
 			},
@@ -35,9 +45,9 @@ vim.lsp.config['pylsp'] = {
 				autopep8 = {
 					enabled = false,
 				},
-			}
-		}
-	}
+			},
+		},
+	},
 }
 
 -- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
