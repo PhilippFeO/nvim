@@ -62,15 +62,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
-    vim.keymap.set('n', 'gd', 'gdzz',
+    vim.keymap.set('n', 'gdv', 'gdzz',
       {
         remap = true,
-        desc = '[g]oto [d]eclaration via Vim and center (faster than `vim.lsp.buf.definition()`)',
+        desc = '[g]oto [d]eclaration via [v]im and center (only within file)',
       })
     vim.keymap.set(
       'n', 'gdl',
       vim.lsp.buf.declaration,
-      { desc = lsp_desc('[g]oto [d]eclaration via LSP (slower than Vim\'s `gd`)') }
+      { desc = lsp_desc('[g]oto [d]eclaration via LSP') }
     )
     vim.keymap.set(
       'n', 'gD',
@@ -105,10 +105,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       { desc = lsp_desc('[i]nlay hints') }
     )
 
-    -- difference to `h vim.lsp.buf.hover` unclear
-    -- Guess, hover is more general
+    -- ś makes only sense with NeoQWERTZ
     vim.keymap.set(
-      'n', '<C-k>',
+      'i', 'ś',
       vim.lsp.buf.signature_help,
       { desc = lsp_desc('Signature Documentation') }
     )
