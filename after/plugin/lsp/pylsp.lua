@@ -1,6 +1,9 @@
 vim.lsp.config['pylsp'] = {
 	-- capabilities = capabilities,
 	on_attach = function(client, bufnr)
+		-- Show available capabilities:
+		--	`lua =vim.lsp.get_active_clients()[2]`
+		--	`tabnew | put = execute('messages')`
 		-- disable some capabilities and use basedpyright instead
 		client.server_capabilities.hoverProvider = false
 		client.server_capabilities.renameProvider = false
