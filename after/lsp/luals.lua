@@ -1,4 +1,10 @@
+-- **After** the configuration, the LSP has to be enabled: 
+--  vim.lsp.enable('lua_ls')
+-- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
+
+
 -- Doc: https://luals.github.io/
+--  mytable@…: mytable@inse<C-Enter> -> table.insert(mytable, )
 vim.lsp.config('lua_ls', {
   cmd = { 'lua-language-server' },
   -- Command and arguments to start the server. When using Mason this is done automatically.
@@ -48,7 +54,3 @@ vim.lsp.config('lua_ls', {
     },
   },
 })
-
-
--- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
--- vim.lsp.enable('luals')

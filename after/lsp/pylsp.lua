@@ -1,4 +1,8 @@
-vim.lsp.config['pylsp'] = {
+-- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
+-- vim.lsp.enable('pylsp')
+
+-- Maybe helpful: https://www.reddit.com/r/neovim/comments/1bt3dy0/comment/l5813wf/?context=3
+vim.lsp.config('pylsp', {
 	-- capabilities = capabilities,
 	on_attach = function(client, bufnr)
 		-- Show available capabilities:
@@ -52,6 +56,5 @@ vim.lsp.config['pylsp'] = {
 		},
 	},
 }
+)
 
--- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
--- vim.lsp.enable('pylsp')
