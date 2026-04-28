@@ -9,8 +9,7 @@ vim.diagnostic.config({
 
 -- Keymaps
 -- ───────
--- We create a function that lets us more easily define mappings specific
--- for LSP related items. It sets the mode, buffer and description for us each time.
+--- Enable Preview of folded Lines or LSP-Information on K
 vim.keymap.set(
   { 'n', 'v' }, 'K',
   function()
@@ -119,27 +118,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
     )
 
     -- ś makes only sense with NeoQWERTZ
-    vim.keymap.set(
-      'i', 'ś',
+    -- Default: <C-s>
+    vim.keymap.set('i', 'ś',
       vim.lsp.buf.signature_help,
       { desc = lsp_desc('Signature Documentation') }
     )
 
     -- Workspace related
-    vim.keymap.set(
-      'n',
+    vim.keymap.set('n',
       '<Leader>as',
       require('telescope.builtin').lsp_dynamic_workspace_symbols,
       { desc = lsp_desc('[a]ll workspace [s]ymbols') }
     )
-    vim.keymap.set(
-      'n',
+    vim.keymap.set('n',
       '<leader>ld',
       function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        vim.lsp.buf.list_workspace_folders()
       end,
       { desc = lsp_desc('[l]ist all workspace [d]irectories/folders') }
     )
   end,
-  desc = 'Lorem Ipsum',
+  desc = 'Commands when a LSP attaches',
 })
