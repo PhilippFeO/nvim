@@ -53,52 +53,65 @@ vim.keymap.set(
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
-  callback = function(ev)
-    -- Copied from https://www.youtube.com/watch?v=ZiH59zg59kg
-    -- Which mechanics are enabled is currently unclear
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+  callback = function(args)
+    -- `h lsp-format`
+
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+    -- if client:supports_method('textDocument/implementation') then
+    --   -- Create a keymap for vim.lsp.buf.implementation ...
+    -- end
+
+    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
     if client ~= nil and client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+    end
+
+    -- Auto-format ("lint") on save.
+    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+    if  not client:supports_method('textDocument/willSaveWaitUntil')
+    and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+        buffer = args.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+        end,
+      })
     end
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
-    vim.keymap.set('n', 'gdv', 'gdzz',
+    vim.keymap.set('n', 'gd', 'gdzz',
       {
         remap = true,
-        desc = '[g]oto [d]eclaration via [v]im and center (only within file)',
+        desc = '[g]oto [d]eclaration via Vim default gd and center (only within file)',
       })
-    vim.keymap.set(
-      'n', 'gdl',
+    vim.keymap.set('n', 'gdl',
       vim.lsp.buf.declaration,
       { desc = lsp_desc('[g]oto [d]eclaration via LSP') }
     )
-    vim.keymap.set(
-      'n', 'gD',
+    vim.keymap.set('n', 'gD',
       vim.lsp.buf.definition,
       { desc = lsp_desc('[g]oto [D]efinition') }
     )
-    vim.keymap.set(
-      'n', '<Leader>ds',
+    vim.keymap.set('n', '<Leader>ds',
       require('telescope.builtin').lsp_document_symbols,
       { desc = lsp_desc('[d]ocument [s]ymbols') })
-    vim.keymap.set(
-      'n', 'gO',
+    vim.keymap.set('n', 'gO',
       require('telescope.builtin').lsp_document_symbols,
       {
         remap = true,
         desc = lsp_desc('document symbols (remapped to use telescope)'),
       }
     )
-    vim.keymap.set(
-      'n', 'grr',
+    vim.keymap.set('n', 'grr',
       require('telescope.builtin').lsp_references,
       {
         -- remap = true,
         desc = '[g]oto [rr]eferences',
       }
     )
-    vim.keymap.set(
-      'n', '<Leader>i',
+    vim.keymap.set('n', '<Leader>i',
       function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
       end,
