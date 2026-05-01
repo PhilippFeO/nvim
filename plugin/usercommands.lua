@@ -15,6 +15,19 @@ user_command('KL', function(_)
     end
 end, { desc = ':colorscheme kanagawa-lotus' })
 
+user_command('ReloadDAPPythonConfigs', function(_)
+        -- `after/plugin` is searched automatically (probably because it's part of `h runtimepath`)
+        local module = 'dap-configs.python'
+        local ok, err = pcall(require, module)
+        if not ok then
+            vim.notify(("Failed reloading %s: %s"):format(module, err), vim.log.levels.ERROR)
+        else
+            vim.notify(("Reloaded %s"):format(module), vim.log.levels.INFO)
+        end
+    end,
+    { desc = 'Reload DAP Python configs.' }
+)
+
 --- Jump to the last valid quickfix entry
 --- Python error messages produce multiple valid quickfix entries. With this function it is possible to jump to the last (and often the most relevant) one.
 local jump_to_last_valid_qf_entry = function()
