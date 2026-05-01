@@ -5,6 +5,7 @@ local my_configs = {
   require 'dap-configs.python-default'.configs,
   require 'dap-configs.python-kursverwaltung'.configs,
   require 'dap-configs.python-tagebuch'.configs,
+  require 'dap-configs.python-GPSPos'.configs,
 }
 
 local all_configs = {}
