@@ -68,8 +68,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Auto-format ("lint") on save.
     -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-    if  not client:supports_method('textDocument/willSaveWaitUntil')
-    and client:supports_method('textDocument/formatting') then
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
         buffer = args.buf,
@@ -80,17 +80,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
-    vim.keymap.set('n', 'gd', 'gdzz',
+    -- The Vim mapping 'gd' sometimes goes to the first occurence of a symbol, for instance to a location in a comment/docstring coming before the actual declaration, s. `h gd`. Better use `vim.lsp.buf.declaration()`.
+    vim.keymap.set('n', 'gdv', 'gdzz',
       {
         remap = true,
         desc = '[g]oto [d]eclaration via Vim default gd and center (only within file)',
       })
-    vim.keymap.set('n', 'gdl',
-      vim.lsp.buf.declaration,
+    vim.keymap.set('n', 'gd', function()
+        vim.lsp.buf.declaration()
+        vim.cmd('normal zz')
+      end,
       { desc = lsp_desc('[g]oto [d]eclaration via LSP') }
     )
-    vim.keymap.set('n', 'gD',
-      vim.lsp.buf.definition,
+    vim.keymap.set('n', 'gD', function()
+      vim.lsp.buf.definition()
+      vim.cmd('normal zz')
+    end,
       { desc = lsp_desc('[g]oto [D]efinition') }
     )
     vim.keymap.set('n', '<Leader>ds',
