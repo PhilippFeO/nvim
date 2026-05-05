@@ -16,12 +16,7 @@ I moved some contents into (list by far not complete)
 local home_dir = os.getenv("HOME")
 package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
 
-local start_idx, _ = string.find(vim.fn.hostname(), 'dlr.de')
-if start_idx then
-  DLR_Machine = true
-else
-  DLR_Machine = false
-end
+WORK_MACHINE = require('work_machine').is_work_machine
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
@@ -71,7 +66,7 @@ require('lazy').setup(
         completion_column = 1,
         skip_rows = 0,
       },
-      cond = not DLR_Machine,
+      cond = not WORK_MACHINE,
     },
 
     {
