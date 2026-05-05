@@ -156,7 +156,6 @@ require('lazy').setup(
     require('plugins.debug'),
     -- require 'plugins.nvim-dap-view',
     require('plugins.gitlinker'),
-    require('plugins.jupynium'),
     require('plugins.kanagawa'),
     require('plugins.lazydev'),
     require('plugins.nvim-cmp'),
