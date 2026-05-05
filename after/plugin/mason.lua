@@ -9,7 +9,6 @@ require('mason-nvim-dap').setup({
   automatic_setup = true,
   ensure_installed = {
     'debugpy', -- s. https://github.com/mfussenegger/nvim-dap-python
-    'bash-debug-adapter',
     'shellcheck',
   },
 })
@@ -21,9 +20,7 @@ require('mason-lspconfig').setup({
     'basedpyright',
     'pylsp',
     'ruff',
-    'bashls',
     'lua_ls',
-    'texlab',
     -- Doesn't work, dont know why
     -- 'djlsp',
     -- DAP servers, so not suited for Mason
