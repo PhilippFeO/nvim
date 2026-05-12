@@ -10,6 +10,7 @@ local dap = require 'dap'
 local telescope = require 'telescope'
 local dap_view = require 'dap-view'
 local nmap = require 'utils'.nmap('  DAP')
+local dapui = require('dapui')
 
 nmap('<F5>', function()
   if vim.o.buftype == '' then
@@ -44,6 +45,19 @@ nmap('<F2>', dap.step_over, '  Step over')
 nmap('<F3>', dap.step_out, '  Step out')
 nmap('<F4>', dap.step_back, ' Step out')
 nmap('<Leader>do', dap.run_to_cursor, '[d]ap run to curs[o]r')
+
+vim.keymap.set({ 'n' }, 'CC', function()
+        vim.cmd.cclose()
+        -- Reset DAP-UI if debug session is running
+        if dap.session() then
+            dapui.open({ reset = true })
+        end
+        -- Jump back to previous window, `CTRL-W_p == :wincmd p == vim.cmd.wincmd('p')`
+        -- `h :wincmd`, `h CTRL-W_p`
+        vim.cmd.wincmd('p')
+    end,
+    { desc = 'Close Quickfix-List window' }
+)
 
 nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
 nmap('<Leader>dn', function()

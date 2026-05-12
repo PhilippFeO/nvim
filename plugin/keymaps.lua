@@ -1,7 +1,3 @@
-local dap = require('dap')
-local dapui = require('dapui')
-
-
 vim.keymap.set('n', '<Leader>n', function()
     local x = vim.fn.getreg("a")
     print(x)
@@ -157,18 +153,6 @@ vim.keymap.set('n', '<C-t>', '<C-t>zz', { desc = 'Center after moving down in ta
 -- Keymaps for better default experience
 -- See `h vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set({ 'n' }, 'CC', function()
-        vim.cmd.cclose()
-        -- Reset DAP-UI if debug session is running
-        if dap.session() then
-            dapui.open({ reset = true })
-        end
-        -- Jump back to previous window, `CTRL-W_p == :wincmd p == vim.cmd.wincmd('p')`
-        -- `h :wincmd`, `h CTRL-W_p`
-        vim.cmd.wincmd('p')
-    end,
-    { desc = 'Close Quickfix-List window' }
-)
 vim.keymap.set('n', 'G', 'Gzz') -- Elevate view after going to last line
 -- Remap for dealing with line wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
