@@ -13,10 +13,24 @@ I moved some contents into (list by far not complete)
 
 -- make 'require' work on 'after/plugin/' files
 -- fi. necessary to pass a config to 'dap-python.test_method()'
-local home_dir = os.getenv("HOME")
-package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
+-- local home_dir = os.getenv("HOME")
+-- package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
 
-WORK_MACHINE = require('work_machine').is_work_machine
+
+-- Without `pcall` the `require()` would fail if the file 'work_machine.lua' is missing and my config wouldn't load.
+pcall(require, 'work_machine')
+
+-- Use either of the options depending on the OS.
+--- @param linux_opt string
+--- @param windows_opt string
+--- @return string
+function LINUX_OR_WINDOWS(linux_opt, windows_opt)
+  if vim.fn.has('linux') == 1 then
+    return linux_opt
+  else
+    return windows_opt
+  end
+end
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
@@ -24,19 +38,20 @@ WORK_MACHINE = require('work_machine').is_work_machine
 vim.g.mapleader = ' '
 vim.g.maplocalleader = 'ö'
 
--- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -45,6 +60,7 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup(
   {
+    'PhilippFeO/telescope-filelinks.nvim',
     {
       'PhilippFeO/cmp-help-tags',
       -- config = true -- runs setup({}) (with empty table)
@@ -54,8 +70,8 @@ require('lazy').setup(
           'lua',
         },
       },
+      enabled = not IS_WORK_MACHINE,
     },
-    'PhilippFeO/telescope-filelinks.nvim',
     {
       'PhilippFeO/cmp-csv',
       opts = {
@@ -66,21 +82,19 @@ require('lazy').setup(
         completion_column = 1,
         skip_rows = 0,
       },
-      cond = not WORK_MACHINE,
+      enabled = not IS_WORK_MACHINE,
     },
-
     {
       'PhilippFeO/telescope-link-headings.nvim',
       -- `dev = true` implies using the local version of the plugin
       -- location specified via `dev.path` in `opts` parameter (s. below)
       dev = true,
       branch = 'master',
-      cond = false,
+      enabled = not IS_WORK_MACHINE,
     },
 
     -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
-    -- setup in after/plugin/lualine.lua
-    'nvim-lualine/lualine.nvim',
+    'nvim-lualine/lualine.nvim',   -- setup in after/plugin/lualine.lua
     'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
     'windwp/nvim-autopairs',
 
@@ -98,6 +112,7 @@ require('lazy').setup(
       'lervag/vimtex',
       lazy = false, -- VimTeX must not be lazy loaded.
       ft = { 'tex' },
+      cond = not IS_WORK_MACHINE,
     },
 
     -- ─── Snippets ──────────
@@ -110,14 +125,10 @@ require('lazy').setup(
       -- Hier erhalte ich Fehler
       -- commit = 'f5c5cd6da094ef04a7d6e0bea73f71dfa5dde9bf',
       -- Hier funktioniert's
-      commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
+      -- commit = '43b69a235b2dc54db692049fe0d5cc60c6b58b4b',
       init = function() require("cmp_nvim_ultisnips").setup({}) end,
     },
 
-    {
-      'tpope/vim-fugitive',
-      enabled = false,
-    },
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     { 'lewis6991/gitsigns.nvim' },
 
@@ -149,7 +160,6 @@ require('lazy').setup(
 
     require('plugins.nvim-ufo'),
     require('plugins.debug'),
-    -- require 'plugins.nvim-dap-view',
     require('plugins.gitlinker'),
     require('plugins.kanagawa'),
     require('plugins.lazydev'),
@@ -157,7 +167,7 @@ require('lazy').setup(
     require('plugins.nvim-lspconfig-mason'),
     require('plugins.octo'),
     require('plugins.telescope'),
-    require('plugins.telescope-fzf-native'),
+    require('plugins.telescope-fzf-native'), -- 2026-05-09: Only for performance; for now, let's go without it on windows
     require('plugins.treesitter'),
     require('plugins.vim-markdown'),
     require('plugins.vim-sleuth'),
@@ -178,7 +188,7 @@ require('lazy').setup(
     --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
     -- { import = 'custom.plugins' },
   }, {
-    dev = { path = '~/dotfiles/nvim/lua/myplugins/' },
+    -- dev = { path = '~/dotfiles/nvim/lua/myplugins/' },
   })
 
 
@@ -192,7 +202,9 @@ require('lazy').setup(
 -- should now work with virtual envs flawlessly
 -- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
 -- the mechanic completely
-vim.g.python3_host_prog = '/usr/bin/python3'
+vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
+  "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
+
 
 
 -- ─── Language ──────────

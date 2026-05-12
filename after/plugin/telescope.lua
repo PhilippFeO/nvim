@@ -133,7 +133,9 @@ nmap('<Leader>sm', require('telescope_utils').tab_man_pages, '[s]earch [m]an pag
 -- Doesn't work with plain `builtin.find_files({ cwd = … })` because that's already a function call,
 -- ie. it's return value, which is not callable. The solution below is callable.
 nmap('<Leader>en', function()
-  builtin.find_files({ cwd = vim.fn.stdpath('config') })
+  local config_path = vim.fn.stdpath('config')
+  builtin.find_files({ cwd = config_path })
+  vim.cmd.tcd(config_path)
 end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────
@@ -152,36 +154,37 @@ nmap('<Leader>wt', '<Plug>(wiki-tags)', 'search [w]iki [t]ags')
 --        - evtl. ähnlich zu `builtin.git_bcommits`
 
 -- ─── filelinks ──────────
-telescope.load_extension('filelinks')
-local filelinks = telescope.extensions['filelinks']
-filelinks.setup({
-  working_dir = '~/wiki/',
-  format_string = '  [%s](%s)',
-  prompt_title = 'Wiki Files'
-})
-vim.keymap.set('n', '<Leader>lw', function() filelinks.make_filelink({}) end,
-  { desc = prepend_desc('[l]ink to [w]iki page') })
--- TODO: remap of keymaps? <21-12-2023>
-vim.keymap.set('i', '<C-k>', function() filelinks.make_filelink({}) end, { desc = prepend_desc('[l]ink to [w]iki page') })
+-- telescope.load_extension('filelinks')
+-- local filelinks = telescope.extensions['filelinks']
+-- filelinks.setup({
+--   working_dir = '~/wiki/',
+--   format_string = '  [%s](%s)',
+--   prompt_title = 'Wiki Files'
+-- })
+-- vim.keymap.set('n', '<Leader>lw', function() filelinks.make_filelink({}) end,
+--   { desc = prepend_desc('[l]ink to [w]iki page') })
+-- -- TODO: remap of keymaps? <21-12-2023>
+-- vim.keymap.set('i', '<C-k>', function() filelinks.make_filelink({}) end, { desc = prepend_desc('[l]ink to [w]iki page') })
+--
+-- vim.keymap.set('n', '<Leader>lf', function()
+--   filelinks.make_filelink({
+--     working_dir = vim.fn.expand('~'),
+--     format_string = '[%s](%s)',
+--     remove_extension = false,
+--     prompt_title = 'Files in $HOME: ' .. vim.fn.expand('~')
+--   })
+-- end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
+--
+-- vim.keymap.set('n', '<Leader>li', function()
+--   filelinks.make_filelink({
+--     format_string = '  ![%s](%s)',
+--     remove_extension = false,
+--     first_upper = false,
+--     prepend_to_link = "~/wiki/",
+--     find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
+--   })
+-- end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
 
-vim.keymap.set('n', '<Leader>lf', function()
-  filelinks.make_filelink({
-    working_dir = vim.fn.expand('~'),
-    format_string = '[%s](%s)',
-    remove_extension = false,
-    prompt_title = 'Files in $HOME: ' .. vim.fn.expand('~')
-  })
-end, { desc = prepend_desc('[l]ink to [f]ile in $HOME') })
-
-vim.keymap.set('n', '<Leader>li', function()
-  filelinks.make_filelink({
-    format_string = '  ![%s](%s)',
-    remove_extension = false,
-    first_upper = false,
-    prepend_to_link = "~/wiki/",
-    find_command = { "rg", "-g", "**.png", "--files", "--color", "never" }
-  })
-end, { desc = prepend_desc('[l]ink to [i]mage in ~/wiki/') })
 
 -- ─── link_headings ──────────
 -- telescope.load_extension('link_headings')

@@ -1,3 +1,7 @@
+-- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
+-- vim.lsp.enable('basedpyright')
+
+
 -- https://docs.basedpyright.com/v1.23.1/
 vim.lsp.config['basedpyright'] = {
 	-- on_attach = on_attach,
@@ -10,7 +14,7 @@ vim.lsp.config['basedpyright'] = {
 			-- reportImplicitOverride = false,
 			reportMissingSuperCall = "none",
 			-- reportUnusedImport = false,
-			-- basedpyright very intrusive with errors, this calms it down
+			-- basedpyright is very intrusive with errors, this calms it down
 			typeCheckingMode = "standard",
 			-- works, if pyproject.toml is used
 			reportAttributeAccessIssue = false,
@@ -27,10 +31,18 @@ vim.lsp.config['basedpyright'] = {
 			analysis = {
 				ignore = { '*' },
 			},
+			-- Use custom python path for arcpy projects
+			-- https://docs.basedpyright.com/v1.21.1/configuration/command-line/
+			pythonPath =
+					(function()
+						local root_dir = require 'lspconfig.util'.root_pattern('.git')('.')
+						if root_dir ~= nil and string.find(root_dir, 'e.on-mining', 1, true) ~= nil then
+							return vim.fn.expand(root_dir .. '/.venv/python.exe')
+						else
+							-- fallback to system's python path or python path of active venv
+							return vim.fn.exepath('python')
+						end
+					end)()
 		},
 	}
 }
-
-
--- When using Mason, this is done automatically, s. `h mason-lspconfig-settings`
--- vim.lsp.enable('basedpyright')
