@@ -94,7 +94,7 @@ autocmd('BufWritePost', {
                 package.loaded[key] = nil
             end
         end
-        require 'dap-configs.python'
+        require 'dap-configs.python-default'
     end,
     desc = 'Reload Python DAP Configs',
 })

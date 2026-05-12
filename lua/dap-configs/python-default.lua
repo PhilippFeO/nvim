@@ -1,6 +1,13 @@
 -- Debugpy configurations:
 -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 
+local arcpy_test = {
+    name = "Arcpy",
+    type = "python",
+    request = "launch",
+    program = vim.fn.expand('~/proj/e.on-mining/test.py'),
+    python = vim.fn.expand('~/proj/e.on-mining/.venv/python.exe'),
+}
 
 -- This enables debugging Tests in the first place.
 -- More information in my Wiki
@@ -103,8 +110,6 @@ local default_no_console = {
     program = '${file}',
     request = "launch",
     type = "debugpy",
-    cwd = DLR_Machine and vim.fn.expand '~/python/tree-sitter-demo-py/',
-    -- justMyCode = false
 }
 
 local default_no_console_foreign_code = {
@@ -132,6 +137,7 @@ local default_no_console_foreign_code = {
 
 return {
     configs = {
+        arcpy_test,
         default_no_console,
         default_external_terminal,
         default_integrated_terminal,

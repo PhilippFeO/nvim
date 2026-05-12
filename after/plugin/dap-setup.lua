@@ -23,6 +23,7 @@ dap.defaults.fallback.external_terminal = {
 }
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
 dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+dap.defaults.fallback.focus_terminal = false
 
 -- ────────────────────────────────────────
 
@@ -33,9 +34,31 @@ require 'nvim-dap-virtual-text'.setup({
     enabled = false
 })
 
--- TODO: Open dapui normally also with tabs of the elements <27-01-2024>
 
--- ─── signs ──────────
+-- Load DAP Configs
+-- ────────────────
+-- DAP configuration settings: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+
+-- ─── Python ──────────
+-- s. also Autocommand ReloadDAPPythonConfigs
+local my_configs = {
+    require('dap-configs.python-default').configs,
+    require 'dap-configs.python-default'.configs,
+    require 'dap-configs.python-kursverwaltung'.configs,
+    require 'dap-configs.python-tagebuch'.configs,
+    require 'dap-configs.python-set-GPSIFD'.configs,
+}
+local all_configs = {}
+for _, list in ipairs(my_configs) do
+    for _, value in ipairs(list) do
+        table.insert(all_configs, value)
+    end
+end
+-- Make configurations avialable, ie. entry for menu after `h dap.continue()` was called
+dap.configurations.python = all_configs
+
+
+-- ─── Signs ──────────
 -- `h sign-list`
 local wave_colors = require('kanagawa.colors').setup({ theme = 'wave' })
 -- There are 'text', 'texthl', 'linehl', 'numhl' as params for sign_define()
@@ -163,22 +186,3 @@ vim.keymap.set('n', '<Leader>dt', toggle_closing_dapui, { desc = '[t]oggle closi
 -- nmap('<Leader>df', function()
 --     dap.run({ dap.configurations.python[2] })
 -- end, '[d]ebug [f]ile')
-
-
-
-
--- local my_configs = {
---     require 'dap-configs.python-default'.configs,
---     require 'dap-configs.python-kursverwaltung'.configs,
---     require 'dap-configs.python-tagebuch'.configs,
--- }
---
--- local all_configs = {}
--- for _, list in ipairs(my_configs) do
---     for _, value in ipairs(list) do
---         table.insert(all_configs, value)
---     end
--- end
---
--- -- Make configurations avialable, ie. entry for menu after `h dap.continue()` was called
--- dap.configurations.python = all_configs
