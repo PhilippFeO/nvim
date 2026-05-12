@@ -1,6 +1,7 @@
-  -- fuzzy finder algorithm which requires local dependencies to be built.
-  -- only load if `make` is available. make sure you have the system
-  -- requirements installed.
+-- 2026-05-09: Only for performance, let's go without it on windows
+-- fuzzy finder algorithm which requires local dependencies to be built.
+-- only load if `make` is available. make sure you have the system
+-- requirements installed.
 return {
   'nvim-telescope/telescope-fzf-native.nvim',
   -- note: if you are having trouble with this installation,
