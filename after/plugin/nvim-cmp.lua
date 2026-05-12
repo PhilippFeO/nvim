@@ -157,11 +157,7 @@ cmp.setup {
   window = {
     documentation = {
       -- `h nvim_open_win()`
-      -- Source: https://en.wikipedia.org/wiki/Box-drawing_character > Symbols for Legacy Computing > U+1FB7x
-      -- I don't like the thin horitontals but there aren't better box drawing characters out there.
-      -- Other have their edge in the center which decreases the distance to the text and leaves area
-      -- "outside" of the border colored according to `h FloatBorder` which looks odd.
-      border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }, -- chars from kanagawa.nvim
+      border = require('utils').border
     }
   },
 
@@ -174,4 +170,4 @@ cmp.setup {
   },
 }
 
-require("cmp_git").setup()
+require("cmp_git").setup({})
