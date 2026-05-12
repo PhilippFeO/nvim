@@ -1,28 +1,28 @@
 -- bdelete! *dap-terminal* schließt integratedTerminal
 -- TODO: nach/mit dap.disconnect() oder dap.close() <17-03-2024>
 -- https://github.com/mfussenegger/nvim-dap/issues/278
---
+
 local dap = require('dap')
 
 dap.adapters.my_python_adapter = {
     type = 'executable',
-    command = vim.fn.expand '~/.venv/debugpy/bin/python',
+    command = LINUX_OR_WINDOWS(
+        vim.fn.expand '~/.venv/debugpy/bin/python',
+        vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/python.exe')
+    ),
     args = { '-m', 'debugpy.adapter' }
 }
 
 -- s. `h dap-terminal`
--- Depending on Terminal, an option to execute commands is necessary, but kitty doesn't require one
-local command = function()
-    if DLR_Machine then
-        return vim.fn.expand('/usr/bin/kitty')
-    else
-        return vim.fn.expand('~/.local/bin/kitty')
-    end
-end
-
+-- Depending on Terminal, an option to execute commands is necessary (but kitty doesn't require one)
 dap.defaults.fallback.external_terminal = {
-    command = command()
+    command = LINUX_OR_WINDOWS(
+        vim.fn.expand('~/.local/bin/kitty'),
+        "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.1.0_x64__8wekyb3d8bbwe\\pwsh.exe"
+    )
 }
+-- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 -- ────────────────────────────────────────
 
@@ -139,8 +139,6 @@ toggle_closing_dapui()
 vim.keymap.set('n', '<Leader>dt', toggle_closing_dapui, { desc = '[t]oggle closing DAPUI automatically' })
 
 
--- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
-dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 -- TODO: Both keymaps below don't work <27-01-2024>
 -- But starting with `dap.continue()` does, ie. selecting the Pytest configuration.

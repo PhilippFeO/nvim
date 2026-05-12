@@ -6,6 +6,7 @@ local dap_python = require('dap-python')
 -- dap_python.setup(vim.fn.expand(os.getenv('VIRTUAL_ENV') .. '/bin/python3'))
 
 -- debugpy specific Venv, ie. a Venv with only debugpy installed
-dap_python.setup(vim.fn.expand('~/.venv/debugpy/bin/python'))
+dap_python.setup(LINUX_OR_WINDOWS(vim.fn.expand '~/.venv/debugpy/bin/python',
+  vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/python.exe')))
 
 dap_python.test_runner = 'pytest'
