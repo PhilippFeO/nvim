@@ -30,7 +30,7 @@ local treesitter_pytest = {
   type = 'debugpy',
   request = 'launch',
   module = 'pytest',
-  cwd = DLR_Machine and vim.fn.expand '~/python/tree-sitter-callgraph/',
+  cwd = IS_WORK_MACHINE and vim.fn.expand '~/python/tree-sitter-callgraph/',
   args = {
     vim.fn.getcwd(),
     '-c',
@@ -44,7 +44,9 @@ local treesitter_pytest = {
 }
 
 return {
-  treesitter_pytest,
-  treesitter,
-  treesitter_mc,
+  configs = {
+    treesitter_pytest,
+    treesitter,
+    treesitter_mc,
+  }
 }
