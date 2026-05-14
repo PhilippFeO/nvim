@@ -18,6 +18,7 @@ I moved some contents into (list by far not complete)
 
 
 -- Without `pcall` the `require()` would fail if the file 'work_machine.lua' is missing and my config wouldn't load.
+IS_WORK_MACHINE = false
 pcall(require, 'work_machine')
 
 -- Use either of the options depending on the OS.
@@ -90,7 +91,7 @@ require('lazy').setup(
       -- location specified via `dev.path` in `opts` parameter (s. below)
       dev = true,
       branch = 'master',
-      enabled = not IS_WORK_MACHINE,
+      enabled = false,
     },
 
     -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics

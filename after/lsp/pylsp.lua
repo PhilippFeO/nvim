@@ -18,6 +18,7 @@ vim.lsp.config('pylsp', {
 		--		},
 		-- To disable it, delete the entry by setting it to nil
 		client.server_capabilities.signatureHelpProvider = nil
+		client.server_capabilities.referencesProvider = false
 	end,
 	settings = {
 		pylsp = {
