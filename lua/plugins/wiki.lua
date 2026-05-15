@@ -4,7 +4,7 @@ return {
   init = function()
     vim.g.tag_line_number = 2 -- NO official wiki.vim variable, I have introduced it for `wiki_utils.add_tag()`
     vim.g.wiki_root = '~/wiki'
-    vim.g.wiki_index_name = 'Notizen'
+    vim.g.wiki_index_name = IS_WORK_MACHINE and 'GIGeoinformatik/Notizen' or 'Notizen'
     vim.g.wiki_filetypes = { 'md' }
     vim.g.wiki_link_extension = '.md'
     vim.g.wiki_link_target_type = 'md'
