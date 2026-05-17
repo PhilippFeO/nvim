@@ -201,14 +201,15 @@ require('lazy').setup(
 --   library = { plugins = { "nvim-dap-ui" }, types = true },
 -- })
 
+vim.cmd('let g:loaded_perl_provider = 0')
 -- some plugins, fi. UltiSnips, need python and a python interpreter with the
 -- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
 -- should now work with virtual envs flawlessly
 -- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
 -- the mechanic completely
+-- vim.cmd('let g:loaded_python3_provider = 1')
 vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
--- vim.cmd('let g:loaded_python3_provider = 1')
 
 
 
