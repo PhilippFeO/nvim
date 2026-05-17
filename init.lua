@@ -208,8 +208,9 @@ vim.cmd('let g:loaded_perl_provider = 0')
 -- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
 -- the mechanic completely
 -- vim.cmd('let g:loaded_python3_provider = 1')
-vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
-  "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
+-- vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
+--   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
+vim.g.python3_host_prog = vim.fn.expand('~/.venv/neovim/bin/python')
 
 
 
