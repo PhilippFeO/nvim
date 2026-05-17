@@ -21,10 +21,13 @@ I moved some contents into (list by far not complete)
 IS_WORK_MACHINE = false
 pcall(require, 'work_machine')
 
--- Use either of the options depending on the OS.
---- @param linux_opt string
---- @param windows_opt string
---- @return string
+-- Use either of the options/path depending on the OS.
+---@param linux_opt string Option/Path when on Linux
+---@param windows_opt string Option/Path when on Windows
+---@return string string selected option/path
+---@source ./after/plugin/neogit.lua
+---@see README.md#configuration Configuration Guide
+---@see Internet https://example.com/docs/http-client, HTTP Client Documentation
 function LINUX_OR_WINDOWS(linux_opt, windows_opt)
   if vim.fn.has('linux') == 1 then
     return linux_opt
@@ -205,6 +208,7 @@ require('lazy').setup(
 -- the mechanic completely
 vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
+-- vim.cmd('let g:loaded_python3_provider = 1')
 
 
 
