@@ -1,14 +1,6 @@
 -- Debugpy configurations:
 -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 
-local arcpy_test = {
-    name = "Arcpy",
-    type = "python",
-    request = "launch",
-    program = vim.fn.expand('~/proj/e.on-mining/test.py'),
-    python = vim.fn.expand('~/proj/e.on-mining/.venv/python.exe'),
-}
-
 -- This enables debugging Tests in the first place.
 -- More information in my Wiki
 local pytest_default_config = {

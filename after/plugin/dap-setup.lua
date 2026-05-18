@@ -22,12 +22,12 @@ dap.defaults.fallback.external_terminal = {
     )
 }
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
-dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+-- dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 dap.defaults.fallback.focus_terminal = false
 
 -- ────────────────────────────────────────
 
--- dap.defaults.fallback.force_external_terminal = true
+dap.defaults.fallback.force_external_terminal = false
 -- TODO: README and docs <25-01-2024>
 -- Displays variable names next to their definition, uses TreeSitter to find the respective location
 require 'nvim-dap-virtual-text'.setup({
@@ -41,21 +41,7 @@ require 'nvim-dap-virtual-text'.setup({
 
 -- ─── Python ──────────
 -- s. also Autocommand ReloadDAPPythonConfigs
-local my_configs = {
-    require('dap-configs.python-default').configs,
-    require 'dap-configs.python-default'.configs,
-    require 'dap-configs.python-kursverwaltung'.configs,
-    require 'dap-configs.python-tagebuch'.configs,
-    require 'dap-configs.python-set-GPSIFD'.configs,
-}
-local all_configs = {}
-for _, list in ipairs(my_configs) do
-    for _, value in ipairs(list) do
-        table.insert(all_configs, value)
-    end
-end
--- Make configurations avialable, ie. entry for menu after `h dap.continue()` was called
-dap.configurations.python = all_configs
+dap.configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
 
 
 -- ─── Signs ──────────
@@ -65,6 +51,11 @@ local wave_colors = require('kanagawa.colors').setup({ theme = 'wave' })
 vim.api.nvim_set_hl(0, 'DapStopped_texthl', { fg = wave_colors.palette.springGreen })
 vim.api.nvim_set_hl(0, 'DapBreakpoint_linehl', { bg = wave_colors.palette.winterGreen })
 vim.api.nvim_set_hl(0, 'DapBreakpoint_texthl', { fg = wave_colors.palette.peachRed })
+
+
+-- Probably deprecated
+-- `h diagnostic-signs`
+-- `h vim.diagnostic.config()`
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint_texthl', linehl = 'DapBreakpoint_linehl', })
 vim.fn.sign_define('DapBreakpointCondition',
     { text = '', texthl = 'DapBreakpoint_texthl', linehl = 'DapBreakpoint_linehl', })

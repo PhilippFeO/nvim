@@ -80,21 +80,3 @@ autocmd('TermOpen', {
         vim.opt_local.number = false
     end
 })
-
-
-autocmd('BufWritePost', {
-    group = augroup('reload-python-dap-configs', { clear = true }),
-    pattern = '*.py',
-    callback = function()
-        --[[ The different dap configs are distributed over different files (s. dap-configs/python.lua) and required in the aforementioned file.
-        Since required calls are cached just reloading dap-configs/python.lua has no effect, because the already loaded values are fetched. To circument this, the cached values are deleted by setting the key to nil. Then, they are rerequired in `require 'dap-configs.python`.
-        -- ]]
-        for key, _ in pairs(package.loaded) do
-            if key:match('^dap%-configs%.python') then
-                package.loaded[key] = nil
-            end
-        end
-        require 'dap-configs.python-default'
-    end,
-    desc = 'Reload Python DAP Configs',
-})
