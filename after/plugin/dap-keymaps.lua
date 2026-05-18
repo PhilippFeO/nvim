@@ -47,16 +47,16 @@ nmap('<F4>', dap.step_back, ' Step out')
 nmap('<Leader>do', dap.run_to_cursor, '[d]ap run to curs[o]r')
 
 vim.keymap.set({ 'n' }, 'CC', function()
-        vim.cmd.cclose()
-        -- Reset DAP-UI if debug session is running
-        if dap.session() then
-            dapui.open({ reset = true })
-        end
-        -- Jump back to previous window, `CTRL-W_p == :wincmd p == vim.cmd.wincmd('p')`
-        -- `h :wincmd`, `h CTRL-W_p`
-        vim.cmd.wincmd('p')
-    end,
-    { desc = 'Close Quickfix-List window' }
+    vim.cmd.cclose()
+    -- Reset DAP-UI if debug session is running
+    if dap.session() then
+      dapui.open({ reset = true })
+    end
+    -- Jump back to previous window, `CTRL-W_p == :wincmd p == vim.cmd.wincmd('p')`
+    -- `h :wincmd`, `h CTRL-W_p`
+    vim.cmd.wincmd('p')
+  end,
+  { desc = 'Close Quickfix-List window' }
 )
 
 nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
@@ -134,7 +134,7 @@ nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text
 -- ────────────────
 
 nmap('<Leader>a', function(expr)
-  dap_view.add_expr(expr)
+  dap_view.add_expr(expr, false)
 end, '[a]dd expression under cursor')
 nmap('<Leader>jw', function()
   dap_view.jump_to_view 'watches'
