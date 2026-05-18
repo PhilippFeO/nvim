@@ -112,7 +112,7 @@ require('lazy').setup(
       'lervag/vimtex',
       lazy = false, -- VimTeX must not be lazy loaded.
       ft = { 'tex' },
-      cond = not IS_WORK_MACHINE,
+      enabled = not IS_WORK_MACHINE,
     },
 
     -- ─── Snippets ──────────

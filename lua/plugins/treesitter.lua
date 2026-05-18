@@ -10,5 +10,5 @@ return {
   -- 2025-10-15: master is frozen, development happens on main.
   -- Currently, I don't have the time and motivation to switch since it's a rewrite and my config doesn't work anymore.
   branch = 'master',
-  -- commit = '7d0b475'
+  -- commit = 'cf12346'
 }

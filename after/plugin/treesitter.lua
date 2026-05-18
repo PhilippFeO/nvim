@@ -1,12 +1,6 @@
 vim.treesitter.language.register('markdown', 'octo')
 
 local defaults = { 'lua', 'python', 'vim', 'vimdoc' }
-if DLR_Machine then
-  for _, language in ipairs({ 'cpp', 'cmake' }) do
-    table.insert(defaults, language)
-  end
-end
-
 
 -- Default values in `h nvim-treesitter-context`
 local tc = require 'treesitter-context'
@@ -21,29 +15,28 @@ tc.toggle()
 
 require('nvim-treesitter.configs').setup {
   modules = {},
+  -- Autoinstall languages that are not installed. Defaults to false.
+  auto_install = false,
   sync_install = false,
-
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = defaults,
-
   -- treesitter and vimtex concealing collide, so I disable syntax highlighting for LaTeX
   -- s. :h vimtex-faq-treesitter
   ignore_install = { "latex", "markdown", "gitcommit", "diff", "html" },
 
   additional_vim_regex_highlighting = false,
 
-  -- Autoinstall languages that are not installed. Defaults to false.
-  auto_install = false,
-
   highlight = { enable = true },
   --indent = { enable = true, disable = { 'python' } }, -- TODO Herausfinden, was diese Zeile macht. Da ich es nicht weiß, habe ich sie auskommentiert.
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
+      init_selection = '<C-space>',
+      -- Default mapping: van … an … an
+      -- node_incremental = '<C-space>',
       scope_incremental = '<c-s>',
-      node_decremental = '<A-space>',
+      -- Default mapping: vin … in … in
+      -- node_decremental = '<A-space>',
     },
   },
   textobjects = {
