@@ -36,6 +36,39 @@ local default_external_terminal = {
     type = "python"
 }
 
+-- Not useable for complex issues like starting Neovim in subprocess
+local default_integrated_terminal = {
+    console = 'integratedTerminal',
+    name = "Debug with integratedTerminal",
+    program = "${file}",
+    request = "launch",
+    type = "python"
+}
+
+local default_internal_console = {
+    console = 'internalConsole',
+    name = "Debug with internalConsole",
+    program = "${file}",
+    request = "launch",
+    type = "python",
+}
+
+local default_no_console_foreign_code = {
+    name = "Debug file (default config without 'console' + justmyCode=false)",
+    program = '${file}',
+    request = "launch",
+    type = "python",
+    justMyCode = false,
+}
+
+local test_config = {
+    name = "Lorem Ipsum",
+    program = '${file}',
+    request = "launch",
+    type = "python",
+    justMyCode = false,
+}
+
 local grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
@@ -79,39 +112,6 @@ local grocery_shopper_pdf = {
     args = { '--pdf', 'Spätzle.yaml' }
 }
 
-local diary = {
-    name = 'Tagebuch: Look into the past',
-    request = 'launch',
-    type = 'python',
-    program = vim.fn.expand '~/.tagebuch/look_into_the_past.py',
-    cwd = vim.fn.expand '~/.tagebuch',
-    -- args = { vim.fn.expand '~/.tagebuch/2024/06-Juni/05-06-2024-Mittwoch-Lindau/05-06-2024-Mittwoch-Lindau.html' },
-}
-
--- Not useable for complex issues like starting Neovim in subprocess
-local default_integrated_terminal = {
-    console = 'integratedTerminal',
-    name = "Debug with integratedTerminal",
-    program = "${file}",
-    request = "launch",
-    type = "python"
-}
-
-local default_no_console = {
-    name = "Debug file (default config without 'console')",
-    program = '${file}',
-    request = "launch",
-    type = "debugpy",
-}
-
-local default_no_console_foreign_code = {
-    name = "Debug file (default config without 'console' + justmyCode=false)",
-    program = '${file}',
-    request = "launch",
-    type = "python",
-    justMyCode = false,
-}
-
 -- local configs = {
 --     default_no_console,
 --     default_external_terminal,
@@ -129,18 +129,17 @@ local default_no_console_foreign_code = {
 
 return {
     configs = {
-        arcpy_test,
-        default_no_console,
         default_external_terminal,
         default_integrated_terminal,
+        default_internal_console,
         default_no_console_foreign_code,
-        pytest_default_config,
-        grocery_shopper,
-        grocery_shopper_custom_args,
-        grocery_shopper_pdf,
-        diary,
+        -- pytest_default_config,
+        -- grocery_shopper,
+        -- grocery_shopper_custom_args,
+        -- grocery_shopper_pdf,
+        -- diary,
         -- For use in keymap <Leader>dm for `test_method()`
-        pytest_default_config = pytest_default_config,
+        -- pytest_default_config = pytest_default_config,
     },
     -- Used in Keymap <Leader>dm in after/plugin/dap-keymaps.lua for debugging single test method
     test_configs = {
