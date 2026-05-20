@@ -80,3 +80,32 @@ autocmd('TermOpen', {
         vim.opt_local.number = false
     end
 })
+
+augroup('reload-python-dap-configs', { clear = true })
+
+local dap_path = ''
+if ON_WINDOWS then
+    dap_path = string.gsub(vim.fn.stdpath('config'), '\\', '/') .. '/lua/dap-configs/*.lua'
+else
+    dap_path = vim.fn.stdpath('config') .. '/lua/dap-configs/*.lua'
+end
+
+autocmd('BufWritePost', {
+    group = augroup('reload-python-dap-configs', {}),
+    -- '/' are mandatory, even on Windows.
+    pattern = dap_path,
+    callback = function(event)
+        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+        print(event.file .. ' reloaded.')
+    end,
+    desc = 'Reload Python DAP Configs after editing a config.',
+})
+
+autocmd('BufWritePost', {
+    group = augroup('reload-python-dap-configs', {}),
+    pattern = '*.py',
+    callback = function(event)
+        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+    end,
+    desc = 'Reload Python DAP Configs after saving a python file',
+})
