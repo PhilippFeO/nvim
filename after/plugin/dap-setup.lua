@@ -24,10 +24,13 @@ dap.defaults.fallback.external_terminal = {
 -- Having this in `dap-python-configs` doesn't enable `integratedTerminal`
 -- dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 dap.defaults.fallback.focus_terminal = false
+-- `h dap-view-switchbuf`
+-- Multiple options or function possible
+dap.defaults.fallback.switchbuf = 'usevisible,useopen'
+dap.defaults.fallback.force_external_terminal = false
 
 -- ────────────────────────────────────────
 
-dap.defaults.fallback.force_external_terminal = false
 -- TODO: README and docs <25-01-2024>
 -- Displays variable names next to their definition, uses TreeSitter to find the respective location
 require 'nvim-dap-virtual-text'.setup({
@@ -38,9 +41,8 @@ require 'nvim-dap-virtual-text'.setup({
 -- Load DAP Configs
 -- ────────────────
 -- DAP configuration settings: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-
 -- ─── Python ──────────
--- s. also Autocommand ReloadDAPPythonConfigs
+-- s. also autocommands.lua
 dap.configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
 
 
