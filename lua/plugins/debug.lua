@@ -25,17 +25,25 @@ return {
       -- Are passed to `require 'dap-view.setup()`
       opts = {
         auto_toggle = true,
-        -- sections = { 'watches', 'scopes', 'exceptions', 'breakpoints', 'threads', 'sessions', 'repl' },
+        winbar = {
+          -- 'console' hat keinen Effekt
+          -- hide = true, hat auch keinen Effekt
+          -- Es gibt Issue, das ähnlich klingt
+          -- nvim-dap Einstellunge nicht vergessen
+          sections = { 'watches', 'scopes', 'exceptions', 'breakpoints', 'threads', 'repl', 'console' },
+        },
         windows = {
           size = 0.3,
           terminal = {
             size = 0.3,
             position = 'right',
+            hide = true,
           }
         },
         help = {
           border = require('utils').border,
         },
+        switchbuf = 'usevisible,useopen',
       },
     },
   },
