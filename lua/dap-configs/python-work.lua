@@ -55,6 +55,7 @@ local treesitter_pytest = {
 
 return {
   configs = {
+    arcpy_test,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
