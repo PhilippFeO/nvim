@@ -1,86 +1,93 @@
-vim.treesitter.language.register('markdown', 'octo')
-
-local defaults = { 'lua', 'python', 'vim', 'vimdoc' }
-
--- Default values in `h nvim-treesitter-context`
-local tc = require 'treesitter-context'
-tc.setup {
-  multiline_threshold = 1, -- Maximum number of lines to show for a single context
-  mode = 'cursor',
-  -- max_lines = 5,
-  -- trim_scope = 'outer',
-}
-tc.toggle()
+-- local parsers = { 'bash', 'diff', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' }
+-- local parsers = { 'lua' }
+-- require('nvim-treesitter').install(parsers)
 
 
-require('nvim-treesitter.configs').setup {
-  modules = {},
-  -- Autoinstall languages that are not installed. Defaults to false.
-  auto_install = false,
-  sync_install = false,
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = defaults,
-  -- treesitter and vimtex concealing collide, so I disable syntax highlighting for LaTeX
-  -- s. :h vimtex-faq-treesitter
-  ignore_install = { "latex", "markdown", "gitcommit", "diff", "html" },
 
-  additional_vim_regex_highlighting = false,
+if false then
+  vim.treesitter.language.register('markdown', 'octo')
 
-  highlight = { enable = true },
-  --indent = { enable = true, disable = { 'python' } }, -- TODO Herausfinden, was diese Zeile macht. Da ich es nicht weiß, habe ich sie auskommentiert.
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<C-space>',
-      -- Default mapping: van … an … an
-      -- node_incremental = '<C-space>',
-      scope_incremental = '<c-s>',
-      -- Default mapping: vin … in … in
-      -- node_decremental = '<A-space>',
-    },
-  },
-  textobjects = {
-    select = {
+  local defaults = { 'lua', 'python', 'vim', 'vimdoc' }
+
+  -- Default values in `h nvim-treesitter-context`
+  local tc = require 'treesitter-context'
+  tc.setup {
+    multiline_threshold = 1, -- Maximum number of lines to show for a single context
+    mode = 'cursor',
+    -- max_lines = 5,
+    -- trim_scope = 'outer',
+  }
+  tc.toggle()
+
+  require('nvim-treesitter.configs').setup {
+    modules = {},
+    -- Autoinstall languages that are not installed. Defaults to false.
+    auto_install = false,
+    sync_install = false,
+    -- Add languages to be installed here that you want installed for treesitter
+    ensure_installed = defaults,
+    -- treesitter and vimtex concealing collide, so I disable syntax highlighting for LaTeX
+    -- s. :h vimtex-faq-treesitter
+    ignore_install = { "latex", "markdown", "gitcommit", "diff", "html" },
+
+    additional_vim_regex_highlighting = false,
+
+    highlight = { enable = true },
+    --indent = { enable = true, disable = { 'python' } }, -- TODO Herausfinden, was diese Zeile macht. Da ich es nicht weiß, habe ich sie auskommentiert.
+    incremental_selection = {
       enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+        init_selection = '<C-space>',
+        -- Default mapping: van … an … an
+        -- node_incremental = '<C-space>',
+        scope_incremental = '<c-s>',
+        -- Default mapping: vin … in … in
+        -- node_decremental = '<A-space>',
       },
     },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
       },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']m'] = '@function.outer',
+          [']]'] = '@class.outer',
+        },
+        goto_next_end = {
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
+        },
+        goto_previous_start = {
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
+        },
+        goto_previous_end = {
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
+        },
       },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>a'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>A'] = '@parameter.inner',
+        },
       },
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
-}
+  }
+end
