@@ -9,6 +9,16 @@ local arcpy_test = {
   python = vim.fn.expand('~/proj/e.on-mining/.venv/python.exe'),
 }
 
+local default_internal_console_windows = {
+  console = 'internalConsole',
+  name = "Debug with internalConsole [Windows]",
+  program = "${file}",
+  request = "launch",
+  type = "python",
+  -- python = vim.fn.expand('~/proj/gi-nk/.venv/gi-nk/Scripts/pythonw.exe'),
+  python = vim.fn.expand('pythonw.exe'),
+}
+
 -- ────────────────────────────────────────
 
 local treesitter = {
@@ -56,6 +66,7 @@ local treesitter_pytest = {
 return {
   configs = {
     arcpy_test,
+    default_internal_console_windows,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
