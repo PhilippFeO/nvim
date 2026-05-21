@@ -19,7 +19,6 @@ I moved some contents into (list by far not complete)
 -- require('vim._core.ui2').enable({})
 
 -- Without `pcall` the `require()` would fail if the file 'work_machine.lua' is missing and my config wouldn't load.
-IS_WORK_MACHINE = false
 pcall(require, 'work_machine')
 
 -- Use either of the options/path depending on the OS.
