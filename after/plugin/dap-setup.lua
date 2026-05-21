@@ -8,7 +8,7 @@ dap.adapters.my_python_adapter = {
     type = 'executable',
     command = LINUX_OR_WINDOWS(
         vim.fn.expand '~/.venv/debugpy-for-nvim/bin/python',
-        vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/python.exe')
+        vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/pythonw.exe')
     ),
     args = { '-m', 'debugpy.adapter' }
 }
