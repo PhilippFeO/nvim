@@ -52,7 +52,7 @@ end
 require('neogit').setup({
   cmd = "Neogit",
   kind = "floating",
-  graph_style = ON_WINDOWS and 'unicode' or 'kitty',
+  graph_style = IS_WORK_MACHINE and 'unicode' or 'kitty',
   disable_line_numbers = false,
   disable_relative_line_numbers = false,
   commit_editor = {
