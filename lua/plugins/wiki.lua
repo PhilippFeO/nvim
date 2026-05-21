@@ -19,5 +19,5 @@ return {
     }
   end,
   -- ft = { 'markdown', 'wiki' } -- doesn't work
-  cond = not ON_WINDOWS,
+  enabled = not ON_WINDOWS,
 }
