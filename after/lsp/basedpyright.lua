@@ -3,7 +3,8 @@
 
 
 -- https://docs.basedpyright.com/v1.23.1/
-vim.lsp.config['basedpyright'] = {
+-- vim.lsp.config['basedpyright'] =
+return {
 	-- on_attach = on_attach,
 	-- capabilities = capabilities,
 	settings = {

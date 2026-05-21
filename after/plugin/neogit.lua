@@ -10,14 +10,21 @@ local ngit = require("neogit.lib.git")
 --  git checkout origin/main
 --  git push origin --delete feature
 --  git branch -d feature
-local function final_cleanup(_)
+local function remove_feature_branch(_)
   local remote = ngit.branch.upstream_remote()
   local current_branch = ngit.branch.current()
   local main_dev_branch
-  if vim.fn.getcwd():find('kursverwaltung', 1, true) then
-    main_dev_branch = 'dev'
-  else
-    main_dev_branch = 'main'
+  local root_dir = require 'lspconfig.util'.root_pattern('.git')('.')
+  if root_dir ~= nil then
+    if string.find(root_dir, 'kursverwaltung', 1, true) ~= nil then
+      main_dev_branch = 'dev'
+    elseif IS_WORK_MACHINE then
+      if string.find(root_dir, REPO_NAME_1, 1, true) ~= nil then
+        main_dev_branch = REPO_NAME_1
+      end
+    else
+      main_dev_branch = 'main'
+    end
   end
   local upstream_mdb = ngit.branch.upstream(main_dev_branch)
   local result
@@ -45,7 +52,7 @@ end
 require('neogit').setup({
   cmd = "Neogit",
   kind = "floating",
-  graph_style = 'kitty',
+  graph_style = IS_WORK_MACHINE and 'unicode' or 'kitty',
   disable_line_numbers = false,
   disable_relative_line_numbers = false,
   commit_editor = {
@@ -79,7 +86,7 @@ require('neogit').setup({
     NeogitBranchPopup = function(builder)
       builder
           :new_action_group('My Actions')
-          :action('f', 'Final Cleanup', final_cleanup)
+          :action('f', 'Remove Feature Branch', remove_feature_branch)
     end,
   },
 })

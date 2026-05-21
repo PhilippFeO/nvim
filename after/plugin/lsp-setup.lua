@@ -1,5 +1,11 @@
 local border = require('utils').border
 
+
+-- Recommend by (s. video) https://gpanders.com/blog/whats-new-in-neovim-0-11/
+-- 2026-05-18: I don't see any effect, hence disabled
+-- vim.cmd('set completeopt+=noselect')
+
+
 vim.diagnostic.config({
   virtual_text = true, -- Show diagnostics next to the code
   ---@diagnostic disable-next-line: assign-type-mismatch
@@ -93,9 +99,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       { desc = lsp_desc('[g]oto [d]eclaration via LSP') }
     )
     vim.keymap.set('n', 'gD', function()
-      vim.lsp.buf.definition()
-      vim.cmd('normal zz')
-    end,
+        vim.lsp.buf.definition()
+        vim.cmd('normal zz')
+      end,
       { desc = lsp_desc('[g]oto [D]efinition') }
     )
     vim.keymap.set('n', '<Leader>ds',

@@ -1,6 +1,26 @@
 -- Work configs
 -- ────────────
 
+local arcpy_test = {
+  name = "Arcpy",
+  type = "python",
+  request = "launch",
+  program = vim.fn.expand('~/proj/e.on-mining/test.py'),
+  python = vim.fn.expand('~/proj/e.on-mining/.venv/python.exe'),
+}
+
+local default_internal_console_windows = {
+  console = 'internalConsole',
+  name = "Debug with internalConsole [Windows]",
+  program = "${file}",
+  request = "launch",
+  type = "python",
+  -- python = vim.fn.expand('~/proj/gi-nk/.venv/gi-nk/Scripts/pythonw.exe'),
+  python = vim.fn.expand('pythonw.exe'),
+}
+
+-- ────────────────────────────────────────
+
 local treesitter = {
   name = "Tree-Sitter Callgraph",
   program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/main.py',
@@ -45,6 +65,8 @@ local treesitter_pytest = {
 
 return {
   configs = {
+    arcpy_test,
+    default_internal_console_windows,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
