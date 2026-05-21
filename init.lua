@@ -16,6 +16,7 @@ I moved some contents into (list by far not complete)
 -- local home_dir = os.getenv("HOME")
 -- package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
 
+-- require('vim._core.ui2').enable({})
 
 -- Without `pcall` the `require()` would fail if the file 'work_machine.lua' is missing and my config wouldn't load.
 pcall(require, 'work_machine')
@@ -112,7 +113,7 @@ require('lazy').setup(
       'lervag/vimtex',
       lazy = false, -- VimTeX must not be lazy loaded.
       ft = { 'tex' },
-      cond = not IS_WORK_MACHINE,
+      enabled = not IS_WORK_MACHINE,
     },
 
     -- ─── Snippets ──────────

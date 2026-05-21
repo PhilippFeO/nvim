@@ -19,4 +19,5 @@ return {
     }
   end,
   -- ft = { 'markdown', 'wiki' } -- doesn't work
+  cond = not ON_WINDOWS,
 }

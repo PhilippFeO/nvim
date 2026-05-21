@@ -81,20 +81,31 @@ autocmd('TermOpen', {
     end
 })
 
+augroup('reload-python-dap-configs', { clear = true })
+
+local dap_path = ''
+if ON_WINDOWS then
+    dap_path = string.gsub(vim.fn.stdpath('config'), '\\', '/') .. '/lua/dap-configs/*.lua'
+else
+    dap_path = vim.fn.stdpath('config') .. '/lua/dap-configs/*.lua'
+end
 
 autocmd('BufWritePost', {
-    group = augroup('reload-python-dap-configs', { clear = true }),
-    pattern = '*.py',
-    callback = function()
-        --[[ The different dap configs are distributed over different files (s. dap-configs/python.lua) and required in the aforementioned file.
-        Since required calls are cached just reloading dap-configs/python.lua has no effect, because the already loaded values are fetched. To circument this, the cached values are deleted by setting the key to nil. Then, they are rerequired in `require 'dap-configs.python`.
-        -- ]]
-        for key, _ in pairs(package.loaded) do
-            if key:match('^dap%-configs%.python') then
-                package.loaded[key] = nil
-            end
-        end
-        require 'dap-configs.python-default'
+    group = augroup('reload-python-dap-configs', {}),
+    -- '/' are mandatory, even on Windows.
+    pattern = dap_path,
+    callback = function(event)
+        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+        print(event.file .. ' reloaded.')
     end,
-    desc = 'Reload Python DAP Configs',
+    desc = 'Reload Python DAP Configs after editing a config.',
+})
+
+autocmd('BufWritePost', {
+    group = augroup('reload-python-dap-configs', {}),
+    pattern = '*.py',
+    callback = function(event)
+        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+    end,
+    desc = 'Reload Python DAP Configs after saving a python file',
 })

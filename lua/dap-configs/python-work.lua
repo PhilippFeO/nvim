@@ -1,6 +1,16 @@
 -- Work configs
 -- ────────────
 
+local arcpy_test = {
+  name = "Arcpy",
+  type = "python",
+  request = "launch",
+  program = vim.fn.expand('~/proj/e.on-mining/test.py'),
+  python = vim.fn.expand('~/proj/e.on-mining/.venv/python.exe'),
+}
+
+-- ────────────────────────────────────────
+
 local treesitter = {
   name = "Tree-Sitter Callgraph",
   program = vim.fn.expand '~/python/tree-sitter-callgraph/tscg/main.py',
@@ -45,6 +55,7 @@ local treesitter_pytest = {
 
 return {
   configs = {
+    arcpy_test,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
