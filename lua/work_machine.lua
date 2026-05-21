@@ -1,5 +1,5 @@
 IS_WORK_MACHINE = true
-ON_WINDOWS = vim.fn.has('win32')
+ON_WINDOWS = vim.fn.has('win32') == 1
 REPO_NAME_1 = 'gi-nk'
 
 if IS_WORK_MACHINE and ON_WINDOWS then
