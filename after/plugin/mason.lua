@@ -31,3 +31,5 @@ require('mason-lspconfig').setup({
 })
 
 -- local on_attach = require 'lsp-keymaps' -- lua/lsp-keymaps.lua
+
+if string.find(vim.fn.getcwd(), 'photo-location-updater', 1, true) ~= nil then vim.lsp.enable('ruff', false) end

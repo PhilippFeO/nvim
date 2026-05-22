@@ -43,7 +43,7 @@ return {
         help = {
           border = require('utils').border,
         },
-        switchbuf = 'usevisible,useopen',
+        -- switchbuf = 'usevisible,usetab',
       },
     },
   },

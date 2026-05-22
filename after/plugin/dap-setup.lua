@@ -7,8 +7,8 @@ local dap = require('dap')
 dap.adapters.my_python_adapter = {
     type = 'executable',
     command = LINUX_OR_WINDOWS(
-        vim.fn.expand '~/.venv/debugpy-for-nvim/bin/python',
-        vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/pythonw.exe')
+        vim.fn.stdpath('config') .. '/.venv/debugpy-for-nvim/bin/python',
+        vim.fn.stdpath('config') .. '/.venv/debugpy-for-nvim/Scripts/pythonw.exe'
     ),
     args = { '-m', 'debugpy.adapter' }
 }
@@ -26,7 +26,7 @@ dap.defaults.fallback.external_terminal = {
 dap.defaults.fallback.focus_terminal = false
 -- `h dap-view-switchbuf`
 -- Multiple options or function possible
-dap.defaults.fallback.switchbuf = 'usevisible,useopen'
+-- dap.defaults.fallback.switchbuf = 'usetab'
 dap.defaults.fallback.force_external_terminal = false
 
 -- ────────────────────────────────────────

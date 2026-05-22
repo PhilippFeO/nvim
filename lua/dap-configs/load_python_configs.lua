@@ -7,6 +7,7 @@ local gather_dap_python_configs = function()
     require 'dap-configs.python-kursverwaltung'.configs,
     require 'dap-configs.python-tagebuch'.configs,
     require 'dap-configs.python-set-GPSIFD'.configs,
+    require 'dap-configs.python-photo-location-updater'.configs,
   }
   local all_configs = {}
   for _, list in ipairs(my_configs) do
