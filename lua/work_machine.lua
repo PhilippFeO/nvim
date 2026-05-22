@@ -1,4 +1,4 @@
-IS_WORK_MACHINE = true
+IS_WORK_MACHINE = string.find(vim.fn.hostname(), 'GIG', 2, true) ~= nil
 ON_WINDOWS = vim.fn.has('win32') == 1
 REPO_NAME_1 = 'gi-nk'
 

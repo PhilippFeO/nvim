@@ -2,6 +2,7 @@ local dap_defaults = {
   request = 'launch',
   type = 'python',
   cwd = vim.fn.expand('~/programmieren/GPSPos_setzen/'),
+  args = { 'jpgs/without.jpg' },
 }
 
 

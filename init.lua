@@ -21,10 +21,13 @@ I moved some contents into (list by far not complete)
 -- Without `pcall` the `require()` would fail if the file 'work_machine.lua' is missing and my config wouldn't load.
 pcall(require, 'work_machine')
 
--- Use either of the options depending on the OS.
---- @param linux_opt string
---- @param windows_opt string
---- @return string
+-- Use either of the options/path depending on the OS.
+---@param linux_opt string Option/Path when on Linux
+---@param windows_opt string Option/Path when on Windows
+---@return string string selected option/path
+---@source ./after/plugin/neogit.lua
+---@see README.md#configuration Configuration Guide
+---@see Internet https://example.com/docs/http-client, HTTP Client Documentation
 function LINUX_OR_WINDOWS(linux_opt, windows_opt)
   if vim.fn.has('linux') == 1 then
     return linux_opt
@@ -32,6 +35,19 @@ function LINUX_OR_WINDOWS(linux_opt, windows_opt)
     return windows_opt
   end
 end
+
+vim.cmd('let g:loaded_perl_provider = 0')
+-- Since 2026-05-20, it has to be set before UltiSnip is loaded, s. https://github.com/SirVer/ultisnips/issues/1685#issuecomment-4479468861
+-- some plugins, fi. UltiSnips, need python and a python interpreter with the
+-- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
+-- should now work with virtual envs flawlessly
+-- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
+-- the mechanic completely
+-- vim.cmd('let g:loaded_python3_provider = 1')
+-- vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
+--   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
+vim.g.python3_host_prog = vim.fn.expand('~/.venv/neovim/bin/python')
+
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
 --  Setting <Leader> (not necessarily <LocalLeader>) before plugins are required by lazy.nvim.
@@ -91,7 +107,7 @@ require('lazy').setup(
       -- location specified via `dev.path` in `opts` parameter (s. below)
       dev = true,
       branch = 'master',
-      enabled = not IS_WORK_MACHINE,
+      enabled = false,
     },
 
     -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
@@ -198,13 +214,6 @@ require('lazy').setup(
 --   library = { plugins = { "nvim-dap-ui" }, types = true },
 -- })
 
--- some plugins, fi. UltiSnips, need python and a python interpreter with the
--- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
--- should now work with virtual envs flawlessly
--- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
--- the mechanic completely
-vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
-  "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
 
 
 
