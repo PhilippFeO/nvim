@@ -8,3 +8,4 @@ minimal_configs/
 myplugins/
 Pluginideen.md
 tmp/
+.venv/

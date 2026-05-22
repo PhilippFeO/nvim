@@ -46,7 +46,7 @@ vim.cmd('let g:loaded_perl_provider = 0')
 -- vim.cmd('let g:loaded_python3_provider = 1')
 -- vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
 --   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
-vim.g.python3_host_prog = vim.fn.expand('~/.venv/neovim/bin/python')
+vim.g.python3_host_prog = vim.fn.stdpath('config') .. '/.venv/bin/python3'
 
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
