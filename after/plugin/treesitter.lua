@@ -1,31 +1,33 @@
-local parsers = { 'bash', 'diff', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' }
-require('nvim-treesitter').install(parsers)
+if not ON_WINDOWS then
+  local parsers = { 'bash', 'diff', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' }
+  require('nvim-treesitter').install(parsers)
 
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'bash', 'lua', 'markdown', 'markdown_inline', 'python', 'query', 'vimdoc', 'vim', 'luadoc' },
-  callback = function()
-    -- syntax highlighting, provided by Neovim
-    vim.treesitter.start()
-    -- folds, provided by Neovim
-    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.wo.foldmethod = 'expr'
-    -- indentation, provided by nvim-treesitter
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'bash', 'lua', 'markdown', 'markdown_inline', 'python', 'query', 'vimdoc', 'vim', 'luadoc' },
+    callback = function()
+      -- syntax highlighting, provided by Neovim
+      vim.treesitter.start()
+      -- folds, provided by Neovim
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo.foldmethod = 'expr'
+      -- indentation, provided by nvim-treesitter
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+  })
 
-vim.treesitter.language.register('markdown', 'octo')
+  vim.treesitter.language.register('markdown', 'octo')
 
--- Default values in `h nvim-treesitter-context`
-local tc = require 'treesitter-context'
-tc.setup {
-  multiline_threshold = 1, -- Maximum number of lines to show for a single context
-  mode = 'cursor',
-  -- max_lines = 5,
-  -- trim_scope = 'outer',
-}
-tc.toggle()
+  -- Default values in `h nvim-treesitter-context`
+  local tc = require 'treesitter-context'
+  tc.setup {
+    multiline_threshold = 1, -- Maximum number of lines to show for a single context
+    mode = 'cursor',
+    -- max_lines = 5,
+    -- trim_scope = 'outer',
+  }
+  tc.toggle()
+end
 
 -- incremental_selection = {
 --   enable = true,
