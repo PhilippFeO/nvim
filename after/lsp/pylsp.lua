@@ -12,6 +12,7 @@ return {
 		client.server_capabilities.hoverProvider = false
 		client.server_capabilities.renameProvider = false
 		client.server_capabilities.definitionProvider = false
+		client.server_capabilities.declarationProvider = false
 		-- signatureHelpProvider takes a table as argument (default):
 		--		signatureHelpProvider = {
 		--			triggerCharacters = { "(", ",", "=" }
