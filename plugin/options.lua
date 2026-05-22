@@ -51,7 +51,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect,fuzzy'
+vim.o.completeopt = 'menu,menuone,popup,noselect'
 
 vim.opt.linebreak = true
 vim.opt.breakindent = true
