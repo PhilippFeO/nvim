@@ -196,9 +196,6 @@ end, { expr = true, desc = 'Insert directory of buffer' })
 -- When jumping to a function, I want to see as much as possible from it's body, hence zt and not zz
 vim.keymap.set('n', '[m', '[mzt', { desc = 'Jump to previous @function.outer' })
 vim.keymap.set('n', ']m', ']mzt', { desc = 'Jump to next @function.outer' })
--- Add empty lines
-vim.keymap.set('n', ']<Space>', '<Cmd>normal o<CR>', { desc = 'Add one empty line below cursor' })
-vim.keymap.set('n', '[<Space>', '<Cmd>normal O<CR>', { desc = 'Add one empty line above cursor' })
 vim.keymap.set('n', '[[', '[[zz', { desc = 'Center view after going to previous section' })
 vim.keymap.set('n', ']]', ']]zz', { desc = 'Center view after going to next section' })
 vim.keymap.set('n', '<A-j>', '<Cmd>cnext | copen | norm zt<C-e><C-w>pzz<CR>',
