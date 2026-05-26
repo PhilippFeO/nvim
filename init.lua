@@ -38,15 +38,13 @@ end
 
 vim.cmd('let g:loaded_perl_provider = 0')
 -- Since 2026-05-20, it has to be set before UltiSnip is loaded, s. https://github.com/SirVer/ultisnips/issues/1685#issuecomment-4479468861
--- some plugins, fi. UltiSnips, need python and a python interpreter with the
--- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
--- should now work with virtual envs flawlessly
--- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
--- the mechanic completely
--- vim.cmd('let g:loaded_python3_provider = 1')
--- vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
---   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
-vim.g.python3_host_prog = vim.fn.stdpath('config') .. '/.venv/bin/python3'
+-- Some plugins, fi. UltiSnips, need python and a python interpreter with the "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
+-- (s. :help provider-python & further information in my personal wiki, because i havn't understood the mechanic completely)
+-- Contains debugpy as well, ie used to set DAP Adapter.
+vim.g.python3_host_prog = LINUX_OR_WINDOWS(
+  vim.fn.stdpath('config') .. '/.venv/neovim/bin/python',
+  vim.fn.stdpath('config') .. '/.venv/neovim/Scripts/pythonw.exe'
+)
 
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)

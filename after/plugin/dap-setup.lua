@@ -6,10 +6,11 @@ local dap = require('dap')
 
 dap.adapters.my_python_adapter = {
     type = 'executable',
-    command = LINUX_OR_WINDOWS(
-        vim.fn.expand '~/.venv/debugpy-for-nvim/bin/python',
-        vim.fn.expand('~/.venv/debugpy-for-nvim/Scripts/pythonw.exe')
-    ),
+    command = vim.g.python3_host_prog,
+    -- command = LINUX_OR_WINDOWS(
+    --     vim.fn.stdpath('config') .. '/.venv/neovim/bin/python',
+    --     vim.fn.stdpath('config') .. '/.venv/neovim/Scripts/pythonw.exe'
+    -- ),
     args = { '-m', 'debugpy.adapter' }
 }
 
