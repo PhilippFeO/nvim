@@ -135,7 +135,7 @@ nmap('<Leader>sm', require('telescope_utils').tab_man_pages, '[s]earch [m]an pag
 nmap('<Leader>en', function()
   local config_path = vim.fn.stdpath('config')
   builtin.find_files({ cwd = config_path })
-  vim.cmd.tcd(config_path)
+  vim.cmd.lcd(config_path)
 end, '[e]dit [n]eovim')
 
 -- ─── Git ──────────
