@@ -42,8 +42,8 @@ vim.cmd('let g:loaded_perl_provider = 0')
 -- (s. :help provider-python & further information in my personal wiki, because i havn't understood the mechanic completely)
 -- Contains debugpy as well, ie used to set DAP Adapter.
 vim.g.python3_host_prog = LINUX_OR_WINDOWS(
-  vim.fn.stdpath('config') .. '/.venv/neovim/bin/python',
-  vim.fn.stdpath('config') .. '/.venv/neovim/Scripts/pythonw.exe'
+  vim.fn.stdpath('config') .. '/.venv/bin/python',
+  vim.fn.stdpath('config') .. '/.venv/Scripts/pythonw.exe'
 )
 
 
