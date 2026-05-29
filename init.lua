@@ -100,6 +100,14 @@ require('lazy').setup(
       enabled = not IS_WORK_MACHINE,
     },
     {
+      'PhilippFeO/explain-ruff-rule.nvim',
+      ft = 'python',
+      dev = true,
+      opts = {
+        border = 'rounded',
+      }
+    },
+    {
       'PhilippFeO/telescope-link-headings.nvim',
       -- `dev = true` implies using the local version of the plugin
       -- location specified via `dev.path` in `opts` parameter (s. below)
@@ -203,7 +211,7 @@ require('lazy').setup(
     --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
     -- { import = 'custom.plugins' },
   }, {
-    -- dev = { path = '~/dotfiles/nvim/lua/myplugins/' },
+    dev = { path = vim.fn.stdpath('config') .. '/lua/myplugins/' },
   })
 
 
