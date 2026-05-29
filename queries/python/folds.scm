@@ -8,6 +8,26 @@
   (function_definition)
   (import_from_statement)
   (string)
+  ; ─── Dataclasses ──────────
+  ; Goal: Fold dataclasses but starting at the actual class definition.
+  ; Other approaches do not work
+  (class_definition)
+  ; TODO(Philipp): Doesn't work. <27-05-2026> 
+  ; (decorated_definition
+  ;   (decorator
+  ;     (identifier) @_decorator
+  ;     (#eq? @_decorator "dataclass"))
+  ;   (class_definition))
+  ; (decorated_definition
+  ;   (decorator
+  ;     [
+  ;       ; Captures `@dataclass`
+  ;       (identifier) @_dec
+  ;       ; Captures `@dataclass(…)`
+  ;       (call function: (identifier) @_dec)
+  ;     ]
+  ;     (#eq? @_dec "dataclass"))
+  ;       (class_definition))
   ; ─── Logging ──────────
   ; log_defaults = {…}
   (assignment
