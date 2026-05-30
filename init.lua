@@ -53,7 +53,7 @@ vim.g.python3_host_prog = LINUX_OR_WINDOWS(
 vim.g.mapleader = ' '
 vim.g.maplocalleader = 'ö'
 
-
+local lazy_dev_path = vim.fn.stdpath('config') .. '/lua/myplugins/'
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -100,7 +100,7 @@ require('lazy').setup(
       enabled = not IS_WORK_MACHINE,
     },
     {
-      'PhilippFeO/explain-ruff-rule.nvim',
+      dir = lazy_dev_path .. 'explain-ruff-rule.nvim',
       ft = 'python',
       dev = true,
       opts = {
@@ -211,7 +211,7 @@ require('lazy').setup(
     --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
     -- { import = 'custom.plugins' },
   }, {
-    dev = { path = vim.fn.stdpath('config') .. '/lua/myplugins/' },
+    dev = { path = lazy_dev_path },
   })
 
 
