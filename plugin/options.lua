@@ -31,6 +31,8 @@ vim.o.hlsearch = false
 --  See `:help 'clipboard'`
 -- vim.o.clipboard = 'unnamedplus'
 
+vim.o.diffopt = vim.o.diffopt .. ',vertical,anchor,'
+
 -- Save undo history
 vim.o.undofile = true
 
