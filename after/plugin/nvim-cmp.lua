@@ -53,9 +53,9 @@ cmp.setup.cmdline(':', {
   }, {
     {
       name = 'cmdline',
-      option = {
-        ignore_cmds = { 'Man', '!' }
-      }
+      -- option = {
+      --   ignore_cmds = { 'Man', '!' }
+      -- }
     }
   })
 })
@@ -71,30 +71,41 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<C-CR>'] = cmp.mapping.confirm {
+    -- complete() shows the completion menu/list
+    -- Useful, when
+    --    - dismissed the menu and want it back without retyping
+    --    - A source requires explicit triggering (some LSP servers)
+    --    - You want completion inside a string/comment where it's otherwise suppressed
+    ['<C-CR>'] = cmp.mapping.complete {},
+    -- Executes completion of selected item
+    ['<C-Space>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
     -- <C-n> and <C-p> to move between next and previous item
-    ['<C-n>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() then
-        vim.fn["UltiSnips#ExpandSnippetOrJump."]()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<C-p>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["UltiSnips#CanJumpBackwards"]() then
-        vim.fn["UltiSnips#JumpBackwards"]()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    ['<C-n>'] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() then
+          vim.fn["UltiSnips#ExpandSnippetOrJump."]()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }
+    ),
+
+    ['<C-p>'] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif vim.fn["UltiSnips#CanJumpBackwards"]() then
+          vim.fn["UltiSnips#JumpBackwards"]()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }
+    ),
   },
 
   -- Ordering matters, i.e. in completion menu nvim_lsp proposals come before luasnip, before path , ...
@@ -112,7 +123,8 @@ cmp.setup {
     },
     {
       name = 'buffer',
-      keyword_length = 5 -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
+      -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
+      keyword_length = 5
     },
     { name = 'cmp_csv' },
 
@@ -127,21 +139,27 @@ cmp.setup {
     format = function(entry, vim_item)
       local lspkind_ok, lspkind = pcall(require, "lspkind")
       if not lspkind_ok then
+        print('nvim-cmp: Dont use lspkind.')
         -- From kind_icons array
-        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        -- This concatonates the icons with the name of the item kind
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
         -- Source description
-        vim_item.menu = ({
-          git = "[GIT]",
-          ultisnip = "[UltiS]",
-          nvim_lua = "[API]",
-          nvim_lsp = "[N-LSP]",
-          path = "[Path]",
-          buffer = "[Buf]",
-          cmp_csv = "[CSV]",
-          cmp_help_tags = "[H]"
-        })[entry.source.name]
+        -- `entry.source.name` defined above under `sources`.
+        vim_item.menu = (
+          {
+            git = "[GIT]",
+            ultisnip = "[SNIP]",
+            nvim_lua = "[API]",
+            nvim_lsp = "[LSP]",
+            path = "[Path]",
+            buffer = "[Buf]",
+            cmp_csv = "[CSV]",
+            cmp_help_tags = "[H]"
+          }
+        )[entry.source.name]
         return vim_item
       else
+        print('nvim-cmp: Use lspkind.')
         -- From lspkind
         return lspkind.cmp_format()
       end
@@ -151,7 +169,8 @@ cmp.setup {
   -- Menu direction can be changed, in case cursor is at the bottom or in command line,
   --    > https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#custom-menu-direction
   view = {
-    entries = "custom" -- can be "custom", "wildmenu" or "native"
+    entries = "custom", -- can be "custom", "wildmenu" or "native"
+    selection_order = 'near_cursor'
   },
 
   window = {

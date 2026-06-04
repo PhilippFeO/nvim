@@ -38,15 +38,13 @@ end
 
 vim.cmd('let g:loaded_perl_provider = 0')
 -- Since 2026-05-20, it has to be set before UltiSnip is loaded, s. https://github.com/SirVer/ultisnips/issues/1685#issuecomment-4479468861
--- some plugins, fi. UltiSnips, need python and a python interpreter with the
--- "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
--- should now work with virtual envs flawlessly
--- (s. :help provider-python & further information in my personal wiki, because i havn't understood)
--- the mechanic completely
--- vim.cmd('let g:loaded_python3_provider = 1')
--- vim.g.python3_host_prog = LINUX_OR_WINDOWS('/usr/bin/python3',
---   "C:\\Users\\Philipp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe")
-vim.g.python3_host_prog = vim.fn.expand('~/.venv/neovim/bin/python')
+-- Some plugins, fi. UltiSnips, need python and a python interpreter with the "pynvim" module (installation: python3 -m pip install --user --upgrade pynvim)
+-- (s. :help provider-python & further information in my personal wiki, because i havn't understood the mechanic completely)
+-- Contains debugpy as well, ie used to set DAP Adapter.
+vim.g.python3_host_prog = LINUX_OR_WINDOWS(
+  vim.fn.stdpath('config') .. '/.venv/bin/python',
+  vim.fn.stdpath('config') .. '/.venv/Scripts/pythonw.exe'
+)
 
 
 --  Must happen before plugins are required (otherwise wrong leader will be used)
@@ -55,7 +53,7 @@ vim.g.python3_host_prog = vim.fn.expand('~/.venv/neovim/bin/python')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = 'ö'
 
-
+local lazy_dev_path = vim.fn.stdpath('config') .. '/lua/myplugins/'
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -100,6 +98,14 @@ require('lazy').setup(
         skip_rows = 0,
       },
       enabled = not IS_WORK_MACHINE,
+    },
+    {
+      dir = lazy_dev_path .. 'explain-ruff-rule.nvim',
+      ft = 'python',
+      dev = true,
+      opts = {
+        border = 'rounded',
+      }
     },
     {
       'PhilippFeO/telescope-link-headings.nvim',
@@ -205,7 +211,7 @@ require('lazy').setup(
     --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
     -- { import = 'custom.plugins' },
   }, {
-    -- dev = { path = '~/dotfiles/nvim/lua/myplugins/' },
+    dev = { path = lazy_dev_path },
   })
 
 

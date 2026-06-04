@@ -39,11 +39,11 @@
 -- changing the 'makeprg' option.  For example: >
 --    :set mp=make\ \\\|&\ error_filter
 
-if not IS_WORK_MACHINE then
-  vim.cmd [[CompilerSet makeprg=make]]
-else
+if ON_WINDOWS then
   -- vim.cmd [[CompilerSet makeprg=C:\Users\Philipp\proj\gi-nk\.venv\gi-nk\Scripts\python.exe]]
   vim.cmd [[CompilerSet makeprg=python.exe]]
+else
+  vim.cmd [[CompilerSet makeprg=make]]
 end
 
 -- Use each file and line of Tracebacks (to see and step through the code executing).

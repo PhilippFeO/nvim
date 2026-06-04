@@ -118,12 +118,11 @@ require('ufo').setup({
   provider_selector = function(bufnr, filetype, buftype)
     return { 'treesitter', 'indent' }
   end,
-  -- Treesitter nodes (because I am using treesitter as provider) which shall be folded per default, ie
-  -- when I open the file.
+  -- Treesitter nodes (because I am using treesitter as provider) which shall be folded per default, ie when I open the file.
   -- As far as I can tell, they have to be a subset of the nodes mentioned in queries/python/folds.scm. Just having the file doesnt work.
   --  'call' DOES NOT mean to close every Call but only these matching the ones from `folds.scm`.
   close_fold_kinds_for_ft = {
-    python = { 'function_definition', 'call', 'import_statement', 'import_from_statement', 'assignment' },
+    python = { 'function_definition', 'call', 'import_statement', 'import_from_statement', 'assignment', 'class_definition' },
   },
   -- If `true`, folds are closed if, fi. `vim.lsp.buf.hover()` is used to open a floating window, which is kinda annoying.
   close_fold_current_line_for_ft = {
