@@ -61,35 +61,24 @@ local default_no_console_foreign_code = {
     justMyCode = false,
 }
 
-local test_config = {
-    name = "Lorem Ipsum",
-    program = '${file}',
-    request = "launch",
-    type = "python",
-    justMyCode = false,
-}
-
 local grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
-    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
-        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
+    cwd = vim.fn.expand '~/programmieren/grocery_shopper',
     args = { '-n', '2' }
-    -- args = { '--pdf', 'Spätzle.yaml' }
 }
 
 local grocery_shopper_custom_args = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with custom Arguments",
-    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
-        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
+    cwd = vim.fn.expand '~/programmieren/grocery_shopper',
     args = function()
         local cli_args = vim.fn.input 'Debug with Arguments: '
         local cli_args_table = {}
@@ -104,27 +93,12 @@ local grocery_shopper_pdf = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '--pdf Spätzle.yaml'",
     -- needs absolute path
-    program = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/grocery_shopper/start.py' or
-        vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = DLR_Machine and vim.fn.expand '~/proj/grocery-shopper/' or vim.fn.expand '~/programmieren/grocery_shopper',
+    cwd = vim.fn.expand '~/programmieren/grocery_shopper',
     args = { '--pdf', 'Spätzle.yaml' }
 }
-
--- local configs = {
---     default_no_console,
---     default_external_terminal,
---     default_integrated_terminal,
---     default_no_console_foreign_code,
---     pytest_default_config,
---     grocery_shopper,
---     grocery_shopper_custom_args,
---     grocery_shopper_pdf,
---     diary,
---     -- For use in keymap <Leader>dm for `test_method()`
---     pytest_default_config = pytest_default_config,
--- }
 
 
 return {
@@ -134,9 +108,9 @@ return {
         default_internal_console,
         default_no_console_foreign_code,
         -- pytest_default_config,
-        -- grocery_shopper,
-        -- grocery_shopper_custom_args,
-        -- grocery_shopper_pdf,
+        grocery_shopper,
+        grocery_shopper_custom_args,
+        grocery_shopper_pdf,
         -- diary,
         -- For use in keymap <Leader>dm for `test_method()`
         -- pytest_default_config = pytest_default_config,
