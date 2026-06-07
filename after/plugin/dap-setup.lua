@@ -143,13 +143,18 @@ dapui.setup {
 -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 
 local function toggle_closing_dapui()
-    if not dap.listeners.before.event_terminated['dapui_config'] and not dap.listeners.before.event_exited['dapui_config'] then
-        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-        dap.listeners.before.event_exited['dapui_config'] = dapui.close
-    else
-        dap.listeners.before.event_terminated['dapui_config'] = nil
-        dap.listeners.before.event_exited['dapui_config'] = nil
-    end
+    dap.listeners.after.event_initialized["dap-view"] = nil
+    dap.listeners.before.event_terminated["dap-view"] = nil
+    dap.listeners.before.event_exited["dap-view"] = nil
+    -- if not dap.listeners.before.event_terminated['dapui_config'] and not dap.listeners.before.event_exited['dapui_config'] then
+    --     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    --     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- else
+    --     dap.listeners.before.event_terminated['dapui_config'] = nil
+    --     dap.listeners.before.event_exited['dapui_config'] = nil
+    --     dap.listeners.after.event_terminated['dapui_config'] = nil
+    --     dap.listeners.after.event_exited['dapui_config'] = nil
+    -- end
 end
 -- Run function, so the default is that dapui closes
 toggle_closing_dapui()

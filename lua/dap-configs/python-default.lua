@@ -65,10 +65,11 @@ local grocery_shopper = {
     console = 'externalTerminal',
     name = "Debug grocery_shopper with '-n 2'",
     -- needs absolute path
-    program = vim.fn.expand '~/programmieren/grocery-shopper/grocery_shopper/start.py',
+    -- program = vim.fn.expand '~/programmieren/grocery-shopper/grocery-shopper/start.py',
+    program = vim.fn.expand './grocery-shopper/start.py',
     request = "launch",
     type = "python",
-    cwd = vim.fn.expand '~/programmieren/grocery_shopper',
+    -- cwd = vim.fn.expand '~/programmieren/grocery_shopper',
     args = { '-n', '2' }
 }
 
