@@ -19,6 +19,9 @@ return {
 
     'nvim-telescope/telescope-dap.nvim',
 
+    -- Debug Neovim
+    "jbyuki/one-small-step-for-vimkind",
+
     -- ─── nvim-dap-view ──────────
     {
       "igorlfs/nvim-dap-view",
