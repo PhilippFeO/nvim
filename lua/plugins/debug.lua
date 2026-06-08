@@ -1,5 +1,6 @@
 return {
   'mfussenegger/nvim-dap',
+  lazy = false,
 
   dependencies = {
     -- Creates a beautiful debugger UI
@@ -15,6 +16,7 @@ return {
 
     -- https://github.com/theHamsta/nvim-dap-virtual-text
     'theHamsta/nvim-dap-virtual-text',
+
     'nvim-telescope/telescope-dap.nvim',
 
     -- ─── nvim-dap-view ──────────
