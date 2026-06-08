@@ -117,8 +117,10 @@ require('lazy').setup(
     },
 
     -- 'numToStr/Comment.nvim',       -- check ./after/plugin/comment.lua for setup and mechanics
-    'nvim-lualine/lualine.nvim',   -- setup in after/plugin/lualine.lua
-    'nvim-tree/nvim-web-devicons', -- TODO: onsails/lspkind.nvim  <13-03-2023> --
+    'nvim-lualine/lualine.nvim', -- setup in after/plugin/lualine.lua
+    'nvim-tree/nvim-web-devicons',
+    -- s. ./after/plugin/nvim-cmp.lua
+    -- 'onsails/lspkind.nvim',
     'windwp/nvim-autopairs',
 
     -- -- kanagawa colors and themes are in misc/

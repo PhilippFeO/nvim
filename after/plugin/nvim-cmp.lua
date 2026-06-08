@@ -1,5 +1,6 @@
 -- I disabled every luasnip related line of code. Search for "luasnip" to reverse this step after installing luasnip.
 
+
 -- it also possible to use Unicode symbols like 📂️, 🚀️, etc.
 local kind_icons = {
   Class = "ﴯ",
@@ -76,12 +77,13 @@ cmp.setup {
     --    - dismissed the menu and want it back without retyping
     --    - A source requires explicit triggering (some LSP servers)
     --    - You want completion inside a string/comment where it's otherwise suppressed
-    ['<C-CR>'] = cmp.mapping.complete {},
+    ['<C-Space>'] = cmp.mapping.complete {},
     -- Executes completion of selected item
-    ['<C-Space>'] = cmp.mapping.confirm {
+    ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
+    -- Assumption: Only relevant if LSP provides snippets
     -- <C-n> and <C-p> to move between next and previous item
     ['<C-n>'] = cmp.mapping(
       function(fallback)
@@ -108,15 +110,15 @@ cmp.setup {
     ),
   },
 
-  -- Ordering matters, i.e. in completion menu nvim_lsp proposals come before luasnip, before path , ...
+  -- Ordering matters, i.e. in completion menu nvim_lsp proposals come before Snippets, before path , ...
   -- This behavior can also be achieved by the <priority> key
-  -- Don't forget to add a menu entry below
+  -- Don't forget to add a 'menu' entry below in 'formatting.format'
   sources = {
-    { name = 'git' },
-    { name = 'ultisnips' },
     { name = 'nvim_lua' },
+    { name = 'ultisnips' },
     { name = 'nvim_lsp' },
     { name = 'lazydev' },
+    { name = 'git' },
     {
       name = 'path',
       option = { trailing_slash = true },
@@ -134,16 +136,15 @@ cmp.setup {
     },
   },
 
-
   formatting = {
+    -- fields = { 'abbr', 'icon', 'kind', 'menu' },
     format = function(entry, vim_item)
       local lspkind_ok, lspkind = pcall(require, "lspkind")
+      -- Fallback if lskind is not installed
+      -- 2026-06-08: lspkind is NOT installed, one plugin less.
       if not lspkind_ok then
-        print('nvim-cmp: Dont use lspkind.')
-        -- From kind_icons array
-        -- This concatonates the icons with the name of the item kind
-        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-        -- Source description
+        vim_item.icon = kind_icons[vim_item.kind]
+        -- Append source of complete_item
         -- `entry.source.name` defined above under `sources`.
         vim_item.menu = (
           {
@@ -159,9 +160,45 @@ cmp.setup {
         )[entry.source.name]
         return vim_item
       else
-        print('nvim-cmp: Use lspkind.')
-        -- From lspkind
-        return lspkind.cmp_format()
+        -- ╭──────────────────────────────────────╮
+        -- │ Currently, lspkind is NOT installed! │
+        -- ╰──────────────────────────────────────╯
+        -- I dont see any difference in comparison to my manual approach.
+        return lspkind.cmp_format({
+          maxwidth = {
+            -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            -- can also be a function to dynamically calculate max width such as
+            -- menu = function() return math.floor(0.45 * vim.o.columns) end,
+            menu = 50,              -- leading text (labelDetails)
+            abbr = 50,              -- actual suggestion item
+          },
+          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          before = function(_entry, _vim_item)
+            if _vim_item.kind == 'Variable' then
+              -- Change Icon (I prefere 'x' over \alpha)
+              _vim_item.icon = kind_icons[_vim_item.kind]
+            end
+            -- Append source of complete_item
+            -- `_entry.source.name` defined above under `sources`.
+            _vim_item.menu = (
+              {
+                git = "[GIT]",
+                ultisnip = "[SNIP]",
+                nvim_lua = "[API]",
+                nvim_lsp = "[LSP]",
+                path = "[Path]",
+                buffer = "[Buf]",
+                cmp_csv = "[CSV]",
+                cmp_help_tags = "[H]"
+              }
+            )[_entry.source.name]
+            return _vim_item
+          end,
+        })(entry, vim_item)
       end
     end
   },
