@@ -108,6 +108,7 @@ nmap('<Leader>dm', function()
   })
 end, '[d]ebug single [m]ethod')
 
+-- debugpy stops when an exception occurs
 nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
 
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
