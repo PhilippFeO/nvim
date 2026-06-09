@@ -99,14 +99,14 @@ require('lazy').setup(
       },
       enabled = not IS_WORK_MACHINE,
     },
-    -- {
-    --   dir = lazy_dev_path .. 'explain-ruff-rule.nvim',
-    --   ft = 'python',
-    --   dev = true,
-    --   opts = {
-    --     border = 'rounded',
-    --   }
-    -- },
+    {
+      dir = lazy_dev_path .. 'explain-ruff-rule.nvim',
+      ft = 'python',
+      dev = true,
+      opts = {
+        border = 'rounded',
+      }
+    },
     {
       'PhilippFeO/telescope-link-headings.nvim',
       -- `dev = true` implies using the local version of the plugin
