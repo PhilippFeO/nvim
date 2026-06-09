@@ -1,4 +1,4 @@
-; extends
+;; extends ; Not necessary because currently this file resided in after/. after/ is meant for extending/appending.
 ;; `h treesitter-query-modeline`
 
 ; Inject `htmldjango` (and by this `javascript` and `css`) into the string highlighting, if a variable name ends on `_HTML`.
