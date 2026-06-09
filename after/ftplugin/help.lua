@@ -8,4 +8,5 @@ vim.opt.scrolloff = 8 -- s. plugin/options.lua
 vim.keymap.set('n', 'K', '<C-]>', {
     desc = 'Jump to tag under cursor',
     remap = true,
+    buf = 0,
 })
