@@ -32,10 +32,22 @@ local kind_icons = {
 
 local cmp = require 'cmp'
 
+-- Filetype speific completions must be handled via `filetype` function
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+require("cmp_git").setup({})
+
+
 -- TODO: Herausfinden, was damit gemeint war/ist <19-01-2024>
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
 
 -- `()` were not inserted automatically when completing a function/method. This is fixed with code snippet below.
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#add-parentheses-after-selecting-function-or-method-item
@@ -61,7 +73,37 @@ cmp.setup.cmdline(':', {
   })
 })
 
-cmp.setup {
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+---Helper function to format `h complete-items`. Indicate the LSP name for a 'nvim_lsp' source, ie. don't show "[LSP]" (before) but "[lua_ls]".
+---@param e cmp.Entry
+---@param ci vim.CompletedItem
+---@see Help `complete-items`
+local function set_menu(e, ci)
+  if e.source.name == 'nvim_lsp' then
+    local aliases = { basedpyright = 'BPR', pylsp = 'PYL' }
+    ci.menu = '[' .. (aliases[e.source.source.client.name] or e.source.source.client.name) .. ']'
+  else
+    ci.menu = ({
+      git           = '[GIT]',
+      ultisnip      = '[SNIP]',
+      nvim_lua      = '[API]',
+      path          = '[Path]',
+      buffer        = '[Buf]',
+      cmp_csv       = '[CSV]',
+      cmp_help_tags = '[H]',
+    })[e.source.name]
+  end
+end
+
+
+cmp.setup({
   -- enable snippet enginge. nvim-cmp needs a snippet enginge to work properly, even if no snippets are defined/used.
   snippet = {
     expand = function(args)
@@ -96,7 +138,6 @@ cmp.setup {
         end
       end, { 'i', 's' }
     ),
-
     ['<C-p>'] = cmp.mapping(
       function(fallback)
         if cmp.visible() then
@@ -118,19 +159,31 @@ cmp.setup {
     { name = 'ultisnips' },
     { name = 'nvim_lsp' },
     { name = 'lazydev' },
-    { name = 'git' },
     {
       name = 'path',
-      option = { trailing_slash = true },
+      -- Doesnt work or I dont understand how it works
+      trigger_characters = { '|' },
+      option = {
+        -- Doesnt work or I dont understand how it works
+        pathMapings = {
+          ['/src'] = '${folder}/src',
+          -- ['/'] = '${folder}/src/public/',
+          -- ['~@'] = '${folder}/src',
+          -- ['/images'] = '${folder}/src/images',
+          -- ['/components'] = '${folder}/src/components',
+        },
+        trailing_slash = true
+      },
     },
+    { name = 'git' },
     {
       name = 'buffer',
       -- Start completion for words in buffer after N typed characters, so there is less visual clutter, when typing short words
       keyword_length = 5
     },
     { name = 'cmp_csv' },
-
-    { name = 'cmp_help_tags',
+    {
+      name = 'cmp_help_tags',
       -- TODO: What do `h keyword_pattern` and `h trigger_characters`? <01-02-2024>
       keyword_length = 5
     },
@@ -144,20 +197,7 @@ cmp.setup {
       -- 2026-06-08: lspkind is NOT installed, one plugin less.
       if not lspkind_ok then
         vim_item.icon = kind_icons[vim_item.kind]
-        -- Append source of complete_item
-        -- `entry.source.name` defined above under `sources`.
-        vim_item.menu = (
-          {
-            git = "[GIT]",
-            ultisnip = "[SNIP]",
-            nvim_lua = "[API]",
-            nvim_lsp = "[LSP]",
-            path = "[Path]",
-            buffer = "[Buf]",
-            cmp_csv = "[CSV]",
-            cmp_help_tags = "[H]"
-          }
-        )[entry.source.name]
+        set_menu(entry, vim_item)
         return vim_item
       else
         -- ╭──────────────────────────────────────╮
@@ -182,20 +222,7 @@ cmp.setup {
               -- Change Icon (I prefere 'x' over \alpha)
               _vim_item.icon = kind_icons[_vim_item.kind]
             end
-            -- Append source of complete_item
-            -- `_entry.source.name` defined above under `sources`.
-            _vim_item.menu = (
-              {
-                git = "[GIT]",
-                ultisnip = "[SNIP]",
-                nvim_lua = "[API]",
-                nvim_lsp = "[LSP]",
-                path = "[Path]",
-                buffer = "[Buf]",
-                cmp_csv = "[CSV]",
-                cmp_help_tags = "[H]"
-              }
-            )[_entry.source.name]
+            set_menu(_entry, _vim_item)
             return _vim_item
           end,
         })(entry, vim_item)
@@ -214,7 +241,10 @@ cmp.setup {
     documentation = {
       -- `h nvim_open_win()`
       border = require('utils').border
-    }
+    },
+    -- completion = {
+    --   max_height = 8,
+    -- }
   },
 
   experimental = {
@@ -224,6 +254,6 @@ cmp.setup {
     --      hl_group = 'NameOfHighlightGroup'
     --    }
   },
-}
-
-require("cmp_git").setup({})
+  -- Default: everything is false, as I prefere it.
+  -- matching = …
+})
