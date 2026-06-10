@@ -1,7 +1,7 @@
 --- @alias DAPConfig table<string, string>
 
 --- @return DAPConfig
-local gather_dap_python_configs = function()
+local function gather_dap_python_configs()
   local my_configs = {
     require 'dap-configs.python-default'.configs,
     require 'dap-configs.python-kursverwaltung'.configs,
