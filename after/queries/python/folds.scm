@@ -40,6 +40,15 @@
           "warning"
           "error"
           "critical"))
+  ; parser.add_argument(…)-Aufrufe
+  (expression_statement
+    (call
+      function: (attribute
+          attribute: (identifier) @fn.add_argument (#eq? @fn.add_argument "add_argument"))
+    )
+    ; @lorem.call
+  ) 
+
 ] @fold
 
 ; `+`: One or more (like in Regex)
