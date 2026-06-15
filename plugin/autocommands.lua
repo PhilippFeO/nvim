@@ -82,6 +82,7 @@ autocmd('TermOpen', {
 })
 
 augroup('reload-python-dap-configs', { clear = true })
+local dap = require('dap')
 
 local dap_path = ''
 if ON_WINDOWS then
@@ -95,7 +96,10 @@ autocmd('BufWritePost', {
     -- '/' are mandatory, even on Windows.
     pattern = dap_path,
     callback = function(event)
-        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+        dap.configurations.python = vim.tbl_extend('error',
+            dap.configurations.python,
+            require('dap-configs.load_python_configs').gather_dap_python_configs()
+        )
         print(event.file .. ' reloaded.')
     end,
     desc = 'Reload Python DAP Configs after editing a config.',
@@ -105,7 +109,10 @@ autocmd('BufWritePost', {
     group = augroup('reload-python-dap-configs', {}),
     pattern = '*.py',
     callback = function(event)
-        require('dap').configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+        dap.configurations.python = vim.tbl_extend('error',
+            dap.configurations.python,
+            require('dap-configs.load_python_configs').gather_dap_python_configs()
+        )
     end,
     desc = 'Reload Python DAP Configs after saving a python file',
 })
