@@ -60,9 +60,9 @@ vim.keymap.set({ 'n' }, 'CC', function()
 )
 
 nmap('<Leader>db', dap.toggle_breakpoint, '  Toggle Breakpoint')
-nmap('<Leader>dn', function()
+nmap('<Leader>di', function()
   dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-end, '  Toggle Conditional Breakpoint')
+end, '  Toggle Conditional Breakpoint (break [i]f …)')
 
 nmap('<Leader>dp', function()
   if dap.session() then
@@ -108,9 +108,12 @@ nmap('<Leader>dm', function()
   })
 end, '[d]ebug single [m]ethod')
 
+-- debugpy stops when an exception occurs
 nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
 
 nmap('<Leader>dv', '<Cmd>DapVirtualTextToggle<CR>', 'toggle [d]ap [v]irtual text')
+
+nmap('<Leader>dn', '<Cmd>lua require("osv").launch({ port = 8086})<CR>', '[d]ebug [n]eovim by starting DAP server')
 
 
 -- -- Dapui-Keymaps

@@ -122,7 +122,17 @@ require('ufo').setup({
   -- As far as I can tell, they have to be a subset of the nodes mentioned in queries/python/folds.scm. Just having the file doesnt work.
   --  'call' DOES NOT mean to close every Call but only these matching the ones from `folds.scm`.
   close_fold_kinds_for_ft = {
-    python = { 'function_definition', 'call', 'import_statement', 'import_from_statement', 'assignment', 'class_definition' },
+    python = {
+      'function_definition',
+      'call',
+      'expression_statement',
+      'import_statement',
+      'import_from_statement',
+      'assignment',
+      'string',
+      -- 'lorem.call',
+      -- 'class_definition',
+    },
   },
   -- If `true`, folds are closed if, fi. `vim.lsp.buf.hover()` is used to open a floating window, which is kinda annoying.
   close_fold_current_line_for_ft = {

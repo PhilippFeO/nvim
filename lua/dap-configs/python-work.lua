@@ -19,6 +19,27 @@ local default_internal_console_windows = {
   python = vim.fn.expand('pythonw.exe'),
 }
 
+local askdante_timetracking = {
+  name = 'Erstelle einen AskDante-Zeiteintrag',
+  request = 'launch',
+  type = 'python',
+  console = 'internalConsole',
+  program = 'api.py',
+  args = {
+    'erstelle',
+    '--jira-issue-id',
+    'GINK-33',
+    '44',
+    '2026-06-14',
+    '12:00',
+    '13:00',
+    'projectItemId',
+    '860',
+    '21',
+    'Dieser Eintrag ist im Debugger entstanden.',
+  },
+}
+
 -- ────────────────────────────────────────
 
 local treesitter = {
@@ -67,6 +88,7 @@ return {
   configs = {
     arcpy_test,
     default_internal_console_windows,
+    askdante_timetracking,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
