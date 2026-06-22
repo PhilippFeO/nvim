@@ -10,3 +10,12 @@
   (#match? @_name "_HTML$")
   ; inject the `htmldjango` sytax highlighting
   (#set! injection.language "htmldjango"))
+
+((assignment
+  left: (identifier) @_name
+  right: (parenthesized_expression
+    (concatenated_string) @injection.content))
+  ; #match? compares against a regex pattern
+  (#match? @_name "_sql$")
+  ; inject the `sql` sytax highlighting
+  (#set! injection.language "sql"))
