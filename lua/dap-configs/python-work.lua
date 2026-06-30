@@ -19,12 +19,14 @@ local default_internal_console_windows = {
   python = vim.fn.expand('pythonw.exe'),
 }
 
-local zeit_aj_erstelle = {
-  name = 'Erstelle einen AskDante- und (option) Jira-Zeiteintrag',
+local chronograph_erstelle = {
+  name = 'chronograph erstelle …',
   request = 'launch',
   type = 'python',
   console = 'integratedTerminal',
-  program = 'zeit-aj.py',
+  -- Start as module => relative imports work
+  module = 'chronograph.main',
+  cwd = '${workspaceFolder}',
   args = {
     'erstelle',
     '--jira-issue-id',
@@ -39,19 +41,103 @@ local zeit_aj_erstelle = {
   },
 }
 
-local zeit_aj_csv = {
-  name = 'Lade CSV-Übersicht für Projekte herunter',
+local chronograph_csv = {
+  name = 'chronograph csv 651 155 2026-05-01 2026-05-31',
   request = 'launch',
   type = 'python',
   console = 'integratedTerminal',
-  program = 'zeit-aj.py',
+  -- Start as module => relative imports work
+  module = 'chronograph.main',
+  cwd = '${workspaceFolder}',
   args = {
     'csv',
     '651',
     '155',
     '2026-05-01',
-    '2026-05-30',
+    '2026-05-31',
   },
+}
+
+local chronograph_nutzer_projekte = {
+  name = 'chronograph --nutzer-projekte',
+  request = 'launch',
+  type = 'python',
+  console = 'integratedTerminal',
+  -- Start as module => relative imports work
+  module = 'chronograph.main',
+  cwd = '${workspaceFolder}',
+  args = {
+    '--nutzer-projekte',
+  },
+}
+
+local chronograph_nutzer_teilprojekte = {
+  name = 'chronograph --nutzer-teilprojekte',
+  request = 'launch',
+  type = 'python',
+  console = 'integratedTerminal',
+  -- Start as module => relative imports work
+  module = 'chronograph.main',
+  cwd = '${workspaceFolder}',
+  args = {
+    '--nutzer-teilprojekte',
+  },
+}
+local garage = {
+  name = 'Garage',
+  type = 'python',
+  request = 'launch',
+  program = '${workspaceFolder}/manage.py',
+  django = true,
+  args = {
+    'runserver'
+  },
+  env = {
+    EMAIL_HOST_USER = 'lorem@ipsum.de',
+    SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+    DEBUG = 'true',
+  },
+}
+
+local garage_justMyCode_false = {
+  name = 'Garage + justMyCode = false',
+  type = 'python',
+  request = 'launch',
+  program = '${workspaceFolder}/manage.py',
+  django = true,
+  args = {
+    'runserver'
+  },
+  -- env = {
+  --   EMAIL_HOST_USER = 'lorem@ipsum.de',
+  --   SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+  --   DEBUG = 'true',
+  -- },
+  justMyCode = false,
+}
+
+local garage_sync_user_projects_justMyCode_false = {
+  name = 'Garage – sync_user_projects + justMyCode = false',
+  type = 'python',
+  request = 'launch',
+  program = '${workspaceFolder}/manage.py',
+  django = true,
+  args = {
+    'sync_user_projects'
+  },
+  -- env = {
+  --   EMAIL_HOST_USER = 'lorem@ipsum.de',
+  --   SECRET_KEY = 'django-insecure-ivvcj*%d@qhm1&#e&rez)ot35prmz$d@-bg6mbpd*m*i281ax)',
+  --   DEBUG = 'true',
+  -- },
+  justMyCode = true,
+}
+
+local eon_mining = {
+  name = 'E.On-Mining [Modul]',
+  type = 'python',
+  request = 'launch',
+  module = 'source.migration_grubenfeld.stammbaum',
 }
 
 -- ────────────────────────────────────────
@@ -102,8 +188,14 @@ return {
   configs = {
     arcpy_test,
     default_internal_console_windows,
-    zeit_aj_erstelle,
-    zeit_aj_csv,
+    chronograph_erstelle,
+    chronograph_csv,
+    chronograph_nutzer_projekte,
+    chronograph_nutzer_teilprojekte,
+    garage,
+    garage_justMyCode_false,
+    garage_sync_user_projects_justMyCode_false,
+    eon_mining,
     treesitter_pytest,
     treesitter,
     treesitter_mc,
