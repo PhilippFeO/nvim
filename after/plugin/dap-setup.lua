@@ -60,7 +60,12 @@ require 'nvim-dap-virtual-text'.setup({
 -- DAP configuration settings: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 -- ─── Python ──────────
 -- s. also autocommands.lua
-dap.configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+print(vim.inspect(dap.configurations.python))
+-- dap.configurations.python = vim.tbl_extend(
+--     'error',
+--     dap.configurations.python,
+--     require('dap-configs.load_python_configs').gather_dap_python_configs()
+-- )
 
 
 -- ─── Signs ──────────
