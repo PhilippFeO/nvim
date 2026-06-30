@@ -26,11 +26,12 @@
       ]
       (#eq? @_dec "dataclass"))
         (class_definition))
+
   ; ─── Logging ──────────
   ; log_defaults = {…}
   (assignment
     left: (identifier) @log_defaults (#eq? @log_defaults "log_defaults"))
-  ; Alle Logging-Aufrufe, bspw. `logger.info()` oder `logging.info()`
+  ; logg(er|ing).{debug, info, warning, error, critical}()
   (call
     function: (attribute
       attribute: (identifier) @log-call)
@@ -40,14 +41,13 @@
           "warning"
           "error"
           "critical"))
-  ; parser.add_argument(…)-Aufrufe
+
+  ; parser.add_argument(…)
   (expression_statement
     (call
       function: (attribute
-          attribute: (identifier) @fn.add_argument (#eq? @fn.add_argument "add_argument"))
-    )
-    ; @lorem.call
-  ) 
+          attribute: (identifier) @fn.add_argument
+            (#eq? @fn.add_argument "add_argument")))) 
 
 ] @fold
 
