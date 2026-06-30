@@ -13,6 +13,7 @@ return {
 		client.server_capabilities.renameProvider = false
 		client.server_capabilities.definitionProvider = false
 		client.server_capabilities.declarationProvider = false
+		client.server_capabilities.referencesProvider = false
 		-- signatureHelpProvider takes a table as argument (default):
 		--		signatureHelpProvider = {
 		--			triggerCharacters = { "(", ",", "=" }
@@ -25,7 +26,7 @@ return {
 			python = {
 				analysis = {
 					diagnosticSeverityOverrides = {
-						reportUnusedCallResult = "none", -- Disable unused call expression reporting
+						-- reportUnusedCallResult = "none", -- Disable unused call expression reporting
 					},
 				},
 			},
