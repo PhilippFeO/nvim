@@ -87,19 +87,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Dont forget LSP default mappings: `h lsp-defaults`
     -- The Vim mapping 'gd' sometimes goes to the first occurence of a symbol, for instance to a location in a comment/docstring coming before the actual declaration, s. `h gd`. Better use `vim.lsp.buf.declaration()`.
-    vim.keymap.set('n', 'gi', function()
-        vim.lsp.buf.implementation()
-        -- Without deferring, centering does not work
-        vim.defer_fn(
-          function()
-            vim.cmd('normal zz')
-          end,
-          50)
+    local goto_implementation = function()
+      vim.lsp.buf.implementation()
+      vim.defer_fn(function() vim.cmd('normal zz') end, 50)
+    end
+    vim.keymap.set('n', 'gri', goto_implementation,
+      { remap = true, desc = lsp_desc('[g]oto [i]mplementation') }
+    )
+    vim.keymap.set('n', 'griv', function()
+        vim.cmd('vsplit')
+        goto_implementation()
       end,
-      {
-        remap = true,
-        desc = lsp_desc('[g]oto [i]mplementation')
-      }
+      { desc = lsp_desc('[g]oto [i]mplementation in [v]split') }
     )
     vim.keymap.set('n', 'gdv', 'gdzz',
       {

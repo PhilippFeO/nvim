@@ -4,18 +4,19 @@ local dap_defaults = {
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
   cwd = vim.fn.expand('~/.tagebuch/'),
 }
-
 local create_diary_entry_cron = vim.tbl_extend(
   'force',
   {
     args = { '--cron' },
-    name = 'Tagebuch: Erstelle Eintrag für heutigen Tag via cron',
+    name = 'tagebuch --cron',
   },
   dap_defaults
 )
 
+local arg = '2026-06-07'
+
 local create_diary_entry = {
-  name = 'Tagebuch: Erstelle Eintrag für heutigen Tag',
+  name = 'tagebuch --today',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
@@ -24,22 +25,23 @@ local create_diary_entry = {
 }
 
 local open_diary_entry = {
-  name = 'Tagebuch: Öffne Eintrag für übergebenes Datum',
+  name = string.format('tagebuch --open %s', arg),
   request = 'launch',
   type = 'python',
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
   -- args = { '--open', os.date('%Y-%m-%d') },
-  args = { '--open', '2026-01-11' },
+  args = { '--open', arg },
   cwd = vim.fn.expand('~/.tagebuch/'),
 }
 
+arg = '2025-06-09'
 local past_entries = {
-  name = 'Tagebuch: Öffne vergangene Einträge',
+  name = string.format('tagebuch --past %s', arg),
   request = 'launch',
   type = 'python',
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
   -- program = 'tagebuch',
-  args = { '--past', '2025-06-09' },
+  args = { '--past', arg },
   cwd = vim.fn.expand('~/.tagebuch/'),
   -- env = {
   --   PYTHONPATH = "/home/philipp/.tagebuch/.venv/tagebuch/bin/python3",
@@ -47,7 +49,7 @@ local past_entries = {
 }
 
 local past_last_month = {
-  name = 'Tagebuch: Öffne letzten Monat',
+  name = 'tagebuch --last-month',
   request = 'launch',
   type = 'python',
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
@@ -55,12 +57,13 @@ local past_last_month = {
   cwd = vim.fn.expand('~/.tagebuch/'),
 }
 
+arg = vim.fn.expand('.tmp/diese_fotos_einsortieren/')
 local add_fotos = {
-  name = 'Tagebuch: Füge Fotos zu Tagebuch hinzu',
+  name = string.format('tagebuch --add-fotos %s', arg),
   request = 'launch',
   type = 'python',
   program = vim.fn.expand('tagebuch/__main__.py'),
-  args = { '--add-fotos', vim.fn.expand('.tmp/diese_fotos_einsortieren/') },
+  args = { '--add-fotos', arg },
   cwd = vim.fn.expand('~/.tagebuch/'),
 }
 

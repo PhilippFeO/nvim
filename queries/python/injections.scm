@@ -7,6 +7,15 @@
   right: (string
     (string_content) @injection.content))
   ; #match? compares against a regex pattern
-  (#match? @_name "_HTML$")
+  (#match? @_name "_[hH][tT][mM][lL]$")
   ; inject the `htmldjango` sytax highlighting
   (#set! injection.language "htmldjango"))
+
+((assignment
+  left: (identifier) @_name
+  right: (parenthesized_expression
+    (concatenated_string) @injection.content))
+  ; #match? compares against a regex pattern
+  (#match? @_name "_[sS][qQ][lL]$")
+  ; inject the `sql` sytax highlighting
+  (#set! injection.language "sql"))
