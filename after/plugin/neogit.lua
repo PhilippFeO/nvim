@@ -50,6 +50,8 @@ end
 
 
 require('neogit').setup({
+  -- TODO(Philipp): Should work by default, https://github.com/NeogitOrg/neogit/issues/1964 <26-06-2026>
+  treesitter_diff_highlight = true,
   cmd = "Neogit",
   kind = "floating",
   graph_style = IS_WORK_MACHINE and 'unicode' or 'kitty',
