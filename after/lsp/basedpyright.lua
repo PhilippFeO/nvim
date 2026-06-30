@@ -5,7 +5,9 @@
 -- https://docs.basedpyright.com/v1.23.1/
 -- vim.lsp.config['basedpyright'] =
 return {
-	-- on_attach = on_attach,
+	on_attach = function(client, bufnr)
+		client.server_capabilities.hoverProvider = true
+	end,
 	-- capabilities = capabilities,
 	settings = {
 		basedpyright = {
@@ -24,7 +26,10 @@ return {
 			analysis = {
 				inlayHints = {
 					callArgumentNames = true -- = basedpyright.analysis.inlayHints.callArgumentNames
-				}
+				},
+				-- editable installs via PEP 660 use a runtime import hook that
+				-- basedpyright cannot resolve statically, so list source roots here
+				extraPaths = { vim.fn.expand('~/proj/chronograph') },
 			}
 		},
 		-- Ignore all files for analysis to exclusively use Ruff for linting
