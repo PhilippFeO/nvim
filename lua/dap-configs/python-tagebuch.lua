@@ -1,16 +1,38 @@
 local dap_defaults = {
   request = 'launch',
   type = 'python',
+}
+local name_stump = 'tagebuch'
+local module_stump = 'tagebuch'
+
+local import_jinja = vim.tbl_extend(
+  'force',
+  {
+    name = name_stump .. ' --import-jinja',
+    module = module_stump .. '.import_jinja',
+    args = {
+      '2026-06-07',
+    }
+  },
+  dap_defaults
+)
+
+-- ────────────────────────────────────────
+
+local dap_defaults_old = {
+  request = 'launch',
+  type = 'python',
   program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
   cwd = vim.fn.expand('~/.tagebuch/'),
 }
+
 local create_diary_entry_cron = vim.tbl_extend(
   'force',
   {
     args = { '--cron' },
     name = 'tagebuch --cron',
   },
-  dap_defaults
+  dap_defaults_old
 )
 
 local arg = '2026-06-07'
@@ -101,19 +123,20 @@ local tests = {
 
 return {
   configs = {
-    create_diary_entry_cron,
-    create_diary_entry,
-    open_diary_entry,
-    past_entries,
-    add_fotos,
-    create_db,
-    test_create_db,
-    tests,
-    past_last_month,
+    import_jinja
+    -- create_diary_entry_cron,
+    -- create_diary_entry,
+    -- open_diary_entry,
+    -- past_entries,
+    -- add_fotos,
+    -- create_db,
+    -- test_create_db,
+    -- tests,
+    -- past_last_month,
   },
-  -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
-  test_configs = {
-    test_create_db,
-    tests,
-  },
+  -- -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
+  -- test_configs = {
+  --   test_create_db,
+  --   tests,
+  -- },
 }
