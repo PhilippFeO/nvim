@@ -3,7 +3,7 @@ require('mason').setup()
 -- Has to be loaded **after** Mason, ie. `require('mason').setup()`
 -- TODO: README und Doku durchlesen <25-01-2024>
 require('mason-nvim-dap').setup({
-  automatic_installation = {},
+  automatic_installation = false,
   -- Makes a best effort to setup the various debuggers with
   -- reasonable debug configurations
   automatic_setup = true,
@@ -21,8 +21,6 @@ require('mason-lspconfig').setup({
     'pylsp',
     'ruff',
     'lua_ls',
-    -- Doesn't work, dont know why
-    -- 'djlsp',
     -- DAP servers, so not suited for Mason
     -- 'debugpy',
     -- 'shellcheck',
@@ -31,5 +29,3 @@ require('mason-lspconfig').setup({
 })
 
 -- local on_attach = require 'lsp-keymaps' -- lua/lsp-keymaps.lua
-
-if string.find(vim.fn.getcwd(), 'photo-location-updater', 1, true) ~= nil then vim.lsp.enable('ruff', false) end
