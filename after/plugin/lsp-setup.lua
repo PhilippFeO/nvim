@@ -9,7 +9,16 @@ local border = require('utils').border
 vim.diagnostic.config({
   virtual_text = true, -- Show diagnostics next to the code
   ---@diagnostic disable-next-line: assign-type-mismatch
-  float = { border = border },
+  float = {
+    border = border,
+    ---@alias HighlightGroup string Name of a Highlight Group
+    ---@return string, HighlightGroup
+    -- I prefere this style for displaying the source of a dignostic over `source=true/'if_many'` which prepends the source in red, so it is barely distinguishible.
+    suffix = function(diagnositc, _, _)
+      return string.format(' [%s, %s]', diagnositc.code, diagnositc.source), ''
+    end
+  },
+
 })
 
 
