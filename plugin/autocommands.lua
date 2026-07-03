@@ -1,6 +1,26 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+
+-- Experimental
+-- ────────────
+-- ─── pylsp: Codelens Demo ──────────
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client:supports_method('textDocument/codeLens') then
+            vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+                buffer = args.buf,
+                callback = function() vim.lsp.codelens.enable(true, { bufnr = args.buf }) end,
+            })
+            vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = args.buf })
+        end
+    end,
+})
+
+
+-- ────────────────────────────────────────
+
 -- Disable signcolumn in my wiki (I won't commit it and need no git-signs information)
 autocmd('BufWinEnter', {
     group = augroup('Disable-Signcolumn', { clear = true }),
