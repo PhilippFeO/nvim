@@ -16,6 +16,7 @@
   right: (parenthesized_expression
     (concatenated_string) @injection.content))
   ; #match? compares against a regex pattern
-  (#match? @_name "_[sS][qQ][lL]$")
+  ; (#match? @_name "_[sS][qQ][lL]$")
+  (#match? @_name "_SQL?")
   ; inject the `sql` sytax highlighting
   (#set! injection.language "sql"))
