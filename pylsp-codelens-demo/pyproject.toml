@@ -1,0 +1,11 @@
+[project]
+name = "pylsp-codelens-demo"
+version = "0.1.0"
+dependencies = ["python-lsp-server"]
+
+[project.entry-points.pylsp]
+pylsp_codelens_demo = "pylsp_codelens_demo"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
