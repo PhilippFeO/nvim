@@ -1,190 +1,57 @@
-local dap_defaults = {
-  request = 'launch',
-  type = 'python',
-}
-local name_stump = 'tagebuch'
-local module_stump = 'tagebuch'
+-- local import_jinja = vim.tbl_extend(
+--   'force',
+--   {
+--     name = name_stump .. ' --import-jinja',
+--     module = module_stump .. '.import_jinja',
+--     args = {
+--       '2026-06-07',
+--     }
+--   },
+--   dap_defaults
+-- )
 
-local import_jinja = vim.tbl_extend(
-  'force',
-  {
-    name = name_stump .. ' --import-jinja',
-    module = module_stump .. '.import_jinja',
-    args = {
-      '2026-06-07',
-    }
-  },
-  dap_defaults
-)
+---Helper function to build DAP configs
+---@param cli_args table<string> Name of the Python unit test module (including extension)
+---@param module_name string If config shall run a pytest unit test module
+---@return table
+local function build_dap_config(module_name, cli_args)
+  return {
+    type = 'python',
+    request = 'launch',
+    name = module_name .. ' ' .. table.concat(cli_args, ' '),
+    module = module_name,
+    args = cli_args,
+  }
+end
 
-local get_DATE = vim.tbl_extend(
-  'force',
-  {
-    name = name_stump .. ' --get 2026-07-04',
-    module = module_stump,
-    args = {
-      '--get',
-      '2026-07-04',
-    }
-  },
-  dap_defaults
-)
+local import_html = build_dap_config('tagebuch',
+  { '--import-html', vim.fn.expand '~/programmieren/tagebuch/2025/2025-02-15/' })
+local import_photos = build_dap_config('tagebuch', { '--import-photos' })
+local import_tree = build_dap_config('tagebuch',
+  { '--import-tree', vim.fn.expand '~/programmieren/tagebuch/2025/' })
+local get_DATE = build_dap_config('tagebuch', { '--get', '2026-07-04', })
+local delete_DATE = build_dap_config('tagebuch', { '--delete', '11-01-2025', })
 
-local import_photos = vim.tbl_extend(
-  'force',
-  {
-    name = name_stump .. ' --import-photos',
-    module = module_stump,
-    args = {
-      '--import-photos',
-    }
-  },
-  dap_defaults
-)
+-- ─── Pytest Configs ──────────
 
-
--- ─── Test ──────────
-local dap_defaults_test = {
-  request = 'launch',
-  type = 'python',
-  module = 'test',
-}
-local unit_test = 'test_import_jinja.py'
-
-
-local import_jinja_test = vim.tbl_extend(
-  'force',
-  {
-    name = name_stump .. ': pytest ' .. unit_test,
-    args = {
-      '-rA', 'tests/', unit_test,
-    }
-  },
-  dap_defaults_test
-)
+local import_jinja_test = build_dap_config('pytest', { '-rA', 'tests/', 'test_import_jinja.py' })
+local import_html_test = build_dap_config('pytest', { '-rA', 'tests/test_import_html.py' })
+local import_photos_test = build_dap_config('pytest', { '-rA', 'tests/', 'test_import_photos.py' })
 
 -- ────────────────────────────────────────
 
-local dap_defaults_old = {
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
-  cwd = vim.fn.expand('~/.tagebuch/'),
-}
-
-local create_diary_entry_cron = vim.tbl_extend(
-  'force',
-  {
-    args = { '--cron' },
-    name = 'tagebuch --cron',
-  },
-  dap_defaults_old
-)
-
-local arg = '2026-06-07'
-
-local create_diary_entry = {
-  name = 'tagebuch --today',
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
-  args = { '--today' },
-  cwd = vim.fn.expand('~/.tagebuch/'),
-}
-
-local open_diary_entry = {
-  name = string.format('tagebuch --open %s', arg),
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
-  -- args = { '--open', os.date('%Y-%m-%d') },
-  args = { '--open', arg },
-  cwd = vim.fn.expand('~/.tagebuch/'),
-}
-
-arg = '2025-06-09'
-local past_entries = {
-  name = string.format('tagebuch --past %s', arg),
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
-  -- program = 'tagebuch',
-  args = { '--past', arg },
-  cwd = vim.fn.expand('~/.tagebuch/'),
-  -- env = {
-  --   PYTHONPATH = "/home/philipp/.tagebuch/.venv/tagebuch/bin/python3",
-  -- }
-}
-
-local past_last_month = {
-  name = 'tagebuch --last-month',
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/__main__.py'),
-  args = { '--last-month' },
-  cwd = vim.fn.expand('~/.tagebuch/'),
-}
-
-arg = vim.fn.expand('.tmp/diese_fotos_einsortieren/')
-local add_fotos = {
-  name = string.format('tagebuch --add-fotos %s', arg),
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('tagebuch/__main__.py'),
-  args = { '--add-fotos', arg },
-  cwd = vim.fn.expand('~/.tagebuch/'),
-}
-
-local create_db = {
-  name = 'Tagebuch: Erstelle DB',
-  request = 'launch',
-  type = 'python',
-  program = vim.fn.expand('~/.tagebuch/tagebuch/create_db.py'),
-}
-
-local test_create_db = {
-  name = 'Tagebuch: Teste DB-Erstellung (create_db.py)',
-  request = 'launch',
-  type = 'python',
-  module = 'pytest',
-  args = { '-rA', '-sv', './tests/test_create_db.py' },
-  -- program = vim.fn.expand '~/.tagebuch/tests/test_create_db.py',
-}
-
-local tests = {
-  name = 'Tagebuch: Unittests',
-  request = 'launch',
-  type = 'python',
-  module = 'pytest',
-  args = {
-    '-rA',
-    '-sv',
-    './tests/test_create_db.py',
-    './tests/test_helper.py',
-    './tests/test_new_entry.py',
-    './tests/test_render_diary_template.py',
-  },
-  -- program = vim.fn.expand '~/.tagebuch/tests/test_create_db.py',
-}
-
 return {
   configs = {
-    import_jinja,
+    import_tree,
     import_photos,
+    import_html,
     get_DATE,
-    -- create_diary_entry_cron,
-    -- create_diary_entry,
-    -- open_diary_entry,
-    -- past_entries,
-    -- add_fotos,
-    -- create_db,
-    -- test_create_db,
-    -- tests,
-    -- past_last_month,
+    delete_DATE,
   },
   -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
   test_configs = {
     import_jinja_test,
-    --   tests,
+    import_html_test,
+    import_photos_test,
   },
 }
