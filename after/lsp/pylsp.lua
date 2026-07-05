@@ -32,15 +32,13 @@ return {
 			},
 			-- :PyLspInstall <tab>
 			plugins = {
-				-- Unklar, was es macht, wird ggfl. auch von ruff[-lsp] übernommen
+				-- Unklar, was es macht, wird ggfl. auch von Ruff übernommen
 				rope = {
 					enabled = false,
 				},
 				-- All disabled to avoid overlap with ruff
-				-- list from python-lsp-ruff
 				pycodestyle = {
 					enabled = false,
-					-- maxLineLength = 154
 				},
 				mccabe = {
 					enabled = false,
@@ -48,7 +46,6 @@ return {
 				pydocstyle = {
 					enabled = false,
 				},
-				-- autopep8, yapf formatieren beide, Unterschied unklar. yapf = false, autopep8 = true macht es so, wie ich es möchte
 				yapf = {
 					enabled = false,
 				},
