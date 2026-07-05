@@ -17,6 +17,52 @@ local import_jinja = vim.tbl_extend(
   dap_defaults
 )
 
+local get_DATE = vim.tbl_extend(
+  'force',
+  {
+    name = name_stump .. ' --get 2026-07-04',
+    module = module_stump,
+    args = {
+      '--get',
+      '2026-07-04',
+    }
+  },
+  dap_defaults
+)
+
+local import_photos = vim.tbl_extend(
+  'force',
+  {
+    name = name_stump .. ' --import-photos',
+    module = module_stump,
+    args = {
+      '--import-photos',
+    }
+  },
+  dap_defaults
+)
+
+
+-- ─── Test ──────────
+local dap_defaults_test = {
+  request = 'launch',
+  type = 'python',
+  module = 'test',
+}
+local unit_test = 'test_import_jinja.py'
+
+
+local import_jinja_test = vim.tbl_extend(
+  'force',
+  {
+    name = name_stump .. ': pytest ' .. unit_test,
+    args = {
+      '-rA', 'tests/', unit_test,
+    }
+  },
+  dap_defaults_test
+)
+
 -- ────────────────────────────────────────
 
 local dap_defaults_old = {
@@ -123,7 +169,9 @@ local tests = {
 
 return {
   configs = {
-    import_jinja
+    import_jinja,
+    import_photos,
+    get_DATE,
     -- create_diary_entry_cron,
     -- create_diary_entry,
     -- open_diary_entry,
@@ -134,9 +182,9 @@ return {
     -- tests,
     -- past_last_month,
   },
-  -- -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
-  -- test_configs = {
-  --   test_create_db,
-  --   tests,
-  -- },
+  -- Necessary as key-value-pair for keymap for test_method (2025-09-12: <Leader>dm)
+  test_configs = {
+    import_jinja_test,
+    --   tests,
+  },
 }

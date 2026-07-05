@@ -9,6 +9,7 @@ local function gather_dap_python_configs()
     require 'dap-configs.python-set-GPSIFD'.configs,
     require 'dap-configs.python-photo-location-updater'.configs,
     require 'dap-configs.python-work'.configs,
+    require 'dap-configs.python-tagebuch'.test_configs,
   }
   local all_configs = {}
   for _, list in ipairs(my_configs) do

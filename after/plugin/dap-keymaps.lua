@@ -104,7 +104,7 @@ nmap('<Leader>dm', function()
     -- ! Don't forget to add the respective config in the returned table
     -- config = require 'dap-configs.python'.test_configs.pytest_default_config,
     -- config = require 'dap-configs.python-kursverwaltung'.test_configs.kursverwaltung_docker_unittest,
-    config = require 'dap-configs.python-tagebuch'.test_configs.tests,
+    config = require 'dap-configs.python-tagebuch'.test_configs.import_jinja_test,
   })
 end, '[d]ebug single [m]ethod')
 

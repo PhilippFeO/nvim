@@ -36,6 +36,31 @@ vim.keymap.set(
   end,
   { desc = 'Hover' }
 )
+vim.keymap.set('n', 'gK', function()
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(0, 'textDocument/definition', params, function(_, result)
+    if not result or vim.tbl_isempty(result) then return end
+    local def   = vim.islist(result) and result[1] or result
+    local bufnr = vim.uri_to_bufnr(def.uri or def.targetUri)
+    vim.fn.bufload(bufnr)
+    vim.treesitter.get_parser(bufnr, 'python'):parse()
+
+    local range = def.range or def.targetRange
+    local node  = vim.treesitter.get_node({
+      bufnr = bufnr,
+      pos   = { range.start.line, range.start.character },
+    })
+
+    while node and node:type() ~= 'assignment' do
+      node = node:parent()
+    end
+    if not node then return end
+
+    local lines = vim.split(vim.treesitter.get_node_text(node, bufnr), '\n')
+    vim.lsp.util.open_floating_preview(lines, 'python', { border = 'rounded' })
+  end)
+end, { desc = 'Hover with full assignment/definition' })
+
 vim.keymap.set(
   'n', '<Leader>e',
   vim.diagnostic.open_float, -- '<C-w>d' == 'vim.diagnostic.open_float'
@@ -170,6 +195,65 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end,
       { desc = lsp_desc('[l]ist all workspace [d]irectories/folders') }
     )
+
+    vim.keymap.set('n', '<Leader>lc', function()
+      local clients = vim.lsp.get_clients({ bufnr = args.buf })
+      if #clients == 0 then
+        vim.notify('No LSP clients attached', vim.log.levels.WARN)
+        return
+      end
+
+      local function open_caps(selected)
+        vim.cmd('tabnew')
+        for i, c in ipairs(selected) do
+          if i > 1 then vim.cmd('vsplit') end
+          local buf = vim.api.nvim_create_buf(false, true)
+          local lines = vim.split(vim.inspect(c.server_capabilities), '\n')
+          table.insert(lines, 1, '')
+          table.insert(lines, 1, '-- ' .. c.name)
+          vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+          vim.bo[buf].filetype = 'lua'
+          vim.bo[buf].modifiable = false
+          vim.api.nvim_win_set_buf(0, buf)
+        end
+      end
+
+      if #clients == 1 then
+        open_caps(clients)
+        return
+      end
+
+      local pickers      = require('telescope.pickers')
+      local finders      = require('telescope.finders')
+      local conf         = require('telescope.config').values
+      local actions      = require('telescope.actions')
+      local action_state = require('telescope.actions.state')
+
+      pickers.new({}, {
+        prompt_title = 'Select LSP Clients',
+        finder = finders.new_table({
+          results = clients,
+          entry_maker = function(c)
+            return { value = c, display = c.name, ordinal = c.name }
+          end,
+        }),
+        sorter = conf.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr, map)
+          map('i', '<Tab>', actions.toggle_selection)
+          map('n', '<Tab>', actions.toggle_selection)
+          actions.select_default:replace(function()
+            local picker = action_state.get_current_picker(prompt_bufnr)
+            local selections = picker:get_multi_selection()
+            if #selections == 0 then
+              selections = { action_state.get_selected_entry() }
+            end
+            actions.close(prompt_bufnr)
+            open_caps(vim.tbl_map(function(s) return s.value end, selections))
+          end)
+          return true
+        end,
+      }):find()
+    end, { desc = lsp_desc('[l]sp [c]apabilities') })
   end,
   desc = 'Commands when a LSP attaches',
 })
