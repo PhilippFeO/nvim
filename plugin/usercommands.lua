@@ -16,13 +16,14 @@ user_command('KL', function(_)
 end, { desc = ':colorscheme kanagawa-lotus' })
 
 user_command('ReloadDAPPythonConfigs', function(_)
-        -- `after/plugin` is searched automatically (probably because it's part of `h runtimepath`)
-        local module = 'dap-configs.python'
-        local ok, err = pcall(require, module)
+        local ok, result = pcall(function()
+            return require('dap-configs.load_python_configs').refresh_dap_python_configs()
+        end)
+
         if not ok then
-            vim.notify(("Failed reloading %s: %s"):format(module, err), vim.log.levels.ERROR)
+            vim.notify(("Failed reloading DAP Python configs: %s"):format(result), vim.log.levels.ERROR)
         else
-            vim.notify(("Reloaded %s"):format(module), vim.log.levels.INFO)
+            vim.notify(("Reloaded DAP Python configs (%d configs)."):format(#result), vim.log.levels.INFO)
         end
     end,
     { desc = 'Reload DAP Python configs.' }

@@ -61,7 +61,7 @@ require 'nvim-dap-virtual-text'.setup({
 -- ─── Python ──────────
 -- s. also autocommands.lua
 -- print(vim.inspect(dap.configurations.python))
-dap.configurations.python = require('dap-configs.load_python_configs').gather_dap_python_configs()
+require('dap-configs.load_python_configs').refresh_dap_python_configs()
 
 
 -- ─── Signs ──────────
