@@ -80,3 +80,11 @@ vim.api.nvim_create_user_command(
         bar = true
     }
 )
+
+vim.api.nvim_create_user_command(
+    'TDBUI',
+    function()
+        vim.cmd('tabnew | DBUI')
+    end,
+    { desc = 'Open DBUI in new Tab.' }
+)
