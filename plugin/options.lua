@@ -1,7 +1,10 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Read project local .nvim.lua files
 vim.o.exrc = true
+-- Read project local nvim configurations withtin .nvim dir
+-- Appending is important such that project config overwrites existing/loaded config
 vim.opt.runtimepath:append('.nvim')
 
 -- Both (suffixesadd, path) make `require('lazy.kanagawa')` in init.lua jumpable
