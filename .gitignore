@@ -9,3 +9,5 @@ myplugins/
 Pluginideen.md
 tmp/
 .venv/
+schnipsel/python/work*
+lua/dap-configs/python-work.lua
