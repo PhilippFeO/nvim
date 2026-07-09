@@ -1,6 +1,3 @@
--- I disabled every luasnip related line of code. Search for "luasnip" to reverse this step after installing luasnip.
-
-
 -- it also possible to use Unicode symbols like 📂️, 🚀️, etc.
 local kind_icons = {
   Class = "ﴯ",
@@ -31,16 +28,6 @@ local kind_icons = {
 }
 
 local cmp = require 'cmp'
-
--- Filetype speific completions must be handled via `filetype` function
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'git' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-require("cmp_git").setup({})
 
 
 -- TODO: Herausfinden, was damit gemeint war/ist <19-01-2024>
@@ -98,6 +85,7 @@ local function set_menu(e, ci)
       buffer        = '[Buf]',
       cmp_csv       = '[CSV]',
       cmp_help_tags = '[H]',
+      -- ['vim-dadbod-completion'] = '[DB]',
     })[e.source.name]
   end
 end
@@ -256,4 +244,32 @@ cmp.setup({
   },
   -- Default: everything is false, as I prefere it.
   -- matching = …
+})
+
+
+-- Filetype speific completions must be handled via `filetype` function
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+require("cmp_git").setup({})
+
+
+-- SQL completion (vim-dadbod-completion)
+cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
+  sources = {
+    { name = 'vim-dadbod-completion' },
+    { name = 'buffer' },
+  },
+  formatting = {
+    format = function(entry, vim_item)
+      if vim_item ~= nil then
+        vim_item.menu = '[DB]'
+        return vim_item
+      end
+    end
+  }
 })

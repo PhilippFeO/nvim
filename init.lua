@@ -197,6 +197,7 @@ require('lazy').setup(
     require('plugins.vim-markdown'),
     require('plugins.vim-sleuth'),
     require('plugins.wiki'),
+    require('plugins.vim-dadbod'),
 
     -- note: next step on your neovim journey: add/configure additional "plugins" for kickstart
     --       these are some example plugins that i've included in the kickstart repository.
