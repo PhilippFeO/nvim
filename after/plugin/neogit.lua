@@ -3,6 +3,7 @@
 -- „Popups“ öffnen sich und bieten weitere Optionen für Befehl an.
 
 local ngit = require("neogit.lib.git")
+local notification = require("neogit.lib.notification")
 -- ngit.config.set('neogit.baseBranch', 'origin/dev') --get("neogit.baseBranch")
 
 -- Does the following on a feature branch (Execute after PR was merged):
@@ -18,32 +19,46 @@ local function remove_feature_branch(_)
   if root_dir ~= nil then
     if string.find(root_dir, 'kursverwaltung', 1, true) ~= nil then
       main_dev_branch = 'dev'
-    elseif IS_WORK_MACHINE then
-      if string.find(root_dir, REPO_NAME_1, 1, true) ~= nil then
-        main_dev_branch = REPO_NAME_1
-      end
     else
       main_dev_branch = 'main'
     end
   end
-  local upstream_mdb = ngit.branch.upstream(main_dev_branch)
+  -- Built directly instead of via `ngit.branch.upstream(main_dev_branch)`:
+  -- that resolves `{main_dev_branch}@{upstream}` through git, which requires
+  -- a pre-existing local branch with valid upstream tracking configured --
+  -- and returns nil (silently no-opping this whole function via the guard
+  -- below) whenever that tracking is missing or stale.
+  local upstream_mdb = remote and (remote .. '/' .. main_dev_branch)
   local result
   if remote and current_branch and upstream_mdb then
     print('Fetch from ' .. remote .. '/' .. main_dev_branch)
     -- Done with --prune, s. ~/.gitconfig
     ngit.fetch.fetch(remote, main_dev_branch)
-    -- Or `checkout(main)`?
     print('Checkout ' .. upstream_mdb)
     ngit.branch.checkout(upstream_mdb)
     -- delete: append -d
     -- (remotes: append -r)
     -- => git branch -d -r NAME
     print('Delete ' .. remote .. '/' .. current_branch)
-    result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
-    if result:success() then
-      print('Delete ' .. current_branch)
-      -- git branch -v | grep "\[entfernt\]" | cut -f 3 -d ' ' | xargs git branch -D
-      ngit.cli.branch.delete.name(current_branch).call({ await = true })
+    -- Check if remote counterpart exists
+    if ngit.fetch.fetch(remote, current_branch):success() then
+      result = ngit.cli.push.delete.remote(remote).to(current_branch).call({ await = true })
+      if result:success() then
+        print('Delete ' .. current_branch)
+        -- Force-delete unconditionally (`-D`, no ancestry check, no prompt):
+        -- this action only runs after a PR merge, and squash/rebase-merged PRs
+        -- would otherwise trip `ngit.branch.delete()`'s "unmerged" confirmation
+        -- every single time -- if you're running this, you've already decided
+        -- the branch is done for.
+        local delete_result = ngit.cli.branch.delete.force.name(current_branch).call({ await = true })
+        if delete_result:success() then
+          notification.info('Deleted ' .. current_branch .. ' (local + remote)')
+        else
+          notification.error('Deleted remote branch, but failed to delete local branch ' .. current_branch)
+        end
+      else
+        notification.error('Failed to delete remote branch ' .. remote .. '/' .. current_branch)
+      end
     end
   end
 end
