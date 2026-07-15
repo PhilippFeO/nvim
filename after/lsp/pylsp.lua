@@ -52,6 +52,9 @@ return {
 				autopep8 = {
 					enabled = false,
 				},
+				pyflakes = {
+					enabled = false,
+				}
 			},
 		},
 	},
