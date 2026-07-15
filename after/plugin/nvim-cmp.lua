@@ -109,7 +109,7 @@ cmp.setup({
     --    - You want completion inside a string/comment where it's otherwise suppressed
     ['<C-Space>'] = cmp.mapping.complete {},
     -- Executes completion of selected item
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<TAB>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
