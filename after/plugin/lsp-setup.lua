@@ -36,29 +36,35 @@ vim.keymap.set(
   end,
   { desc = 'Hover' }
 )
+
+-- Only works for Python
 vim.keymap.set('n', 'gK', function()
-  local params = vim.lsp.util.make_position_params()
-  vim.lsp.buf_request(0, 'textDocument/definition', params, function(_, result)
-    if not result or vim.tbl_isempty(result) then return end
-    local def   = vim.islist(result) and result[1] or result
-    local bufnr = vim.uri_to_bufnr(def.uri or def.targetUri)
-    vim.fn.bufload(bufnr)
-    vim.treesitter.get_parser(bufnr, 'python'):parse()
+  local params = vim.lsp.util.make_position_params(0, 'utf-8')
+  vim.lsp.buf_request(
+    0,
+    'textDocument/definition',
+    params,
+    function(_, result)
+      if not result or vim.tbl_isempty(result) then return end
+      local def   = vim.islist(result) and result[1] or result
+      local bufnr = vim.uri_to_bufnr(def.uri or def.targetUri)
+      vim.fn.bufload(bufnr)
+      vim.treesitter.get_parser(bufnr, 'python'):parse()
 
-    local range = def.range or def.targetRange
-    local node  = vim.treesitter.get_node({
-      bufnr = bufnr,
-      pos   = { range.start.line, range.start.character },
-    })
+      local range = def.range or def.targetRange
+      local node  = vim.treesitter.get_node({
+        bufnr = bufnr,
+        pos   = { range.start.line, range.start.character },
+      })
 
-    while node and node:type() ~= 'assignment' do
-      node = node:parent()
-    end
-    if not node then return end
+      while node and node:type() ~= 'assignment' do
+        node = node:parent()
+      end
+      if not node then return end
 
-    local lines = vim.split(vim.treesitter.get_node_text(node, bufnr), '\n')
-    vim.lsp.util.open_floating_preview(lines, 'python', { border = 'rounded' })
-  end)
+      local lines = vim.split(vim.treesitter.get_node_text(node, bufnr), '\n')
+      vim.lsp.util.open_floating_preview(lines, 'python', { border = border })
+    end)
 end, { desc = 'Hover with full assignment/definition' })
 
 vim.keymap.set(
