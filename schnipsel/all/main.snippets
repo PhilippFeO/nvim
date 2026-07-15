@@ -15,7 +15,7 @@ endglobal
 # get_comment_format(), Pyton: ['#', '#', '#', '']
 # get_comment_format(), C++: ['/*', '*', '*/', ' ']
 snippet todo "TODO-Kommentar" bwA
-`!p snip.rv='//' if (cf:=get_comment_format()[0]) != '#' else cf` TODO(Philipp): $1 <`!v strftime('%d-%m-%Y')`> $0
+`!p snip.rv='//' if (cf:=get_comment_format()[0]) != '#' else cf` TODO(Philipp): $1 <`!v strftime('%d-%m-%Y')`>$0
 endsnippet
 
 snippet cc "juypinum cell" bA
