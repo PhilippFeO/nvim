@@ -13,12 +13,22 @@ vim.keymap.set('i', '<A-c>', '<Esc>b~A', {
     buffer = true,
     desc = '[A] – Change [c]ase of current word.'
 })
--- Open help command enclosed in `` in new tab, ie. `h lua-guide`
+-- Open help command enclosed in `` in new tab, ie. `[ h] lua-guide`
 -- <S-k> is consistent with navigating help (there, <S-k> opens another help page)
-vim.keymap.set('n', '<S-k>', '"hyi`:tab <C-r>h<CR>', {
-    buffer = true,
-    desc = 'Open help page reference in Wiki'
-})
+vim.keymap.set('n', '<S-k>',
+    function()
+        vim.cmd('normal! "hyi`')
+        local content = vim.fn.getreg('h')
+        -- Map ' lua-guide' to 'h lua-guide' and open according help page.
+        if content:sub(1, 1) ~= 'h' then
+            content = 'h' .. content:sub(4)
+        end
+        vim.cmd('tab ' .. content)
+    end
+    , {
+        buffer = true,
+        desc = 'Open help page reference in Wiki'
+    })
 
 
 -- Both options led to concealed markdown code block markers (```[language] and ```)
