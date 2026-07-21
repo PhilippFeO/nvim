@@ -12,6 +12,7 @@ dap.configurations.lua = {
     }
 }
 
+
 dap.adapters.nlua = function(callback, config)
     callback({
         type = 'server',
@@ -159,6 +160,10 @@ dapui.setup {
 
 -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 
+-- Automatically break on uncaught exceptions whenever a debug session starts
+dap.listeners.after.event_initialized['exception_breakpoints'] = function()
+    dap.set_exception_breakpoints({ 'uncaught' })
+end
 local function toggle_closing_dapui()
     dap.listeners.after.event_initialized["dap-view"] = nil
     dap.listeners.before.event_terminated["dap-view"] = nil
