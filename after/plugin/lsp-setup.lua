@@ -184,7 +184,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- ś makes only sense with NeoQWERTZ
     -- Default: <C-s>
     vim.keymap.set('i', 'ś',
-      vim.lsp.buf.signature_help,
+      function() vim.lsp.buf.signature_help({ border = 'solid' }) end,
       { desc = lsp_desc('Signature Documentation') }
     )
 
