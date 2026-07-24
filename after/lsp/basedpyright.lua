@@ -42,7 +42,8 @@ return {
 			pythonPath =
 					(function()
 						local root_dir = require 'lspconfig.util'.root_pattern('.git')('.')
-						if root_dir ~= nil and string.find(root_dir, 'e.on-mining', 1, true) ~= nil then
+						-- if ON_WINDOWS and root_dir ~= nil and string.find(root_dir, 'e.on-mining', 1, true) ~= nil then
+						if ON_WINDOWS then
 							return vim.fn.expand(root_dir .. '/.venv/python.exe')
 						else
 							-- fallback to system's python path or python path of active venv
