@@ -44,7 +44,11 @@ dap.defaults.fallback.external_terminal = {
 dap.defaults.fallback.focus_terminal = false
 -- `h dap-view-switchbuf`
 -- Multiple options or function possible
--- dap.defaults.fallback.switchbuf = 'usetab'
+-- 'useopen': if the frame's buffer is already open in some window in the
+-- current tab, switch focus to that window instead of loading the buffer
+-- into whatever window currently has focus (s. `switchbuf_fn.useopen()` in
+-- nvim-dap's session.lua). 'usetab' additionally searches other tabpages.
+dap.defaults.fallback.switchbuf = 'useopen,usetab'
 dap.defaults.fallback.force_external_terminal = false
 
 -- ────────────────────────────────────────
