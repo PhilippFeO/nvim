@@ -1,6 +1,12 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Without `-o pipefail`, I don't know if `vim.cmd('make')` (or similar) failed or not.
+-- Outout of `:make` is fed into `tee`, s. `h shellpipe` and `tee` usually succeeds, even
+-- if the make target failed. To propagate this, use `-o pipefail`.
+-- I need to know this for `make_and_jump_to_last_frame_in_code()`.
+vim.o.shellcmdflag = '-o pipefail -c'
+
 -- Read project local .nvim.lua files
 vim.o.exrc = true
 -- Read project local nvim configurations withtin .nvim dir

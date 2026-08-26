@@ -79,16 +79,39 @@ vim.keymap.set({ 'n' }, '<Leader>,', 'vt,', { desc = 'visual select until [,]' }
 -- :make executes string behind makeprg
 -- s. RUNTIMEPATH/compiler/python.lua for example
 -- maybe vim.fn.expand('%') is useful for having absolute paths
--- vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make | cwindow 12 | wincmd k<CR>',
--- vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make vim-run | cwindow | clast | cprevious<CR>',
-vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make vim-run | LastQuickfix | cwindow | wincmd k<CR>zb',
-    { desc = 'make/compile/execute current file' })
--- Without "<Cmd>" letters are typed
-vim.keymap.set('n', '<Leader>ma', ':make %< ',
-    { desc = '[m]ake with CLI [a]rguments' })
--- %< == Filename without extension, s. Wiki > neovim.md
-vim.keymap.set('n', '<Leader>mr', '<Cmd>w | make run<CR>',
-    { desc = '[m]ake and [r]un current file' })
+
+--- `:make` alone jumps to the *first* quickfix entry; since third-party and
+--- stdlib frames are filtered out of the errorformat entirely (s.
+--- compiler/python.lua), the *last remaining valid* entry is the deepest
+--- frame still in my own code. Plain `:clast` doesn't work for this: it jumps
+--- to the literal last list entry regardless of validity, and that's usually
+--- the exception message itself (fi. "ConnectionError: ..."), which never
+--- matches the file/line pattern and so is an unjumpable, invalid entry --
+--- confirmed against a real chained requests.exceptions.ConnectionError
+--- traceback, where :clast silently did nothing. Walk the list backwards and
+--- jump to the last entry that's actually valid instead.
+---@see Optionen lua/options.lua::shellcmdflag
+local function make_and_jump_to_last_frame_in_code()
+    vim.cmd('wa')
+    vim.cmd('make! run')
+    -- Only jump to error if one occured, works due to custom `h shellcmdflag`.
+    if vim.v.shell_error ~= 0 then
+        local list = vim.fn.getqflist()
+        for i = #list, 1, -1 do
+            if list[i].valid == 1 then
+                vim.cmd('cc ' .. i)
+                return
+            end
+        end
+    end
+end
+
+vim.keymap.set('n', '<Leader>mr', make_and_jump_to_last_frame_in_code,
+    { desc = '`make run` and jumpt to error (in own code)' })
+
+vim.keymap.set('n', '<Leader>mm', '<Cmd>w | make! run<CR>',
+    { desc = "`make run` but don't jump to error" })
+
 -- Run Tests
 vim.keymap.set('n', '<Leader>mt', '<Cmd>w | make test<CR>',
     { desc = '[m]ake and run [t]ests' })
