@@ -101,12 +101,20 @@ nmap('<Leader>dm', function()
     -- necessary, if 'console' not explicitly set in config
     console = 'internalConsole',
     test_runner = 'pytest',
-    -- ! Don't forget to add the respective config in the returned table
-    -- config = require 'dap-configs.python'.test_configs.pytest_default_config,
-    -- config = require 'dap-configs.python-kursverwaltung'.test_configs.kursverwaltung_docker_unittest,
-    config = require 'dap-configs.python-tagebuch'.test_configs.import_jinja_test,
+    config = { justMyCode = true },
   })
 end, '[d]ebug single [m]ethod')
+
+nmap('<Leader>dmt', function()
+  require 'dap-python'.test_method({
+    -- necessary, if 'console' not explicitly set in config
+    console = 'internalConsole',
+    test_runner = 'pytest',
+    -- Merged ("force") into the generated DAP config, s. `trigger_test()` in
+    -- nvim-dap-python -- any key here overrides/extends the config it builds.
+    config = { justMyCode = false },
+  })
+end, '[d]ebug single method with [j]ustMyCode=true')
 
 -- -- debugpy stops when an exception occurs
 -- nmap('<Leader>dx', dap.set_exception_breakpoints, 'Set [d]ap e[x]ception breakpoint')
