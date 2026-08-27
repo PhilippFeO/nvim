@@ -48,7 +48,13 @@ dap.defaults.fallback.focus_terminal = false
 -- current tab, switch focus to that window instead of loading the buffer
 -- into whatever window currently has focus (s. `switchbuf_fn.useopen()` in
 -- nvim-dap's session.lua). 'usetab' additionally searches other tabpages.
-dap.defaults.fallback.switchbuf = 'useopen,usetab'
+-- Neither ever opens a new window -- if the target buffer isn't open
+-- anywhere (e.g. stepping into Lua runtime/plugin files you don't have open,
+-- as when debugging Neovim itself), both fail and nvim-dap just warns
+-- ("switchbuf setting prevented jump to location") without navigating at
+-- all. 'uselast' is the final fallback for that case -- it never fails, it
+-- just loads the buffer into the current or alternate window.
+dap.defaults.fallback.switchbuf = 'useopen,usetab,uselast'
 dap.defaults.fallback.force_external_terminal = false
 
 -- ────────────────────────────────────────
