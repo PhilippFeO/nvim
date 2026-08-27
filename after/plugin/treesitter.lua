@@ -4,7 +4,7 @@ if not ON_WINDOWS then
 
 
   vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'bash', 'lua', 'markdown', 'markdown_inline', 'python', 'query', 'vimdoc', 'vim', 'luadoc' },
+    pattern = { 'bash', 'lua', 'markdown', 'markdown_inline', 'python', 'query', 'vimdoc', 'vim', 'luadoc', 'yaml', },
     callback = function()
       -- syntax highlighting, provided by Neovim
       vim.treesitter.start()
